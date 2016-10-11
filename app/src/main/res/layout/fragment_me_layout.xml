@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_eeeeee"
+    android:orientation="vertical">
+
+    <com.vivifram.second.hitalk.ui.view.BGATitlebar
+        android:id="@+id/titleBar"
+        style="@style/TitleBar"
+        android:background="@color/black_deep"
+        app:bgatitlebar_titleText="@string/tab_me" />
+
+    <com.vivifram.second.hitalk.ui.springview.widget.SpringView
+        android:id="@+id/meSpv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:give="both"
+        app:type="follow">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/meInfoLv"
+                    android:layout_width="match_parent"
+                    android:layout_height="68dp"
+                    android:background="@color/colorWhite">
+
+                    <com.vivifram.second.hitalk.ui.view.AvatarView
+                        android:id="@+id/meInfoAvatar"
+                        style="@style/avatar_imv_style"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="12dp"
+                        android:src="@drawable/default_avatar"
+                        app:avatar_border_color="@color/transparent"
+                        app:avatar_border_width="0dp"
+                        app:avatar_shadow_color="@color/transparent"
+                        app:avatar_shadow_width="0dp" />
+
+                    <TextView
+                        android:id="@+id/meInfoUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="19dp"
+                        android:layout_toRightOf="@+id/meInfoAvatar"
+                        android:gravity="center"
+                        android:textColor="@color/color_333333"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:id="@+id/meInfoSignature"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginTop="47dp"
+                        android:layout_toRightOf="@+id/meInfoAvatar"
+                        android:gravity="center"
+                        android:textColor="@color/color_757575"
+                        android:textSize="16dp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
+
+                <com.vivifram.second.hitalk.ui.view.CommonItem
+                    android:id="@+id/bnci"
+                    style="@style/commonItem_style" />
+
+                <com.vivifram.second.hitalk.ui.view.CommonItem
+                    android:id="@+id/fcci"
+                    style="@style/commonItem_style" />
+
+                <com.vivifram.second.hitalk.ui.view.CommonItem
+                    android:id="@+id/ccci"
+                    style="@style/commonItem_style"/>
+
+                <com.vivifram.second.hitalk.ui.view.CommonItem
+                    android:id="@+id/pvci"
+                    style="@style/commonItem_style" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
+
+                <com.vivifram.second.hitalk.ui.view.CommonItem
+                    android:id="@+id/acci"
+                    style="@style/commonItem_style" />
+
+                <com.vivifram.second.hitalk.ui.view.CommonItem
+                    android:id="@+id/afci"
+                    style="@style/commonItem_style"/>
+
+                <com.vivifram.second.hitalk.ui.view.CommonItem
+                    android:id="@+id/ntci"
+                    style="@style/commonItem_style"/>
+
+                <com.vivifram.second.hitalk.ui.view.CommonItem
+                    android:id="@+id/abci"
+                    style="@style/commonItem_style" />
+            </LinearLayout>
+
+        </ScrollView>
+    </com.vivifram.second.hitalk.ui.springview.widget.SpringView>
+
+</LinearLayout>

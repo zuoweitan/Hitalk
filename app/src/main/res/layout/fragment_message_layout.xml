@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_eeeeee">
+
+    <com.vivifram.second.hitalk.ui.view.BGATitlebar
+        android:id="@+id/titleBar"
+        style="@style/TitleBar"
+        android:background="@color/colorWhite"
+        app:bgatitlebar_titleText="@string/tab_message"
+        app:bgatitlebar_titleTextColor="@color/color_272636"
+        app:bgatitlebar_rightDrawable="@drawable/addx"
+        app:bgatitlebar_rightDrawablePadding="20dp"/>
+
+    <View style="@style/normal_line" />
+
+    <com.vivifram.second.hitalk.ui.springview.widget.SpringView
+        android:id="@+id/messageLtSv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:give="both"
+        app:type="follow"
+        android:background="#ffffff">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/messageLtRv"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.vivifram.second.hitalk.ui.springview.widget.SpringView>
+
+
+
+</LinearLayout>

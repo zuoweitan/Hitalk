@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.vivifram.second.hitalk.ui.view.BGATitlebar
+        android:id="@+id/titleBar"
+        style="@style/TitleBar"
+        app:bgatitlebar_leftText="@string/cancel"
+        app:bgatitlebar_rightText="@string/publish"
+        app:bgatitlebar_titleTextColor="@color/colorWhite"
+        app:bgatitlebar_rightTextColor="@color/hitalk_yellow"
+        app:bgatitlebar_leftTextColor="@color/colorWhite"
+        app:bgatitlebar_titleTextSize="@dimen/textSize20"
+        app:bgatitlebar_leftAndRightPadding="@dimen/gapMiddle"
+        app:bgatitlebar_titleText="@string/publishBn"
+        android:background="@color/black_deep"
+        />
+
+    <com.vivifram.second.hitalk.ui.springview.widget.SpringView
+        android:id="@+id/bnPublishSv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/bnInfoEt"
+                    style="@style/inputStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="140dp"
+                    android:paddingTop="12dp"
+                    android:gravity="left|top"
+                    android:lineSpacingMultiplier="1.1"
+                    android:hint="@string/publishSome"
+                    android:background="@color/colorWhite"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/imageRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/line_bg"
+                    android:layout_marginTop="2dp"/>
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </com.vivifram.second.hitalk.ui.springview.widget.SpringView>
+
+</LinearLayout>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_for_login_bg">
+
+    <TextView
+        android:id="@+id/welTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welTips"
+        android:textSize="21dp"
+        android:textColor="@color/title_normal"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/welTv"
+        android:layout_marginTop="24dp">
+
+
+        <!--ImageView
+            android:id="@+id/de_login_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="61dip"
+            android:src="@mipmap/hitalk_1" /-->
+
+        <!--EditText
+            android:id="@+id/etNickName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sign_in_input_line_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/userName"
+            android:inputType="textPersonName"
+            android:maxLength="32"
+            android:ellipsize="end"
+            android:singleLine="true"
+            style="@style/inputStyle"
+            /-->
+
+        <EditText
+            android:id="@+id/etPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sign_in_input_line_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:hint="@string/phoneTips"
+            android:maxLength="11"
+            android:singleLine="true"
+            android:inputType="phone"
+            style="@style/inputStyle"
+            />
+
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sign_in_input_line_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="11dp"
+            android:hint="@string/passwordRegTips"
+            android:inputType="textPassword"
+            android:maxLength="10"
+            android:singleLine="true"
+            style="@style/inputStyle"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sign_in_input_line_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="11dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/input_bg">
+
+
+            <EditText
+                android:id="@+id/etVerifyCode"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:hint="@string/verify_code"
+                android:inputType="number"
+                android:maxLength="6"
+                android:singleLine="true"
+                style="@style/inputStyle"
+                android:background="@null"/>
+
+
+            <com.vivifram.second.hitalk.ui.view.FlashBorderView
+                android:id="@+id/btGetCode"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="2"
+                android:layout_marginRight="7dp"
+                android:background="@drawable/rs_select_btn_gray">
+
+                <TextView
+                    android:id="@+id/tvCodeTips"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/gray_normal"
+                    android:text="@string/send_code"
+                    android:textSize="14sp"
+                    />
+
+            </com.vivifram.second.hitalk.ui.view.FlashBorderView>
+
+        </LinearLayout>
+
+        <com.vivifram.second.hitalk.ui.view.ShrinkButton
+            android:id="@+id/btRegister"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/sign_in_button_height"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="11dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_rounded_color_accent_background"
+            android:text="@string/register"
+            android:textSize="@dimen/button_sign_in_text_size"
+            android:textColor="@color/colorWhite"
+            android:elevation="@dimen/elevation_sign_in_button"/>
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:text="@string/hiServiceProtocal"
+        android:textColor="@color/tips_color"
+        android:textSize="14sp" />
+
+</RelativeLayout>

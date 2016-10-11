@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:background="@color/__picker_black"
+    >
+    <TextView
+        android:id="@+id/cancelTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:text="@string/__picker_cancel"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:textColor="@color/__picker_white"
+        />
+
+    <TextView
+        android:id="@+id/titleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="@string/__picker_photoTitle"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:textColor="@color/__picker_white"
+        android:layout_centerInParent="true"
+        />
+
+    <TextView
+        android:id="@+id/completeTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:text="@string/__picker_complete"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:textColor="@color/__picker_white"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="12dp"
+        />
+
+
+</RelativeLayout>

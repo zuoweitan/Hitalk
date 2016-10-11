@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_eeeeee"
+    android:orientation="vertical">
+
+    <com.vivifram.second.hitalk.ui.view.BGATitlebar
+        android:id="@+id/titleBar"
+        style="@style/TitleBar"
+        android:background="@color/colorWhite"
+        app:bgatitlebar_rightDrawable="@drawable/addx"
+        app:bgatitlebar_rightDrawablePadding="20dp"
+        app:bgatitlebar_titleText="@string/tab_address"
+        app:bgatitlebar_titleTextColor="@color/color_272636" />
+
+    <View style="@style/normal_line" />
+
+    <RelativeLayout
+        android:layout_width="339dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_white">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="145dp"
+            android:src="@drawable/search" />
+
+        <TextView
+            style="@style/wrap_warp_tv_center"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="165dp"
+            android:text="@string/search"
+            android:textColor="@color/color_cccccc"
+            android:textSize="@dimen/text_size_13" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/tabsLt"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <include
+            android:id="@+id/tabOne"
+            layout="@layout/addresstab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <include
+            android:id="@+id/tabTwo"
+            layout="@layout/addresstab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <include
+            android:id="@+id/tabThree"
+            layout="@layout/addresstab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <!--<com.vivifram.second.hitalk.ui.view.CommonItem
+        android:id="@+id/conditionSearch"
+        style="@style/commonItem_style" />
+
+    <com.vivifram.second.hitalk.ui.view.CommonItem
+        android:id="@+id/nearbyp"
+        style="@style/commonItem_style" />-->
+
+    <FrameLayout android:id="@+id/addressContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+    
+</LinearLayout>

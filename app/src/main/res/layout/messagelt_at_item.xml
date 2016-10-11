@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.bingoogolapple.badgeview.BGABadgeRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="54dp"
+    style="@style/match_horizontal">
+
+
+    <ImageView
+        android:id="@+id/profileIv"
+        style="@style/avatar_imv_style"
+        android:src="@drawable/at_layer"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="13dp"
+        />
+
+    <TextView
+        android:textSize="18dp"
+        android:textColor="@color/color_333333"
+        style="@style/wrap_warp_tv_center"
+        android:text="@string/atme"
+        android:layout_toRightOf="@+id/profileIv"
+        android:layout_marginLeft="18dp"
+        android:layout_centerVertical="true"/>
+
+    <View
+        android:layout_marginLeft="68dp"
+        style="@style/normal_line.bottom" />
+
+</cn.bingoogolapple.badgeview.BGABadgeRelativeLayout>

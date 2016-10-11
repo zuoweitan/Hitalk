@@ -1,0 +1,10 @@
+<resources>
+    <declare-styleable name="__picker_SmoothCheckBox">
+        <attr name="__picker_duration" format="integer"/>
+        <attr name="__picker_stroke_width" format="dimension"/>
+        <attr name="__picker_color_tick" format="color"/>
+        <attr name="__picker_color_checked" format="color"/>
+        <attr name="__picker_color_unchecked" format="color"/>
+        <attr name="__picker_color_unchecked_stroke" format="color"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="collegesArray">
+        <item>重庆邮电大学</item>
+        <item>重庆大学</item>
+        <item>重庆工商大学</item>
+        <item>重庆外国语学校</item>
+        <item>重庆师范大学</item>
+        <item>云南红河学院</item>
+        <item>云南大学</item>
+    </string-array>
+    <string-array name="interestArray">
+        <item>旅游</item>
+        <item>音乐</item>
+        <item>运动</item>
+        <item>摄影</item>
+        <item>军事</item>
+        <item>电影</item>
+        <item>动漫</item>
+    </string-array>
+</resources>

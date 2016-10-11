@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.vivifram.second.hitalk"
+        minSdkVersion 18
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java','src/main/java-gen']
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/maven/com.squareup.picasso/picasso/pom.properties'
+        exclude 'META-INF/maven/com.squareup.picasso/picasso/pom.xml'
+    }
+
+    lintOptions {
+        quiet false
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:support-v4:23.0.0'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:recyclerview-v7:23.+'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.1.2'
+    compile 'org.greenrobot:greendao:2.2.0'
+    compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
+    compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
+    compile 'cn.leancloud.android:avoscloud-sdk:v3.+'
+    compile('cn.leancloud.android:avoscloud-push:v3.+@aar') { transitive = true }
+    compile 'cn.leancloud.android:avoscloud-statistics:v3.+'
+    compile 'cn.leancloud.android:avoscloud-feedback:v3.+@aar'
+    compile 'cn.leancloud.android:avoscloud-search:v3.+@aar'
+    compile 'cn.bingoogolapple:bga-badgeview:1.1.3@aar'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile('com.github.bumptech.glide:okhttp3-integration:1.4.0') {
+        exclude group: 'glide-parent'
+    }
+    compile project(':ninegridview')
+    compile project(':httplib')
+    compile 'com.mikhaellopez:circularprogressbar:1.1.1'
+    compile project(':PhotoPicker')
+    compile project(':bolts-tasks')
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
+}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.bingoogolapple.badgeview.BGABadgeRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="54dp"
+    style="@style/match_horizontal">
+
+
+    <com.vivifram.second.hitalk.ui.view.AvatarView
+        android:id="@+id/profileIv"
+        style="@style/avatar_imv_style"
+        android:src="@drawable/default_avatar"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="13dp"
+        app:avatar_border_color="@color/transparent"
+        app:avatar_border_width="0dp"
+        />
+
+    <TextView
+        android:id="@+id/nickTv"
+        style="@style/wrap_warp_tv_center"
+        android:gravity="bottom"
+        android:textSize="18dp"
+        android:textColor="@color/color_333333"
+        android:text="@string/atme"
+        android:layout_toRightOf="@+id/profileIv"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="4dp"
+        />
+
+    <TextView
+        android:id="@+id/contentTv"
+        style="@style/wrap_warp_tv_center"
+        android:gravity="bottom"
+        android:textSize="16dp"
+        android:textColor="@color/color_888888"
+        android:text="@string/atme"
+        android:layout_toRightOf="@+id/profileIv"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="30dp"
+        />
+
+    <TextView
+        android:id="@+id/timeTv"
+        style="@style/wrap_warp_tv_center"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:textSize="16dp"
+        android:text="2016-09-01"
+        android:textColor="@color/color_888888"
+        />
+
+    <View
+        android:layout_marginLeft="68dp"
+        style="@style/normal_line.bottom" />
+
+</cn.bingoogolapple.badgeview.BGABadgeRelativeLayout>

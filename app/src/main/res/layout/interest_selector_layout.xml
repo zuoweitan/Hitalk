@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vivifram.second.hitalk.ui.bubble.BubbleLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:bl_arrowDirection="top"
+    app:bl_arrowHeight="8dp"
+    app:bl_arrowPosition="8dp"
+    app:bl_arrowWidth="8dp"
+    app:bl_cornersRadius="6dp"
+    app:bl_bubbleColor="#99000000">
+
+    <com.vivifram.second.hitalk.ui.flowlayout.TagFlowLayout
+        android:id="@+id/interestFlow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        app:max_select="-1">
+
+    </com.vivifram.second.hitalk.ui.flowlayout.TagFlowLayout>
+
+</com.vivifram.second.hitalk.ui.bubble.BubbleLayout>

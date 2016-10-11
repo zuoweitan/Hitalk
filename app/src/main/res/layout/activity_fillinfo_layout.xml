@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@color/color_for_login_bg">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19sp"
+        android:textColor="@color/title_normal"
+        android:text="@string/fillInfoTips"
+        android:layout_marginTop="24dp"
+        />
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="40dp">
+
+        <com.vivifram.second.hitalk.ui.view.CircleImageView
+            android:id="@+id/userIcon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/hitalk_yellow"
+            android:layout_centerInParent="true"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/camera"
+            />
+
+    </RelativeLayout>
+
+    <com.vivifram.second.hitalk.ui.view.XEditText
+        android:id="@+id/etNickname"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sign_in_input_line_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/nicknameTips"
+        android:maxLength="11"
+        android:singleLine="true"
+        android:inputType="text"
+        style="@style/inputStyle"
+        android:drawableRight="@mipmap/indicator_input_error"
+        app:x_customizeMarkerEnable="true"
+        app:x_showMarkerTime="never"
+        />
+
+    <com.vivifram.second.hitalk.ui.view.RichAutoCompleteTextView
+        android:id="@+id/etCollege"
+        style="@style/AutoCompleteStyle"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginTop="11dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sign_in_input_line_height"
+        android:completionThreshold="1"
+        android:gravity="center_vertical"
+        android:hint="@string/collegeTips"
+        app:dropdown_layout_id="@layout/college_selector_layout"
+        app:popHeight="wrap_content"
+        app:ime_visible="true"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sign_in_input_line_height"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:background="@drawable/input_bg"
+        android:layout_marginTop="11dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sex"
+            android:textSize="16sp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/edit_color_hint"/>
+        
+        <RadioGroup
+            android:id="@+id/RgSex"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="16dp">
+
+            <RadioButton
+                android:id="@+id/Rbman"
+                style="@style/RbStyle"
+                android:text="@string/man"
+                android:textSize="16sp"
+                android:textColor="@color/selector_sex"
+                android:checked="true"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/sex"/>
+
+            <View
+                android:id="@+id/linev"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/hint"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="14dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                />
+
+            <RadioButton
+                android:id="@+id/Rbwman"
+                style="@style/RbStyle"
+                android:text="@string/woman"
+                android:textSize="16sp"
+                android:textColor="@color/selector_sex"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/sex" />
+
+        </RadioGroup>
+        
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sign_in_input_line_height"
+        android:layout_marginTop="11dp">
+        <EditText
+            android:id="@+id/interestBt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:hint="@string/interestTips"
+            android:editable="false"
+            style="@style/inputStyle"
+            android:singleLine="true"
+            android:ellipsize="end"
+            />
+
+        <Button
+            android:id="@+id/interestFakeBt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:background="@color/transparent"/>
+    </FrameLayout>
+
+    <com.vivifram.second.hitalk.ui.view.ShrinkButton
+        android:id="@+id/btnfill"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sign_in_button_height"
+        android:layout_marginLeft="@dimen/fill_button_margin_edge"
+        android:layout_marginRight="@dimen/fill_button_margin_edge"
+        android:layout_marginTop="11dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_rounded_color_accent_background"
+        android:text="@string/complete"
+        android:textSize="@dimen/button_sign_in_text_size"
+        android:textColor="@color/colorWhite"
+        android:elevation="@dimen/elevation_sign_in_button"/>
+
+</LinearLayout>

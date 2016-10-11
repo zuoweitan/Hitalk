@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tab"
+    android:layout_width="80dp"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@drawable/hititle"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/titleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="HI聊"
+        android:textColor="@color/selector_hitalk_title"
+        android:textSize="@dimen/textSize18" />
+
+    <TextView
+        android:id="@+id/numberTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTv"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="9999在线"
+        android:textColor="@color/selector_hitalk_title"
+        android:textSize="14dp" />
+
+</RelativeLayout>

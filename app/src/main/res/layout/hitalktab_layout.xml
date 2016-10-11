@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vivifram.second.hitalk.ui.layout.HitalkTab
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:background="@color/colorWhite"
+    android:layout_height="52dp">
+
+    <ImageView
+        android:id="@+id/leftImv"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:scaleType="centerInside"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/magnifier"
+        android:layout_marginLeft="5dp"/>
+    <View
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+
+    <include
+        android:id="@+id/tabOne"
+        layout="@layout/hitalktab"
+        />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+
+    <include
+        android:id="@+id/tabTwo"
+        layout="@layout/hitalktab"
+        />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/rightImv"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:scaleType="centerInside"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/more"
+        android:layout_marginRight="5dp"/>
+
+
+</com.vivifram.second.hitalk.ui.layout.HitalkTab>

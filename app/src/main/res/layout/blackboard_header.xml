@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/bb_frame"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center">
+
+        <com.vivifram.second.hitalk.ui.view.CircleProgressBar
+            android:id="@+id/bb_header_progressbar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:mlpb_progress_stoke_width="2dp"
+            app:mlpb_progress_color="@color/hitalk_yellow"
+            app:mlpb_enable_circle_background="false"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/bb_header_text"
+            android:layout_toStartOf="@+id/bb_header_text"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/bb_header_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/bb_header_text"
+            android:layout_toStartOf="@+id/bb_header_text"
+            android:adjustViewBounds="true"/>
+
+
+        <TextView
+            android:id="@+id/bb_header_text"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:gravity="left"
+            android:text="下拉刷新" />
+    </RelativeLayout>
+</LinearLayout>

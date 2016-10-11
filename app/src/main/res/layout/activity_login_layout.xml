@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/color_for_login_bg">
+
+    <TextView
+        android:id="@+id/welTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welTips"
+        android:textSize="21dp"
+        android:textColor="@color/title_normal"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:id="@+id/llUsername"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sign_in_input_line_height"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/fill_button_margin_edge"
+        android:layout_marginRight="@dimen/fill_button_margin_edge"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/welTv"
+        >
+        <!--TextView
+            android:id="@+id/tvUserNameHint"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:text="@string/user_name"
+            android:gravity="center"
+            /-->
+
+        <EditText
+            android:id="@+id/etUserName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:singleLine="true"
+            android:hint="@string/phoneTips"
+            style="@style/inputStyle"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/passwordLt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sign_in_input_line_height"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/fill_button_margin_edge"
+        android:layout_marginRight="@dimen/fill_button_margin_edge"
+        android:layout_marginTop="11dp"
+        android:layout_below="@id/llUsername"
+        >
+        <!--TextView
+            android:id="@+id/tvPasswordHint"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:text="@string/password"
+            android:gravity="center"
+            /-->
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:hint="@string/passwordTips"
+            style="@style/inputStyle"
+            />
+    </LinearLayout>
+
+
+    <com.vivifram.second.hitalk.ui.view.ShrinkButton
+        android:id="@+id/btnSignIn"
+        android:layout_below="@id/passwordLt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sign_in_button_height"
+        android:layout_marginLeft="@dimen/fill_button_margin_edge"
+        android:layout_marginRight="@dimen/fill_button_margin_edge"
+        android:layout_marginTop="11dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_rounded_color_accent_background"
+        android:text="@string/login"
+        android:textSize="@dimen/button_sign_in_text_size"
+        android:textColor="@color/colorWhite"
+        android:elevation="@dimen/elevation_sign_in_button"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:layout_below="@id/btnSignIn"
+        android:layout_marginTop="12dp">
+        <View
+            android:id="@+id/linev"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@color/indicator_color"/>
+
+        <TextView
+            android:id="@+id/registerTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/title_normal"
+            android:text="@string/registerUser"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/linev"
+            android:layout_marginRight="11dp"
+            android:background="@null"/>
+
+
+        <TextView
+            android:id="@+id/issueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/title_normal"
+            android:text="@string/login_issue"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/linev"
+            android:layout_marginLeft="11dp"
+            android:background="@null"
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.vivifram.second.hitalk.ui.view.BGATitlebar
+        android:id="@+id/titleBar"
+        style="@style/TitleBar"
+        app:bgatitlebar_leftDrawable="@mipmap/camera_icon"
+        app:bgatitlebar_rightDrawable="@mipmap/more_icon"
+        app:bgatitlebar_titleTextColor="@color/colorWhite"
+        app:bgatitlebar_titleTextSize="@dimen/textSize20"
+        app:bgatitlebar_leftAndRightPadding="@dimen/gapMiddle"
+        app:bgatitlebar_titleText="@string/tab_blackboard"
+        android:background="@color/black_deep"
+        />
+
+    <RelativeLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.vivifram.second.hitalk.ui.springview.widget.SpringView
+            android:id="@+id/bbSv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/blackBoardRv"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.vivifram.second.hitalk.ui.springview.widget.SpringView>
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            layout="@layout/blackboard_comment_layout"/>
+
+    </RelativeLayout>
+</LinearLayout>

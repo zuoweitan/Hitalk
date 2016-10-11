@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vivifram.second.hitalk.ui.bubble.BubbleLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:bl_arrowDirection="bottom"
+    app:bl_arrowHeight="8dp"
+    app:bl_arrowPosition="8dp"
+    app:bl_arrowWidth="8dp"
+    app:bl_cornersRadius="6dp"
+    app:bl_bubbleColor="#99000000">
+
+    <com.vivifram.second.hitalk.wheelview.widget.WheelView
+        android:id="@+id/collegeWv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        />
+
+
+</com.vivifram.second.hitalk.ui.bubble.BubbleLayout>
