@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/hitalk_lean.iml" filepath="$PROJECT_DIR$/hitalk_lean.iml" />
       <module fileurl="file://$PROJECT_DIR$/httplib/httplib.iml" filepath="$PROJECT_DIR$/httplib/httplib.iml" />
       <module fileurl="file://$PROJECT_DIR$/ninegridview/ninegridview.iml" filepath="$PROJECT_DIR$/ninegridview/ninegridview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recycleview-stickheader/recycleview-stickheader.iml" filepath="$PROJECT_DIR$/recycleview-stickheader/recycleview-stickheader.iml" />
     </modules>
   </component>
 </project>

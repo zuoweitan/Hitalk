@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/greendao" />
             <option value="$PROJECT_DIR$/httplib" />
             <option value="$PROJECT_DIR$/ninegridview" />
+            <option value="$PROJECT_DIR$/recycleview-stickheader" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
