@@ -3,6 +3,13 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.vivifram.second.hitalk.ui.view.SRecyclerView
+        android:id="@+id/schoolmateList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.vivifram.second.hitalk.ui.view.SRecyclerView>
+
     <com.vivifram.second.hitalk.ui.view.CommonItem
         android:id="@+id/conditionSearch"
         style="@style/commonItem_style" />
@@ -11,12 +18,5 @@
         android:id="@+id/nearbyp"
         android:layout_below="@+id/conditionSearch"
         style="@style/commonItem_style" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/schoolmateLists"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

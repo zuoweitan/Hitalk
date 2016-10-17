@@ -12,6 +12,8 @@ import android.view.View;
 
 public class DividerDecoration extends RecyclerView.ItemDecoration {
 
+  private static final int LINE_OFFSET = 80;
+
   private static final int[] ATTRS = new int[]{
       android.R.attr.listDivider
   };
@@ -62,7 +64,7 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
           .getLayoutParams();
       final int top = Math.max(recyclerViewTop, child.getBottom() + params.bottomMargin);
       final int bottom = Math.min(recyclerViewBottom, top + mDivider.getIntrinsicHeight());
-      mDivider.setBounds(left, top, right, bottom);
+      mDivider.setBounds(left + LINE_OFFSET, top, right, bottom);
       mDivider.draw(c);
     }
   }

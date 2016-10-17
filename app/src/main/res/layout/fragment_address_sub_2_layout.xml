@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <com.vivifram.second.hitalk.ui.view.SRecyclerView
+        android:id="@+id/friendList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.vivifram.second.hitalk.ui.view.SRecyclerView>
 
     <com.vivifram.second.hitalk.ui.view.CommonItem
         android:id="@+id/newf"
@@ -9,7 +16,8 @@
 
     <com.vivifram.second.hitalk.ui.view.CommonItem
         android:id="@+id/nearbyp"
+        android:layout_below="@+id/newf"
         style="@style/commonItem_style" />
 
 
-</LinearLayout>
+</RelativeLayout>

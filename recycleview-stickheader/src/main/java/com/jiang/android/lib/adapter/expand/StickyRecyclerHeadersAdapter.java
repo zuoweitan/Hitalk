@@ -33,4 +33,12 @@ public interface StickyRecyclerHeadersAdapter<VH extends RecyclerView.ViewHolder
   public void onBindHeaderViewHolder(VH holder, int position);
 
   public int getItemCount();
+
+  public boolean isRecyclerViewHeader(int position);
+
+  public VH onCreateRecyclerHeaderViewHolder(ViewGroup parent);
+
+  public void onBindRecyclerHeaderViewHolder(VH holder, int position);
+
+  public boolean isRecyclerViewFooter(int position);
 }

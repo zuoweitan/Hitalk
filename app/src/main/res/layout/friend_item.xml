@@ -21,42 +21,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="58dp"
-        android:layout_marginTop="7dp"
+        android:layout_centerVertical="true"
         android:text="Akon"
-        android:textSize="14dp"
+        android:textSize="18dp"
         android:textColor="@color/black_deep"/>
 
     <TextView
-        android:id="@+id/sInfo"
+        android:id="@+id/distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="58dp"
-        android:layout_marginTop="30dp"
-        android:text="清华大学"
-        android:textSize="14dp"
-        android:textColor="@color/black_deep"
-        />
-
-    <TextView
-        android:id="@+id/distance"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginLeft="206dp"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
         android:textColor="@color/color_888888"
         android:textSize="14dp"
         android:text="50m"
         />
     
-    <Button
-        android:layout_width="54dp"
-        android:layout_height="28dp"
-        android:background="@drawable/button_rounded_color_black_background"
-        android:text="@string/makefriend"
-        android:textColor="@color/colorWhite"
-        android:textSize="14dp"
-        android:layout_marginLeft="300dp"
-        android:layout_centerVertical="true"/>
-
 </RelativeLayout>

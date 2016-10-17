@@ -3,11 +3,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
    <TextView
+       android:id="@+id/hotTv"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:text="话题聊"
-       android:gravity="center"
-       android:textSize="20dp"
+       android:layout_height="54dp"
+       android:gravity="center_vertical"
+       android:paddingLeft="12dp"
+       android:textSize="19dp"
+       android:textColor="@color/black_deep"
+       android:text="@string/hotRecommand"
+       android:layout_marginTop="8dp"
+       android:background="@color/colorWhite"
        />
+
+   <View
+       android:layout_width="match_parent"
+       android:layout_height="0.5dp"
+       android:layout_marginLeft="11dp"
+       android:background="@color/color_eeeeee"
+       />
+
+   <com.vivifram.second.hitalk.ui.view.HotLayout
+       android:layout_width="match_parent"
+       android:layout_height="60dp"
+       android:background="@color/colorWhite">
+
+      <com.vivifram.second.hitalk.ui.view.RoundImageView
+          android:layout_width="46dp"
+          android:layout_height="46dp"
+          android:layout_centerVertical="true"
+          android:layout_marginLeft="14dp"
+          android:src="@drawable/hot_1"/>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="16dp"
+          android:layout_marginLeft="70dp"
+          android:layout_marginTop="8dp"
+          android:text="@string/hot_demo_1"
+          android:textColor="@color/black_deep"
+          />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="13dp"
+          android:layout_marginLeft="70dp"
+          android:layout_marginTop="34dp"
+          android:text="@string/hot_demo_2"
+          android:textColor="@color/color_ababab"
+          />
+
+   </com.vivifram.second.hitalk.ui.view.HotLayout>
+
 </LinearLayout>

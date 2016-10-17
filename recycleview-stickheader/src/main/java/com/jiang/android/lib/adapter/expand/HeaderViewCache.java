@@ -3,6 +3,7 @@ package com.jiang.android.lib.adapter.expand;
 import android.support.v4.util.LongSparseArray;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -28,8 +29,16 @@ public class HeaderViewCache implements HeaderProvider {
     View header = mHeaderViews.get(headerId);
     if (header == null) {
       //TODO - recycle views
-      RecyclerView.ViewHolder viewHolder = mAdapter.onCreateHeaderViewHolder(parent);
-      mAdapter.onBindHeaderViewHolder(viewHolder, position);
+      RecyclerView.ViewHolder viewHolder = null;
+
+      if (mAdapter.isRecyclerViewHeader(position)){
+        viewHolder = mAdapter.onCreateRecyclerHeaderViewHolder(parent);
+        mAdapter.onBindRecyclerHeaderViewHolder(viewHolder, position);
+      }else {
+        viewHolder = mAdapter.onCreateHeaderViewHolder(parent);
+        mAdapter.onBindHeaderViewHolder(viewHolder, position);
+      }
+
       header = viewHolder.itemView;
       if (header.getLayoutParams() == null) {
         header.setLayoutParams(new ViewGroup.LayoutParams(

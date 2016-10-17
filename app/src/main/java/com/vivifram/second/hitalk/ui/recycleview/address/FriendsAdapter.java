@@ -1,7 +1,6 @@
 package com.vivifram.second.hitalk.ui.recycleview.address;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +9,13 @@ import android.widget.TextView;
 import com.jiang.android.lib.adapter.BaseAdapter;
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersAdapter;
 import com.vivifram.second.hitalk.R;
-import com.vivifram.second.hitalk.bean.address.SchoolMate;
-import com.zuowei.utils.common.TagUtil;
+import com.vivifram.second.hitalk.bean.address.Friend;
 
 /**
  * Created by zuowei on 16-10-13.
  */
 
-public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.ViewHolder> implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder> {
+public class FriendsAdapter extends BaseAdapter<Friend,RecyclerView.ViewHolder> implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder> {
 
     public static final int HEADER = 0X01;
     public static final int NORMAL = 0x02;
@@ -37,19 +35,19 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
         View view = null;
         if (viewType == HEADER) {
             view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.schoolmateheader, parent, false);
+                    .inflate(R.layout.friendheader, parent, false);
             return new RecyclerView.ViewHolder(view) {};
         }
 
         view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.schoolmate_item, parent, false);
-        return new SchoolMateViewHolder(view);
+                .inflate(R.layout.friend_item, parent, false);
+        return new FriendViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof SchoolMateViewHolder) {
-            ((SchoolMateViewHolder)holder).initWithModel(getItem(position));
+        if (holder instanceof FriendViewHolder) {
+            ((FriendViewHolder)holder).initWithModel(getItem(position));
         }
     }
 
@@ -64,7 +62,7 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.school_stickheader, parent, false);
+                .inflate(R.layout.friend_stickheader, parent, false);
         return new RecyclerView.ViewHolder(view) {
         };
     }
@@ -81,9 +79,9 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
     }
 
     @Override
-    public SchoolMate getItem(int position) {
+    public Friend getItem(int position) {
         if (position == 0){
-            return new SchoolMate();
+            return new Friend();
         }
         return super.getItem(getAdjustPosition(position));
     }
@@ -101,7 +99,7 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateRecyclerHeaderViewHolder(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.school_recyclerheader, parent, false);
+                .inflate(R.layout.friend_recyclerheader, parent, false);
         return new RecyclerView.ViewHolder(view) {
         };
     }
@@ -116,20 +114,17 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
         return false;
     }
 
-    public class SchoolMateViewHolder extends RecyclerView.ViewHolder{
+    public class FriendViewHolder extends RecyclerView.ViewHolder{
 
         TextView nickNameTv;
-        TextView infoTv;
 
-        public SchoolMateViewHolder(View itemView) {
+        public FriendViewHolder(View itemView) {
             super(itemView);
             nickNameTv = (TextView) itemView.findViewById(R.id.nickTv);
-            infoTv = (TextView) itemView.findViewById(R.id.sInfo);
         }
 
-        public void initWithModel(SchoolMate schoolMate){
-            nickNameTv.setText(schoolMate.getNickName());
-            infoTv.setText(schoolMate.getsInfo());
+        public void initWithModel(Friend friend){
+            nickNameTv.setText(friend.getNickName());
         }
     }
 }

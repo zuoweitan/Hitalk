@@ -240,6 +240,14 @@ public class HeaderPositionCalculator {
     return true;
   }
 
+  public boolean isRecyclerViewHeader(int position){
+    return mAdapter.isRecyclerViewHeader(position);
+  }
+
+  public boolean isRecyclerViewFooter(int position){
+    return mAdapter.isRecyclerViewFooter(position);
+  }
+
   private int getListTop(RecyclerView view) {
     if (view.getLayoutManager().getClipToPadding()) {
       return view.getPaddingTop();
