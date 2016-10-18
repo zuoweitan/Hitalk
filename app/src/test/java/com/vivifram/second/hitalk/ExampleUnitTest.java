@@ -151,4 +151,43 @@ public class ExampleUnitTest {
         lock.await();
         System.out.println("do next at time = "+new Date());
     }
+
+    class Parent{
+        int i;
+        public Parent(){
+            this(0);
+        }
+        public Parent(int i){
+            this.i = i;
+            printi();
+        }
+
+        protected void printi(){
+            i+=1;
+            System.out.println(i);
+            System.out.println(this);
+        }
+    }
+
+    class Child extends Parent{
+
+        public Child() {
+        }
+
+        public Child(int i) {
+            super(i);
+            System.out.println("HHHHHHHH");
+        }
+
+        @Override
+        protected void printi() {
+            super.printi();
+        }
+    }
+
+    @Test
+    public void testClass(){
+        new Child();
+    }
+
 }

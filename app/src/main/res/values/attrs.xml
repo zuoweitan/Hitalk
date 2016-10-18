@@ -169,4 +169,8 @@
         <attr name="item_selector_color" format="color"/>
     </declare-styleable>
 
+    <declare-styleable name="HotLayout">
+        <attr name="hot_title" format="string"/>
+    </declare-styleable>
+
 </resources>
