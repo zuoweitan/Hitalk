@@ -48,10 +48,7 @@
 
     <View
         android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/color_bebebe"
-        android:layout_marginLeft="24dp"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        style="@style/divider_style" />
 
 </RelativeLayout>

@@ -8,8 +8,7 @@
     <com.vivifram.second.hitalk.ui.view.BGATitlebar
         android:id="@+id/titleBar"
         style="@style/TitleBar"
-        app:bgatitlebar_leftDrawable="@mipmap/camera_icon"
-        app:bgatitlebar_rightDrawable="@mipmap/more_icon"
+        app:bgatitlebar_leftDrawable="@drawable/camera_icon"
         app:bgatitlebar_titleTextColor="@color/colorWhite"
         app:bgatitlebar_titleTextSize="@dimen/textSize20"
         app:bgatitlebar_leftAndRightPadding="@dimen/gapMiddle"

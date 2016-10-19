@@ -167,7 +167,7 @@ public class BGATitlebar extends RelativeLayout implements View.OnClickListener 
     }
 
     public void setTitleDrawable(Drawable drawable) {
-        drawable.setBounds(0,0,70,70);
+        drawable.setBounds(0,0,60,60);
         mTitleCtv.setCompoundDrawables(null, null, drawable, null);
         showTitleCtv();
     }
@@ -190,7 +190,7 @@ public class BGATitlebar extends RelativeLayout implements View.OnClickListener 
     }
 
     public void setRightDrawable(Drawable drawable) {
-        drawable.setBounds(0,0,70,70);
+        drawable.setBounds(0,0,60,60);
         mRightCtv.setCompoundDrawables(null, null, drawable, null);
         showRightCtv();
     }
