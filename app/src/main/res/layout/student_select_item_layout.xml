@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="58dp"
+    android:gravity="center_vertical">
+
+    <me.iwf.photopicker.widget.SmoothCheckBox
+        android:id="@+id/v_selected"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="5dp"
+        app:__picker_color_tick="@color/__picker_white"
+        app:__picker_color_checked="@color/__picker_yellow"
+        app:__picker_color_unchecked="@color/__picker_white"
+        app:__picker_stroke_width="1.5dp"
+        />
+
+    <com.vivifram.second.hitalk.ui.view.AvatarView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/default_avatar"
+        app:avatar_border_width="0dp"
+        app:avatar_shadow_width="0dp"
+        />
+
+    <TextView
+        android:id="@+id/nickTv"
+        style="@style/wrap_warp_tv_center"
+        android:textColor="@color/black_deep"
+        android:textSize="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="hello world"/>
+
+</LinearLayout>

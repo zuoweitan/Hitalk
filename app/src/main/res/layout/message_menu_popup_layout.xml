@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vivifram.second.hitalk.ui.bubble.BubbleLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menuBubble"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="12dp"
+    android:padding="8dp"
+    app:bl_arrowDirection="top"
+    app:bl_arrowHeight="8dp"
+    app:bl_arrowPosition="106dp"
+    app:bl_arrowWidth="8dp"
+    app:bl_cornersRadius="6dp"
+    app:bl_strokeWidth="1dp">
+
+    <TextView
+        android:id="@+id/selectTv"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:textSize="16dp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center|left"
+        android:textColor="@color/black_deep"
+        android:text="@string/start_group_chat"
+        />
+
+</com.vivifram.second.hitalk.ui.bubble.BubbleLayout>

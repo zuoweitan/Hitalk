@@ -1,10 +1,12 @@
 package com.vivifram.second.hitalk.bean.address;
 
+import com.vivifram.second.hitalk.ui.view.slidebar.Indexable;
+
 /**
  * Created by zuowei on 16-10-13.
  */
 
-public class SchoolMate {
+public class SchoolMate extends LetterMark implements Indexable{
 
     private String nickName;
 
@@ -26,13 +28,8 @@ public class SchoolMate {
 
     private String sInfo;
 
-    public void setSortLetters(String sortLetters) {
-        this.sortLetters = sortLetters;
+    @Override
+    public String getIndex() {
+        return getSortLetters();
     }
-
-    public String getSortLetters() {
-        return sortLetters;
-    }
-
-    private String sortLetters;
 }

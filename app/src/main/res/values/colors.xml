@@ -58,6 +58,7 @@
     <color name="hint">#cccccc</color>
     <color name="hitalk_yellow">#ffd300</color>
     <color name="hitalk_deep_yellow">#ffa000</color>
+    <color name="ripple_yellow">#a0ffa000</color>
     <color name="title_normal">#333333</color>
     <color name="alpha_white">#54ffffff</color>
     <color name="indicator_color">#979797</color>
@@ -90,4 +91,9 @@
     <color name="color_979797">#979797</color>
     <color name="color_888888">#888888</color>
     <color name="color_ababab">#ababab</color>
+
+    <color name="material_blue_500">#5677fc</color>
+
+    <color name="shadow_bg">#66000000</color>
+    <color name="side_bar_text">#4A4A4A</color>
 </resources>

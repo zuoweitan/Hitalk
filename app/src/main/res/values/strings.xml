@@ -91,4 +91,7 @@
     <string name="topics">话题大杂烩</string>
     <string name="chinajoy">2016年度chinajoy</string>
     <string name="chinajoyvr">今年看点围绕VR</string>
+    <string name="start_group_chat">发起群聊</string>
+    <string name="title_select_student">选择同学</string>
+    <string name="confirm">确定</string>
 </resources>

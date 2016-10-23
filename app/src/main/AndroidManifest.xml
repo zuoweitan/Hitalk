@@ -63,6 +63,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.SelectStudentsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <!-- for im -->
         <service android:name="com.avos.avoscloud.PushService"/>

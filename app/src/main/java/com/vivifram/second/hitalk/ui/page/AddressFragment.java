@@ -8,6 +8,8 @@ import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.LayoutInject;
 import com.vivifram.second.hitalk.ui.page.layout.AddressFragmentLayout;
 import com.vivifram.second.hitalk.ui.page.layout.HitalkFragmentLayout;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.TagUtil;
 
 /**
  * Created by zuowei on 16-7-25.

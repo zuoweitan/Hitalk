@@ -63,10 +63,10 @@ public class BeanEventuallyQueue extends BaseEventuallyQueue{
                 super.setConnected(connected);
                 if (connected) {
                     connectionTaskCompletionSource.trySetResult(null);
-                    connectionTaskCompletionSource = Task.create();
+                    connectionTaskCompletionSource = new TaskCompletionSource<>();
                     connectionTaskCompletionSource.trySetResult(null);
                 } else {
-                    connectionTaskCompletionSource = Task.create();
+                    connectionTaskCompletionSource = new TaskCompletionSource<>();
                 }
             }
         }
@@ -87,7 +87,7 @@ public class BeanEventuallyQueue extends BaseEventuallyQueue{
     public void pause() {
         synchronized (connectionLock) {
             connectionTaskCompletionSource.trySetError(new PauseException());
-            connectionTaskCompletionSource = Task.create();
+            connectionTaskCompletionSource = new TaskCompletionSource<>();
             connectionTaskCompletionSource.trySetError(new PauseException());
         }
 
@@ -110,10 +110,10 @@ public class BeanEventuallyQueue extends BaseEventuallyQueue{
         NLog.i(TagUtil.makeTag(getClass()),"resume");
         if (isConnected()) {
             connectionTaskCompletionSource.trySetResult(null);
-            connectionTaskCompletionSource = Task.create();
+            connectionTaskCompletionSource = new TaskCompletionSource<>();
             connectionTaskCompletionSource.trySetResult(null);
         } else {
-            connectionTaskCompletionSource = Task.create();
+            connectionTaskCompletionSource = new TaskCompletionSource<>();
         }
 
         populateQueueAsync();

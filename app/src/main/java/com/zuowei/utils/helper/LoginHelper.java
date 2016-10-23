@@ -40,16 +40,6 @@ public class LoginHelper {
                     LoginHandler.getInstance().loginSuccess();
                 }
             }
-
-            @Override
-            protected void internalDone0(Object o, AVException e) {
-                NLog.i(TagUtil.makeTag(LoginHelper.class),"internalDone0 = "+e);
-                if (e != null) {
-                    LoginHandler.getInstance().loginError(e.getCode(), e.getMessage());
-                }else {
-                    LoginHandler.getInstance().loginSuccess();
-                }
-            }
         };
 
         mRegisterCallback = new SignUpCallback() {

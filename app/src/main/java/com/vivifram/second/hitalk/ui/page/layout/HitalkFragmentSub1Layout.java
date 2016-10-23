@@ -9,6 +9,7 @@ import com.vivifram.second.hitalk.bean.Emojicon;
 import com.vivifram.second.hitalk.bean.IMessageWrap;
 import com.vivifram.second.hitalk.cache.MessageCacheQueue;
 import com.vivifram.second.hitalk.ui.page.layout.adapter.ChatMessageListAdapter;
+import com.vivifram.second.hitalk.ui.view.FloatingActionButton;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;

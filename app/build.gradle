@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion '24.0.0'
 
     defaultConfig {
         applicationId "com.vivifram.second.hitalk"
@@ -11,6 +11,10 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+
+        jackOptions {
+            enabled true
+        }
     }
     buildTypes {
         release {
@@ -35,6 +39,10 @@ android {
     lintOptions {
         quiet false
         abortOnError false
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 }
 

@@ -2,6 +2,7 @@ package com.vivifram.second.hitalk.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -35,6 +36,9 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
         super.onCreate(arg0);
         //http://stackoverflow.com/questions/4341600/how-to-prevent-multiple-instances-of-an-activity-when-it-is-launched-with-differ/
         //理论上应该放在launcher activity,放在基类中所有集成此库的app都可以避免此问题
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         if(!isTaskRoot()){
             Intent intent = getIntent();
             String action = intent.getAction();

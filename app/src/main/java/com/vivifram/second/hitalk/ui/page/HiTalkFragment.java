@@ -15,6 +15,8 @@ import com.vivifram.second.hitalk.ui.page.layout.HitalkFragmentLayout;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.IEater;
 import com.zuowei.utils.bridge.params.LightParam;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.TagUtil;
 
 /**
  * Created by zuowei on 16-7-25.
@@ -86,6 +88,7 @@ public class HiTalkFragment extends LazyFragment<HitalkFragmentLayout> {
 
     private void switchTab(int index){
         if (index != mIndex) {
+            NLog.i(TagUtil.makeTag(getClass()),"index = "+index+",mIndex = "+mIndex);
             FragmentTransaction trx = getActivity().getSupportFragmentManager()
                     .beginTransaction();
             trx.hide(mFragments[mIndex]);

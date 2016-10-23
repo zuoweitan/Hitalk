@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_eeeeee">
+
+        <com.vivifram.second.hitalk.ui.view.BGATitlebar
+            android:id="@+id/titleBar"
+            style="@style/TitleBar"
+            android:background="@color/colorWhite"
+            app:bgatitlebar_leftDrawable="@drawable/back"
+            app:bgatitlebar_leftDrawablePadding="10dp"
+            app:bgatitlebar_rightText="@string/confirm"
+            app:bgatitlebar_rightTextColor="@color/color_272636"
+            app:bgatitlebar_titleText="@string/title_select_student"
+            app:bgatitlebar_titleTextColor="@color/color_272636" />
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/studentsRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:background="@color/colorWhite"/>
+
+    </LinearLayout>
+
+    <com.vivifram.second.hitalk.ui.view.slidebar.ZSideBar
+        android:id="@+id/zsidebar"
+        android:layout_width="24dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        />
+
+</FrameLayout>
