@@ -5,7 +5,9 @@ import android.text.TextUtils;
 import com.avos.avoscloud.AVCallback;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.im.v2.AVIMConversation;
+import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.helper.HiTalkHelper;
+import com.zuowei.utils.helper.UserBeanCacheHelper;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,22 +32,21 @@ public class ConversationUtils {
                     callback.internalDone(conversation.getName(), null);
                 } else if(2 == conversation.getMembers().size()) {
                     String peerId = getConversationPeerId(conversation);
-                    LCIMProfileCache.getInstance().getUserName(peerId, callback);
+                    UserBeanCacheHelper.getInstance().getUserName(peerId, callback);
                 } else if(!TextUtils.isEmpty(conversation.getName())) {
                     callback.internalDone(conversation.getName(), null);
                 } else {
-                    LCIMProfileCache.getInstance().getCachedUsers(conversation.getMembers(), new AVCallback() {
-                        protected void internalDone0(List<LCChatKitUser> lcimUserProfiles, AVException e) {
+                    UserBeanCacheHelper.getInstance().getCachedUsers(conversation.getMembers(), new AVCallback<List<User>>() {
+                        protected void internalDone0(List<User> users, AVException e) {
                             ArrayList nameList = new ArrayList();
-                            if(null != lcimUserProfiles) {
-                                Iterator i$ = lcimUserProfiles.iterator();
+                            if(null != users) {
+                                Iterator<User> i$ = users.iterator();
 
                                 while(i$.hasNext()) {
-                                    LCChatKitUser userProfile = (LCChatKitUser)i$.next();
-                                    nameList.add(userProfile.getUserName());
+                                    User user = i$.next();
+                                    nameList.add(user.getUserName());
                                 }
                             }
-
                             callback.internalDone(TextUtils.join(",", nameList), e);
                         }
                     });
@@ -61,8 +62,7 @@ public class ConversationUtils {
             if(1 == conversation.getMembers().size()) {
                 peerId = conversation.getMembers().get(0);
             }
-
-            LCIMProfileCache.getInstance().getUserAvatar(peerId, callback);
+            UserBeanCacheHelper.getInstance().getUserAvatar(peerId, callback);
         } else {
             callback.internalDone(null, new AVException(new Throwable("cannot find icon!")));
         }

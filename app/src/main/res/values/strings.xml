@@ -94,4 +94,10 @@
     <string name="start_group_chat">发起群聊</string>
     <string name="title_select_student">选择同学</string>
     <string name="confirm">确定</string>
+
+
+    <string name="message_shorthand_audio">[语音]</string>
+    <string name="message_shorthand_image">[图片]</string>
+    <string name="message_shorthand_location">[位置]</string>
+    <string name="message_shorthand_unknown">[未知]</string>
 </resources>

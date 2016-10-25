@@ -117,13 +117,32 @@ public class UserBeanCacheHelper {
 
     }
 
+    public void getUserName(String id, final AVCallback<String> callback) {
+        this.getCachedUser(id, new AVCallback<User>() {
+            @Override
+            protected void internalDone0(User user, AVException e) {
+                String userName = null != user?user.getUserName():null;
+                callback.internalDone(userName, e);
+            }
+        });
+    }
+
+    public void getUserAvatar(String id, final AVCallback<String> callback) {
+        this.getCachedUser(id, new AVCallback<User>() {
+            protected void internalDone0(User user, AVException e) {
+                String avatarUrl = null != user?user.getAvatar():null;
+                callback.internalDone(avatarUrl, e);
+            }
+        });
+    }
+
     private void getUsersFromProvider(List<String> idList, final List<User> users, final AVCallback<List<User>> callback) {
         if(null != mUserProvider) {
             mUserProvider.fetch(idList, (userList, e) -> {
                 if(null != userList) {
-                    userList.forEach((User user) -> {
+                    for (User user : userList) {
                         cacheUser(user);
-                    });
+                    }
                     users.addAll(userList);
                 }
                 callback.internalDone(users, null != e?new AVException(e):null);

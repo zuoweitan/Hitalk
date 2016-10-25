@@ -1,20 +1,36 @@
 package com.vivifram.second.hitalk.ui.page.layout.adapter;
 
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVCallback;
+import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMException;
+import com.avos.avoscloud.im.v2.AVIMMessage;
+import com.avos.avoscloud.im.v2.AVIMReservedMessageType;
+import com.avos.avoscloud.im.v2.AVIMTypedMessage;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCallback;
+import com.avos.avoscloud.im.v2.callback.AVIMMessagesQueryCallback;
+import com.avos.avoscloud.im.v2.callback.AVIMSingleMessageQueryCallback;
+import com.avos.avoscloud.im.v2.messages.AVIMTextMessage;
+import com.bumptech.glide.Glide;
+import com.vivifram.second.hitalk.HiTalkApplication;
 import com.vivifram.second.hitalk.R;
+import com.zuowei.utils.chat.ConversationUtils;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.TagUtil;
+import com.zuowei.utils.helper.ConversationCacheHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cn.bingoogolapple.badgeview.BGABadgeRelativeLayout;
@@ -93,7 +109,7 @@ public class MessagePreviewRvAdapter extends RecyclerView.Adapter<RecyclerView.V
         return conversationList.size() + SPECIAL_ITEMS;
     }
 
-    public static class MessageHolder<T> extends RecyclerView.ViewHolder{
+    public class MessageHolder<T> extends RecyclerView.ViewHolder{
         BGABadgeRelativeLayout bgaBadgeRelativeLayout;
         public MessageHolder(View itemView) {
             super(itemView);
@@ -114,7 +130,7 @@ public class MessagePreviewRvAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    public static class NormalMessageHolder extends MessageHolder<AVIMConversation>{
+    public class NormalMessageHolder extends MessageHolder<AVIMConversation>{
         ImageView avatarView;
         TextView nickTv;
         TextView contentTv;
@@ -138,14 +154,20 @@ public class MessagePreviewRvAdapter extends RecyclerView.Adapter<RecyclerView.V
                     avimConversation.fetchInfoInBackground(new AVIMConversationCallback() {
                         public void done(AVIMException e) {
                             if (e != null) {
-                            } else {
+                                NLog.e(TagUtil.makeTag(getClass()),"bindData fetchInfoInBackground failed :",e);
+                            }else {
+                                updateName(avimConversation,nickTv);
+                                updateAvatar(avimConversation,avatarView);
                             }
 
                         }
                     });
                 } else {
+                    updateName(avimConversation,nickTv);
+                    updateAvatar(avimConversation,avatarView);
                 }
-
+                updateUnreadCount(avimConversation,this);
+                updateLastMessageByConversation(avimConversation,contentTv,timeTv);
             }
         }
 
@@ -158,14 +180,109 @@ public class MessagePreviewRvAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    public static class AtMessageHolder extends MessageHolder{
+    private void updateName(AVIMConversation avimConversation,TextView nickTv){
+        ConversationUtils.getConversationName(avimConversation, new AVCallback<String>() {
+            protected void internalDone0(String s, AVException e) {
+                if(null != e) {
+                    NLog.e(TagUtil.makeTag(getClass()),"updateName failed :",e);
+                } else {
+                    nickTv.setText(s);
+                }
+
+            }
+        });
+    }
+
+    //should recode for groupAvatar
+    private void updateAvatar(AVIMConversation conversation,ImageView avatarView) {
+        if(null != conversation) {
+            if(!conversation.isTransient() && conversation.getMembers().size() <= 2) {
+                ConversationUtils.getConversationPeerIcon(conversation, new AVCallback<String>() {
+                    protected void internalDone0(String s, AVException e) {
+                        if(null != e) {
+                            NLog.e(TagUtil.makeTag(getClass()),"updateAvatar failed :",e);
+                        }
+                        if(!TextUtils.isEmpty(s)) {
+                            Glide.with(HiTalkApplication.mAppContext).load(s).placeholder(R.drawable.default_avatar).into(avatarView);
+                        } else {
+                            avatarView.setImageResource(R.drawable.default_avatar);
+                        }
+
+                    }
+                });
+            } else {
+                avatarView.setImageResource(R.drawable.default_group_icon);
+            }
+        }
+    }
+
+    private void updateUnreadCount(AVIMConversation conversation,MessageHolder messageHolder) {
+        int num = ConversationCacheHelper.getInstance().getUnreadCount(conversation.getConversationId());
+        messageHolder.setCount(num > 0?num:0);
+    }
+
+    private void updateLastMessageByConversation(final AVIMConversation conversation,TextView contentTv,TextView timeTv) {
+        conversation.getLastMessage(new AVIMSingleMessageQueryCallback() {
+            public void done(AVIMMessage avimMessage, AVIMException e) {
+                if(null != avimMessage) {
+                    updateLastMessage(avimMessage,contentTv,timeTv);
+                } else {
+                    conversation.queryMessages(1, new AVIMMessagesQueryCallback() {
+                        public void done(List<AVIMMessage> list, AVIMException e) {
+                            if(null != e) {
+                                NLog.e(TagUtil.makeTag(getClass()),"updateLastMessageByConversation failed :",e);
+                            }
+                            if(null != list && !list.isEmpty()) {
+                                updateLastMessage(list.get(0),contentTv,timeTv);
+                            }
+
+                        }
+                    });
+                }
+
+            }
+        });
+    }
+
+    private void updateLastMessage(AVIMMessage message,TextView contentTv,TextView timeTv) {
+        if(null != message) {
+            Date date = new Date(message.getTimestamp());
+            SimpleDateFormat format = new SimpleDateFormat("MM-dd HH:mm");
+            timeTv.setText(format.format(date));
+            contentTv.setText(getMessageeShorthand(HiTalkApplication.mAppContext, message));
+        }
+    }
+
+    private static CharSequence getMessageeShorthand(Context context, AVIMMessage message) {
+        if(message instanceof AVIMTypedMessage) {
+            AVIMReservedMessageType type = AVIMReservedMessageType.getAVIMReservedMessageType(((AVIMTypedMessage)message).getMessageType());
+            switch(type) {
+                case TextMessageType:
+                    return ((AVIMTextMessage)message).getText();
+                case ImageMessageType:
+                    return context.getString(R.string.message_shorthand_image);
+                case LocationMessageType:
+                    return context.getString(R.string.message_shorthand_location);
+                case AudioMessageType:
+                    return context.getString(R.string.message_shorthand_audio);
+                default:
+                    return context.getString(R.string.message_shorthand_unknown);
+            }
+        } else {
+            return message.getContent();
+        }
+    }
+
+
+
+    public class AtMessageHolder extends MessageHolder{
 
         public AtMessageHolder(View itemView) {
             super(itemView);
         }
     }
 
-    public static class BookMessageHolder extends MessageHolder{
+    public class BookMessageHolder extends MessageHolder{
 
         public BookMessageHolder(View itemView) {
             super(itemView);
