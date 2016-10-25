@@ -2,7 +2,11 @@
 <cn.bingoogolapple.badgeview.BGABadgeRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="54dp"
-    style="@style/match_horizontal">
+    style="@style/match_horizontal"
+    app:badge_dragable="true"
+    app:badge_padding="7dp"
+    app:badge_verticalMargin="5dp"
+    app:badge_gravity="rightBottom">
 
 
     <com.vivifram.second.hitalk.ui.view.AvatarView
@@ -42,9 +46,9 @@
     <TextView
         android:id="@+id/timeTv"
         style="@style/wrap_warp_tv_center"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="4dp"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="7dp"
         android:textSize="16dp"
         android:text="2016-09-01"
         android:textColor="@color/color_888888"

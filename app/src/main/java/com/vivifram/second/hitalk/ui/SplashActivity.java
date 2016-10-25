@@ -20,7 +20,7 @@ import com.zuowei.utils.helper.HiTalkHelper;
  */
 public class SplashActivity extends BaseActivity {
 
-    private static final int MAX_SLEEPTIME = 1000;
+    private static final int MAX_SLEEPTIME = 2000;
     private Handler mHandler;
     private static final int MSG_GO_MAIN = 0x01;
     private static final int MSG_GO_LOGIN = 0x02;
@@ -56,6 +56,12 @@ public class SplashActivity extends BaseActivity {
                 }
             }
         }).start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     private void goLogin() {

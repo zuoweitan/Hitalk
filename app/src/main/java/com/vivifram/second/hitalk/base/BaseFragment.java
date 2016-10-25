@@ -11,11 +11,15 @@ import android.view.ViewGroup;
 
 import com.vivifram.second.hitalk.HiTalkApplication;
 import com.vivifram.second.hitalk.ui.page.layout.BaseFragmentLayout;
+import com.zuowei.utils.bridge.EaterManager;
+import com.zuowei.utils.bridge.IEater;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by zuowei on 16-7-25.
@@ -42,8 +46,40 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
             mLayout.onActivitySet();
             mLayout.onViewCreate(view);
         }
+
+        checkAndInstallEatMark();
         onViewCreated();
         return view;
+    }
+
+    private List<IEater> eater = new ArrayList<>();
+    private void checkAndInstallEatMark() {
+        Class<?>[] declaredClasses = getClass().getDeclaredClasses();
+        if (declaredClasses != null) {
+            for (Class<?> declaredClass : declaredClasses) {
+                EatMark eatMark = declaredClass.getAnnotation(EatMark.class);
+                if (eatMark != null && eatMark.action() != null) {
+                    IEater iEater = null;
+                    try {
+                        Constructor<?> constructor = declaredClass.getConstructor(this.getClass());
+                        constructor.setAccessible(true);
+                        iEater = (IEater) constructor.newInstance(this);
+                    } catch (java.lang.InstantiationException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchMethodException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                    if (iEater != null) {
+                        eater.add(iEater);
+                        EaterManager.getInstance().registerEater(eatMark.action(),iEater);
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -85,6 +121,7 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
             mLayout.onViewDestroy();
         }
         onViewDestroyed();
+        unInstallEatMark();
     }
 
     @Override
@@ -92,6 +129,12 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
         super.onDestroy();
         if (mLayout != null) {
             mLayout.onDestroy();
+        }
+    }
+
+    private void unInstallEatMark() {
+        for (IEater iEater : eater) {
+            EaterManager.getInstance().unRegisterEater(iEater);
         }
     }
 

@@ -58,6 +58,13 @@ public class ConversationParse {
         public int unreadcount;
         public long updateTime;
 
+        public Wrap() {
+        }
+
+        public Wrap(String conversationId){
+            this.conversationId = conversationId;
+        }
+
         public String getConversationId() {
             return conversationId;
         }

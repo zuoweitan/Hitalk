@@ -17,19 +17,16 @@ public class UserProvider implements IProvider<String,User> {
 
     @Override
     public void fetch(List<String> ids, final DoneCallback<User> doneCallback) {
-        UserCacheHelper.getInstance().fetchUsers(ids, new UserCacheHelper.CacheUserCallback() {
-            @Override
-            public void done(List<AVUser> userList, Exception e) {
-                List<User> users = new ArrayList<User>();
-                if (userList != null && userList.size() > 0){
-                    for (AVUser avUser : userList) {
-                        User user = new User();
-                        UserBeanCacheHelper.AvUserToUser(avUser,user);
-                        users.add(user);
-                    }
+        UserCacheHelper.getInstance().fetchUsers(ids, (userList, e) -> {
+            List<User> users = new ArrayList<>();
+            if (userList != null && userList.size() > 0){
+                for (AVUser avUser : userList) {
+                    User user = new User();
+                    UserBeanCacheHelper.AvUserToUser(avUser,user);
+                    users.add(user);
                 }
-                doneCallback.done(users,e);
             }
+            doneCallback.done(users,e);
         });
     }
 }

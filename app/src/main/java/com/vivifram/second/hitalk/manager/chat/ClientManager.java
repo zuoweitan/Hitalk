@@ -2,13 +2,18 @@ package com.vivifram.second.hitalk.manager.chat;
 
 import android.text.TextUtils;
 
+import com.avos.avoscloud.AVCallback;
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
+import com.vivifram.second.hitalk.state.ActionCallback;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.params.chat.ClientOpenParam;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
+import com.zuowei.utils.helper.ConversationCacheHelper;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -43,7 +48,6 @@ public class ClientManager {
         NLog.i(TagUtil.makeTag(ClientManager.class),"open client");
         OpenCmd openCmd = new OpenCmd();
         openCmd.clientId = clientId;
-        openCmd.callback = callback;
         mClientId = clientId;
         mAvimClient = AVIMClient.getInstance(clientId);
         mCmdQueue.add(openCmd);
@@ -62,10 +66,11 @@ public class ClientManager {
                 if (e == null){
                     mCmdQueue.clear();
                     mOpened = true;
+                    initWithOpenState();
                 }else {
                     if (mCmdQueue.size() > 0) {
                         OpenCmd openCmd = mCmdQueue.poll();
-                        doOpen(openCmd.clientId, openCmd.callback);
+                        doOpen(openCmd.clientId, null);
 
                     }
                 }
@@ -73,6 +78,18 @@ public class ClientManager {
                 if (callback != null) {
                     callback.done(avimClient, e);
                 }
+            }
+        });
+    }
+
+    private void initWithOpenState() {
+        ConversationCacheHelper.getInstance().init(new ActionCallback() {
+            @Override
+            public void onError(int code, String message) {
+                NLog.i(TagUtil.makeTag(getClass()),"ConversationCacheHelper initFailed because "+message);
+            }
+            @Override
+            public void onSuccess() {
             }
         });
     }
@@ -107,6 +124,5 @@ public class ClientManager {
 
     class OpenCmd{
         String clientId;
-        AVIMClientCallback callback;
     }
 }

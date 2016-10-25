@@ -1,18 +1,13 @@
 package com.zuowei.utils.helper;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVFile;
-import com.avos.avoscloud.AVGeoPoint;
-import com.avos.avoscloud.AVInstallation;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.GetCallback;
-import com.avos.avoscloud.SaveCallback;
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMMessageManager;
 import com.avos.avoscloud.im.v2.AVIMTypedMessage;
@@ -22,9 +17,7 @@ import com.vivifram.second.hitalk.bean.blackboard.BnRemote;
 import com.vivifram.second.hitalk.cache.BaseEventuallyQueue;
 import com.vivifram.second.hitalk.cache.BeanEventuallyQueue;
 import com.vivifram.second.hitalk.cache.HiTalkModel;
-import com.vivifram.second.hitalk.bean.UserWrap;
 import com.vivifram.second.hitalk.state.ActionCallback;
-import com.vivifram.second.hitalk.state.DoneCallback;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.common.NLog;
@@ -34,8 +27,6 @@ import com.zuowei.utils.handlers.ConversationHandler;
 import com.zuowei.utils.handlers.MessageHandler;
 import com.zuowei.utils.handlers.SharePreferenceHandler;
 import com.zuowei.utils.provider.UserProvider;
-
-import java.io.IOException;
 
 /**
  * Created by zuowei on 16-7-14.

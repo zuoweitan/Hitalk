@@ -75,12 +75,9 @@ public class LoginActivity extends BaseActivity<LoginLayout> implements LoginHan
         ClientManager.getInstance().open(HiTalkHelper.getInstance().getCurrentUserId(), new AVIMClientCallback() {
             @Override
             public void done(AVIMClient avimClient, AVIMException e) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        UIUtils.startActivitySafety(LoginActivity.this,HiTalkActivity.class);
-                        finish();
-                    }
+                new Handler().postDelayed(() -> {
+                    UIUtils.startActivitySafety(LoginActivity.this,HiTalkActivity.class);
+                    finish();
                 },0);
             }
         });

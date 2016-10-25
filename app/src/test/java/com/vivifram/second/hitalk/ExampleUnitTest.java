@@ -3,6 +3,7 @@ package com.vivifram.second.hitalk;
 import com.avos.avoscloud.AVObject;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vivifram.second.hitalk.base.LayoutInject;
 import com.vivifram.second.hitalk.manager.RetrofitManager;
 import com.zuowei.utils.helper.ILoginService;
 import com.zuowei.utils.helper.LoginHelper;
@@ -19,6 +20,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static android.R.attr.name;
 import static org.junit.Assert.*;
 
 /**
@@ -93,7 +95,7 @@ public class ExampleUnitTest {
 
         Type type = new TypeToken<HashMap<String, Integer>>() {
         }.getType();
-        System.out.println(new Gson().fromJson(new Gson().toJson(entries), type));
+       // System.out.println(new Gson().fromJson(new Gson().toJson(entries), type));
 
 
     }
@@ -188,6 +190,22 @@ public class ExampleUnitTest {
     @Test
     public void testClass(){
         new Child();
+    }
+
+    @LayoutInject(name = "HAHA")
+    class HaHa{
+
+    }
+
+    @Test
+    public void testClassReflect(){
+        Class<?>[] declaredClasses = getClass().getDeclaredClasses();
+        for (Class<?> declaredClass : declaredClasses) {
+            LayoutInject layoutInject = declaredClass.getAnnotation(LayoutInject.class);
+            if (layoutInject != null) {
+                System.out.println(layoutInject.name());
+            }
+        }
     }
 
 }

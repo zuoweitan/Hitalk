@@ -58,9 +58,11 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
         super.onAttach(context);
         NLog.i(TagUtil.makeTag(HiTalkFragmentSub1.class),"onAttach");
         mRequest = new ConcurrentLinkedQueue<>();
-        initSquareConversation();
-        listenToClient();
-        listenToConversation();
+        if (ClientManager.getInstance().isOpend()) {
+            initSquareConversation();
+            listenToClient();
+            listenToConversation();
+        }
     }
 
     @Override
@@ -108,6 +110,8 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
             public void doJobWithParam(ClientOpenParam param) {
                 if (param.mOpened){
                     initSquareConversation();
+                }else {
+                    NToast.shortToast(mAppCtx,getString(R.string.internet_not_connect_warn));
                 }
             }
         };

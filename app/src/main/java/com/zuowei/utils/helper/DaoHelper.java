@@ -14,6 +14,8 @@ import com.zuowei.utils.common.TagUtil;
 
 import java.util.List;
 
+import de.greenrobot.dao.AbstractDao;
+import de.greenrobot.dao.AbstractDaoSession;
 import de.greenrobot.dao.async.AsyncSession;
 import de.greenrobot.dao.query.Query;
 
@@ -58,6 +60,10 @@ public class DaoHelper {
 
     public AsyncSession getAsyncSession() {
         return mAsyncSession;
+    }
+
+    public AsyncSession wrapDao(AbstractDao abstractDao){
+        return new AsyncSession(abstractDao.getSession());
     }
 
     public <T> void queryAsync(final Query<T> query, final AVCallback<List<T>> callback){

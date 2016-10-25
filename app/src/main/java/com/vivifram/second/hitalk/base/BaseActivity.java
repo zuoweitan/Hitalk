@@ -6,18 +6,20 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import com.vivifram.second.hitalk.HiTalkApplication;
 import com.vivifram.second.hitalk.ui.layout.BaseLayout;
+import com.zuowei.utils.bridge.EaterManager;
+import com.zuowei.utils.bridge.IEater;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
-import com.zuowei.utils.common.UIUtils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -51,6 +53,37 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
         mAppCtx = HiTalkApplication.mAppContext;
 
         sAliveActivities.add(this);
+        checkAndInstallEatMark();
+    }
+
+    private List<IEater> eater = new ArrayList<>();
+    private void checkAndInstallEatMark() {
+        Class<?>[] declaredClasses = getClass().getDeclaredClasses();
+        if (declaredClasses != null) {
+            for (Class<?> declaredClass : declaredClasses) {
+                EatMark eatMark = declaredClass.getAnnotation(EatMark.class);
+                if (eatMark != null && eatMark.action() != null) {
+                    IEater iEater = null;
+                    try {
+                        Constructor<?> constructor = declaredClass.getConstructor(this.getClass());
+                        constructor.setAccessible(true);
+                        iEater = (IEater) constructor.newInstance(this);
+                    } catch (InstantiationException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (NoSuchMethodException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                    if (iEater != null) {
+                        eater.add(iEater);
+                        EaterManager.getInstance().registerEater(eatMark.action(),iEater);
+                    }
+                }
+            }
+        }
     }
 
 
@@ -69,6 +102,13 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
             mLayout.onDestroy();
         }
         sAliveActivities.remove(this);
+        unInstallEatMark();
+    }
+
+    private void unInstallEatMark() {
+        for (IEater iEater : eater) {
+            EaterManager.getInstance().unRegisterEater(iEater);
+        }
     }
 
     @Override

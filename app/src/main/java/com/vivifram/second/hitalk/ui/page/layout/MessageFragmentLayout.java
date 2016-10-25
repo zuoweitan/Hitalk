@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.ui.SelectStudentsActivity;
 import com.vivifram.second.hitalk.ui.page.layout.adapter.MessagePreviewRvAdapter;
@@ -14,6 +15,8 @@ import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
 import com.vivifram.second.hitalk.ui.view.BGATitlebar;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
+
+import java.util.List;
 
 /**
  * Created by zuowei on 16-9-25.
@@ -70,5 +73,10 @@ public class MessageFragmentLayout extends BaseFragmentLayout {
         });
     }
 
+    public void setData(List<AVIMConversation> data){
+        if (data != null && data.size() > 0) {
+            messagePreviewRvAdapter.setData(data);
+        }
+    }
 
 }

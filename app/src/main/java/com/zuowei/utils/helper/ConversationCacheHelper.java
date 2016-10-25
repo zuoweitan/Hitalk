@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
+import de.greenrobot.dao.async.AsyncSession;
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func1;
@@ -86,7 +87,7 @@ public class ConversationCacheHelper {
 
     public synchronized void increaseUnreadCount(String convid, int increment) {
         if(!TextUtils.isEmpty(convid) && increment > 0) {
-            ConversationParse.Wrap wrap = mCache.get(convid);
+            ConversationParse.Wrap wrap = getConversationItemFromMap(convid);
             wrap.unreadcount += increment;
             syncToCache(wrap);
         }
@@ -95,7 +96,7 @@ public class ConversationCacheHelper {
 
     public synchronized void clearUnread(String convid) {
         if(!TextUtils.isEmpty(convid)) {
-            ConversationParse.Wrap wrap = mCache.get(convid);
+            ConversationParse.Wrap wrap = getConversationItemFromMap(convid);
             wrap.unreadcount = 0;
             syncToCache(wrap);
         }
@@ -105,7 +106,7 @@ public class ConversationCacheHelper {
     public synchronized void deleteConversation(String convid) {
         if(!TextUtils.isEmpty(convid)) {
             ConversationParse.Wrap wrap = mCache.remove(convid);
-
+            deleteFromCache(convid);
         }
 
     }
@@ -113,13 +114,13 @@ public class ConversationCacheHelper {
 
     public synchronized void insertConversation(String convid) {
         if(!TextUtils.isEmpty(convid)) {
-            syncToCache(mCache.get(convid));
+            syncToCache(getConversationItemFromMap(convid));
         }
 
     }
 
     public synchronized int getUnreadCount(String convid) {
-        return mCache.get(convid).unreadcount;
+        return getConversationItemFromMap(convid).unreadcount;
     }
 
 
@@ -141,15 +142,34 @@ public class ConversationCacheHelper {
         if(null != item) {
             item.updateTime = System.currentTimeMillis();
             mCache.put(item.conversationId, item);
-            ConversationDao conversationDao = DaoHelper.getInstance().getConversationDao();
-            conversationDao.insertOrReplace(ConversationParse.toConversationDao(item));
+            AsyncSession asyncSession = getAsyncSession();
+            asyncSession.insertOrReplace(ConversationParse.toConversationDao(item));
         }
     }
 
     private void deleteFromCache(ConversationParse.Wrap item){
         if (item != null) {
-            ConversationDao conversationDao = DaoHelper.getInstance().getConversationDao();
-            conversationDao.deleteByKey(item.conversationId);
+            mCache.remove(item.conversationId);
+            AsyncSession asyncSession = getAsyncSession();
+            asyncSession.deleteByKey(item.conversationId);
         }
+    }
+
+    private void deleteFromCache(String convid){
+        if (convid != null) {
+            mCache.remove(convid);
+            AsyncSession asyncSession = getAsyncSession();
+            asyncSession.deleteByKey(convid);
+        }
+    }
+
+    private ConversationParse.Wrap getConversationItemFromMap(String convId) {
+        return mCache.containsKey(convId)?mCache.get(convId):new ConversationParse.Wrap(convId);
+    }
+
+
+    private AsyncSession getAsyncSession() {
+        ConversationDao conversationDao = DaoHelper.getInstance().getConversationDao();
+        return DaoHelper.getInstance().wrapDao(conversationDao);
     }
 }

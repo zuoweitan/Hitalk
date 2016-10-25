@@ -45,20 +45,12 @@ public class HitalkFragmentSub1Layout extends BaseFragmentLayout{
         mCache = new MessageCacheQueue();
         mChatLt = new ChatMessageListLayout(root);
         mChatLt.onViewCreate(root);
-        mChatLt.setMessageFetcher(new ChatMessageListAdapter.MessageFetcher<AVIMTypedMessage>() {
-            @Override
-            public List<IMessageWrap<AVIMTypedMessage>> fetchMessages() {
-                return mCache.poll();
-            }
-        });
+        mChatLt.setMessageFetcher(() -> mCache.poll());
 
-        mChatLt.setOntouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mChatMenuLayout.hideKeyboard();
-                mChatMenuLayout.hideExtendMenuContainer();
-                return false;
-            }
+        mChatLt.setOntouchListener((v, event) -> {
+            mChatMenuLayout.hideKeyboard();
+            mChatMenuLayout.hideExtendMenuContainer();
+            return false;
         });
 
         mChatMenuLayout = (ChatInputMenuLayout) findViewById(R.id.chatInput);

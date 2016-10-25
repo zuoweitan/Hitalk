@@ -58,6 +58,8 @@ public class UserBeanCacheHelper {
 
     }
 
+
+
     public synchronized void getCachedUser(String id, final AVCallback<User> callback) {
         getCachedUsers(Arrays.asList(new String[]{id}), new AVCallback<List<User>>() {
             @Override
@@ -117,16 +119,14 @@ public class UserBeanCacheHelper {
 
     private void getUsersFromProvider(List<String> idList, final List<User> users, final AVCallback<List<User>> callback) {
         if(null != mUserProvider) {
-            mUserProvider.fetch(idList, new DoneCallback<User>() {
-                public void done(List<User> userList, Exception e) {
-                    if(null != userList) {
-                        for (User user : userList) {
-                            cacheUser(user);
-                        }
-                        users.addAll(userList);
-                    }
-                    callback.internalDone(users, null != e?new AVException(e):null);
+            mUserProvider.fetch(idList, (userList, e) -> {
+                if(null != userList) {
+                    userList.forEach((User user) -> {
+                        cacheUser(user);
+                    });
+                    users.addAll(userList);
                 }
+                callback.internalDone(users, null != e?new AVException(e):null);
             });
         } else {
             callback.internalDone(null, new AVException(new Throwable("please setUserProvider first!")));
