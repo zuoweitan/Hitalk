@@ -52,7 +52,7 @@ public class ConversationParse {
         return conversation;
     }
 
-    public static class Wrap{
+    public static class Wrap implements Comparable<Wrap>{
         /*"conversation_id":"579175b78bada3390afc6682","unreadcount":0,"upadte_time":1469150689842*/
         public String conversationId;
         public int unreadcount;
@@ -75,6 +75,15 @@ public class ConversationParse {
 
         public long getUpdateTime() {
             return updateTime;
+        }
+
+        @Override
+        public int compareTo(Wrap another) {
+            if (conversationId == null && another.conversationId == null) return 0;
+            if (conversationId == null) return -1;
+            if (another.conversationId == null) return 1;
+
+            return conversationId.compareTo(another.conversationId);
         }
     }
 }

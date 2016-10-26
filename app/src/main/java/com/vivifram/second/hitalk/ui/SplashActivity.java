@@ -46,14 +46,14 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        new Thread(new Runnable() {
-            public void run() {
-                if (HiTalkHelper.getInstance().isLoggedIn()) {
-                    tryToOpenClient();
-                    mHandler.sendEmptyMessageDelayed(MSG_GO_MAIN,MAX_SLEEPTIME);
-                }else {
-                    goLogin();
-                }
+        new Thread(() -> {
+            if (HiTalkHelper.getInstance().isLoggedIn()) {
+
+                HiTalkHelper.getInstance().updateUserInfo();
+                tryToOpenClient();
+                mHandler.sendEmptyMessageDelayed(MSG_GO_MAIN,MAX_SLEEPTIME);
+            }else {
+                goLogin();
             }
         }).start();
     }

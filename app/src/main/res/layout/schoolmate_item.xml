@@ -23,7 +23,7 @@
         android:layout_marginLeft="58dp"
         android:layout_marginTop="7dp"
         android:text="Akon"
-        android:textSize="14dp"
+        android:textSize="16dp"
         android:textColor="@color/black_deep"/>
 
     <TextView

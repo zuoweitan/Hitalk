@@ -6,6 +6,8 @@ import com.avos.avoscloud.AVCallback;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.zuowei.dao.greendao.User;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.UserBeanCacheHelper;
 
@@ -29,11 +31,14 @@ public class ConversationUtils {
                 callback.internalDone(null,new AVException(new Throwable("conversation can not be null!")));
             } else {
                 if(conversation.isTransient()) {
+                    NLog.i(TagUtil.makeTag(ConversationUtils.class),"conversation.isTransient");
                     callback.internalDone(conversation.getName(), null);
                 } else if(2 == conversation.getMembers().size()) {
+                    NLog.i(TagUtil.makeTag(ConversationUtils.class),"conversation.getMembers = 2");
                     String peerId = getConversationPeerId(conversation);
                     UserBeanCacheHelper.getInstance().getUserName(peerId, callback);
                 } else if(!TextUtils.isEmpty(conversation.getName())) {
+                    NLog.i(TagUtil.makeTag(ConversationUtils.class),"conversation.getName not null");
                     callback.internalDone(conversation.getName(), null);
                 } else {
                     UserBeanCacheHelper.getInstance().getCachedUsers(conversation.getMembers(), new AVCallback<List<User>>() {

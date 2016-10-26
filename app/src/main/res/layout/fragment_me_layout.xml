@@ -94,20 +94,9 @@
                     android:layout_height="8dp" />
 
                 <com.vivifram.second.hitalk.ui.view.CommonItem
-                    android:id="@+id/acci"
+                    android:id="@+id/stci"
                     style="@style/commonItem_style" />
 
-                <com.vivifram.second.hitalk.ui.view.CommonItem
-                    android:id="@+id/afci"
-                    style="@style/commonItem_style"/>
-
-                <com.vivifram.second.hitalk.ui.view.CommonItem
-                    android:id="@+id/ntci"
-                    style="@style/commonItem_style"/>
-
-                <com.vivifram.second.hitalk.ui.view.CommonItem
-                    android:id="@+id/abci"
-                    style="@style/commonItem_style" />
             </LinearLayout>
 
         </ScrollView>

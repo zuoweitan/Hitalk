@@ -3,11 +3,14 @@ package com.vivifram.second.hitalk.ui.page;
 import com.avos.avoscloud.AVUser;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.LayoutInject;
+import com.vivifram.second.hitalk.ui.SettingActivity;
 import com.vivifram.second.hitalk.ui.page.layout.MeFragmentLayout;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.UserCacheHelper;
+
+import static com.avos.avoscloud.Messages.StatusType.on;
 
 /**
  * Created by zuowei on 16-7-25.
@@ -17,6 +20,17 @@ public class MeFragment extends LazyFragment<MeFragmentLayout> {
     @Override
     protected void lazyLoad() {
         requestUserData();
+    }
+
+    @Override
+    protected void onViewCreated() {
+        super.onViewCreated();
+        mLayout.setOnItemClickListener(new MeFragmentLayout.OnItemClickListener() {
+            @Override
+            public void onSettingItemClick() {
+                SettingActivity.start(mAppCtx);
+            }
+        });
     }
 
     private void requestUserData() {

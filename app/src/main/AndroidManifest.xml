@@ -86,6 +86,7 @@
 
         <activity android:name="me.iwf.photopicker.PhotoPagerActivity"></activity>
         <activity android:name="me.iwf.photopicker.PhotoPickerActivity"></activity>
+        <activity android:name=".ui.SettingActivity" />
 
     </application>
 

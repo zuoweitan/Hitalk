@@ -25,8 +25,7 @@ public abstract class BaseAdapter<T,VH extends RecyclerView.ViewHolder>
         notifyDataSetChanged();
     }
 
-    public void addAll(Collection<T> collection)
-    {
+    public void addAll(Collection<T> collection) {
         if (collection != null) {
             items.clear();
             items.addAll(collection);

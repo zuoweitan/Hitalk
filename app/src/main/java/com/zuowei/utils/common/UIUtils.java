@@ -39,6 +39,8 @@ public class UIUtils {
     }
 
     public static void startActivitySafety(Context context, Class c){
-        startActivitySafety(context,new Intent(context,c));
+        Intent intent = new Intent(context,c);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivitySafety(context,intent);
     }
 }

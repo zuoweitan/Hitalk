@@ -1,12 +1,9 @@
 package com.zuowei.utils.handlers;
 
-import com.avos.avoscloud.AVUser;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.handler.ToolKit;
 import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.LoginParam;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.LoginHelper;
 

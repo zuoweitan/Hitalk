@@ -7,6 +7,7 @@ import android.util.Log;
 
 
 import com.zuowei.utils.bridge.params.LightParam;
+import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
 
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ import java.util.concurrent.Executors;
 import rx.Observable;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
+
+import static android.R.attr.key;
 
 /**
  * Created by zuowei on 16-4-6.
@@ -78,8 +81,8 @@ public class EaterManager {
     }
 
     public void registerEater(String action,IEater eater){
-        if (action == null){
-            throw new RuntimeException("action can not be null");
+        if (action == null || eater == null){
+            throw new RuntimeException("parameters can not be null action = "+action+" , eater = "+eater);
         }
         Message msg = new Message();
         msg.what = MSG_REGISTER;
@@ -122,10 +125,12 @@ public class EaterManager {
     }
 
     private void unRegisterEaterInner(IEater eater){
-        String target = null;
-        boolean doRemove = false;
-        for (String key : mEaterEntries.keySet()){
-            List<IEater> value = mEaterEntries.get(key);
+        boolean doRemove;
+        Iterator<Map.Entry<String, List<IEater>>> iterator = mEaterEntries.entrySet().iterator();
+        while(iterator.hasNext()){
+            doRemove = false;
+            Map.Entry<String, List<IEater>> next = iterator.next();
+            List<IEater> value = next.getValue();
             if (value != null) {
                 for (int i = 0; i < value.size();i++){
                     IEater temp = value.get(i);
@@ -135,17 +140,12 @@ public class EaterManager {
                         break;
                     }
                 }
-            }
-            if (doRemove) {
-                if (value.size() == 0) {
-                    target = key;
+                if (doRemove) {
+                    if (value.size() == 0) {
+                        iterator.remove();
+                    }
                 }
-                break;
             }
-        }
-
-        if (target != null){
-            mEaterEntries.remove(target);
         }
     }
 
@@ -189,7 +189,8 @@ public class EaterManager {
 
     private void doBroadCast(LightParam param){
         List<IEater> eaters = mEaterEntries.get(param.getAction());
-        if (eaters != null){
+
+        if (eaters != null && eaters.size() > 0){
             for (IEater eater : eaters){
                 eater.onEat(param);
             }

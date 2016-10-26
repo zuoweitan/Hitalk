@@ -17,10 +17,14 @@ import com.vivifram.second.hitalk.ui.view.CommonItem;
 /**
  * Created by zuowei on 16-9-25.
  */
-public class MeFragmentLayout extends BaseFragmentLayout{
+public class MeFragmentLayout extends BaseFragmentLayout implements View.OnClickListener{
 
     public MeFragmentLayout(View root) {
         super(root);
+    }
+
+    public interface OnItemClickListener{
+        void onSettingItemClick();
     }
 
     private RelativeLayout meInfoLv;
@@ -33,11 +37,10 @@ public class MeFragmentLayout extends BaseFragmentLayout{
     private CommonItem createdCci;
     private CommonItem photosCci;
 
+    private CommonItem settingCi;
 
-    private CommonItem accountMci;
-    private CommonItem infoMci;
-    private CommonItem notifyCi;
-    private CommonItem aboutCi;
+    private OnItemClickListener onItemClickListener;
+
     private SpringView spv;
 
     @Override
@@ -62,15 +65,9 @@ public class MeFragmentLayout extends BaseFragmentLayout{
         fillCommonItem(photosCci,mRes.getString(R.string.myPhotos));
         photosCci.showDivider(false);
 
-        accountMci = (CommonItem) findViewById(R.id.acci);
-        fillCommonItem(accountMci,mRes.getString(R.string.accountManager));
-        infoMci = (CommonItem) findViewById(R.id.afci);
-        fillCommonItem(infoMci,mRes.getString(R.string.infoManager));
-        notifyCi = (CommonItem) findViewById(R.id.ntci);
-        fillCommonItem(notifyCi,mRes.getString(R.string.notifyInfo));
-        aboutCi = (CommonItem) findViewById(R.id.abci);
-        fillCommonItem(aboutCi,mRes.getString(R.string.about));
-        aboutCi.showDivider(false);
+        settingCi = (CommonItem) findViewById(R.id.stci);
+        fillCommonItem(settingCi,mRes.getString(R.string.setting));
+        settingCi.setOnClickListener(this);
 
         spv = (SpringView) findViewById(R.id.meSpv);
         spv.setHeader(new DefaultHeader());
@@ -98,5 +95,24 @@ public class MeFragmentLayout extends BaseFragmentLayout{
 
     public void setSignature(String signature){
         signatureTv.setText(signature);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.stci:
+                    goSetting();
+                break;
+        }
+    }
+
+    private void goSetting() {
+        if (onItemClickListener != null) {
+            onItemClickListener.onSettingItemClick();
+        }
     }
 }

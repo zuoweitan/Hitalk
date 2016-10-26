@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.avos.avoscloud.AVCallback;
 import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.AVIMMessage;
@@ -96,9 +97,9 @@ public class MessagePreviewRvAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     public Object getItem(int position){
-        switch (position){
+        switch (getItemViewType(position)){
             case TYPE_NORMAL:
-                return conversationList.get(position);
+                return conversationList.get(position - SPECIAL_ITEMS);
         }
 
         return null;
@@ -224,6 +225,7 @@ public class MessagePreviewRvAdapter extends RecyclerView.Adapter<RecyclerView.V
     private void updateLastMessageByConversation(final AVIMConversation conversation,TextView contentTv,TextView timeTv) {
         conversation.getLastMessage(new AVIMSingleMessageQueryCallback() {
             public void done(AVIMMessage avimMessage, AVIMException e) {
+                NLog.i(TagUtil.makeTag(getClass()),"updateLastMessageByConversation avimMessage");
                 if(null != avimMessage) {
                     updateLastMessage(avimMessage,contentTv,timeTv);
                 } else {

@@ -34,12 +34,7 @@ public class LoginActivity extends BaseActivity<LoginLayout> implements LoginHan
         setContentView(R.layout.activity_login_layout);
         mLoginHandler = LoginHandler.getInstance();
         mLayout.setOnLoginButtonClick(this);
-        mLayout.setRegisterOnClick(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goRegister();
-            }
-        });
+        mLayout.setRegisterOnClick(v -> goRegister());
         mLoginHandler.addLoginListener(this);
         EaterManager.getInstance().registerEater(EaterAction.ACTION_DO_LOGIN,mLoginHandler);
     }
@@ -85,12 +80,9 @@ public class LoginActivity extends BaseActivity<LoginLayout> implements LoginHan
 
     @Override
     public void onError(int code, final String message) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(LoginActivity.this,message,Toast.LENGTH_SHORT).show();
-                mLayout.resetLoginButton();
-            }
+        runOnUiThread(() -> {
+            Toast.makeText(LoginActivity.this,message,Toast.LENGTH_SHORT).show();
+            mLayout.resetLoginButton();
         });
     }
 

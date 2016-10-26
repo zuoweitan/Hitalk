@@ -60,9 +60,9 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
         mRequest = new ConcurrentLinkedQueue<>();
         if (ClientManager.getInstance().isOpend()) {
             initSquareConversation();
-            listenToClient();
-            listenToConversation();
         }
+        listenToClient();
+        listenToConversation();
     }
 
     @Override

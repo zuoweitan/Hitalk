@@ -1,6 +1,7 @@
 package com.vivifram.second.hitalk.bean;
 
 import com.avos.avoscloud.AVUser;
+import com.zuowei.utils.common.Md5Utils;
 
 import java.util.HashMap;
 
@@ -15,6 +16,7 @@ public class UserWrap extends HashMap<String,Object>{
     }
     public UserWrap putCollege(String college){
         put("college",college);
+        put("collegeCode", Md5Utils.stringToMD5(college));
         return this;
     }
     public UserWrap putSex(int sex){

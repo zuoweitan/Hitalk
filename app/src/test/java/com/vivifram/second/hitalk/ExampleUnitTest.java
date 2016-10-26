@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vivifram.second.hitalk.base.LayoutInject;
 import com.vivifram.second.hitalk.manager.RetrofitManager;
+import com.zuowei.utils.common.Md5Utils;
 import com.zuowei.utils.helper.ILoginService;
 import com.zuowei.utils.helper.LoginHelper;
 
@@ -206,6 +207,11 @@ public class ExampleUnitTest {
                 System.out.println(layoutInject.name());
             }
         }
+    }
+
+    @Test
+    public void testMd5(){
+        System.out.println(Md5Utils.stringToMD5("重庆邮电大学"));
     }
 
 }

@@ -29,6 +29,9 @@
         android:layout_toRightOf="@+id/profileIv"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="4dp"
+        android:maxWidth="200dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         />
 
     <TextView
@@ -41,6 +44,9 @@
         android:layout_toRightOf="@+id/profileIv"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="30dp"
+        android:maxWidth="240dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         />
 
     <TextView

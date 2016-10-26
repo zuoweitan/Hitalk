@@ -100,4 +100,6 @@
     <string name="message_shorthand_image">[图片]</string>
     <string name="message_shorthand_location">[位置]</string>
     <string name="message_shorthand_unknown">[未知]</string>
+    <string name="title_setting">设置</string>
+    <string name="login_out">退出登陆</string>
 </resources>

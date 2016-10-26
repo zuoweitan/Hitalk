@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.vivifram.second.hitalk.ui.view.BGATitlebar
+        android:id="@+id/titleBar"
+        style="@style/TitleBar"
+        android:background="@color/colorWhite"
+        app:bgatitlebar_leftDrawable="@drawable/back"
+        app:bgatitlebar_leftDrawablePadding="10dp"
+        app:bgatitlebar_titleText="@string/title_setting"
+        app:bgatitlebar_titleTextColor="@color/color_272636" />
+
+    <com.vivifram.second.hitalk.ui.view.bounce.OverScrollLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_eeeeee"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <com.vivifram.second.hitalk.ui.view.CommonItem
+                android:id="@+id/acci"
+                style="@style/commonItem_style" />
+
+            <com.vivifram.second.hitalk.ui.view.CommonItem
+                android:id="@+id/afci"
+                style="@style/commonItem_style" />
+
+            <com.vivifram.second.hitalk.ui.view.CommonItem
+                android:id="@+id/ntci"
+                style="@style/commonItem_style" />
+
+            <com.vivifram.second.hitalk.ui.view.CommonItem
+                android:id="@+id/abci"
+                style="@style/commonItem_style" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <Button
+                android:id="@+id/logoutBt"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:gravity="center"
+                android:background="@drawable/btn_common_background"
+                android:text="@string/login_out"
+                android:textSize="16dp"
+                style="?android:attr/borderlessButtonStyle"/>
+
+        </LinearLayout>
+    </com.vivifram.second.hitalk.ui.view.bounce.OverScrollLayout>
+
+</LinearLayout>

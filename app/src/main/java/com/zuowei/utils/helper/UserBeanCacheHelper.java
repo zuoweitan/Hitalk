@@ -59,7 +59,6 @@ public class UserBeanCacheHelper {
     }
 
 
-
     public synchronized void getCachedUser(String id, final AVCallback<User> callback) {
         getCachedUsers(Arrays.asList(new String[]{id}), new AVCallback<List<User>>() {
             @Override
@@ -121,7 +120,7 @@ public class UserBeanCacheHelper {
         this.getCachedUser(id, new AVCallback<User>() {
             @Override
             protected void internalDone0(User user, AVException e) {
-                String userName = null != user?user.getUserName():null;
+                String userName = null != user?user.getNick():null;
                 callback.internalDone(userName, e);
             }
         });

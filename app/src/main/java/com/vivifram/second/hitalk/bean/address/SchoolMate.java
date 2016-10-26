@@ -10,23 +10,36 @@ public class SchoolMate extends LetterMark implements Indexable{
 
     private String nickName;
 
-    public String getsInfo() {
-        return sInfo;
-    }
+    private String userId;
 
-    public void setsInfo(String sInfo) {
-        this.sInfo = sInfo;
-    }
+    private String sInfo;
 
     public String getNickName() {
         return nickName;
     }
 
-    public void setNickName(String nickName) {
+    public SchoolMate setNickName(String nickName) {
         this.nickName = nickName;
+        return this;
     }
 
-    private String sInfo;
+    public String getsInfo() {
+        return sInfo;
+    }
+
+    public SchoolMate setsInfo(String sInfo) {
+        this.sInfo = sInfo;
+        return this;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public SchoolMate setUserId(String userId) {
+        this.userId = userId;
+        return this;
+    }
 
     @Override
     public String getIndex() {

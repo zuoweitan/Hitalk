@@ -92,7 +92,7 @@ public class UserCacheHelper {
     }
 
     public void fetchUsers(final List<String> ids, final CacheUserCallback cacheUserCallback) {
-        NLog.i(TagUtil.makeTag(UserCacheHelper.class),"fetchUsers ids = "+ids);
+
         Set<String> uncachedIds = new HashSet<String>();
         for (String id : ids) {
             if (!mAvUsersCache.containsKey(id)) {
