@@ -17,20 +17,24 @@ public abstract class BaseAdapter<T,VH extends RecyclerView.ViewHolder>
 
     public void add(T object) {
         items.add(object);
-        notifyDataSetChanged();
+        notifyDataAddChanged(-1);
     }
 
     public void add(int index, T object) {
         items.add(index, object);
-        notifyDataSetChanged();
+        notifyDataAddChanged(index);
     }
 
     public void addAll(Collection<T> collection) {
         if (collection != null) {
             items.clear();
             items.addAll(collection);
-            notifyDataSetChanged();
+            notifyDataAddChanged(0);
         }
+    }
+
+    public void notifyDataAddChanged(int position){
+        notifyDataSetChanged();
     }
 
     public void addAll(T... items) {

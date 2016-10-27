@@ -112,6 +112,20 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
     }
 
     @Override
+    public void notifyDataAddChanged(int position) {
+        if (position == -1){
+            notifyItemInserted(getItemCount() - 1);
+        }else if (position == 0){
+            if (super.getItemCount() > 0) {
+                notifyItemRangeChanged(1,super.getItemCount());
+            }
+        }else {
+            notifyItemInserted(position);
+            notifyItemRangeChanged(position,super.getItemCount() - position);
+        }
+    }
+
+    @Override
     public boolean isRecyclerViewFooter(int position) {
         return false;
     }

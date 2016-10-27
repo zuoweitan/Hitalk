@@ -10,11 +10,13 @@ import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.vivifram.second.hitalk.ui.recycleview.address.DividerDecoration;
 import com.vivifram.second.hitalk.ui.recycleview.address.SchoolMatesAdapter;
+import com.vivifram.second.hitalk.ui.springview.container.AddressRotationHeader;
+import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
 import com.vivifram.second.hitalk.ui.view.CommonItem;
 import com.vivifram.second.hitalk.ui.view.SRecyclerView;
-import com.zuowei.utils.pinyin.CharacterParser;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by zuowei on 16-10-11.
@@ -31,6 +33,13 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
 
     private SRecyclerView recyclerView;
     private SchoolMatesAdapter schoolMatesAdapter;
+
+    private SpringView smSv;
+
+    public interface OnItemActionListener{
+        void OnAddFriendCall();
+    }
+
     @Override
     public void onViewCreate(View root) {
         super.onViewCreate(root);
@@ -67,6 +76,17 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
                 animateCommonItems(dy);
             }
         });
+
+        smSv = (SpringView) findViewById(R.id.smLtSv);
+        smSv.setHeader(new AddressRotationHeader(mAppCtx));
+    }
+
+    public void setOnFreshListener(SpringView.OnFreshListener onFreshListener){
+        smSv.setListener(onFreshListener);
+    }
+
+    public void notifyFreshDone(){
+        smSv.onFinishFreshAndLoad();
     }
 
     private void animateCommonItems(int dy) {
@@ -99,6 +119,10 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
 
     public void setData(Collection<SchoolMate> schoolMates){
         schoolMatesAdapter.addAll(schoolMates);
+    }
+
+    public void setData(List<SchoolMate> result, int i) {
+        mRootView.postDelayed(() -> schoolMatesAdapter.addAll(result),i);
     }
 
     private void fillCommonItem(CommonItem commonItem, int resId, String title){
