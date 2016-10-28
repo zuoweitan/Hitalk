@@ -7,15 +7,12 @@ import com.avos.avoscloud.AVUser;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.common.Md5Utils;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.UserBeanCacheHelper;
 import com.zuowei.utils.pinyin.CharacterParser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import bolts.Task;
 

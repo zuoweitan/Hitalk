@@ -2,9 +2,7 @@ package com.zuowei.utils.common;
 
 import java.util.concurrent.CancellationException;
 
-import bolts.Continuation;
 import bolts.Task;
-import bolts.TaskCompletionSource;
 
 /**
  * Created by zuowei on 16-8-29.

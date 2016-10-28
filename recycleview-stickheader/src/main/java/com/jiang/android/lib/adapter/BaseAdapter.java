@@ -16,18 +16,22 @@ public abstract class BaseAdapter<T,VH extends RecyclerView.ViewHolder>
     }
 
     public void add(T object) {
-        items.add(object);
-        notifyDataAddChanged(-1);
+        if (!items.contains(object)) {
+            items.add(object);
+            notifyDataAddChanged(-1);
+        }
     }
 
     public void add(int index, T object) {
-        items.add(index, object);
-        notifyDataAddChanged(index);
+        if (!items.contains(object)) {
+            items.add(index, object);
+            notifyDataAddChanged(index);
+        }
     }
 
     public void addAll(Collection<T> collection) {
         if (collection != null) {
-            items.clear();
+            items = new ArrayList<>();
             items.addAll(collection);
             notifyDataAddChanged(0);
         }
@@ -57,7 +61,11 @@ public abstract class BaseAdapter<T,VH extends RecyclerView.ViewHolder>
 
     @Override
     public long getItemId(int position) {
-        return getItem(position).hashCode();
+        T t = getItem(position);
+        if (t != null) {
+            return t.hashCode();
+        }
+        return -1;
     }
 
     @Override

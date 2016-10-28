@@ -45,4 +45,24 @@ public class SchoolMate extends LetterMark implements Indexable{
     public String getIndex() {
         return getSortLetters();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof SchoolMate)) {
+            return false;
+        }
+        SchoolMate temp = (SchoolMate) o;
+        if (temp.userId == null || userId == null)
+            return false;
+        return userId.equals(temp.userId);
+    }
+
+    @Override
+    public String toString() {
+        return "SchoolMate{" +
+                "nickName='" + nickName + '\'' +
+                ", userId='" + userId + '\'' +
+                ", sInfo='" + sInfo + '\'' +
+                '}' + " letter = "+getSortLetters();
+    }
 }

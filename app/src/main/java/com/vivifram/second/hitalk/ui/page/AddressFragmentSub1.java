@@ -1,5 +1,7 @@
 package com.vivifram.second.hitalk.ui.page;
 
+import android.os.Handler;
+
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.LayoutInject;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
@@ -7,6 +9,8 @@ import com.vivifram.second.hitalk.manager.chat.SchoolMatesManager;
 import com.vivifram.second.hitalk.ui.page.layout.AddressFragmentSub1Layout;
 import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
 import com.zuowei.utils.bridge.handler.ToolKit;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.pinyin.LetterComparator;
 
 import java.util.Collections;
@@ -20,6 +24,7 @@ import bolts.Task;
  */
 @LayoutInject(name = "AddressFragmentSub1Layout")
 public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout> {
+    Handler handler;
     @Override
     protected void lazyLoad() {
     }
@@ -39,7 +44,7 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
                 updateSchoolMates(task -> {
                     mLayout.notifyFreshDone();
                     if (task.getResult() != null) {
-                        mLayout.setData(task.getResult(),500);
+                        mLayout.refresh(task.getResult());
                     }
                     return null;
                 });
@@ -50,6 +55,15 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
 
             }
         });
+        handler = new Handler();
+        /*Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                mLayout.refresh();
+                handler.postDelayed(this,5000);
+            }
+        };
+        handler.postDelayed(runnable,10000);*/
     }
 
     private void updateSchoolMates(Continuation<List<SchoolMate>,Void> continuation) {
@@ -57,17 +71,15 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
                 .continueWith(task -> {
                     final List<SchoolMate> result = task.getResult();
                     if (result != null){
-                        Collections.sort(result,new LetterComparator<SchoolMate>());
-                        ToolKit.runOnMainThreadAsync(() -> {
-                            if (continuation != null) {
-                                Task.<List<SchoolMate>>forResult(result)
-                                        .continueWith(continuation);
-                            }
-                        });
+                        Collections.sort(result,new LetterComparator<>());
+                        if (continuation != null) {
+                            Task.<List<SchoolMate>>forResult(result)
+                                    .continueWith(continuation,Task.UI_THREAD_EXECUTOR);
+                        }
                     }else {
                         if (continuation != null) {
                             Task.<List<SchoolMate>>forResult(null)
-                                    .continueWith(continuation);
+                                    .continueWith(continuation,Task.UI_THREAD_EXECUTOR);
                         }
                     }
 

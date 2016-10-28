@@ -1,8 +1,10 @@
 package com.vivifram.second.hitalk.ui.page.layout;
 
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
 
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersDecoration;
@@ -11,12 +13,17 @@ import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.vivifram.second.hitalk.ui.recycleview.address.DividerDecoration;
 import com.vivifram.second.hitalk.ui.recycleview.address.SchoolMatesAdapter;
 import com.vivifram.second.hitalk.ui.springview.container.AddressRotationHeader;
+import com.vivifram.second.hitalk.ui.springview.container.DefaultHeader;
 import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
 import com.vivifram.second.hitalk.ui.view.CommonItem;
 import com.vivifram.second.hitalk.ui.view.SRecyclerView;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.TagUtil;
 
 import java.util.Collection;
 import java.util.List;
+
+import static com.avos.avoscloud.Messages.OpType.add;
 
 /**
  * Created by zuowei on 16-10-11.
@@ -35,6 +42,7 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
     private SchoolMatesAdapter schoolMatesAdapter;
 
     private SpringView smSv;
+    private Handler handler;
 
     public interface OnItemActionListener{
         void OnAddFriendCall();
@@ -43,7 +51,14 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
     @Override
     public void onViewCreate(View root) {
         super.onViewCreate(root);
+        handler = new Handler();
         init();
+    }
+
+    @Override
+    public void onViewDestroy() {
+        super.onViewDestroy();
+        handler.removeCallbacksAndMessages(null);
     }
 
     private void init() {
@@ -54,7 +69,6 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
         nearByCi = (CommonItem) findViewById(R.id.nearbyp);
         fillCommonItem(nearByCi,R.drawable.nearby,mRes.getString(R.string.nearbyp));
         nearByCi.showDivider(false);
-
 
         recyclerView = (SRecyclerView) findViewById(R.id.schoolmateList);
         recyclerView.setHasFixedSize(true);
@@ -78,7 +92,7 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
         });
 
         smSv = (SpringView) findViewById(R.id.smLtSv);
-        smSv.setHeader(new AddressRotationHeader(mAppCtx));
+        smSv.setHeader(new AddressRotationHeader(mAct));
     }
 
     public void setOnFreshListener(SpringView.OnFreshListener onFreshListener){
@@ -116,13 +130,23 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
         return null;
     }
 
+    //for test
+    public void refresh(List<SchoolMate> result){
+        schoolMatesAdapter = new SchoolMatesAdapter();
+        schoolMatesAdapter.addAll(result);
+    }
+
 
     public void setData(Collection<SchoolMate> schoolMates){
-        schoolMatesAdapter.addAll(schoolMates);
+        if (schoolMates != null) {
+            for (SchoolMate schoolMate : schoolMates) {
+                schoolMatesAdapter.add(schoolMate);
+            }
+        }
     }
 
     public void setData(List<SchoolMate> result, int i) {
-        mRootView.postDelayed(() -> schoolMatesAdapter.addAll(result),i);
+        handler.postDelayed(() -> schoolMatesAdapter.addAll(result),i);
     }
 
     private void fillCommonItem(CommonItem commonItem, int resId, String title){

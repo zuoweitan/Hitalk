@@ -32,6 +32,7 @@ import com.zuowei.utils.bridge.params.chat.MessageParam;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.NToast;
 import com.zuowei.utils.common.NotificationUtils;
+import com.zuowei.utils.common.SyncUtils;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.AbstractHandler;
 import com.zuowei.utils.helper.ConversationCacheHelper;
@@ -39,7 +40,10 @@ import com.zuowei.utils.helper.HiTalkHelper;
 
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import bolts.Task;
 
 /**
  * Created by zuowei on 16-7-25.
@@ -108,6 +112,7 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
 
             @Override
             public void doJobWithParam(ClientOpenParam param) {
+                NLog.i(TagUtil.makeTag(getClass()),"mClientOpenListener callback and param.mOpened = "+param.mOpened);
                 if (param.mOpened){
                     initSquareConversation();
                 }else {
@@ -118,6 +123,7 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
     }
 
     private void initSquareConversation() {
+        NLog.i(TagUtil.makeTag(getClass()),"initSquareConversation");
         String currentSquareConversationName = HiTalkHelper.getInstance().getModel().getSquareConversationName();
         if (HiTalkHelper.getInstance().getCurrentUserCollege() != null &&
                 ConversationClient.getCollegeSquareConversationName(HiTalkHelper.getInstance().getCurrentUserCollege())
@@ -203,7 +209,10 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
                 if (mLayout != null){
                     IMessageWrap firstMessage = mLayout.getChatLt().getFirstMessage();
                     if (firstMessage == null){
-                        mLayout.getChatLt().finshRefresh();
+                        fetchMessages().continueWith(task -> {
+                            mLayout.getChatLt().finshRefresh();
+                            return null;
+                        });
                     }else {
                         if (mAvimConversation != null) {
                             mAvimConversation.queryMessages(firstMessage.message_.getMessageId(),
@@ -285,20 +294,37 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
         }
     }
 
-    private void fetchMessages() {
+    private Task<List<AVIMMessage>> fetchMessages() {
         if (mAvimConversation != null) {
-            mAvimConversation.queryMessages(new AVIMMessagesQueryCallback() {
+            return Task.callInBackground(new Callable<List<AVIMMessage>>() {
+                List<AVIMMessage> queryResult;
                 @Override
-                public void done(List<AVIMMessage> list, AVIMException e) {
-                    if (filterException(e)){
-                        if (mLayout.getChatLt() != null) {
-                            mLayout.getChatLt().clear();
-                            mLayout.pushMessagesAndRefreshToBottom(IMessageWrap.buildFrom(list,false));
+                public List<AVIMMessage> call() throws Exception {
+                    int syncLatch = SyncUtils.getSyncLatch();
+                    mAvimConversation.queryMessages(new AVIMMessagesQueryCallback() {
+                        @Override
+                        public void done(List<AVIMMessage> list, AVIMException e) {
+                            if (filterException(e)) {
+                                queryResult = list;
+                            }
+                            SyncUtils.notify(syncLatch);
                         }
-                    }
+                    });
+                    SyncUtils.wait(syncLatch);
+                    NLog.i(TagUtil.makeTag(getClass()),"fetchMessages queryResult = "+queryResult);
+                    return queryResult;
                 }
-            });
+            }).continueWith(task -> {
+                List<AVIMMessage> result = task.getResult();
+                if (result != null && mLayout.getChatLt() != null){
+                        mLayout.getChatLt().clear();
+                        mLayout.pushMessagesAndRefreshToBottom(IMessageWrap.buildFrom(result,false));
+                    return result;
+                }
+                return null;
+            },Task.UI_THREAD_EXECUTOR);
         }
+        return Task.forResult(null);
     }
 
     private boolean filterException(Exception e) {

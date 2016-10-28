@@ -11,6 +11,7 @@ import com.jiang.android.lib.adapter.BaseAdapter;
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersAdapter;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
+import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
 
 /**
@@ -33,8 +34,7 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View view = null;
+        View view;
         if (viewType == HEADER) {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.schoolmateheader, parent, false);
@@ -48,7 +48,7 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof SchoolMateViewHolder) {
+        if (position != 0) {
             ((SchoolMateViewHolder)holder).initWithModel(getItem(position));
         }
     }
@@ -71,6 +71,8 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
 
     @Override
     public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
+        NLog.i(TagUtil.makeTag(getClass()),"onBindHeaderViewHolder position = "+position);
+        NLog.i(TagUtil.makeTag(getClass()),"onBindHeaderViewHolder getItem(position) = "+getItem(position));
         TextView textView = (TextView) holder.itemView;
         String showValue = String.valueOf(getItem(position).getSortLetters().charAt(0));
         textView.setText(showValue);
@@ -83,7 +85,7 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
     @Override
     public SchoolMate getItem(int position) {
         if (position == 0){
-            return new SchoolMate();
+            return null;
         }
         return super.getItem(getAdjustPosition(position));
     }
@@ -116,9 +118,7 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
         if (position == -1){
             notifyItemInserted(getItemCount() - 1);
         }else if (position == 0){
-            if (super.getItemCount() > 0) {
-                notifyItemRangeChanged(1,super.getItemCount());
-            }
+            notifyDataSetChanged();
         }else {
             notifyItemInserted(position);
             notifyItemRangeChanged(position,super.getItemCount() - position);

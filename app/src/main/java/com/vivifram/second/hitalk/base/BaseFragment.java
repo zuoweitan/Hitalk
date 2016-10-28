@@ -75,7 +75,6 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
                     }
                     if (iEater != null) {
                         eater.add(iEater);
-                        NLog.i(TagUtil.makeTag(getClass()),"eatMark action = "+eatMark.action());
                         EaterManager.getInstance().registerEater(eatMark.action(),iEater);
                     }
                 }
