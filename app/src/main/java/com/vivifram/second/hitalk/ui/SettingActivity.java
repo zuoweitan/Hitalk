@@ -14,6 +14,8 @@ import com.vivifram.second.hitalk.manager.chat.ClientManager;
 import com.vivifram.second.hitalk.manager.chat.PushManager;
 import com.vivifram.second.hitalk.ui.layout.SettingLayout;
 import com.vivifram.second.hitalk.ui.view.BGATitlebar;
+import com.zuowei.utils.bridge.EaterManager;
+import com.zuowei.utils.bridge.params.LoginParam;
 import com.zuowei.utils.common.UIUtils;
 import com.zuowei.utils.helper.HiTalkHelper;
 
@@ -51,7 +53,8 @@ public class SettingActivity extends BaseActivity<SettingLayout> {
 
             PushManager.getInstance().unsubscribeCurrentUserChannel();
 
-            HiTalkHelper.getInstance().logOut();
+            EaterManager.getInstance().
+                    broadcast(new LoginParam.Builder(LoginParam.TYPE_LOGOUT).create());
 
             finish();
 

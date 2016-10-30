@@ -7,6 +7,8 @@ import com.avos.avoscloud.AVUser;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.common.Md5Utils;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.UserBeanCacheHelper;
 import com.zuowei.utils.pinyin.CharacterParser;
@@ -44,6 +46,7 @@ public class SchoolMatesManager {
 
     public Task<List<SchoolMate>> queryAllSchoolMates(){
         return Task.callInBackground(()->{
+            NLog.i(TagUtil.makeTag(getClass()),"queryAllSchoolMates");
             List<SchoolMate> results = new ArrayList<>();
 
             AVQuery<AVUser> avQuery = AVUser.getQuery();
@@ -55,13 +58,16 @@ public class SchoolMatesManager {
             avQuery.whereEqualTo("collegeCode",collegeCode);
 
             List<AVUser> list = avQuery.find();
+            NLog.i(TagUtil.makeTag(getClass()),"queryAllSchoolMates list = "+list);
             if (list != null) {
                 for (AVUser avUser : list) {
                     User user = new User();
                     UserBeanCacheHelper.AvUserToUser(avUser,user);
+                    UserBeanCacheHelper.getInstance().cacheUser(user);
                     SchoolMate schoolMate  = new SchoolMate();
                     schoolMate.setNickName(user.getNick())
                             .setUserId(user.getObjectId());
+                    NLog.i(TagUtil.makeTag(getClass()),"schoolMate = "+schoolMate);
                     fillLetters(schoolMate);
                     results.add(schoolMate);
                 }

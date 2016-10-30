@@ -99,6 +99,10 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
         smSv.setListener(onFreshListener);
     }
 
+    public void setOnSchoolMatesActionListener(SchoolMatesAdapter.OnSchoolMatesActionListener onSchoolMatesActionListener){
+        schoolMatesAdapter.setOnSchoolMatesActionListener(onSchoolMatesActionListener);
+    }
+
     public void notifyFreshDone(){
         smSv.onFinishFreshAndLoad();
     }

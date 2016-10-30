@@ -175,7 +175,7 @@ public class BNAdapter extends BaseRecycleViewAdapter<BnItem,RecyclerView.ViewHo
                         @Override
                         public void onItemClick(int commentPosition) {
                             CommentItem commentItem = commentsDatas.get(commentPosition);
-                            if (BnDataProvider.curUser.getObjectId().equals(commentItem.getUser().getObjectId())) {//复制或者删除自己的评论
+                            if (BnDataProvider.$().curUser.getObjectId().equals(commentItem.getUser().getObjectId())) {//复制或者删除自己的评论
                                 int action = isCommentFromMe(commentItem) ? CommentActionPopup.ACTION_BOTH:CommentActionPopup.ACTION_COPY;
                                 CommentActionPopup actionPopup = new CommentActionPopup(context,action,bnItemOnClickListener,commentItem,bnPosition);
                                 actionPopup.showPopupWindow();
@@ -216,7 +216,7 @@ public class BNAdapter extends BaseRecycleViewAdapter<BnItem,RecyclerView.ViewHo
 
             final SnsPopupWindow snsPopupWindow = holder.snsPopupWindow;
             //判断是否已点赞
-            String curUserFavortId = bnItem.getCurUserFavortId(BnDataProvider.curUser.getObjectId());
+            String curUserFavortId = bnItem.getCurUserFavortId(BnDataProvider.$().curUser.getObjectId());
             if (!TextUtils.isEmpty(curUserFavortId)) {
                 snsPopupWindow.getmActionItems().get(0).mTitle = "取消";
             } else {
@@ -294,7 +294,7 @@ public class BNAdapter extends BaseRecycleViewAdapter<BnItem,RecyclerView.ViewHo
 
     private boolean isCommentFromMe(CommentItem commentItem){
         if (commentItem != null
-                && BnDataProvider.curUser.getObjectId().equals(
+                && BnDataProvider.$().curUser.getObjectId().equals(
                 commentItem.getUser().getObjectId())) {
             return true;
         } else {

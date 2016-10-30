@@ -77,4 +77,5 @@ dependencies {
     compile project(':bolts-tasks')
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
     compile project(':recycleview-stickheader')
+    compile 'com.afollestad.material-dialogs:core:0.8.6.2'
 }

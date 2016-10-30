@@ -13,6 +13,7 @@ import com.avos.avoscloud.PaasClient;
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMMessageManager;
 import com.avos.avoscloud.im.v2.AVIMTypedMessage;
+import com.vivifram.second.hitalk.bean.address.AddRequest;
 import com.vivifram.second.hitalk.bean.blackboard.BnCommentRemote;
 import com.vivifram.second.hitalk.bean.blackboard.BnFavortRemote;
 import com.vivifram.second.hitalk.bean.blackboard.BnRemote;
@@ -109,6 +110,8 @@ public class HiTalkHelper {
         AVObject.registerSubclass(BnRemote.class);
         AVObject.registerSubclass(BnCommentRemote.class);
         AVObject.registerSubclass(BnFavortRemote.class);
+
+        AVObject.registerSubclass(AddRequest.class);
     }
 
     private void initProviders() {
@@ -187,9 +190,5 @@ public class HiTalkHelper {
 
     public BaseEventuallyQueue getEventuallyQueue() {
         return eventuallyQueue;
-    }
-
-    public void logOut() {
-        AVUser.logOut();
     }
 }

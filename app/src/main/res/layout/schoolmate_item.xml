@@ -50,6 +50,7 @@
         />
     
     <Button
+        android:id="@+id/addFriendBt"
         android:layout_width="54dp"
         android:layout_height="28dp"
         android:background="@drawable/button_rounded_color_black_background"

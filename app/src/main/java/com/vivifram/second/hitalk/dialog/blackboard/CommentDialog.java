@@ -59,7 +59,7 @@ public class CommentDialog extends Dialog implements
 		copyTv.setOnClickListener(this);
 		TextView deleteTv = (TextView) findViewById(R.id.deleteTv);
 		if (mCommentItem != null
-				&& BnDataProvider.curUser.getObjectId().equals(
+				&& BnDataProvider.$().curUser.getObjectId().equals(
 						mCommentItem.getUser().getObjectId())) {
 			deleteTv.setVisibility(View.VISIBLE);
 		} else {

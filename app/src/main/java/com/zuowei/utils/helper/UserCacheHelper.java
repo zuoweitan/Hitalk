@@ -135,7 +135,10 @@ public class UserCacheHelper {
         return userList;
     }
 
-    public static void fillAvUser(User user,AVUser avUser){
+    public static AVUser fillAvUser(User user,AVUser avUser){
+        if (user == null || avUser == null)
+            return null;
+
         Field[] fields = user.getClass().getFields();
         for (int i = 0; i < fields.length; i++) {
             Field field = fields[i];
@@ -146,6 +149,7 @@ public class UserCacheHelper {
                 e.printStackTrace();
             }
         }
+        return avUser;
     }
 
     public void saveCropAvatarInBackgroud(final Intent data, final StringBuilder out) {

@@ -1,18 +1,20 @@
 package com.vivifram.second.hitalk.ui.recycleview.address;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.jiang.android.lib.adapter.BaseAdapter;
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersAdapter;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
+import com.zuowei.utils.common.NoDoubleClickListener;
+
+import bolts.Continuation;
 
 /**
  * Created by zuowei on 16-10-13.
@@ -23,6 +25,16 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
     public static final int HEADER = 0X01;
     public static final int NORMAL = 0x02;
     private static final int HEADSIZE = 1;
+
+    public static final int REQUEST_STATE_SUCCESS = 0x01;
+    public static final int REQUEST_STATE_WATING = 0x02;
+    public static final int REQUEST_STATE_FAILED = 0x03;
+
+    public interface OnSchoolMatesActionListener{
+        void onAddFriendRequest(String userId, Continuation<Boolean,Void> callback);
+    }
+
+    private OnSchoolMatesActionListener onSchoolMatesActionListener;
 
     @Override
     public int getItemViewType(int position) {
@@ -50,6 +62,23 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position != 0) {
             ((SchoolMateViewHolder)holder).initWithModel(getItem(position));
+            ((SchoolMateViewHolder)holder).setOnAddFriendCalledListener(new NoDoubleClickListener() {
+                @Override
+                public void onNoDoubleClick(View v) {
+                    SchoolMate item = getItem(position);
+                    if (onSchoolMatesActionListener != null) {
+                        onSchoolMatesActionListener.onAddFriendRequest(item.getUserId(), task -> {
+                            Boolean result = task.getResult();
+                            if (result){
+                                ((SchoolMateViewHolder)holder).setRequestState(REQUEST_STATE_WATING);
+                            }else {
+                                ((SchoolMateViewHolder)holder).setRequestState(REQUEST_STATE_FAILED);
+                            }
+                            return null;
+                        });
+                    }
+                }
+            });
         }
     }
 
@@ -71,8 +100,6 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
 
     @Override
     public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
-        NLog.i(TagUtil.makeTag(getClass()),"onBindHeaderViewHolder position = "+position);
-        NLog.i(TagUtil.makeTag(getClass()),"onBindHeaderViewHolder getItem(position) = "+getItem(position));
         TextView textView = (TextView) holder.itemView;
         String showValue = String.valueOf(getItem(position).getSortLetters().charAt(0));
         textView.setText(showValue);
@@ -130,20 +157,50 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
         return false;
     }
 
+    public SchoolMatesAdapter setOnSchoolMatesActionListener(OnSchoolMatesActionListener onSchoolMatesActionListener) {
+        this.onSchoolMatesActionListener = onSchoolMatesActionListener;
+        return this;
+    }
+
     public class SchoolMateViewHolder extends RecyclerView.ViewHolder{
 
+        Context ctx;
         TextView nickNameTv;
         TextView infoTv;
+        Button addFriendBtn;
 
         public SchoolMateViewHolder(View itemView) {
             super(itemView);
+            ctx = itemView.getContext();
             nickNameTv = (TextView) itemView.findViewById(R.id.nickTv);
             infoTv = (TextView) itemView.findViewById(R.id.sInfo);
+
+            addFriendBtn = (Button) itemView.findViewById(R.id.addFriendBt);
         }
 
         public void initWithModel(SchoolMate schoolMate){
             nickNameTv.setText(schoolMate.getNickName());
             infoTv.setText(schoolMate.getsInfo());
+        }
+
+        public void setRequestState(int success){
+            switch (success){
+                case REQUEST_STATE_FAILED:
+                        addFriendBtn.setVisibility(View.VISIBLE);
+                        addFriendBtn.setText(ctx.getString(R.string.add_friend));
+                    break;
+                case REQUEST_STATE_SUCCESS:
+                        addFriendBtn.setVisibility(View.GONE);
+                    break;
+                case REQUEST_STATE_WATING:
+                        addFriendBtn.setVisibility(View.VISIBLE);
+                        addFriendBtn.setText(ctx.getString(R.string.wait_for_verfiy));
+                    break;
+            }
+        }
+
+        public void setOnAddFriendCalledListener(NoDoubleClickListener onAddFriendCalledListener){
+            addFriendBtn.setOnClickListener(onAddFriendCalledListener);
         }
     }
 }

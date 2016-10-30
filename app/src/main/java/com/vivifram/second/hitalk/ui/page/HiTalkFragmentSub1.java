@@ -206,6 +206,7 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
         mLayout.setMessageListFreshListener(new ChatMessageListLayout.IMessageListFreshListener() {
             @Override
             public void onRefresh() {
+                NLog.i(TagUtil.makeTag(getClass()),"mAvimConversation = "+mAvimConversation);
                 if (mLayout != null){
                     IMessageWrap firstMessage = mLayout.getChatLt().getFirstMessage();
                     if (firstMessage == null){

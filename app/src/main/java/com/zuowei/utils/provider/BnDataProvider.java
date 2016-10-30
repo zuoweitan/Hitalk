@@ -5,11 +5,9 @@ import com.vivifram.second.hitalk.bean.blackboard.BnItem;
 import com.vivifram.second.hitalk.bean.blackboard.CommentItem;
 import com.vivifram.second.hitalk.bean.blackboard.FavortItem;
 import com.vivifram.second.hitalk.manager.LocalIdManager;
-import com.vivifram.second.hitalk.state.ActionCallback;
 import com.vivifram.second.hitalk.state.DoneCallback;
 import com.vivifram.second.hitalk.state.SingleResult;
 import com.zuowei.dao.greendao.User;
-import com.zuowei.utils.common.DateUtils;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.BnHelper;
@@ -20,14 +18,30 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 /**
  * Created by zuowei on 16-8-14.
  */
 
 public class BnDataProvider {
 	private static final String TAG = TagUtil.makeTag(BnDataProvider.class);
-	public static final User curUser = getCurrentUser();
+	public User curUser;
+
+	private static BnDataProvider sInstance;
+
+	private BnDataProvider(){
+		curUser = getCurrentUser();
+	}
+
+	public static BnDataProvider $(){
+		if (sInstance == null) {
+			synchronized (BnDataProvider.class){
+				if (sInstance == null) {
+					return new BnDataProvider();
+				}
+			}
+		}
+		return sInstance;
+	}
 
 	public static void refreshBnDatas(final DoneCallback<BnItem> callback) {
 		if (callback == null) return;

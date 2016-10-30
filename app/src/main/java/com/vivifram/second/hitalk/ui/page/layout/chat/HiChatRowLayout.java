@@ -148,21 +148,29 @@ public abstract class HiChatRowLayout<T extends AVIMTypedMessage> extends Linear
     private void checkMessageState() {
         switch (message_.message_.getMessageStatus()){
             case AVIMMessageStatusSending:
-                    mProgressBar.setVisibility(VISIBLE);
-                    mStatusView.setVisibility(GONE);
+                    setVisibleState(mProgressBar,VISIBLE);
+                    setVisibleState(mStatusView,GONE);
                 break;
             case AVIMMessageStatusFailed:
-                    mProgressBar.setVisibility(GONE);
-                    mStatusView.setVisibility(VISIBLE);
+                    setVisibleState(mProgressBar,GONE);
+                    setVisibleState(mStatusView,VISIBLE);
                 break;
             case AVIMMessageStatusReceipt:
             case AVIMMessageStatusSent:
             default:
-                    mProgressBar.setVisibility(GONE);
-                    mStatusView.setVisibility(GONE);
+                    setVisibleState(mProgressBar,GONE);
+                    setVisibleState(mStatusView,GONE);
                 break;
         }
     }
+
+    private void setVisibleState(View v , int visible){
+        if (v != null) {
+            v.setVisibility(visible);
+        }
+    }
+
+
 
     private void setClickListener() {
         if(mBlt != null){

@@ -52,8 +52,11 @@ public class UserBeanCacheHelper {
 
     public synchronized void cacheUser(User user) {
         if(null != user) {
-            mUsersBeanCache.put(user.getObjectId(),new SoftReference<User>(user));
-            DaoHelper.getInstance().getAsyncSession().insertOrReplaceInTx(User.class,user);
+            SoftReference<User> userSoftReference = mUsersBeanCache.get(user);
+            if (userSoftReference == null || userSoftReference.get() == null) {
+                mUsersBeanCache.put(user.getObjectId(), new SoftReference<User>(user));
+                DaoHelper.getInstance().getAsyncSession().insertOrReplaceInTx(User.class, user);
+            }
         }
 
     }
@@ -152,7 +155,10 @@ public class UserBeanCacheHelper {
 
     }
 
-    public static void AvUserToUser(AVUser avUser, User user){
+    public static User AvUserToUser(AVUser avUser, User user){
+        if (avUser == null || user == null) {
+            return null;
+        }
         user.setUserName(avUser.getUsername());
         user.setObjectId(avUser.getObjectId());
         user.setAvatar(UserCacheHelper.getInstance().getAvatarUrl(avUser));
@@ -161,5 +167,6 @@ public class UserBeanCacheHelper {
         user.setSex(userWrap.getSex());
         user.setCollege(userWrap.getCollege());
         user.setInterest(userWrap.getInterest());
+        return user;
     }
 }
