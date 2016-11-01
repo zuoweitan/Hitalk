@@ -48,20 +48,10 @@ public class CharacterParser {
             "yin", "ying", "yo", "yong", "you", "yu", "yuan", "yue", "yun", "za", "zai", "zan", "zang", "zao", "ze", "zei", "zen", "zeng", "zha",
             "zhai", "zhan", "zhang", "zhao", "zhe", "zhen", "zheng", "zhi", "zhong", "zhou", "zhu", "zhua", "zhuai", "zhuan", "zhuang", "zhui",
             "zhun", "zhuo", "zi", "zong", "zou", "zu", "zuan", "zui", "zun", "zuo"};
-    private StringBuilder buffer;
-    private String resource;
     private static CharacterParser characterParser = new CharacterParser();
 
     public static CharacterParser getInstance() {
         return characterParser;
-    }
-
-    public String getResource() {
-        return resource;
-    }
-
-    public void setResource(String resource) {
-        this.resource = resource;
     }
 
     /**
@@ -112,11 +102,11 @@ public class CharacterParser {
      */
     public String getSelling(String chs) {
         String key, value;
-        buffer = new StringBuilder();
+        StringBuilder buffer = new StringBuilder();
         for (int i = 0; i < chs.length(); i++) {
             key = chs.substring(i, i + 1);
             if (key.getBytes().length >= 2) {
-                value = (String) convert(key);
+                value = convert(key);
                 if (value == null) {
                     value = "unknown";
                 }
@@ -126,9 +116,5 @@ public class CharacterParser {
             buffer.append(value);
         }
         return buffer.toString();
-    }
-
-    public String getSpelling() {
-        return this.getSelling(this.getResource());
     }
 }

@@ -1,7 +1,6 @@
 package com.vivifram.second.hitalk.manager.chat;
 
-import android.content.Context;
-
+import com.avos.avoscloud.AVCallback;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
@@ -12,14 +11,19 @@ import com.avos.avoscloud.FollowCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.vivifram.second.hitalk.HiTalkApplication;
 import com.vivifram.second.hitalk.R;
+import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.address.AddRequest;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
+import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.helper.HiTalkHelper;
+import com.zuowei.utils.helper.UserBeanCacheHelper;
+import com.zuowei.utils.helper.UserCacheHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
+import bolts.Continuation;
 import bolts.Task;
 
 
@@ -28,6 +32,9 @@ import bolts.Task;
  */
 
 public class FriendsManager {
+
+    private volatile List<String> friendIds = new ArrayList<>();
+
     private static FriendsManager friendsManager;
 
     /**
@@ -149,7 +156,6 @@ public class FriendsManager {
         try {
             count = q.count();
         } catch (AVException e) {
-            NLog.e(TagUtil.makeTag(getClass()),"createAddRequest failed :",e);
             if (e.getCode() == AVException.OBJECT_NOT_FOUND) {
                 count = 0;
             } else {
@@ -177,6 +183,65 @@ public class FriendsManager {
                 createAddRequest(user);
                 return null;
             }
+        }).continueWith(new Continuation<Void, Void>() {
+            @Override
+            public Void then(Task<Void> task) throws Exception {
+                if (task.getError() == null) {
+                    PushManager.getInstance().pushMessage(user.getObjectId(), HiTalkApplication.mAppContext
+                            .getString(R.string.push_add_request),
+                            Constants.INVITATION_ACTION);
+                }else {
+                    throw task.getError();
+                }
+                return null;
+            }
         });
     }
+
+    public List<String> getFriendIds() {
+        return friendIds;
+    }
+
+    public void setFriendIds(List<String> friendList) {
+        friendIds.clear();
+        if (friendList != null) {
+            friendIds.addAll(friendList);
+        }
+    }
+
+    public void fetchFriends(boolean isForce, final AVCallback<List<User>> avCallback) {
+        AVQuery.CachePolicy policy =
+                (isForce ? AVQuery.CachePolicy.NETWORK_ELSE_CACHE : AVQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        findFriendsWithCachePolicy(policy, new FindCallback<AVUser>() {
+            @Override
+            public void done(List<AVUser> list, AVException e) {
+                if (null != e) {
+                    avCallback.internalDone(null,e);
+                } else {
+                    final List<String> userIds = new ArrayList<String>();
+                    for (AVUser user : list) {
+                        userIds.add(user.getObjectId());
+                    }
+                   /* UserCacheHelper.getInstance().fetchUsers(userIds, (userList, e1) -> {
+                        setFriendIds(userIds);
+                        findCallback.done(userList, null);
+                    });*/
+                    UserBeanCacheHelper.getInstance().getCachedUsers(userIds,avCallback);
+                }
+            }
+        });
+    }
+
+    public void findFriendsWithCachePolicy(AVQuery.CachePolicy cachePolicy, FindCallback<AVUser>
+            findCallback) {
+        AVQuery<AVUser> q = null;
+        try {
+            q = HiTalkHelper.getInstance().getCurrentUser().followeeQuery(AVUser.class);
+        } catch (Exception e) {
+        }
+        q.setCachePolicy(cachePolicy);
+        q.setMaxCacheAge(TimeUnit.MINUTES.toMillis(1));
+        q.findInBackground(findCallback);
+    }
+
 }

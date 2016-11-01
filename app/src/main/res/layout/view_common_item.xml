@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/summary_img"
@@ -13,15 +14,17 @@
         android:scaleType="center" >
     </ImageView>
 
-    <TextView
+    <cn.bingoogolapple.badgeview.BGABadgeTextView
         android:id="@+id/summary_text"
         style="@style/wrap_warp_tv_center"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/summary_img"
         android:textColor="#333333"
         android:textSize="16sp"
-        android:layout_marginLeft="16dp">
-    </TextView>
+        android:layout_marginLeft="16dp"
+        app:badge_padding="5dp"
+        app:badge_gravity="rightCenter">
+    </cn.bingoogolapple.badgeview.BGABadgeTextView>
 
     <TextView
         android:id="@+id/detail_text"

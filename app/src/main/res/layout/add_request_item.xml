@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="58dp"
+    android:background="@color/colorWhite">
+
+    <com.vivifram.second.hitalk.ui.view.AvatarView
+        android:id="@+id/iconIv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="11dp"
+        android:src="@drawable/default_avatar"
+        app:avatar_border_width="0dp"
+        app:avatar_shadow_width="0dp"
+        />
+
+    <TextView
+        android:id="@+id/nickTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="58dp"
+        android:layout_marginTop="7dp"
+        android:text="Akon"
+        android:textSize="16dp"
+        android:textColor="@color/black_deep"/>
+
+    <TextView
+        android:id="@+id/nfInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="58dp"
+        android:layout_marginTop="30dp"
+        android:text="清华大学"
+        android:textSize="14dp"
+        android:textColor="@color/black_deep"
+        />
+
+    <Button
+        android:id="@+id/arBt"
+        android:layout_width="54dp"
+        android:layout_height="28dp"
+        android:background="@drawable/accept_new_friend_button_background"
+        android:text="@string/accept"
+        android:textColor="@color/black_deep"
+        android:textSize="14dp"
+        android:layout_marginLeft="300dp"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>

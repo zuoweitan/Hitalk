@@ -16,9 +16,11 @@ import com.vivifram.second.hitalk.R;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
 
+import cn.bingoogolapple.badgeview.BGABadgeTextView;
+
 public class CommonItem extends FrameLayout {
 	private ImageView mSummaryImg;
-	private TextView mSummaryText;
+	private BGABadgeTextView mSummaryText;
 	private TextView mDetailText;
 	private ImageView mDetailImg;
 	private View divider;
@@ -44,10 +46,19 @@ public class CommonItem extends FrameLayout {
 		View view = inflater.inflate(R.layout.view_common_item, this,
 				true);
 		mSummaryImg = (ImageView) view.findViewById(R.id.summary_img);
-		mSummaryText = (TextView) view.findViewById(R.id.summary_text);
+		mSummaryText = (BGABadgeTextView) view.findViewById(R.id.summary_text);
+		mSummaryText.hiddenBadge();
 		mDetailText = (TextView) view.findViewById(R.id.detail_text);
 		mDetailImg = (ImageView) view.findViewById(R.id.detail_img);
 		divider = view.findViewById(R.id.divider);
+	}
+
+	public void showBadge(boolean show){
+		if (show) {
+			mSummaryText.showCirclePointBadge();
+		}else {
+			mSummaryText.hiddenBadge();
+		}
 	}
 
 	public void setType(Type type) {

@@ -17,6 +17,8 @@ import com.vivifram.second.hitalk.ui.page.HiTalkFragment;
 import com.vivifram.second.hitalk.ui.page.MeFragment;
 import com.vivifram.second.hitalk.ui.page.MessageFragment;
 
+import java.util.HashMap;
+
 import cn.bingoogolapple.badgeview.BGABadgeRadioButton;
 
 /**
@@ -29,11 +31,14 @@ public class HiTalkLayout extends BaseLayout {
     private int mTabTipsIds[] = new int[]{R.string.tab_hi,R.string.tab_message,
     R.string.tab_address,R.string.tab_blackboard,R.string.tab_me};
 
+    private HashMap<Integer,BGABadgeRadioButton> radioBtns;
+
     private SmartTabLayout mPagerTab;
     private ViewPager mPager;
     private HiTalkActivity mActivity;
     public HiTalkLayout(View rootView) {
         super(rootView);
+        radioBtns = new HashMap<>();
         mActivity = (HiTalkActivity) mCtx;
     }
 
@@ -63,18 +68,22 @@ public class HiTalkLayout extends BaseLayout {
         mPagerTab.setViewPager(mPager);
     }
 
+    public BGABadgeRadioButton getRadioBtn(int index){
+        if (index < 0 || index >= radioBtns.size())
+            return null;
+        return radioBtns.get(index);
+    }
+
     private void initPagerTab() {
-        mPagerTab.setCustomTabView(new SmartTabLayout.TabProvider() {
-            @Override
-            public View createTabView(ViewGroup container, int position, PagerAdapter adapter) {
-                View view = mLayoutInflater.inflate(R.layout.custom_viewpager_tab, container, false);
-                BGABadgeRadioButton radioButton = (BGABadgeRadioButton) view.findViewById(R.id.RdTabItem);
-                Drawable drawable = mRes.getDrawable(mTabIconIds[position % mTabIconIds.length]);
-                drawable.setBounds(0,0,60,65);
-                radioButton.setCompoundDrawables(null,drawable,null,null);
-                radioButton.setText(mRes.getString(mTabTipsIds[position % mTabTipsIds.length]));
-                return view;
-            }
+        mPagerTab.setCustomTabView((container, position, adapter) -> {
+            View view = mLayoutInflater.inflate(R.layout.custom_viewpager_tab, container, false);
+            BGABadgeRadioButton radioButton = (BGABadgeRadioButton) view.findViewById(R.id.RdTabItem);
+            Drawable drawable = mRes.getDrawable(mTabIconIds[position % mTabIconIds.length]);
+            drawable.setBounds(0,0,60,65);
+            radioButton.setCompoundDrawables(null,drawable,null,null);
+            radioButton.setText(mRes.getString(mTabTipsIds[position % mTabTipsIds.length]));
+            radioBtns.put(position,radioButton);
+            return view;
         });
     }
 }

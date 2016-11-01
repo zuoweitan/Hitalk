@@ -114,7 +114,6 @@ public class UserCacheHelper {
             public void done(List<AVUser> list, AVException e) {
                 if (null == e) {
                     for (AVUser user : list) {
-                        NLog.i(TagUtil.makeTag(UserCacheHelper.class),"user college = "+user.get("college")+",name = "+user.getUsername());
                         mAvUsersCache.put(user.getObjectId(), user);
                     }
                 }
@@ -138,15 +137,18 @@ public class UserCacheHelper {
     public static AVUser fillAvUser(User user,AVUser avUser){
         if (user == null || avUser == null)
             return null;
-
-        Field[] fields = user.getClass().getFields();
+        Field[] fields = user.getClass().getDeclaredFields();
         for (int i = 0; i < fields.length; i++) {
             Field field = fields[i];
             field.setAccessible(true);
             try {
-                avUser.put(field.getName(),field.get(user));
+                if ("objectId".equals(field.getName())){
+                     avUser.setObjectId((String) field.get(user));
+                }else {
+                    avUser.put(field.getName(), field.get(user));
+                }
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                NLog.e(TagUtil.makeTag(UserCacheHelper.class),e);
             }
         }
         return avUser;

@@ -8,8 +8,11 @@ import android.view.View;
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersDecoration;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.address.Friend;
+import com.vivifram.second.hitalk.ui.NewFriendConfirmActivity;
 import com.vivifram.second.hitalk.ui.recycleview.address.DividerDecoration;
 import com.vivifram.second.hitalk.ui.recycleview.address.FriendsAdapter;
+import com.vivifram.second.hitalk.ui.springview.container.AddressRotationHeader;
+import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
 import com.vivifram.second.hitalk.ui.view.CommonItem;
 import com.vivifram.second.hitalk.ui.view.SRecyclerView;
 import com.zuowei.utils.pinyin.CharacterParser;
@@ -34,6 +37,8 @@ public class AddressFragmentSub2Layout extends BaseFragmentLayout {
     private FriendsAdapter friendsAdapter;
     private CharacterParser characterParser;
 
+    private SpringView fSv;
+
     @Override
     public void onViewCreate(View root) {
         super.onViewCreate(root);
@@ -46,6 +51,10 @@ public class AddressFragmentSub2Layout extends BaseFragmentLayout {
         newfCi = (CommonItem) findViewById(R.id.newf);
         fillCommonItem(newfCi,R.drawable.newf,mRes.getString(R.string.newf));
         newfCi.showDivider(true);
+        newfCi.setOnClickListener(view->{
+            NewFriendConfirmActivity.start(mAct);
+        });
+
         nearByCi = (CommonItem) findViewById(R.id.nearbyp);
         fillCommonItem(nearByCi,R.drawable.nearby,mRes.getString(R.string.nearbyp));
         nearByCi.showDivider(false);
@@ -59,8 +68,6 @@ public class AddressFragmentSub2Layout extends BaseFragmentLayout {
 
         friendsAdapter = new FriendsAdapter();
 
-        initData(friendsAdapter);
-
         recyclerView.setAdapter(friendsAdapter);
         final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(friendsAdapter);
         recyclerView.addItemDecoration(headersDecor);
@@ -73,6 +80,26 @@ public class AddressFragmentSub2Layout extends BaseFragmentLayout {
                 animateCommonItems(dy);
             }
         });
+
+        fSv = (SpringView) findViewById(R.id.fLtSv);
+        fSv.setHeader(new AddressRotationHeader(mAct));
+    }
+
+    public void setOnFreshListener(SpringView.OnFreshListener onFreshListener){
+        fSv.setListener(onFreshListener);
+    }
+
+    public void notifyFreshDone(){
+        fSv.onFinishFreshAndLoad();
+    }
+
+    public void refresh(List<Friend> result){
+        friendsAdapter = new FriendsAdapter();
+        friendsAdapter.addAll(result);
+    }
+
+    public CommonItem getNewfCi(){
+        return newfCi;
     }
 
     private void animateCommonItems(int dy) {
@@ -102,9 +129,6 @@ public class AddressFragmentSub2Layout extends BaseFragmentLayout {
         return null;
     }
 
-    private void initData(FriendsAdapter friendsAdapter) {
-        friendsAdapter.addAll(makeFake());
-    }
 
     private String friends[] = new String[]{"张三","李四","王五",
             "非凡","非常","飞天","飞舞地","等端子",

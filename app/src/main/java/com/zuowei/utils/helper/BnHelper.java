@@ -5,14 +5,13 @@ import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.google.gson.Gson;
 import com.vivifram.second.hitalk.bean.BaseBean;
-import com.vivifram.second.hitalk.bean.DesConstant;
+import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.blackboard.BnCommentRemote;
 import com.vivifram.second.hitalk.bean.blackboard.BnFavortRemote;
 import com.vivifram.second.hitalk.bean.blackboard.BnItem;
 import com.vivifram.second.hitalk.bean.blackboard.BnRemote;
 import com.vivifram.second.hitalk.bean.blackboard.CommentItem;
 import com.vivifram.second.hitalk.bean.blackboard.FavortItem;
-import com.vivifram.second.hitalk.bean.parser.BeanParser;
 import com.vivifram.second.hitalk.cache.BeanEventuallyQueue;
 import com.vivifram.second.hitalk.manager.LocalIdManager;
 import com.vivifram.second.hitalk.state.DoneCallback;
@@ -425,8 +424,8 @@ public class BnHelper {
         HashMap<String,String> photos = new HashMap<>();
         try {
             for (Map.Entry<String,Object> entry : map.entrySet()){
-                photos.put(DesConstant.BN_PHOTOS_DESUTIL.decrypt(entry.getKey()),
-                        DesConstant.BN_PHOTOS_DESUTIL.decrypt((String) entry.getValue()));
+                photos.put(Constants.BN_PHOTOS_DESUTIL.decrypt(entry.getKey()),
+                        Constants.BN_PHOTOS_DESUTIL.decrypt((String) entry.getValue()));
             }
         }catch (Exception e){
 

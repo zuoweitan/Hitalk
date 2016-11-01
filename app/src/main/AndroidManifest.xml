@@ -87,6 +87,16 @@
         <activity android:name="me.iwf.photopicker.PhotoPagerActivity"></activity>
         <activity android:name="me.iwf.photopicker.PhotoPickerActivity"></activity>
         <activity android:name=".ui.SettingActivity" />
+        <activity android:name=".ui.NewFriendConfirmActivity" />
+
+        <receiver android:name=".service.HitalkReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="com.avoscloud.chat.INVITATION_ACTION" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

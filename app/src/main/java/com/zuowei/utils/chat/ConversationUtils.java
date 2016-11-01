@@ -5,6 +5,9 @@ import android.text.TextUtils;
 import com.avos.avoscloud.AVCallback;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.im.v2.AVIMConversation;
+import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
+import com.vivifram.second.hitalk.manager.chat.ClientManager;
+import com.vivifram.second.hitalk.model.ConversationType;
 import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
@@ -12,8 +15,11 @@ import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.UserBeanCacheHelper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 项目名称：Hitalk
@@ -59,6 +65,12 @@ public class ConversationUtils {
 
             }
         }
+    }
+
+    public static void createSingleConversation(String memberId, AVIMConversationCreatedCallback callback) {
+        Map<String, Object> attrs = new HashMap<>();
+        attrs.put(ConversationType.TYPE_KEY, ConversationType.Single.getValue());
+        ClientManager.getInstance().getClient().createConversation(Arrays.asList(memberId), "", attrs, false, true, callback);
     }
 
     public static void getConversationPeerIcon(AVIMConversation conversation, AVCallback<String> callback) {

@@ -60,6 +60,18 @@ public class FriendsAdapter extends BaseAdapter<Friend,RecyclerView.ViewHolder> 
     }
 
     @Override
+    public void notifyDataAddChanged(int position) {
+        if (position == -1){
+            notifyItemInserted(getItemCount() - 1);
+        }else if (position == 0){
+            notifyDataSetChanged();
+        }else {
+            notifyItemInserted(position);
+            notifyItemRangeChanged(position,super.getItemCount() - position);
+        }
+    }
+
+    @Override
     public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.friend_stickheader, parent, false);

@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
 
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersDecoration;
@@ -13,17 +12,12 @@ import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.vivifram.second.hitalk.ui.recycleview.address.DividerDecoration;
 import com.vivifram.second.hitalk.ui.recycleview.address.SchoolMatesAdapter;
 import com.vivifram.second.hitalk.ui.springview.container.AddressRotationHeader;
-import com.vivifram.second.hitalk.ui.springview.container.DefaultHeader;
 import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
 import com.vivifram.second.hitalk.ui.view.CommonItem;
 import com.vivifram.second.hitalk.ui.view.SRecyclerView;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 
 import java.util.Collection;
 import java.util.List;
-
-import static com.avos.avoscloud.Messages.OpType.add;
 
 /**
  * Created by zuowei on 16-10-11.

@@ -1,13 +1,10 @@
 package com.vivifram.second.hitalk.bean.parser;
 
-import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
-import com.vivifram.second.hitalk.bean.DesConstant;
+import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.blackboard.BnItem;
 import com.vivifram.second.hitalk.bean.blackboard.BnRemote;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,8 +47,8 @@ public class BnItemParser extends BeanParser<BnItem> {
         HashMap remotePhotos = new HashMap();
         try {
             for (Map.Entry<String,String> entry : photos.entrySet()){
-                remotePhotos.put(DesConstant.BN_PHOTOS_DESUTIL.encrypt(entry.getKey()),
-                        DesConstant.BN_PHOTOS_DESUTIL.encrypt(entry.getValue()));
+                remotePhotos.put(Constants.BN_PHOTOS_DESUTIL.encrypt(entry.getKey()),
+                        Constants.BN_PHOTOS_DESUTIL.encrypt(entry.getValue()));
             }
         }catch (Exception e){
         }

@@ -87,4 +87,16 @@ public class User {
         this.interest = interest;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userName='" + userName + '\'' +
+                ", nick='" + nick + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", objectId='" + objectId + '\'' +
+                ", college='" + college + '\'' +
+                ", sex=" + sex +
+                ", interest='" + interest + '\'' +
+                '}';
+    }
 }

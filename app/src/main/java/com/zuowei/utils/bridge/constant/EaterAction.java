@@ -10,4 +10,7 @@ public final class EaterAction {
     public static final String ACTION_DO_CHECK_MESSAGE = "action_do_check_message";
     public static final String ACTION_DO_CHECK_CONVERSATION = "action_do_check_conversation";
     public static final String ACTION_DO_CHECK_CLIENT = "action_do_check_client";
+
+    public static final String ACTION_DO_INVITATION = "action_do_invitation";
+    public static final String ACTION_ON_ADDRESS = "action_on_address";
 }

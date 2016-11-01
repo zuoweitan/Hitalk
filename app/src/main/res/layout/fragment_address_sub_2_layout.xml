@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.vivifram.second.hitalk.ui.view.SRecyclerView
-        android:id="@+id/friendList"
+    <com.vivifram.second.hitalk.ui.springview.widget.SpringView
+        android:id="@+id/fLtSv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        app:give="top"
+        app:type="overlap">
 
-    </com.vivifram.second.hitalk.ui.view.SRecyclerView>
+        <com.vivifram.second.hitalk.ui.view.SRecyclerView
+            android:id="@+id/friendList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.vivifram.second.hitalk.ui.view.SRecyclerView>
+
+    </com.vivifram.second.hitalk.ui.springview.widget.SpringView>
 
     <com.vivifram.second.hitalk.ui.view.CommonItem
         android:id="@+id/newf"
@@ -16,8 +28,8 @@
 
     <com.vivifram.second.hitalk.ui.view.CommonItem
         android:id="@+id/nearbyp"
-        android:layout_below="@+id/newf"
-        style="@style/commonItem_style" />
+        style="@style/commonItem_style"
+        android:layout_below="@+id/newf" />
 
 
 </RelativeLayout>

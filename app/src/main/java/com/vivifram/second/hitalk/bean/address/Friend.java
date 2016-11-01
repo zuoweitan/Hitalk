@@ -7,12 +7,33 @@ package com.vivifram.second.hitalk.bean.address;
 public class Friend extends LetterMark{
 
     private String nickName;
+    private String userId;
+    private String avatarUrl;
 
     public String getNickName() {
         return nickName;
     }
 
-    public void setNickName(String nickName) {
+    public Friend setNickName(String nickName) {
         this.nickName = nickName;
+        return this;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public Friend setUserId(String userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public Friend setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+        return this;
     }
 }

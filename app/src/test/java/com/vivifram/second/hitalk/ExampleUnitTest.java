@@ -8,10 +8,12 @@ import com.vivifram.second.hitalk.manager.RetrofitManager;
 import com.zuowei.utils.common.Md5Utils;
 import com.zuowei.utils.helper.ILoginService;
 import com.zuowei.utils.helper.LoginHelper;
+import com.zuowei.utils.pinyin.CharacterParser;
 
 import org.junit.Test;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
@@ -214,4 +216,46 @@ public class ExampleUnitTest {
         System.out.println(Md5Utils.stringToMD5("重庆邮电大学"));
     }
 
+
+    @Test
+    public void testArrayList(){
+        ArrayList a = new ArrayList();
+        a.add(1);
+        System.out.println(a);
+        a.remove(1);
+        a.add(0,1);
+        System.out.println(a);
+    }
+
+    @Test
+    public void testPinyin(){
+        for (int i = 0; i < 100000; i++) {
+            String aa = CharacterParser.getInstance().getSelling("无非凡");
+            if (!aa.startsWith("wu")){
+                System.err.println("error");
+                break;
+            }
+        }
+
+        new Thread(()->{
+            for (int i = 0; i < 100000; i++) {
+                String aa = CharacterParser.getInstance().getSelling("无非凡");
+                if (!aa.startsWith("wu")){
+                    System.err.println("error 2");
+                    break;
+                }
+            }
+        }).start();
+
+        new Thread(()->{
+            for (int i = 0; i < 100000; i++) {
+                String aa = CharacterParser.getInstance().getSelling("无非凡");
+                if (!aa.startsWith("wu")){
+                    System.err.println("error 3");
+                    break;
+                }
+            }
+        }).start();
+
+    }
 }

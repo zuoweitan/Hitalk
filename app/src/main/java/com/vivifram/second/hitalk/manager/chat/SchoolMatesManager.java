@@ -11,6 +11,7 @@ import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.UserBeanCacheHelper;
+import com.zuowei.utils.helper.UserCacheHelper;
 import com.zuowei.utils.pinyin.CharacterParser;
 
 import java.util.ArrayList;
@@ -61,14 +62,15 @@ public class SchoolMatesManager {
             NLog.i(TagUtil.makeTag(getClass()),"queryAllSchoolMates list = "+list);
             if (list != null) {
                 for (AVUser avUser : list) {
+                    UserCacheHelper.getInstance().cacheUser(avUser);
                     User user = new User();
                     UserBeanCacheHelper.AvUserToUser(avUser,user);
                     UserBeanCacheHelper.getInstance().cacheUser(user);
                     SchoolMate schoolMate  = new SchoolMate();
                     schoolMate.setNickName(user.getNick())
                             .setUserId(user.getObjectId());
-                    NLog.i(TagUtil.makeTag(getClass()),"schoolMate = "+schoolMate);
                     fillLetters(schoolMate);
+                    NLog.i(TagUtil.makeTag(getClass()),"schoolMate = "+schoolMate);
                     results.add(schoolMate);
                 }
             }
