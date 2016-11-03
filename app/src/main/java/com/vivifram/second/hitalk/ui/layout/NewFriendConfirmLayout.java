@@ -16,6 +16,7 @@ import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.address.AddRequest;
 import com.vivifram.second.hitalk.ui.recycleview.address.DividerDecoration;
 import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
+import com.vivifram.second.hitalk.ui.view.BGATitlebar;
 import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.helper.UserBeanCacheHelper;
 
@@ -36,13 +37,21 @@ import bolts.Continuation;
  */
 public class NewFriendConfirmLayout extends BaseLayout {
 
+
+    public interface OnTitleActionListener{
+        void onBack();
+    }
+
     public NewFriendConfirmLayout(View rootView) {
         super(rootView);
     }
 
     private SpringView nSv;
     private RecyclerView nfRv;
+    private BGATitlebar titlebar;
 
+
+    private OnTitleActionListener onTitleActionListener;
     private NewFriendsAdapter newFriendsAdapter;
 
     public interface OnAcceptActionListener{
@@ -65,6 +74,17 @@ public class NewFriendConfirmLayout extends BaseLayout {
         newFriendsAdapter = new NewFriendsAdapter();
         nfRv.setAdapter(newFriendsAdapter);
 
+        titlebar = (BGATitlebar) findViewById(R.id.titleBar);
+        titlebar.setDelegate(new BGATitlebar.BGATitlebarDelegate(){
+            @Override
+            public void onClickLeftCtv() {
+                super.onClickLeftCtv();
+                if (onTitleActionListener != null) {
+                    onTitleActionListener.onBack();
+                }
+            }
+        });
+
     }
 
     public NewFriendConfirmLayout setOnAcceptActionListener(OnAcceptActionListener onAcceptActionListener) {
@@ -82,6 +102,11 @@ public class NewFriendConfirmLayout extends BaseLayout {
             newFriendsAdapter.addRequests.addAll(data);
             newFriendsAdapter.notifyDataSetChanged();
         }
+    }
+
+    public NewFriendConfirmLayout setOnTitleActionListener(OnTitleActionListener onTitleActionListener) {
+        this.onTitleActionListener = onTitleActionListener;
+        return this;
     }
 
     public void add(AddRequest... addRequests){
@@ -159,14 +184,14 @@ public class NewFriendConfirmLayout extends BaseLayout {
         private TextView nickTv;
         private ImageView iconIv;
         private TextView infoTv;
-        private Button acceptBtn;
+        private TextView acceptBtn;
         public NewFriendsHolder(View itemView) {
             super(itemView);
 
             nickTv = (TextView) itemView.findViewById(R.id.nickTv);
             iconIv = (ImageView) itemView.findViewById(R.id.iconIv);
             infoTv = (TextView) itemView.findViewById(R.id.nfInfo);
-            acceptBtn = (Button) itemView.findViewById(R.id.arBt);
+            acceptBtn = (TextView) itemView.findViewById(R.id.arBt);
 
         }
 

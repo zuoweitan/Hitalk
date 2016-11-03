@@ -2,6 +2,8 @@ package com.vivifram.second.hitalk.ui.springview.container;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.ProgressBar;
 
 import com.vivifram.second.hitalk.R;
 import com.zuowei.utils.common.DisplayUtil;
+import com.zuowei.utils.common.NLog;
 
 /**
  * Created by zuowei on 16-8-11.
@@ -23,12 +26,13 @@ public class AddressRotationHeader extends BaseHeader {
     private RotateAnimation mRotateUpAnim;
 
     private ProgressBar progress;
+    private View root;
 
-    public AddressRotationHeader(Context context){
-        this(context,0);
+    public AddressRotationHeader(Context context, RecyclerView recyclerView){
+        this(context,0,recyclerView);
     }
 
-    public AddressRotationHeader(Context context, int rotationSrc){
+    public AddressRotationHeader(Context context, int rotationSrc,RecyclerView recyclerView){
         this.context = context;
         this.rotationSrc = rotationSrc;
 
@@ -37,16 +41,22 @@ public class AddressRotationHeader extends BaseHeader {
         mRotateUpAnim.setRepeatCount(Integer.MAX_VALUE);
         mRotateUpAnim.setDuration(600);
         mRotateUpAnim.setFillAfter(true);
+
     }
 
     @Override
     public View getView(LayoutInflater inflater,ViewGroup viewGroup) {
-        View view = inflater.inflate(R.layout.rotation_overlap_header, viewGroup, true);
-        progress = (ProgressBar) view.findViewById(R.id.progress);
+        root = inflater.inflate(R.layout.rotation_overlap_header, viewGroup, true);
+        progress = (ProgressBar) root.findViewById(R.id.progress);
         if (rotationSrc != 0) {
             progress.setIndeterminateDrawable(ContextCompat.getDrawable(context, rotationSrc));
         }
-        return view;
+        progress.setVisibility(View.INVISIBLE);
+        return root;
+    }
+
+    public void enable(boolean b){
+        root.setVisibility(b?View.VISIBLE:View.GONE);
     }
 
     @Override
@@ -65,7 +75,6 @@ public class AddressRotationHeader extends BaseHeader {
 //        float y = maxY * Math.abs(dy)/rootView.getMeasuredHeight();
 //        if (y > maxY) return;
 //        rootView.setTranslationY(y);
-
         float rota = 360*dy/rootView.getMeasuredHeight();
         progress.setRotation(rota);
     }
@@ -82,6 +91,12 @@ public class AddressRotationHeader extends BaseHeader {
     @Override
     public void onFinishAnim() {
         progress.clearAnimation();
+        progress.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onPositionReset() {
+        super.onPositionReset();
         progress.setVisibility(View.GONE);
     }
 }

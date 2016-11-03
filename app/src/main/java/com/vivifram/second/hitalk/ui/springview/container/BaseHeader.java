@@ -40,4 +40,9 @@ public abstract class BaseHeader implements SpringView.DragHander{
     public int getDragSpringHeight(View rootView) {
         return 0;
     }
+
+    @Override
+    public void onPositionReset() {
+
+    }
 }

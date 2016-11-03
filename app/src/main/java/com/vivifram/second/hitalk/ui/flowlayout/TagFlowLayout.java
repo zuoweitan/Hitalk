@@ -101,7 +101,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
     }
 
 
-    public void setAdapter(TagAdapter adapter)
+    public <T> void setAdapter(TagAdapter<T> adapter)
     {
         mTagAdapter = adapter;
         mTagAdapter.setOnDataChangedListener(this);
@@ -245,7 +245,7 @@ public class TagFlowLayout extends FlowLayout implements TagAdapter.OnDataChange
         }
     }
 
-    public TagAdapter getAdapter()
+    public <T> TagAdapter<T> getAdapter()
     {
         return mTagAdapter;
     }

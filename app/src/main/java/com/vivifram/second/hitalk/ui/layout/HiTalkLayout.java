@@ -16,10 +16,12 @@ import com.vivifram.second.hitalk.ui.page.BlackboardFragment;
 import com.vivifram.second.hitalk.ui.page.HiTalkFragment;
 import com.vivifram.second.hitalk.ui.page.MeFragment;
 import com.vivifram.second.hitalk.ui.page.MessageFragment;
+import com.zuowei.utils.common.DisplayUtil;
 
 import java.util.HashMap;
 
 import cn.bingoogolapple.badgeview.BGABadgeRadioButton;
+import cn.bingoogolapple.badgeview.BGABadgeViewHelper;
 
 /**
  * Created by zuowei on 16-7-22.

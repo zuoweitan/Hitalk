@@ -82,7 +82,7 @@ public class AddressFragmentSub2Layout extends BaseFragmentLayout {
         });
 
         fSv = (SpringView) findViewById(R.id.fLtSv);
-        fSv.setHeader(new AddressRotationHeader(mAct));
+        fSv.setHeader(new AddressRotationHeader(mAct,recyclerView));
     }
 
     public void setOnFreshListener(SpringView.OnFreshListener onFreshListener){
@@ -127,32 +127,6 @@ public class AddressFragmentSub2Layout extends BaseFragmentLayout {
             return null;
         }
         return null;
-    }
-
-
-    private String friends[] = new String[]{"张三","李四","王五",
-            "非凡","非常","飞天","飞舞地","等端子",
-            "等妻子","等鸭子","等烤鸭"};
-
-    private List<Friend> makeFake() {
-        ArrayList<Friend> list = new ArrayList<>();
-        for (String temp : friends) {
-            Friend friend = new Friend();
-            friend.setNickName(temp);
-            String pinyin = characterParser.getSelling(friend.getNickName());
-            String sortString = pinyin.substring(0, 1).toUpperCase();
-
-            if (sortString.matches("[A-Z]")) {
-                friend.setSortLetters(sortString.toUpperCase());
-            } else {
-                friend.setSortLetters("#");
-            }
-
-            list.add(friend);
-        }
-
-
-        return list;
     }
 
     private void fillCommonItem(CommonItem commonItem, int resId, String title){

@@ -61,6 +61,13 @@ public class NewFriendConfirmActivity extends BaseActivity<NewFriendConfirmLayou
             }
         }));
 
+        mLayout.setOnTitleActionListener(new NewFriendConfirmLayout.OnTitleActionListener() {
+            @Override
+            public void onBack() {
+                finish();
+            }
+        });
+
         mLayout.setOnFreshListener(new SpringView.OnFreshListener() {
             @Override
             public void onRefresh() {
@@ -136,11 +143,13 @@ public class NewFriendConfirmActivity extends BaseActivity<NewFriendConfirmLayou
         FriendsManager.getInstance().findAddRequests(isRefresh ? 0 : mLayout.getCurrentSize(), 20, new FindCallback<AddRequest>() {
             @Override
             public void done(List<AddRequest> list, AVException e) {
-                FriendsManager.getInstance().markAddRequestsRead(list);
                 final List<AddRequest> filters = new ArrayList<>();
-                for (AddRequest addRequest : list) {
-                    if (addRequest.getFromUser() != null) {
-                        filters.add(addRequest);
+                if (list != null) {
+                    FriendsManager.getInstance().markAddRequestsRead(list);
+                    for (AddRequest addRequest : list) {
+                        if (addRequest.getFromUser() != null) {
+                            filters.add(addRequest);
+                        }
                     }
                 }
                 if (doneCallback != null) {

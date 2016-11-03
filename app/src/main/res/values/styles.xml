@@ -135,6 +135,12 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="wrap_warp_tv_centerVertical">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
 
     <style name="normal_line">
         <item name="android:layout_width">match_parent</item>

@@ -38,6 +38,8 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
     private SpringView smSv;
     private Handler handler;
 
+    AddressRotationHeader rotationHeader;
+
     public interface OnItemActionListener{
         void OnAddFriendCall();
     }
@@ -86,7 +88,8 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
         });
 
         smSv = (SpringView) findViewById(R.id.smLtSv);
-        smSv.setHeader(new AddressRotationHeader(mAct));
+        rotationHeader = new AddressRotationHeader(mAct,recyclerView);
+        smSv.setHeader(rotationHeader);
     }
 
     public void setOnFreshListener(SpringView.OnFreshListener onFreshListener){

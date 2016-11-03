@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +17,8 @@ import android.widget.ListView;
 import android.widget.OverScroller;
 
 import com.vivifram.second.hitalk.R;
+
+import static android.R.attr.y;
 
 
 /**
@@ -477,7 +480,21 @@ public class SpringView extends ViewGroup{
                 }
             }
         }
+
+        if (mScroller.isFinished() && mScroller.getCurrY() == 0 && type == Type.FOLLOW) {
+            callOnPositionReset();
+        }
     }
+
+    private void callOnPositionReset() {
+        if ((type == Type.FOLLOW && getScrollY() == 0) ||
+                (type == Type.OVERLAP && contentView.getTop() == 0)){
+            if (headerHander != null){
+                headerHander.onPositionReset();
+            }
+        }
+    }
+
     private int callFreshORload = 0;
     private boolean isFullAnim;
     private boolean hasCallFull = false;
@@ -588,6 +605,7 @@ public class SpringView extends ViewGroup{
                 @Override
                 public void onAnimationEnd(Animation animation) {
                     callOnAfterFullAnim();
+                    callOnPositionReset();
                 }
                 @Override
                 public void onAnimationRepeat(Animation animation) {
@@ -1078,6 +1096,7 @@ public class SpringView extends ViewGroup{
     }
     public interface DragHander{
         View getView(LayoutInflater inflater, ViewGroup viewGroup);
+        void onPositionReset();
         int getDragLimitHeight(View rootView);
         int getDragMaxHeight(View rootView);
         int getDragSpringHeight(View rootView);

@@ -22,6 +22,7 @@ import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.UserCacheHelper;
 
 import cn.bingoogolapple.badgeview.BGABadgeRadioButton;
+import cn.bingoogolapple.badgeview.BGABadgeable;
 
 @LayoutInject(name = "HiTalkLayout")
 public class HiTalkActivity extends BaseActivity<HiTalkLayout> {
@@ -94,7 +95,7 @@ public class HiTalkActivity extends BaseActivity<HiTalkLayout> {
     }
 
     private void updateNewRequestBadge() {
-        BGABadgeRadioButton radioButton = mLayout.getRadioBtn(2);
+        BGABadgeable radioButton = mLayout.getRadioBtn(2);
         if (FriendsManager.getInstance().hasUnreadRequests()) {
             radioButton.showCirclePointBadge();
         }else {

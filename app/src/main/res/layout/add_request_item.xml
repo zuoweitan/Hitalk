@@ -38,7 +38,8 @@
         android:textColor="@color/black_deep"
         />
 
-    <Button
+
+    <TextView
         android:id="@+id/arBt"
         android:layout_width="54dp"
         android:layout_height="28dp"

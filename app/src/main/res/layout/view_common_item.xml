@@ -16,12 +16,13 @@
 
     <cn.bingoogolapple.badgeview.BGABadgeTextView
         android:id="@+id/summary_text"
-        style="@style/wrap_warp_tv_center"
+        style="@style/wrap_warp_tv_centerVertical"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/summary_img"
         android:textColor="#333333"
         android:textSize="16sp"
         android:layout_marginLeft="16dp"
+        android:paddingRight="18dp"
         app:badge_padding="5dp"
         app:badge_gravity="rightCenter">
     </cn.bingoogolapple.badgeview.BGABadgeTextView>
