@@ -17,6 +17,9 @@ import android.widget.ListView;
 import android.widget.OverScroller;
 
 import com.vivifram.second.hitalk.R;
+import com.vivifram.second.hitalk.ui.springview.animation.HTranslateAnimation;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.TagUtil;
 
 import static android.R.attr.y;
 
@@ -595,15 +598,22 @@ public class SpringView extends ViewGroup{
             }
             if(time<100) time = 100;
 
-            Animation animation = new TranslateAnimation(0, 0, contentView.getTop(),mRect.top);
+            TranslateAnimation animation = new HTranslateAnimation(0, 0, contentView.getTop(),mRect.top);
             animation.setDuration(time);
             animation.setFillAfter(true);
-            animation.setAnimationListener(new Animation.AnimationListener() {
+            animation.setAnimationListener(new HTranslateAnimation.OnTranslateListener() {
+                @Override
+                public void onTranslateChanged(float dx, float dy) {
+                    contentView.layout(mRect.left, (int) dy, mRect.right, mRect.bottom);
+                    callOnDropAnim();
+                }
+
                 @Override
                 public void onAnimationStart(Animation animation) {
                 }
                 @Override
                 public void onAnimationEnd(Animation animation) {
+                    contentView.clearAnimation();
                     callOnAfterFullAnim();
                     callOnPositionReset();
                 }
@@ -612,7 +622,6 @@ public class SpringView extends ViewGroup{
                 }
             });
             contentView.startAnimation(animation);
-            contentView.layout(mRect.left, mRect.top, mRect.right, mRect.bottom);
         }else if(type== Type.FOLLOW){
             mScroller.startScroll(0, getScrollY(), 0, -getScrollY(),MOVE_TIME);
             invalidate();

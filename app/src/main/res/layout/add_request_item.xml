@@ -38,8 +38,21 @@
         android:textColor="@color/black_deep"
         />
 
-
     <TextView
+        android:id="@+id/acceptTv"
+        android:layout_width="54dp"
+        android:layout_height="28dp"
+        android:text="@string/accept"
+        android:gravity="center"
+        android:textColor="@color/black_deep"
+        android:textSize="14dp"
+        android:layout_marginLeft="300dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/accept_new_friend_button_background"
+        />
+
+
+    <!--<TextView
         android:id="@+id/arBt"
         android:layout_width="54dp"
         android:layout_height="28dp"
@@ -48,6 +61,6 @@
         android:textColor="@color/black_deep"
         android:textSize="14dp"
         android:layout_marginLeft="300dp"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"/>-->
 
 </RelativeLayout>

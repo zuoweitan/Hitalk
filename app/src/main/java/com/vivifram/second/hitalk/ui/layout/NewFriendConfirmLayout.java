@@ -191,7 +191,7 @@ public class NewFriendConfirmLayout extends BaseLayout {
             nickTv = (TextView) itemView.findViewById(R.id.nickTv);
             iconIv = (ImageView) itemView.findViewById(R.id.iconIv);
             infoTv = (TextView) itemView.findViewById(R.id.nfInfo);
-            acceptBtn = (TextView) itemView.findViewById(R.id.arBt);
+            acceptBtn = (TextView) itemView.findViewById(R.id.acceptTv);
 
         }
 
