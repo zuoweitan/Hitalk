@@ -4,6 +4,8 @@ import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMClientEventHandler;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.params.chat.ConnectChangedParam;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.TagUtil;
 
 /**
  * Created by zuowei on 16-8-4.
@@ -33,6 +35,7 @@ public class ClientEventHandler extends AVIMClientEventHandler {
 
     public void setConnectAndNotify(boolean isConnect) {
         this.connect = isConnect;
+        NLog.i(TagUtil.makeTag(getClass()),"setConnectAndNotify isConnect = "+isConnect);
         EaterManager.getInstance().broadcast(new ConnectChangedParam(isConnect));
     }
 

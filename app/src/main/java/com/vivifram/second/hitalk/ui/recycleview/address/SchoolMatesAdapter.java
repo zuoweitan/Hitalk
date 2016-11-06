@@ -13,8 +13,11 @@ import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersAdapter;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.zuowei.utils.common.NoDoubleClickListener;
+import com.zuowei.utils.helper.DaoHelper;
+import com.zuowei.utils.helper.SchoolmatesCacheHelper;
 
 import bolts.Continuation;
+import bolts.Task;
 
 /**
  * Created by zuowei on 16-10-13.
@@ -26,9 +29,9 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
     public static final int NORMAL = 0x02;
     private static final int HEADSIZE = 1;
 
-    public static final int REQUEST_STATE_SUCCESS = 0x01;
-    public static final int REQUEST_STATE_WATING = 0x02;
-    public static final int REQUEST_STATE_FAILED = 0x03;
+    public static final int REQUEST_STATE_SUCCESS = SchoolmatesCacheHelper.REQUEST_STATE_SUCCESS;
+    public static final int REQUEST_STATE_WATING = SchoolmatesCacheHelper.REQUEST_STATE_WATING;
+    public static final int REQUEST_STATE_FAILED = SchoolmatesCacheHelper.REQUEST_STATE_FAILED;
 
     public interface OnSchoolMatesActionListener{
         void onAddFriendRequest(String userId, Continuation<Boolean,Void> callback);
@@ -62,6 +65,7 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position != 0) {
             ((SchoolMateViewHolder)holder).initWithModel(getItem(position));
+
             ((SchoolMateViewHolder)holder).setOnAddFriendCalledListener(new NoDoubleClickListener() {
                 @Override
                 public void onNoDoubleClick(View v) {
@@ -70,8 +74,10 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
                         onSchoolMatesActionListener.onAddFriendRequest(item.getUserId(), task -> {
                             Boolean result = task.getResult();
                             if (result){
+                                SchoolmatesCacheHelper.getInstance().cache(item.getUserId(),SchoolmatesCacheHelper.REQUEST_STATE_WATING);
                                 ((SchoolMateViewHolder)holder).setRequestState(REQUEST_STATE_WATING);
                             }else {
+                                SchoolmatesCacheHelper.getInstance().cache(item.getUserId(),SchoolmatesCacheHelper.REQUEST_STATE_FAILED);
                                 ((SchoolMateViewHolder)holder).setRequestState(REQUEST_STATE_FAILED);
                             }
                             return null;
@@ -181,6 +187,15 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
         public void initWithModel(SchoolMate schoolMate){
             nickNameTv.setText(schoolMate.getNickName());
             infoTv.setText(schoolMate.getsInfo());
+            initFriendState(schoolMate.getUserId());
+        }
+
+        private void initFriendState(String userId) {
+            SchoolmatesCacheHelper.getInstance().getSchoolmateFriendState(userId)
+                    .continueWith(task -> {
+                        setRequestState(task.getResult());
+                       return null;
+                    }, Task.UI_THREAD_EXECUTOR);
         }
 
         public void setRequestState(int success){
@@ -190,7 +205,8 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
                         addFriendBtn.setText(ctx.getString(R.string.add_friend));
                     break;
                 case REQUEST_STATE_SUCCESS:
-                        addFriendBtn.setVisibility(View.GONE);
+                        addFriendBtn.setVisibility(View.VISIBLE);
+                        addFriendBtn.setText(ctx.getString(R.string.add_already));
                     break;
                 case REQUEST_STATE_WATING:
                         addFriendBtn.setVisibility(View.VISIBLE);

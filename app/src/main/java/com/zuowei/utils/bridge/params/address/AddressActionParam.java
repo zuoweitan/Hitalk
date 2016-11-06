@@ -15,6 +15,7 @@ import com.zuowei.utils.bridge.params.LightParam;
 public abstract class AddressActionParam extends LightParam{
 
     public static final int ACTION_NEW_FRIEND_ADDED = 0x01;
+    public static final int ACTION_UNREAD_REQUEST_COUNTS = 0x02;
 
     public AddressActionParam() {
         super(EaterAction.ACTION_ON_ADDRESS);

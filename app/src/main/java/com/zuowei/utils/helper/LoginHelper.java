@@ -101,7 +101,8 @@ public class LoginHelper {
     }
 
     public void verifyMobilePhone(String code,String phoneNumber){
-        ILoginService loginService =
+        mobilePhoneVerifyCallback_.done(null);
+        /*ILoginService loginService =
                 RetrofitManager.getInstance().create(ILoginService.class,"https://api.leancloud.cn");
 
         RxjavaUtils.ObServerOnMainThread(loginService.verifySms(code,phoneNumber),
@@ -126,7 +127,7 @@ public class LoginHelper {
                             mobilePhoneVerifyCallback_.done(avResult);
                         }
                     }
-                });
+                });*/
     }
 
     public void requestVerifyMobilePhone(String phoneNumber){

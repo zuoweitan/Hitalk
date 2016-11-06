@@ -5,15 +5,20 @@ import android.os.Handler;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.avos.avoscloud.AVUser;
 import com.vivifram.second.hitalk.R;
+import com.vivifram.second.hitalk.base.EatMark;
 import com.vivifram.second.hitalk.base.LayoutInject;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.vivifram.second.hitalk.manager.chat.FriendsManager;
 import com.vivifram.second.hitalk.manager.chat.SchoolMatesManager;
 import com.vivifram.second.hitalk.ui.page.layout.AddressFragmentSub1Layout;
 import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
+import com.zuowei.utils.bridge.constant.EaterAction;
+import com.zuowei.utils.bridge.params.LightParam;
+import com.zuowei.utils.bridge.params.address.AddressActionParam;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.NToast;
 import com.zuowei.utils.common.TagUtil;
+import com.zuowei.utils.handlers.AbstractHandler;
 import com.zuowei.utils.helper.UserCacheHelper;
 import com.zuowei.utils.pinyin.LetterComparator;
 
@@ -75,8 +80,8 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
                 Task.forResult(null).continueWithTask(task -> FriendsManager.getInstance().createAddRequestInBackground(avUser))
                         .continueWith(task -> {
                             Exception error = task.getError();
-                            NLog.i(TagUtil.makeTag(getClass()),"error = "+error.getMessage());
                             if (error != null){
+                                NLog.i(TagUtil.makeTag(getClass()),"error = "+error.getMessage());
                                 NToast.shortToast(mAppCtx,error.getMessage());
                             }else {
                                 NToast.shortToast(mAppCtx,R.string.request_send);
@@ -89,6 +94,21 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
             }
 
         });
+    }
+
+    @EatMark(action = EaterAction.ACTION_ON_ADDRESS)
+    public class NewFriendAddedListener extends AbstractHandler<AddressActionParam> {
+
+        @Override
+        public boolean isParamAvailable(LightParam param) {
+            return param != null && param instanceof AddressActionParam;
+        }
+
+        @Override
+        public void doJobWithParam(AddressActionParam param) {
+            if (param.getActionType() == AddressActionParam.ACTION_NEW_FRIEND_ADDED){
+            }
+        }
     }
 
     private void updateSchoolMates(Continuation<List<SchoolMate>,Void> continuation) {

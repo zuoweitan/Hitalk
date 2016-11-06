@@ -48,6 +48,7 @@ public class MessageFragment extends LazyFragment<MessageFragmentLayout> {
     @Override
     public void onResume() {
         super.onResume();
+        updateConversationList();
     }
 
     private void updateConversationList() {
@@ -62,6 +63,7 @@ public class MessageFragment extends LazyFragment<MessageFragmentLayout> {
 
         mLayout.setData(conversationList);
     }
+
 
     @EatMark(action = EaterAction.ACTION_DO_CHECK_MESSAGE)
     public class MessageReceiver extends AbstractHandler<MessageParam>{

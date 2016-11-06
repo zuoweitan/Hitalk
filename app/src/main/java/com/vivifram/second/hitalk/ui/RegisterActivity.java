@@ -25,12 +25,7 @@ public class RegisterActivity extends BaseActivity<RegisterLayout> implements Vi
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_register_layout);
-        mLayout.setRegisterButtonOnclickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                doRegister();
-            }
-        });
+        mLayout.setRegisterButtonOnclickListener(v -> doRegister());
         EaterManager.getInstance().registerEater(EaterAction.ACTION_DO_LOGIN,LoginHandler.getInstance());
         LoginHandler.getInstance().addVerifyListener(this);
         LoginHandler.getInstance().addRegisterListener(this);

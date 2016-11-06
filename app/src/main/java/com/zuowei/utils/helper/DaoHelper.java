@@ -8,6 +8,7 @@ import com.zuowei.dao.greendao.BeanDao;
 import com.zuowei.dao.greendao.ConversationDao;
 import com.zuowei.dao.greendao.DaoMaster;
 import com.zuowei.dao.greendao.DaoSession;
+import com.zuowei.dao.greendao.SchoolmateDao;
 import com.zuowei.dao.greendao.UserDao;
 import com.zuowei.utils.common.RxjavaUtils;
 import com.zuowei.utils.common.TagUtil;
@@ -15,7 +16,6 @@ import com.zuowei.utils.common.TagUtil;
 import java.util.List;
 
 import de.greenrobot.dao.AbstractDao;
-import de.greenrobot.dao.AbstractDaoSession;
 import de.greenrobot.dao.async.AsyncSession;
 import de.greenrobot.dao.query.Query;
 
@@ -54,6 +54,14 @@ public class DaoHelper {
     public UserDao getUserDao(){
         if (mDaoSession != null) {
             return mDaoSession.getUserDao();
+        }
+        return null;
+    }
+
+
+    public SchoolmateDao getSchoolmateDao(){
+        if (mDaoSession != null) {
+            return mDaoSession.getSchoolmateDao();
         }
         return null;
     }

@@ -94,7 +94,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="com.avoscloud.chat.INVITATION_ACTION" />
+                <action android:name="com.vivifram.second.hitalk.INVITATION_ACTION" />
             </intent-filter>
         </receiver>
 

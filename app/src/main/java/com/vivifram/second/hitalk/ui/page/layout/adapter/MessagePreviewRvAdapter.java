@@ -79,6 +79,7 @@ public class MessagePreviewRvAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     public void setData(List<AVIMConversation> data){
+        NLog.i(TagUtil.makeTag(getClass()),"setData data = "+data);
         conversationList.clear();
         conversationList.addAll(data);
         notifyDataSetChanged();

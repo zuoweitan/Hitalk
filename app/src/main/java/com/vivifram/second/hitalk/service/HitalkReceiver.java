@@ -31,6 +31,7 @@ public class HitalkReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        NLog.i(TagUtil.makeTag(getClass()),"HitalkReceiver onReceive");
         String action = intent.getAction();
         if (!TextUtils.isEmpty(action)) {
             if (action.equals(Constants.INVITATION_ACTION)) {

@@ -78,7 +78,7 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
         final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(schoolMatesAdapter);
         recyclerView.addItemDecoration(headersDecor);
         recyclerView.addItemDecoration(new DividerDecoration(mCtx));
-
+        recyclerView.setItemAnimator(null);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -133,7 +133,6 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
 
     //for test
     public void refresh(List<SchoolMate> result){
-        schoolMatesAdapter = new SchoolMatesAdapter();
         schoolMatesAdapter.addAll(result);
     }
 

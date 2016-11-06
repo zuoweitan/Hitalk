@@ -52,7 +52,7 @@ public class SchoolMatesManager {
 
             AVQuery<AVUser> avQuery = AVUser.getQuery();
 
-            avQuery.setCachePolicy(AVQuery.CachePolicy.CACHE_ELSE_NETWORK);
+            avQuery.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
 
             String collegeCode = Md5Utils.stringToMD5(HiTalkHelper.$().getCurrentUserCollege());
 

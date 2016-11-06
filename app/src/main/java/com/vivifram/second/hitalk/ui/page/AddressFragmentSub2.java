@@ -13,9 +13,11 @@ import com.vivifram.second.hitalk.ui.page.layout.AddressFragmentSub2Layout;
 import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
 import com.vivifram.second.hitalk.ui.view.CommonItem;
 import com.zuowei.dao.greendao.User;
+import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.address.AddressActionParam;
+import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
 import com.zuowei.utils.bridge.params.push.InvitationParam;
 import com.zuowei.utils.handlers.AbstractHandler;
 import com.zuowei.utils.pinyin.CharacterParser;
@@ -32,14 +34,13 @@ import java.util.List;
 public class AddressFragmentSub2 extends LazyFragment<AddressFragmentSub2Layout> {
     @Override
     protected void lazyLoad() {
-
     }
 
     @Override
     protected void onViewCreated() {
         super.onViewCreated();
         refresh();
-        fetchFriends(false,null);
+        fetchFriends(true,null);
         mLayout.setOnFreshListener(new SpringView.OnFreshListener() {
             @Override
             public void onRefresh() {
@@ -65,6 +66,7 @@ public class AddressFragmentSub2 extends LazyFragment<AddressFragmentSub2Layout>
         FriendsManager.getInstance().fetchFriends(isforce, new AVCallback<List<User>>() {
             @Override
             protected void internalDone0(List<User> users, AVException e) {
+
                 ArrayList<Friend> friends = new ArrayList<>();
                 if (e == null && users != null){
                     for (User user : users) {
@@ -145,9 +147,23 @@ public class AddressFragmentSub2 extends LazyFragment<AddressFragmentSub2Layout>
         FriendsManager.getInstance().countUnreadRequests(new CountCallback() {
             @Override
             public void done(int i, AVException e) {
-                updateNewRequestBadge();
+                EaterManager.getInstance().broadcast(new UnReadRequestCountParam().setUnReadCount(i));
             }
         });
+    }
+
+    @EatMark(action = EaterAction.ACTION_ON_ADDRESS)
+    public class RequestCountUpdate extends AbstractHandler<UnReadRequestCountParam>{
+
+        @Override
+        public boolean isParamAvailable(LightParam param) {
+            return param != null && param instanceof UnReadRequestCountParam;
+        }
+
+        @Override
+        public void doJobWithParam(UnReadRequestCountParam param) {
+            updateNewRequestBadge();
+        }
     }
 
     @Override

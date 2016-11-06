@@ -14,6 +14,10 @@ import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.address.AddRequest;
 import com.zuowei.dao.greendao.User;
+import com.zuowei.utils.bridge.EaterManager;
+import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.UserBeanCacheHelper;
 import com.zuowei.utils.helper.UserCacheHelper;
@@ -76,8 +80,9 @@ public class FriendsManager {
         addRequestAVQuery.countInBackground(new CountCallback() {
             @Override
             public void done(int i, AVException e) {
+                unreadAddRequestsCount = i;
+                EaterManager.getInstance().broadcast(new UnReadRequestCountParam().setUnReadCount(i));
                 if (null != countCallback) {
-                    unreadAddRequestsCount = i;
                     countCallback.done(i, e);
                 }
             }
@@ -187,7 +192,7 @@ public class FriendsManager {
             @Override
             public Void then(Task<Void> task) throws Exception {
                 if (task.getError() == null) {
-                    PushManager.getInstance().pushMessage(user.getObjectId(), HiTalkApplication.mAppContext
+                   PushManager.getInstance().pushMessage(user.getObjectId(), HiTalkApplication.mAppContext
                             .getString(R.string.push_add_request),
                             Constants.INVITATION_ACTION);
                 }else {
@@ -226,7 +231,15 @@ public class FriendsManager {
                         setFriendIds(userIds);
                         findCallback.done(userList, null);
                     });*/
-                    UserBeanCacheHelper.getInstance().getCachedUsers(userIds,avCallback);
+                    UserBeanCacheHelper.getInstance().getCachedUsers(userIds, new AVCallback<List<User>>() {
+                        @Override
+                        protected void internalDone0(List<User> users, AVException e) {
+                            setFriendIds(userIds);
+                            if (avCallback != null) {
+                                avCallback.internalDone(users,e);
+                            }
+                        }
+                    });
                 }
             }
         });

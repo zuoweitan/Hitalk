@@ -10,6 +10,8 @@ import com.jiang.android.lib.adapter.BaseAdapter;
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersAdapter;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.address.Friend;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.TagUtil;
 
 /**
  * Created by zuowei on 16-10-13.
@@ -46,7 +48,7 @@ public class FriendsAdapter extends BaseAdapter<Friend,RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof FriendViewHolder) {
+        if (position != 0 && holder instanceof FriendViewHolder) {
             ((FriendViewHolder)holder).initWithModel(getItem(position));
         }
     }
@@ -93,7 +95,7 @@ public class FriendsAdapter extends BaseAdapter<Friend,RecyclerView.ViewHolder> 
     @Override
     public Friend getItem(int position) {
         if (position == 0){
-            return new Friend();
+            return null;
         }
         return super.getItem(getAdjustPosition(position));
     }

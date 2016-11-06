@@ -5,6 +5,9 @@ import android.widget.TextView;
 
 import com.vivifram.second.hitalk.R;
 
+import cn.bingoogolapple.badgeview.BGABadgeRelativeLayout;
+import cn.bingoogolapple.badgeview.BGABadgeTextView;
+
 /**
  * Created by zuowei on 16-9-26.
  */
@@ -52,29 +55,26 @@ public class AddressFragmentLayout extends BaseFragmentLayout {
         tab3.setSelected(false);
         tab3.setIndex(2);
 
-        View.OnClickListener onClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tab1.setSelected(false);
-                tab2.setSelected(false);
-                tab3.setSelected(false);
-                Tab tab = null;
-                switch (v.getId()){
-                    case R.id.tabOne:
-                            tab = tab1;
-                        break;
-                    case R.id.tabTwo:
-                            tab = tab2;
-                        break;
-                    case R.id.tabThree:
-                            tab = tab3;
-                        break;
-                }
-                if (tab != null) {
-                    tab.setSelected(true);
-                    if (onTabClickListener != null) {
-                        onTabClickListener.onTabClick(tab.index);
-                    }
+        View.OnClickListener onClickListener = v -> {
+            tab1.setSelected(false);
+            tab2.setSelected(false);
+            tab3.setSelected(false);
+            Tab tab = null;
+            switch (v.getId()){
+                case R.id.tabOne:
+                        tab = tab1;
+                    break;
+                case R.id.tabTwo:
+                        tab = tab2;
+                    break;
+                case R.id.tabThree:
+                        tab = tab3;
+                    break;
+            }
+            if (tab != null) {
+                tab.setSelected(true);
+                if (onTabClickListener != null) {
+                    onTabClickListener.onTabClick(tab.index);
                 }
             }
         };
@@ -84,18 +84,37 @@ public class AddressFragmentLayout extends BaseFragmentLayout {
         tab3.setOnTabClickListener(onClickListener);
     }
 
+    public Tab get(int index){
+        switch (index){
+            case  1:
+                return tab1;
+            case 2:
+                return tab2;
+            case 3:
+                return tab3;
+        }
+        return null;
+    }
 
     public int getContentId(){
         return R.id.addressContent;
     }
 
-    private class Tab{
+    public class Tab{
         private int index;
         private TextView titleTv;
-        private View root;
+        private BGABadgeRelativeLayout root;
         public Tab(View v){
-            root = v;
+            root = (BGABadgeRelativeLayout) v;
             titleTv = (TextView) v.findViewById(R.id.titleTv);
+        }
+
+        public void showBadge(boolean show){
+            if (show){
+                root.showCirclePointBadge();
+            }else {
+                root.hiddenBadge();
+            }
         }
 
         public void setIndex(int index) {

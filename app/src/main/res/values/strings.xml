@@ -113,4 +113,5 @@
     <string name="preIntroduce">我是</string>
     <string name="trying">加载中</string>
     <string name="message_when_agree_request">我们已经是好友了，来聊天吧</string>
+    <string name="add_already">已添加</string>
 </resources>

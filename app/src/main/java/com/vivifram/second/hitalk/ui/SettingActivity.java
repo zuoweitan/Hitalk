@@ -57,7 +57,7 @@ public class SettingActivity extends BaseActivity<SettingLayout> {
                     broadcast(new LoginParam.Builder(LoginParam.TYPE_LOGOUT).create());
 
             finish();
-
+            notifyAllActivityDestroy();
             UIUtils.startActivitySafety(mAppCtx,LoginActivity.class);
 
         });

@@ -187,4 +187,14 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
             target.finish();
         }
     }
+
+    protected void notifyAllActivityDestroy(){
+        for (BaseActivity activity:sAliveActivities){
+            if (activity.isDestroyed() || activity.isFinishing())
+                continue;
+            activity.finish();
+        }
+
+        sAliveActivities.clear();
+    }
 }

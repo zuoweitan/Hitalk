@@ -5,11 +5,20 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
 import com.vivifram.second.hitalk.R;
+import com.vivifram.second.hitalk.base.EatMark;
 import com.vivifram.second.hitalk.base.LayoutInject;
+import com.vivifram.second.hitalk.manager.chat.FriendsManager;
 import com.vivifram.second.hitalk.ui.page.layout.AddressFragmentLayout;
 import com.vivifram.second.hitalk.ui.page.layout.HitalkFragmentLayout;
+import com.zuowei.utils.bridge.constant.EaterAction;
+import com.zuowei.utils.bridge.params.LightParam;
+import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
+import com.zuowei.utils.bridge.params.push.InvitationParam;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
+import com.zuowei.utils.handlers.AbstractHandler;
+
+import cn.bingoogolapple.badgeview.BGABadgeable;
 
 /**
  * Created by zuowei on 16-7-25.
@@ -83,5 +92,46 @@ public class AddressFragment extends LazyFragment<AddressFragmentLayout> {
     @Override
     protected int getContentLayout() {
         return R.layout.fragment_address_layout;
+    }
+
+    @EatMark(action = EaterAction.ACTION_DO_INVITATION)
+    public class InvitateListener extends AbstractHandler<InvitationParam> {
+
+        @Override
+        public boolean isParamAvailable(LightParam param) {
+            return param != null && param instanceof InvitationParam;
+        }
+
+        @Override
+        public void doJobWithParam(InvitationParam param) {
+            NLog.i(TagUtil.makeTag(getClass()),"InvitateListener received");
+            FriendsManager.getInstance().unreadRequestsIncrement();
+            updateNewRequestBadge();
+        }
+    }
+
+    @EatMark(action = EaterAction.ACTION_ON_ADDRESS)
+    public class RequestCountUpdate extends AbstractHandler<UnReadRequestCountParam>{
+
+        @Override
+        public boolean isParamAvailable(LightParam param) {
+            return param != null && param instanceof UnReadRequestCountParam;
+        }
+
+        @Override
+        public void doJobWithParam(UnReadRequestCountParam param) {
+            updateNewRequestBadge();
+        }
+    }
+
+    private void updateNewRequestBadge() {
+        AddressFragmentLayout.Tab tab = mLayout.get(2);
+        tab.showBadge(FriendsManager.getInstance().hasUnreadRequests());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateNewRequestBadge();
     }
 }

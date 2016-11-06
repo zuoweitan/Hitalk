@@ -9,10 +9,12 @@ import de.greenrobot.dao.AbstractDaoSession;
 import de.greenrobot.dao.identityscope.IdentityScopeType;
 import de.greenrobot.dao.internal.DaoConfig;
 
+import com.zuowei.dao.greendao.Schoolmate;
 import com.zuowei.dao.greendao.User;
 import com.zuowei.dao.greendao.Bean;
 import com.zuowei.dao.greendao.Conversation;
 
+import com.zuowei.dao.greendao.SchoolmateDao;
 import com.zuowei.dao.greendao.UserDao;
 import com.zuowei.dao.greendao.BeanDao;
 import com.zuowei.dao.greendao.ConversationDao;
@@ -26,10 +28,12 @@ import com.zuowei.dao.greendao.ConversationDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
+    private final DaoConfig schoolmateDaoConfig;
     private final DaoConfig userDaoConfig;
     private final DaoConfig beanDaoConfig;
     private final DaoConfig conversationDaoConfig;
 
+    private final SchoolmateDao schoolmateDao;
     private final UserDao userDao;
     private final BeanDao beanDao;
     private final ConversationDao conversationDao;
@@ -37,6 +41,9 @@ public class DaoSession extends AbstractDaoSession {
     public DaoSession(SQLiteDatabase db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
             daoConfigMap) {
         super(db);
+
+        schoolmateDaoConfig = daoConfigMap.get(SchoolmateDao.class).clone();
+        schoolmateDaoConfig.initIdentityScope(type);
 
         userDaoConfig = daoConfigMap.get(UserDao.class).clone();
         userDaoConfig.initIdentityScope(type);
@@ -47,19 +54,26 @@ public class DaoSession extends AbstractDaoSession {
         conversationDaoConfig = daoConfigMap.get(ConversationDao.class).clone();
         conversationDaoConfig.initIdentityScope(type);
 
+        schoolmateDao = new SchoolmateDao(schoolmateDaoConfig, this);
         userDao = new UserDao(userDaoConfig, this);
         beanDao = new BeanDao(beanDaoConfig, this);
         conversationDao = new ConversationDao(conversationDaoConfig, this);
 
+        registerDao(Schoolmate.class, schoolmateDao);
         registerDao(User.class, userDao);
         registerDao(Bean.class, beanDao);
         registerDao(Conversation.class, conversationDao);
     }
     
     public void clear() {
+        schoolmateDaoConfig.getIdentityScope().clear();
         userDaoConfig.getIdentityScope().clear();
         beanDaoConfig.getIdentityScope().clear();
         conversationDaoConfig.getIdentityScope().clear();
+    }
+
+    public SchoolmateDao getSchoolmateDao() {
+        return schoolmateDao;
     }
 
     public UserDao getUserDao() {
