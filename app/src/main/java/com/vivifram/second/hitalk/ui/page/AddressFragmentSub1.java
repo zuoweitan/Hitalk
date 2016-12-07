@@ -97,7 +97,7 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
     }
 
     @EatMark(action = EaterAction.ACTION_ON_ADDRESS)
-    public class NewFriendAddedListener extends AbstractHandler<AddressActionParam> {
+    public class SchoolStateChangedListener extends AbstractHandler<AddressActionParam> {
 
         @Override
         public boolean isParamAvailable(LightParam param) {
@@ -106,7 +106,8 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
 
         @Override
         public void doJobWithParam(AddressActionParam param) {
-            if (param.getActionType() == AddressActionParam.ACTION_NEW_FRIEND_ADDED){
+            if (param.getActionType() == AddressActionParam.ACTION_SCHOOLMATE_STATE_CHANGED){
+                mLayout.refresh();
             }
         }
     }

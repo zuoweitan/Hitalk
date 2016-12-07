@@ -4,9 +4,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.vivifram.second.hitalk.R;
+import com.vivifram.second.hitalk.ui.pop.address.AddressMenuPopup;
+import com.vivifram.second.hitalk.ui.view.BGATitlebar;
 
 import cn.bingoogolapple.badgeview.BGABadgeRelativeLayout;
-import cn.bingoogolapple.badgeview.BGABadgeTextView;
 
 /**
  * Created by zuowei on 16-9-26.
@@ -37,6 +38,8 @@ public class AddressFragmentLayout extends BaseFragmentLayout {
     private Tab tab1;
     private Tab tab2;
     private Tab tab3;
+    private BGATitlebar titlebar;
+    private AddressMenuPopup addressMenuPopup;
 
     private void init() {
 
@@ -82,6 +85,16 @@ public class AddressFragmentLayout extends BaseFragmentLayout {
         tab1.setOnTabClickListener(onClickListener);
         tab2.setOnTabClickListener(onClickListener);
         tab3.setOnTabClickListener(onClickListener);
+
+
+        addressMenuPopup = new AddressMenuPopup(mAct);
+        titlebar = (BGATitlebar) findViewById(R.id.titleBar);
+        titlebar.setDelegate(new BGATitlebar.BGATitlebarDelegate(){
+            @Override
+            public void onClickRightCtv() {
+                addressMenuPopup.showPopupWindow(titlebar.getRightCtv());
+            }
+        });
     }
 
     public Tab get(int index){

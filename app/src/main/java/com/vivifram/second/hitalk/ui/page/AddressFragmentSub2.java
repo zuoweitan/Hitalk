@@ -17,9 +17,11 @@ import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.address.AddressActionParam;
+import com.zuowei.utils.bridge.params.address.SchoolMateStateParam;
 import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
 import com.zuowei.utils.bridge.params.push.InvitationParam;
 import com.zuowei.utils.handlers.AbstractHandler;
+import com.zuowei.utils.helper.SchoolmatesCacheHelper;
 import com.zuowei.utils.pinyin.CharacterParser;
 import com.zuowei.utils.pinyin.LetterComparator;
 
@@ -118,7 +120,14 @@ public class AddressFragmentSub2 extends LazyFragment<AddressFragmentSub2Layout>
         @Override
         public void doJobWithParam(AddressActionParam param) {
             if (param.getActionType() == AddressActionParam.ACTION_NEW_FRIEND_ADDED){
-                fetchFriends(true,null);
+                fetchFriends(true, (list, e) -> {
+                    if (list != null) {
+                        for (Friend friend : list) {
+                            SchoolmatesCacheHelper.getInstance().update(friend.getUserId(),SchoolmatesCacheHelper.REQUEST_STATE_SUCCESS);
+                        }
+                        EaterManager.getInstance().broadcast(new SchoolMateStateParam());
+                    }
+                });
             }
         }
     }

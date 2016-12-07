@@ -13,7 +13,6 @@ import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersAdapter;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.zuowei.utils.common.NoDoubleClickListener;
-import com.zuowei.utils.helper.DaoHelper;
 import com.zuowei.utils.helper.SchoolmatesCacheHelper;
 
 import bolts.Continuation;
@@ -65,26 +64,6 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position != 0) {
             ((SchoolMateViewHolder)holder).initWithModel(getItem(position));
-
-            ((SchoolMateViewHolder)holder).setOnAddFriendCalledListener(new NoDoubleClickListener() {
-                @Override
-                public void onNoDoubleClick(View v) {
-                    SchoolMate item = getItem(position);
-                    if (onSchoolMatesActionListener != null) {
-                        onSchoolMatesActionListener.onAddFriendRequest(item.getUserId(), task -> {
-                            Boolean result = task.getResult();
-                            if (result){
-                                SchoolmatesCacheHelper.getInstance().cache(item.getUserId(),SchoolmatesCacheHelper.REQUEST_STATE_WATING);
-                                ((SchoolMateViewHolder)holder).setRequestState(REQUEST_STATE_WATING);
-                            }else {
-                                SchoolmatesCacheHelper.getInstance().cache(item.getUserId(),SchoolmatesCacheHelper.REQUEST_STATE_FAILED);
-                                ((SchoolMateViewHolder)holder).setRequestState(REQUEST_STATE_FAILED);
-                            }
-                            return null;
-                        });
-                    }
-                }
-            });
         }
     }
 
@@ -182,6 +161,26 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
             infoTv = (TextView) itemView.findViewById(R.id.sInfo);
 
             addFriendBtn = (Button) itemView.findViewById(R.id.addFriendBt);
+
+            setOnAddFriendCalledListener(new NoDoubleClickListener() {
+                @Override
+                public void onNoDoubleClick(View v) {
+                    SchoolMate item = getItem(getAdapterPosition());
+                    if (onSchoolMatesActionListener != null) {
+                        onSchoolMatesActionListener.onAddFriendRequest(item.getUserId(), task -> {
+                            Boolean result = task.getResult();
+                            if (result){
+                                SchoolmatesCacheHelper.getInstance().cache(item.getUserId(),SchoolmatesCacheHelper.REQUEST_STATE_WATING);
+                                setRequestState(REQUEST_STATE_WATING);
+                            }else {
+                                SchoolmatesCacheHelper.getInstance().cache(item.getUserId(),SchoolmatesCacheHelper.REQUEST_STATE_FAILED);
+                                setRequestState(REQUEST_STATE_FAILED);
+                            }
+                            return null;
+                        });
+                    }
+                }
+            });
         }
 
         public void initWithModel(SchoolMate schoolMate){
@@ -215,7 +214,7 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
             }
         }
 
-        public void setOnAddFriendCalledListener(NoDoubleClickListener onAddFriendCalledListener){
+        private void setOnAddFriendCalledListener(NoDoubleClickListener onAddFriendCalledListener){
             addFriendBtn.setOnClickListener(onAddFriendCalledListener);
         }
     }

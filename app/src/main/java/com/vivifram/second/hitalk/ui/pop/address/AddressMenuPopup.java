@@ -1,4 +1,4 @@
-package com.vivifram.second.hitalk.ui.pop.message;
+package com.vivifram.second.hitalk.ui.pop.address;
 
 import android.app.Activity;
 import android.view.Gravity;
@@ -17,7 +17,7 @@ import com.zuowei.utils.common.DisplayUtil;
  * Created by zuowei on 16-10-22.
  */
 
-public class MessageMenuPopup extends BasePopupWindow {
+public class AddressMenuPopup extends BasePopupWindow {
 
     private View popupView;
 
@@ -29,7 +29,7 @@ public class MessageMenuPopup extends BasePopupWindow {
         void onItemClick(int pos);
     }
 
-    public MessageMenuPopup(Activity context) {
+    public AddressMenuPopup(Activity context) {
         super(context, ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         popupView.measure(
                 View.MeasureSpec.
@@ -37,17 +37,17 @@ public class MessageMenuPopup extends BasePopupWindow {
                 View.MeasureSpec.
                         makeMeasureSpec(DisplayUtil.getDisplayMetrics(mContext).heightPixels, View.MeasureSpec.AT_MOST));
 
-        selectTv = (TextView) findViewById(R.id.selectTv);
+        /*selectTv = (TextView) findViewById(R.id.selectTv);
         selectTv.setOnClickListener(view->{
             mPopupWindow.dismiss();
             if (onMenuItemClick != null) {
                 onMenuItemClick.onItemClick(0);
             }
-        });
+        });*/
 
     }
 
-    public MessageMenuPopup setOnMenuItemClick(MessageMenuPopup.onMenuItemClick onMenuItemClick) {
+    public AddressMenuPopup setOnMenuItemClick(AddressMenuPopup.onMenuItemClick onMenuItemClick) {
         this.onMenuItemClick = onMenuItemClick;
         return this;
     }
@@ -85,7 +85,7 @@ public class MessageMenuPopup extends BasePopupWindow {
     @Override
     public View getPopupView() {
         if (popupView == null) {
-            popupView = getPopupViewById(R.layout.message_menu_popup_layout);
+            popupView = getPopupViewById(R.layout.address_menu_popup_layout);
         }
         return popupView;
     }

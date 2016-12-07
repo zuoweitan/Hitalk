@@ -133,7 +133,15 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
 
     //for test
     public void refresh(List<SchoolMate> result){
-        schoolMatesAdapter.addAll(result);
+        if (schoolMatesAdapter != null) {
+            schoolMatesAdapter.addAll(result);
+        }
+    }
+
+    public void refresh(){
+        if (schoolMatesAdapter != null) {
+            schoolMatesAdapter.notifyDataSetChanged();
+        }
     }
 
 

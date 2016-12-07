@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
+import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.common.Md5Utils;
@@ -56,7 +57,8 @@ public class SchoolMatesManager {
 
             String collegeCode = Md5Utils.stringToMD5(HiTalkHelper.$().getCurrentUserCollege());
 
-            avQuery.whereEqualTo("collegeCode",collegeCode);
+            avQuery.whereEqualTo(Constants.User.COLLEGECODE_C,collegeCode)
+                    .whereNotEqualTo(Constants.User.OBJECTID_C,HiTalkHelper.getInstance().getCurrentUserId());
 
             List<AVUser> list = avQuery.find();
             NLog.i(TagUtil.makeTag(getClass()),"queryAllSchoolMates list = "+list);

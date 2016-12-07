@@ -13,6 +13,8 @@ import bolts.Task;
 import de.greenrobot.dao.async.AsyncSession;
 import de.greenrobot.dao.query.Query;
 
+import static com.avos.avoscloud.feedback.ThreadActivity.cache;
+
 /**
  * Created by zuowei on 16-11-6.
  */
@@ -61,5 +63,9 @@ public class SchoolmatesCacheHelper {
         caches.put(uid,friendState);
         AsyncSession asyncSession = DaoHelper.getInstance().wrapDao(DaoHelper.getInstance().getSchoolmateDao());
         asyncSession.insertOrReplaceInTx(Schoolmate.class,new Schoolmate(uid,friendState,new Date()));
+    }
+
+    public void update(String uid,int state){
+        cache(uid,state);
     }
 }

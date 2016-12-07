@@ -28,4 +28,9 @@ public class Constants {
     public static String getPrefixConstant(String str) {
         return LEANMESSAGE_CONSTANTS_PREFIX + str;
     }
+
+    public final class User{
+        public static final String OBJECTID_C = "objectId";
+        public static final String COLLEGECODE_C = "collegeCode";
+    }
 }

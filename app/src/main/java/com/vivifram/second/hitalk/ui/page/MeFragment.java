@@ -5,12 +5,8 @@ import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.LayoutInject;
 import com.vivifram.second.hitalk.ui.SettingActivity;
 import com.vivifram.second.hitalk.ui.page.layout.MeFragmentLayout;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.UserCacheHelper;
-
-import static com.avos.avoscloud.Messages.StatusType.on;
 
 /**
  * Created by zuowei on 16-7-25.
