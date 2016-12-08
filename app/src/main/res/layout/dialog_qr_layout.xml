@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@color/color_eeeeee"
+    android:padding="20dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <com.vivifram.second.hitalk.ui.view.AvatarView
+            android:id="@+id/avatarImv"
+            android:layout_width="@dimen/big_size_avatar"
+            android:layout_height="@dimen/big_size_avatar"
+            android:src="@mipmap/hitalk_1"
+            app:avatar_border_width="0dp"
+            app:avatar_shadow_width="0dp"/>
+
+        <TextView
+            android:id="@+id/nickTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:gravity="center"
+            android:text="hello"
+            android:textSize="16sp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/collegeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:minWidth="100dp"
+            android:gravity="center|left"
+            android:text="chongqing"
+            android:textSize="16sp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="40dp"
+            />
+
+        <ImageView
+            android:id="@+id/qrImv"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="250dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/qr_identity_description"
+            android:textSize="12sp"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

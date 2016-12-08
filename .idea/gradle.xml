@@ -8,12 +8,14 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/PhotoPicker" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/blurdialog" />
             <option value="$PROJECT_DIR$/bolts-tasks" />
             <option value="$PROJECT_DIR$/greendao" />
             <option value="$PROJECT_DIR$/httplib" />
             <option value="$PROJECT_DIR$/ninegridview" />
+            <option value="$PROJECT_DIR$/photopicker" />
+            <option value="$PROJECT_DIR$/qrcode" />
             <option value="$PROJECT_DIR$/recycleview-stickheader" />
           </set>
         </option>

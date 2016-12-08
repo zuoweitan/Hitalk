@@ -114,4 +114,7 @@
     <string name="trying">加载中</string>
     <string name="message_when_agree_request">我们已经是好友了，来聊天吧</string>
     <string name="add_already">已添加</string>
+    <string name="title_add_friend">添加朋友</string>
+    <string name="qr_identity_description">扫一扫上面的二维码,加我HI聊</string>
+    <string name="generate_qr_failed">二维码生成失败</string>
 </resources>

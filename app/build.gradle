@@ -8,8 +8,8 @@ android {
         applicationId "com.vivifram.second.hitalk"
         minSdkVersion 18
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 5
+        versionName "5.0"
         multiDexEnabled true
 
         jackOptions {
@@ -58,7 +58,7 @@ dependencies {
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
     compile 'cn.leancloud.android:avoscloud-sdk:v3.+'
-    compile('cn.leancloud.android:avoscloud-push:v3.+@aar') {transitive = true}
+    compile('cn.leancloud.android:avoscloud-push:v3.+@aar') { transitive = true }
     compile 'cn.leancloud.android:avoscloud-statistics:v3.+'
     compile 'cn.leancloud.android:avoscloud-feedback:v3.+@aar'
     compile 'cn.leancloud.android:avoscloud-search:v3.+@aar'
@@ -73,9 +73,10 @@ dependencies {
     compile project(':ninegridview')
     compile project(':httplib')
     compile 'com.mikhaellopez:circularprogressbar:1.1.1'
-    compile project(':PhotoPicker')
+    compile project(':photopicker')
     compile project(':bolts-tasks')
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
     compile project(':recycleview-stickheader')
     compile 'com.afollestad.material-dialogs:core:0.8.6.2'
+    compile project(':qrcode')
+    compile project(':blurdialog')
 }

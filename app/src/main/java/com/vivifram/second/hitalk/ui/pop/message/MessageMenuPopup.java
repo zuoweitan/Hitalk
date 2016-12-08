@@ -56,7 +56,8 @@ public class MessageMenuPopup extends BasePopupWindow {
     public void showPopupWindow(View v) {
         try {
             int screenWidth = DisplayUtil.getDisplayMetrics(v.getContext()).widthPixels;
-            mPopupWindow.showAsDropDown(v,-getPopupView().getMeasuredWidth() + v.getWidth() - v.getPaddingRight(),-v.getHeight() / 3);
+            int arrowPadding = DisplayUtil.dip2px(2);
+            mPopupWindow.showAsDropDown(v,-getPopupView().getMeasuredWidth() + v.getWidth() - v.getPaddingRight() - arrowPadding,-v.getHeight() / 3);
             if (getShowAnimation() != null && mAnimaView != null) {
                 mAnimaView.clearAnimation();
                 mAnimaView.startAnimation(getShowAnimation());

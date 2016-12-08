@@ -4,10 +4,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.vivifram.second.hitalk.R;
+import com.vivifram.second.hitalk.ui.AddFriendActivity;
 import com.vivifram.second.hitalk.ui.pop.address.AddressMenuPopup;
 import com.vivifram.second.hitalk.ui.view.BGATitlebar;
 
 import cn.bingoogolapple.badgeview.BGABadgeRelativeLayout;
+
+import static com.avos.avoscloud.ops.AVOp.OpType.Add;
 
 /**
  * Created by zuowei on 16-9-26.
@@ -88,6 +91,15 @@ public class AddressFragmentLayout extends BaseFragmentLayout {
 
 
         addressMenuPopup = new AddressMenuPopup(mAct);
+        addressMenuPopup.setOnMenuItemClick(pos->{
+           switch (pos){
+               case 0:
+                    AddFriendActivity.start(mAct);
+                   break;
+               case 1:
+                   break;
+           }
+        });
         titlebar = (BGATitlebar) findViewById(R.id.titleBar);
         titlebar.setDelegate(new BGATitlebar.BGATitlebarDelegate(){
             @Override

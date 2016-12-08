@@ -32,5 +32,27 @@ public class Constants {
     public final class User{
         public static final String OBJECTID_C = "objectId";
         public static final String COLLEGECODE_C = "collegeCode";
+        public static final String NICKNAME_C = "nickName";
+        public static final String COLLEGE_C = "college";
     }
+
+    public final class BlurDialog{
+        public static final String BUNDLE_KEY_DOWN_SCALE_FACTOR = "bundle_key_down_scale_factor";
+
+        public static final String BUNDLE_KEY_BLUR_RADIUS = "bundle_key_blur_radius";
+
+        public static final String BUNDLE_KEY_DIMMING = "bundle_key_dimming_effect";
+
+        public static final String BUNDLE_KEY_USE_RENDERSCRIPT = "bundle_key_use_renderscript";
+
+        public static final String BUNDLE_KEY_DEBUG = "bundle_key_debug_effect";
+
+
+        //DEFAULT
+        public static final int DEFAULT_RADIUS = 9;
+        public static final float DEFAULT_FACTOR = 4.0f;
+        public static final boolean DEFAULT_DIMMING = true;
+        public static final boolean DEFAULT_USE_RENDERSCRIPT = false;
+    }
+
 }

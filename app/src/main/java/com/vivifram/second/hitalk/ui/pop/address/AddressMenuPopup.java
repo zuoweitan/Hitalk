@@ -13,6 +13,8 @@ import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.ui.pop.BasePopupWindow;
 import com.zuowei.utils.common.DisplayUtil;
 
+import static com.vivifram.second.hitalk.R.id.selectTv;
+
 /**
  * Created by zuowei on 16-10-22.
  */
@@ -21,7 +23,8 @@ public class AddressMenuPopup extends BasePopupWindow {
 
     private View popupView;
 
-    private TextView selectTv;
+    private TextView addFriendTv;
+    private TextView createGroupTv;
 
     private onMenuItemClick onMenuItemClick;
 
@@ -37,13 +40,21 @@ public class AddressMenuPopup extends BasePopupWindow {
                 View.MeasureSpec.
                         makeMeasureSpec(DisplayUtil.getDisplayMetrics(mContext).heightPixels, View.MeasureSpec.AT_MOST));
 
-        /*selectTv = (TextView) findViewById(R.id.selectTv);
-        selectTv.setOnClickListener(view->{
+        addFriendTv = (TextView) findViewById(R.id.addFriendTv);
+        addFriendTv.setOnClickListener(view->{
             mPopupWindow.dismiss();
             if (onMenuItemClick != null) {
                 onMenuItemClick.onItemClick(0);
             }
-        });*/
+        });
+
+        createGroupTv = (TextView) findViewById(R.id.createGroupTv);
+        createGroupTv.setOnClickListener(view->{
+            mPopupWindow.dismiss();
+            if (onMenuItemClick != null) {
+                onMenuItemClick.onItemClick(1);
+            }
+        });
 
     }
 
@@ -56,7 +67,8 @@ public class AddressMenuPopup extends BasePopupWindow {
     public void showPopupWindow(View v) {
         try {
             int screenWidth = DisplayUtil.getDisplayMetrics(v.getContext()).widthPixels;
-            mPopupWindow.showAsDropDown(v,-getPopupView().getMeasuredWidth() + v.getWidth() - v.getPaddingRight(),-v.getHeight() / 3);
+            int arrowPadding = DisplayUtil.dip2px(2);
+            mPopupWindow.showAsDropDown(v,-getPopupView().getMeasuredWidth() + v.getWidth() - v.getPaddingRight() - arrowPadding,-v.getHeight() / 3);
             if (getShowAnimation() != null && mAnimaView != null) {
                 mAnimaView.clearAnimation();
                 mAnimaView.startAnimation(getShowAnimation());

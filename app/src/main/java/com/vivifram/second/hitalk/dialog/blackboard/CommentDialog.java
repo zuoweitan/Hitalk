@@ -13,10 +13,11 @@ import android.widget.TextView;
 
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.blackboard.CommentItem;
+import com.vivifram.second.hitalk.dialog.BaseDialog;
 import com.vivifram.second.hitalk.ui.page.layout.BlackboardFragmentLayout;
 import com.zuowei.utils.provider.BnDataProvider;
 
-public class CommentDialog extends Dialog implements
+public class CommentDialog extends BaseDialog implements
 		View.OnClickListener {
 
 	private Context mContext;

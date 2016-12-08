@@ -1,12 +1,10 @@
 package com.vivifram.second.hitalk.ui.springview.container;
 
 import android.content.Context;
-import android.graphics.Interpolator;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +16,6 @@ import android.widget.ProgressBar;
 
 import com.vivifram.second.hitalk.R;
 import com.zuowei.utils.common.DisplayUtil;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 
 /**
  * Created by zuowei on 16-8-11.

@@ -1,1 +1,1 @@
-include ':app', ':greendao', ':ninegridview', ':httplib', ':PhotoPicker', ':bolts-tasks', ':recycleview-stickheader'
+include ':app', ':greendao', ':ninegridview', ':httplib', ':photopicker', ':bolts-tasks', ':recycleview-stickheader', ':qrcode', ':blurdialog'

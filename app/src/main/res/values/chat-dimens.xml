@@ -4,6 +4,7 @@
     <dimen name="padding_search_bar">5dp</dimen>
     <dimen name="height_row_weixin">59dp</dimen>
     <dimen name="size_avatar">48dp</dimen>
+    <dimen name="big_size_avatar">64dp</dimen>
     <dimen name="margin_chat">5dp</dimen>
     <dimen name="field_textsize">14sp</dimen>
     <dimen name="field_margin_right">5dp</dimen>
