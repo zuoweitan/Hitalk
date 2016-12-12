@@ -117,4 +117,10 @@
     <string name="title_add_friend">添加朋友</string>
     <string name="qr_identity_description">扫一扫上面的二维码,加我HI聊</string>
     <string name="generate_qr_failed">二维码生成失败</string>
+    <string name="mobileNumber">手机号</string>
+    <string name="mobile_HitalkNumber">手机号/HI聊号</string>
+    <string name="scanqr">扫一扫</string>
+    <string name="scanqr_des">扫描二维码名片</string>
+    <string name="phonecontacts">手机联系人</string>
+    <string name="phonecontacts_des">添加通讯录中的朋友</string>
 </resources>

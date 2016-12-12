@@ -80,7 +80,6 @@ public class AddFriendActivity extends BaseActivity<AddFriendLayout>{
             @Override
             public Void then(Task<Bitmap> task) throws Exception {
                 Bitmap result = task.getResult();
-                NLog.i(TagUtil.makeTag(getClass()),"generateAndShowQR and result = "+result);
                 if (result != null){
                     showQRDialog(result);
                 }else {

@@ -18,4 +18,121 @@
         app:bgatitlebar_titleTextColor="@color/color_272636" />
 
 
+    <LinearLayout
+        android:id="@+id/searchLt"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical|left"
+        >
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/search_f"
+            android:layout_marginLeft="8dp"
+            android:scaleType="centerInside"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="@string/mobile_HitalkNumber"
+            android:textSize="16sp"
+            />
+
+        </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:paddingLeft="8dp"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="24dp"
+        >
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/scanqr"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_deep"
+            android:text="@string/scanqr"
+            android:layout_marginLeft="52dp"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_normal"
+            android:text="@string/scanqr_des"
+            android:layout_marginLeft="52dp"
+            android:layout_marginTop="32dp"
+            android:textSize="12sp"
+            />
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/detail_arrow"
+            style="@style/detail_arrow_style" />
+
+    </RelativeLayout>
+
+    <View
+        style="@style/normal_line"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:paddingLeft="8dp"
+        android:background="@color/colorWhite"
+        >
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/addressbook"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_deep"
+            android:text="@string/phonecontacts"
+            android:layout_marginLeft="52dp"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_normal"
+            android:text="@string/phonecontacts_des"
+            android:layout_marginLeft="52dp"
+            android:layout_marginTop="32dp"
+            android:textSize="12sp"
+            />
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/detail_arrow"
+            style="@style/detail_arrow_style" />
+
+    </RelativeLayout>
+
+
 </LinearLayout>

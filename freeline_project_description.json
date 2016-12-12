@@ -1,0 +1,309 @@
+{
+    "android_gradle_plugin_version": "2.2.0",
+    "apk_path": "/home/zuowei/sundires/Hitalk/app/build/outputs/apk/app-debug.apk",
+    "auto_dependency": true,
+    "build_cache_dir": "/home/zuowei/sundires/Hitalk/app/build/freeline",
+    "build_directory": "/home/zuowei/sundires/Hitalk/app/build",
+    "build_script": "./gradlew :app:assembleDebug",
+    "build_script_work_directory": "",
+    "build_tools_directory": "/home/zuowei/Android/Sdk/build-tools/24.0.0",
+    "build_tools_version": "24.0.0",
+    "compile_sdk_directory": "/home/zuowei/Android/Sdk/platforms/android-23",
+    "compile_sdk_version": "android-23",
+    "databinding": [
+        
+    ],
+    "databinding_modules": [
+        
+    ],
+    "debug_package": "com.vivifram.second.hitalk",
+    "exclude_dep_res_paths": [
+        
+    ],
+    "extra_dep_res_paths": [
+        
+    ],
+    "freeline_cache_dir": "/home/zuowei/sundires/Hitalk",
+    "freeline_gradle_plugin_version": "0.8.3",
+    "java_home": "/home/zuowei/devKit/jdk1.8.0_102",
+    "launcher": "com.vivifram.second.hitalk.ui.SplashActivity",
+    "main_assets_directory": [
+        "/home/zuowei/sundires/Hitalk/app/src/debug/assets",
+        "/home/zuowei/sundires/Hitalk/app/src/main/assets"
+    ],
+    "main_jniLibs_directory": [
+        "/home/zuowei/sundires/Hitalk/app/src/debug/jniLibs",
+        "/home/zuowei/sundires/Hitalk/app/src/main/jniLibs"
+    ],
+    "main_jni_directory": [
+        "/home/zuowei/sundires/Hitalk/app/src/debug/jni",
+        "/home/zuowei/sundires/Hitalk/app/src/main/jni"
+    ],
+    "main_manifest_path": "/home/zuowei/sundires/Hitalk/app/src/main/AndroidManifest.xml",
+    "main_project_dir": "app",
+    "main_project_name": "app",
+    "main_r_path": "/home/zuowei/sundires/Hitalk/app/build/generated/source/r/debug/R.java",
+    "main_res_directory": [
+        "/home/zuowei/sundires/Hitalk/app/src/debug/res",
+        "/home/zuowei/sundires/Hitalk/app/src/main/res"
+    ],
+    "main_src_directory": [
+        "/home/zuowei/sundires/Hitalk/app/src/debug/java",
+        "/home/zuowei/sundires/Hitalk/app/src/main/java",
+        "/home/zuowei/sundires/Hitalk/app/src/main/java-gen"
+    ],
+    "module_dependencies": {
+        "app": [
+            "ninegridview",
+            "httplib",
+            "photopicker",
+            "bolts-tasks",
+            "recycleview-stickheader",
+            "qrcode",
+            "blurdialog"
+        ],
+        "blurdialog": [
+            
+        ],
+        "bolts-tasks": [
+            
+        ],
+        "httplib": [
+            
+        ],
+        "ninegridview": [
+            
+        ],
+        "photopicker": [
+            
+        ],
+        "qrcode": [
+            
+        ],
+        "recycleview-stickheader": [
+            
+        ]
+    },
+    "modules": [
+        {
+            "name": "app",
+            "path": "/home/zuowei/sundires/Hitalk/app"
+        },
+        {
+            "name": "ninegridview",
+            "path": "/home/zuowei/sundires/Hitalk/ninegridview"
+        },
+        {
+            "name": "httplib",
+            "path": "/home/zuowei/sundires/Hitalk/httplib"
+        },
+        {
+            "name": "photopicker",
+            "path": "/home/zuowei/sundires/Hitalk/photopicker"
+        },
+        {
+            "name": "bolts-tasks",
+            "path": "/home/zuowei/sundires/Hitalk/bolts-tasks"
+        },
+        {
+            "name": "recycleview-stickheader",
+            "path": "/home/zuowei/sundires/Hitalk/recycleview-stickheader"
+        },
+        {
+            "name": "qrcode",
+            "path": "/home/zuowei/sundires/Hitalk/qrcode"
+        },
+        {
+            "name": "blurdialog",
+            "path": "/home/zuowei/sundires/Hitalk/blurdialog"
+        }
+    ],
+    "package": "com.vivifram.second.hitalk",
+    "product_flavor": "",
+    "project_source_sets": {
+        "app": {
+            "main_assets_directory": [
+                "/home/zuowei/sundires/Hitalk/app/src/debug/assets",
+                "/home/zuowei/sundires/Hitalk/app/src/main/assets"
+            ],
+            "main_jniLibs_directory": [
+                "/home/zuowei/sundires/Hitalk/app/src/debug/jniLibs",
+                "/home/zuowei/sundires/Hitalk/app/src/main/jniLibs"
+            ],
+            "main_jni_directory": [
+                "/home/zuowei/sundires/Hitalk/app/src/debug/jni",
+                "/home/zuowei/sundires/Hitalk/app/src/main/jni"
+            ],
+            "main_manifest_path": "/home/zuowei/sundires/Hitalk/app/src/main/AndroidManifest.xml",
+            "main_res_directory": [
+                "/home/zuowei/sundires/Hitalk/app/src/debug/res",
+                "/home/zuowei/sundires/Hitalk/app/src/main/res"
+            ],
+            "main_src_directory": [
+                "/home/zuowei/sundires/Hitalk/app/src/debug/java",
+                "/home/zuowei/sundires/Hitalk/app/src/main/java",
+                "/home/zuowei/sundires/Hitalk/app/src/main/java-gen"
+            ]
+        },
+        "blurdialog": {
+            "main_assets_directory": [
+                "/home/zuowei/sundires/Hitalk/blurdialog/src/release/assets",
+                "/home/zuowei/sundires/Hitalk/blurdialog/src/main/assets"
+            ],
+            "main_jniLibs_directory": [
+                "/home/zuowei/sundires/Hitalk/blurdialog/src/release/jniLibs",
+                "/home/zuowei/sundires/Hitalk/blurdialog/src/main/jniLibs"
+            ],
+            "main_jni_directory": [
+                "/home/zuowei/sundires/Hitalk/blurdialog/src/release/jni",
+                "/home/zuowei/sundires/Hitalk/blurdialog/src/main/jni"
+            ],
+            "main_manifest_path": "/home/zuowei/sundires/Hitalk/blurdialog/src/main/AndroidManifest.xml",
+            "main_res_directory": [
+                "/home/zuowei/sundires/Hitalk/blurdialog/src/release/res",
+                "/home/zuowei/sundires/Hitalk/blurdialog/src/main/res"
+            ],
+            "main_src_directory": [
+                "/home/zuowei/sundires/Hitalk/blurdialog/src/release/java",
+                "/home/zuowei/sundires/Hitalk/blurdialog/src/main/java"
+            ]
+        },
+        "bolts-tasks": {
+            "main_assets_directory": [
+                
+            ],
+            "main_jniLibs_directory": [
+                
+            ],
+            "main_jni_directory": [
+                
+            ],
+            "main_manifest_path": null,
+            "main_res_directory": [
+                
+            ],
+            "main_src_directory": [
+                "/home/zuowei/sundires/Hitalk/bolts-tasks/src/main/java"
+            ]
+        },
+        "httplib": {
+            "main_assets_directory": [
+                "/home/zuowei/sundires/Hitalk/httplib/src/release/assets",
+                "/home/zuowei/sundires/Hitalk/httplib/src/main/assets"
+            ],
+            "main_jniLibs_directory": [
+                "/home/zuowei/sundires/Hitalk/httplib/src/release/jniLibs",
+                "/home/zuowei/sundires/Hitalk/httplib/src/main/jniLibs"
+            ],
+            "main_jni_directory": [
+                "/home/zuowei/sundires/Hitalk/httplib/src/release/jni",
+                "/home/zuowei/sundires/Hitalk/httplib/src/main/jni"
+            ],
+            "main_manifest_path": "/home/zuowei/sundires/Hitalk/httplib/src/main/AndroidManifest.xml",
+            "main_res_directory": [
+                "/home/zuowei/sundires/Hitalk/httplib/src/release/res",
+                "/home/zuowei/sundires/Hitalk/httplib/src/main/res"
+            ],
+            "main_src_directory": [
+                "/home/zuowei/sundires/Hitalk/httplib/src/release/java",
+                "/home/zuowei/sundires/Hitalk/httplib/src/main/java"
+            ]
+        },
+        "ninegridview": {
+            "main_assets_directory": [
+                "/home/zuowei/sundires/Hitalk/ninegridview/src/release/assets",
+                "/home/zuowei/sundires/Hitalk/ninegridview/src/main/assets"
+            ],
+            "main_jniLibs_directory": [
+                "/home/zuowei/sundires/Hitalk/ninegridview/src/release/jniLibs",
+                "/home/zuowei/sundires/Hitalk/ninegridview/src/main/jniLibs"
+            ],
+            "main_jni_directory": [
+                "/home/zuowei/sundires/Hitalk/ninegridview/src/release/jni",
+                "/home/zuowei/sundires/Hitalk/ninegridview/src/main/jni"
+            ],
+            "main_manifest_path": "/home/zuowei/sundires/Hitalk/ninegridview/src/main/AndroidManifest.xml",
+            "main_res_directory": [
+                "/home/zuowei/sundires/Hitalk/ninegridview/src/release/res",
+                "/home/zuowei/sundires/Hitalk/ninegridview/src/main/res"
+            ],
+            "main_src_directory": [
+                "/home/zuowei/sundires/Hitalk/ninegridview/src/release/java",
+                "/home/zuowei/sundires/Hitalk/ninegridview/src/main/java"
+            ]
+        },
+        "photopicker": {
+            "main_assets_directory": [
+                "/home/zuowei/sundires/Hitalk/photopicker/src/release/assets",
+                "/home/zuowei/sundires/Hitalk/photopicker/src/main/assets"
+            ],
+            "main_jniLibs_directory": [
+                "/home/zuowei/sundires/Hitalk/photopicker/src/release/jniLibs",
+                "/home/zuowei/sundires/Hitalk/photopicker/src/main/jniLibs"
+            ],
+            "main_jni_directory": [
+                "/home/zuowei/sundires/Hitalk/photopicker/src/release/jni",
+                "/home/zuowei/sundires/Hitalk/photopicker/src/main/jni"
+            ],
+            "main_manifest_path": "/home/zuowei/sundires/Hitalk/photopicker/src/main/AndroidManifest.xml",
+            "main_res_directory": [
+                "/home/zuowei/sundires/Hitalk/photopicker/src/release/res",
+                "/home/zuowei/sundires/Hitalk/photopicker/src/main/res"
+            ],
+            "main_src_directory": [
+                "/home/zuowei/sundires/Hitalk/photopicker/src/release/java",
+                "/home/zuowei/sundires/Hitalk/photopicker/src/main/java"
+            ]
+        },
+        "qrcode": {
+            "main_assets_directory": [
+                "/home/zuowei/sundires/Hitalk/qrcode/src/release/assets",
+                "/home/zuowei/sundires/Hitalk/qrcode/src/main/assets"
+            ],
+            "main_jniLibs_directory": [
+                "/home/zuowei/sundires/Hitalk/qrcode/src/release/jniLibs",
+                "/home/zuowei/sundires/Hitalk/qrcode/src/main/jniLibs"
+            ],
+            "main_jni_directory": [
+                "/home/zuowei/sundires/Hitalk/qrcode/src/release/jni",
+                "/home/zuowei/sundires/Hitalk/qrcode/src/main/jni"
+            ],
+            "main_manifest_path": "/home/zuowei/sundires/Hitalk/qrcode/src/main/AndroidManifest.xml",
+            "main_res_directory": [
+                "/home/zuowei/sundires/Hitalk/qrcode/src/release/res",
+                "/home/zuowei/sundires/Hitalk/qrcode/src/main/res"
+            ],
+            "main_src_directory": [
+                "/home/zuowei/sundires/Hitalk/qrcode/src/release/java",
+                "/home/zuowei/sundires/Hitalk/qrcode/src/main/java"
+            ]
+        },
+        "recycleview-stickheader": {
+            "main_assets_directory": [
+                "/home/zuowei/sundires/Hitalk/recycleview-stickheader/src/release/assets",
+                "/home/zuowei/sundires/Hitalk/recycleview-stickheader/src/main/assets"
+            ],
+            "main_jniLibs_directory": [
+                "/home/zuowei/sundires/Hitalk/recycleview-stickheader/src/release/jniLibs",
+                "/home/zuowei/sundires/Hitalk/recycleview-stickheader/src/main/jniLibs"
+            ],
+            "main_jni_directory": [
+                "/home/zuowei/sundires/Hitalk/recycleview-stickheader/src/release/jni",
+                "/home/zuowei/sundires/Hitalk/recycleview-stickheader/src/main/jni"
+            ],
+            "main_manifest_path": "/home/zuowei/sundires/Hitalk/recycleview-stickheader/src/main/AndroidManifest.xml",
+            "main_res_directory": [
+                "/home/zuowei/sundires/Hitalk/recycleview-stickheader/src/release/res",
+                "/home/zuowei/sundires/Hitalk/recycleview-stickheader/src/main/res"
+            ],
+            "main_src_directory": [
+                "/home/zuowei/sundires/Hitalk/recycleview-stickheader/src/release/java",
+                "/home/zuowei/sundires/Hitalk/recycleview-stickheader/src/main/java"
+            ]
+        }
+    },
+    "project_type": "gradle",
+    "root_dir": "/home/zuowei/sundires/Hitalk",
+    "sdk_directory": "/home/zuowei/Android/Sdk",
+    "use_jdk8": true
+}
