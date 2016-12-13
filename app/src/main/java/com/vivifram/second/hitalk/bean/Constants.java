@@ -52,7 +52,7 @@ public class Constants {
         public static final int DEFAULT_RADIUS = 9;
         public static final float DEFAULT_FACTOR = 4.0f;
         public static final boolean DEFAULT_DIMMING = true;
-        public static final boolean DEFAULT_USE_RENDERSCRIPT = false;
+        public static final boolean DEFAULT_USE_RENDERSCRIPT = true;
     }
 
 }

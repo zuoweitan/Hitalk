@@ -14,13 +14,10 @@ import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.vivifram.second.hitalk.bean.UserWrap;
 import com.zuowei.dao.greendao.User;
-import com.zuowei.dao.greendao.UserDao;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.PathUtils;
-import com.zuowei.utils.common.RxjavaUtils;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.common.Utils;
-
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -31,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import de.greenrobot.dao.query.Query;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;

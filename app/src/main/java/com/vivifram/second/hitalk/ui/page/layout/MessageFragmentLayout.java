@@ -13,8 +13,6 @@ import com.vivifram.second.hitalk.ui.springview.container.DefaultFooter;
 import com.vivifram.second.hitalk.ui.springview.container.DefaultHeader;
 import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
 import com.vivifram.second.hitalk.ui.view.BGATitlebar;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 
 import java.util.List;
 

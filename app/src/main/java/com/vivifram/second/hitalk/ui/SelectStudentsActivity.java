@@ -9,7 +9,6 @@ import com.vivifram.second.hitalk.base.BaseActivity;
 import com.vivifram.second.hitalk.base.LayoutInject;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.vivifram.second.hitalk.ui.layout.SelectStudentsLayout;
-import com.vivifram.second.hitalk.ui.view.BGATitlebar;
 import com.zuowei.utils.pinyin.CharacterParser;
 import com.zuowei.utils.pinyin.LetterComparator;
 
@@ -71,6 +70,6 @@ public class SelectStudentsActivity extends BaseActivity<SelectStudentsLayout> {
     }
 
     public static void start(Context context){
-        context.startActivity(new Intent(context,SelectStudentsActivity.class));
+        start(context,SelectStudentsActivity.class);
     }
 }

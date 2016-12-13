@@ -19,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-
 import com.vivifram.second.hitalk.wheelview.util.WheelUtils;
 import com.vivifram.second.hitalk.wheelview.widget.IWheelView;
 

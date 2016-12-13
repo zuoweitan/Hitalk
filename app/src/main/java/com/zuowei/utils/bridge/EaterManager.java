@@ -3,14 +3,10 @@ package com.zuowei.utils.bridge;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
-
 
 import com.zuowei.utils.bridge.params.LightParam;
-import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,12 +15,6 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import rx.Observable;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-
-import static android.R.attr.key;
 
 /**
  * Created by zuowei on 16-4-6.

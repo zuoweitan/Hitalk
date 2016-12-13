@@ -10,8 +10,6 @@ import com.jiang.android.lib.adapter.BaseAdapter;
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersAdapter;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.address.Friend;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 
 /**
  * Created by zuowei on 16-10-13.

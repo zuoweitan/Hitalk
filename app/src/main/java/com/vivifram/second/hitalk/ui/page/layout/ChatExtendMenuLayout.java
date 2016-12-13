@@ -1,8 +1,5 @@
 package com.vivifram.second.hitalk.ui.page.layout;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -18,6 +15,9 @@ import android.widget.TextView;
 
 import com.vivifram.second.hitalk.R;
 import com.zuowei.utils.common.DisplayUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**

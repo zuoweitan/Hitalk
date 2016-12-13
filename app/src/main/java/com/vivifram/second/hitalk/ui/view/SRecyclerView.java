@@ -4,9 +4,6 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
-
-import com.zuowei.utils.common.TagUtil;
 
 /**
  * Created by zuowei on 16-10-15.

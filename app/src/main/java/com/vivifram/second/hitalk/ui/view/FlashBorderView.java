@@ -7,8 +7,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
-import com.zuowei.utils.common.UIUtils;
 import com.vivifram.second.hitalk.R;
+import com.zuowei.utils.common.UIUtils;
 /**
  * Created by wusp on 16/5/3.
  */

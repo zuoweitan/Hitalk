@@ -2,7 +2,6 @@ package com.vivifram.second.hitalk.ui.page;
 
 import com.vivifram.second.hitalk.base.BaseFragment;
 import com.vivifram.second.hitalk.ui.page.layout.BaseFragmentLayout;
-import com.vivifram.second.hitalk.ui.page.layout.HitalkFragmentLayout;
 
 /**
  * Created by zuowei on 16-7-25.

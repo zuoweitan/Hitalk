@@ -6,19 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.avos.avoscloud.im.v2.AVIMConversation;
-import com.avos.avoscloud.im.v2.AVIMException;
-import com.avos.avoscloud.im.v2.AVIMTypedMessage;
-import com.avos.avoscloud.im.v2.callback.AVIMConversationCallback;
-import com.avos.avoscloud.im.v2.messages.AVIMTextMessage;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.LayoutInject;
-import com.vivifram.second.hitalk.bean.IMessageWrap;
-import com.vivifram.second.hitalk.ui.page.layout.HitalkFragmentLayout;
 import com.vivifram.second.hitalk.ui.page.layout.HitalkFragmentSub2Layout;
-import com.zuowei.utils.bridge.params.LightParam;
-import com.zuowei.utils.bridge.params.chat.MessageParam;
-import com.zuowei.utils.handlers.AbstractHandler;
 
 /**
  * Created by zuowei on 16-7-25.

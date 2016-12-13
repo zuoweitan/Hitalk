@@ -4,7 +4,6 @@ import com.avos.avoscloud.AVCallback;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.vivifram.second.hitalk.bean.UserWrap;
-import com.vivifram.second.hitalk.state.DoneCallback;
 import com.zuowei.dao.greendao.User;
 import com.zuowei.dao.greendao.UserDao;
 import com.zuowei.utils.provider.UserProvider;

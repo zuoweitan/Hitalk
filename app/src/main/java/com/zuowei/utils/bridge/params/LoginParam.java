@@ -3,8 +3,6 @@ package com.zuowei.utils.bridge.params;
 import android.os.Bundle;
 
 import com.zuowei.utils.bridge.constant.EaterAction;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 
 /**
  * Created by zuowei on 16-7-18.

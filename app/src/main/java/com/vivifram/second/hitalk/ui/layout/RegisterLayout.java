@@ -16,14 +16,12 @@ import com.vivifram.second.hitalk.ui.view.ShrinkButton;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.params.LoginParam;
 import com.zuowei.utils.common.DisplayUtil;
-import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.NToast;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.common.Utils;
 import com.zuowei.utils.downtime.DownTimer;
 import com.zuowei.utils.downtime.DownTimerListener;
 import com.zuowei.utils.handlers.LoginHandler;
-import com.zuowei.utils.helper.HiTalkHelper;
 
 /**
  * Created by zuowei on 16-7-21.

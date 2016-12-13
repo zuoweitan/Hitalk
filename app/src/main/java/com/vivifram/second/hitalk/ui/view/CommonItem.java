@@ -13,8 +13,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vivifram.second.hitalk.R;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 
 import cn.bingoogolapple.badgeview.BGABadgeTextView;
 

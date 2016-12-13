@@ -3,7 +3,6 @@ package com.vivifram.second.hitalk.ui.page.layout;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersDecoration;
@@ -16,11 +15,8 @@ import com.vivifram.second.hitalk.ui.springview.container.AddressRotationHeader;
 import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
 import com.vivifram.second.hitalk.ui.view.CommonItem;
 import com.vivifram.second.hitalk.ui.view.SRecyclerView;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.pinyin.CharacterParser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

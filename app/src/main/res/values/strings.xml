@@ -123,4 +123,7 @@
     <string name="scanqr_des">扫描二维码名片</string>
     <string name="phonecontacts">手机联系人</string>
     <string name="phonecontacts_des">添加通讯录中的朋友</string>
+    <string name="title_scan_qr">二维码/条码</string>
+    <string name="open_camera_error">打开相机出错</string>
+    <string name="scan_qr_tips">将二维码放入框内，即可自动扫描</string>
 </resources>

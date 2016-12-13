@@ -1,9 +1,6 @@
 package com.vivifram.second.hitalk.ui.page.layout;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -17,6 +14,9 @@ import android.widget.RelativeLayout;
 
 import com.vivifram.second.hitalk.R;
 import com.zuowei.utils.common.DisplayUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by zuowei on 16-8-3.

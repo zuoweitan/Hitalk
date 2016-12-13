@@ -6,8 +6,8 @@ import android.text.Spannable;
 import android.text.Spannable.Factory;
 import android.text.style.ImageSpan;
 
-import com.vivifram.second.hitalk.cache.HiTalkModel;
 import com.vivifram.second.hitalk.bean.Emojicon;
+import com.vivifram.second.hitalk.cache.HiTalkModel;
 import com.vivifram.second.hitalk.model.EmojiconDatas;
 import com.zuowei.utils.helper.HiTalkHelper;
 

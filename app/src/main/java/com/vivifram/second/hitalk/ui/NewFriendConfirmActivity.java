@@ -45,9 +45,7 @@ import bolts.Task;
 public class NewFriendConfirmActivity extends BaseActivity<NewFriendConfirmLayout>{
 
     public static void start(Context c){
-        Intent intent = new Intent(c,NewFriendConfirmActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        c.startActivity(intent);
+        start(c,NewFriendConfirmActivity.class);
     }
 
     @Override

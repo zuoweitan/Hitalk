@@ -10,8 +10,6 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.vivifram.second.hitalk.R;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 
 import java.io.File;
 import java.util.ArrayList;

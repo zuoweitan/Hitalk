@@ -17,6 +17,7 @@ import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +97,11 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         if (mLayout != null) {
@@ -109,6 +115,8 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
         for (IEater iEater : eater) {
             EaterManager.getInstance().unRegisterEater(iEater);
         }
+        eater.clear();
+        eater = null;
     }
 
     @Override
@@ -153,7 +161,31 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
         super.setContentView(layoutResID);
         mLayout = generateLayout();
         if (mLayout != null) {
+            bindAllInterfaces();
             mLayout.onContentViewCreate(getBaseView());
+        }
+    }
+
+    private void bindAllInterfaces() {
+        Field[] declaredFields = getClass().getDeclaredFields();
+        if (declaredFields != null) {
+            for (Field injectField : declaredFields) {
+                InterfaceInject annotation = injectField.getAnnotation(InterfaceInject.class);
+                if (annotation == null) {
+                    continue;
+                }
+                String name = annotation.bindName();
+                try {
+                    Field field = mLayout.getClass().getDeclaredField(name);
+                    field.setAccessible(true);
+                    injectField.setAccessible(true);
+                    field.set(mLayout,injectField.get(this));
+                } catch (NoSuchFieldException e) {
+                    NLog.e(TAG,"bindAllInterfaces failed : ",e);
+                } catch (IllegalAccessException e) {
+                    NLog.e(TAG,"bindAllInterfaces failed : ",e);
+                }
+            }
         }
     }
 
@@ -196,5 +228,15 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
         }
 
         sAliveActivities.clear();
+    }
+
+
+    public static <T extends BaseActivity> void start(Context ctx,Class<T> c){
+        if (ctx == null) {
+            return;
+        }
+        Intent intent = new Intent(ctx,c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ctx.startActivity(intent);
     }
 }

@@ -1,10 +1,5 @@
 package com.zuowei.utils.common;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-
-
 import android.content.Context;
 import android.media.MediaRecorder;
 import android.os.Handler;
@@ -12,6 +7,10 @@ import android.os.SystemClock;
 import android.text.format.Time;
 
 import com.zuowei.utils.helper.HiTalkHelper;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 
 public class VoiceRecorder {
     MediaRecorder recorder;

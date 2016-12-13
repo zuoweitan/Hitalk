@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.wheelview.adapter.BaseWheelAdapter;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 
 /**
  * Created by zuowei on 16-7-27.

@@ -20,7 +20,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -37,13 +36,11 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import com.vivifram.second.hitalk.wheelview.adapter.ArrayWheelAdapter;
 import com.vivifram.second.hitalk.wheelview.adapter.BaseWheelAdapter;
 import com.vivifram.second.hitalk.wheelview.adapter.SimpleWheelAdapter;
 import com.vivifram.second.hitalk.wheelview.common.WheelConstants;
 import com.vivifram.second.hitalk.wheelview.common.WheelViewException;
-import com.vivifram.second.hitalk.wheelview.graphics.DrawableFactory;
 import com.vivifram.second.hitalk.wheelview.util.WheelUtils;
 
 import java.util.HashMap;

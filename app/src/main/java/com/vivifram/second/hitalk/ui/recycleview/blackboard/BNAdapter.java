@@ -32,8 +32,6 @@ import com.vivifram.second.hitalk.ui.view.ExpandTextView;
 import com.vivifram.second.hitalk.ui.view.PraiseListView;
 import com.zuowei.utils.common.DateUtils;
 import com.zuowei.utils.common.GlideCircleTransform;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.common.UrlUtils;
 import com.zuowei.utils.helper.NineGridHelper;
 import com.zuowei.utils.provider.BnDataProvider;

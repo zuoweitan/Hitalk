@@ -27,14 +27,12 @@ import com.vivifram.second.hitalk.ui.view.ass.AutoTextArrayAdapter;
 import com.vivifram.second.hitalk.wheelview.widget.WheelView;
 import com.zuowei.utils.common.DisplayUtil;
 import com.zuowei.utils.common.JsonUtils;
-import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.NToast;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.common.TextSpanUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 

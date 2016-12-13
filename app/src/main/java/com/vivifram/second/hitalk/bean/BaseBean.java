@@ -4,12 +4,10 @@ package com.vivifram.second.hitalk.bean;
 import com.avos.avoscloud.AVObject;
 import com.vivifram.second.hitalk.bean.parser.BeanParser;
 import com.zuowei.dao.greendao.Bean;
-import com.zuowei.dao.greendao.BeanDao;
 import com.zuowei.utils.helper.BeanHelper;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.concurrent.Callable;
 
 import bolts.Continuation;
 import bolts.Task;

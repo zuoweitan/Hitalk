@@ -5,8 +5,6 @@ import android.content.Intent;
 
 import com.avos.avoscloud.AVCallback;
 import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMTypedMessage;
@@ -15,7 +13,6 @@ import com.avos.avoscloud.im.v2.messages.AVIMTextMessage;
 import com.vivifram.second.hitalk.HiTalkApplication;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.ChatConstants;
-import com.vivifram.second.hitalk.bean.UserWrap;
 import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.params.chat.MessageParam;
@@ -25,9 +22,6 @@ import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.ConversationCacheHelper;
 import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.UserBeanCacheHelper;
-import com.zuowei.utils.helper.UserCacheHelper;
-
-import java.util.List;
 
 /**
  * Created by zuowei on 16-8-4.

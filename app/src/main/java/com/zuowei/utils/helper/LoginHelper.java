@@ -15,8 +15,6 @@ import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.LoginHandler;
 
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by zuowei on 16-7-18.

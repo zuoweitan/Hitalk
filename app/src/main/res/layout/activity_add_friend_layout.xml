@@ -47,6 +47,7 @@
         </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/scanQrRl"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:paddingLeft="8dp"
@@ -93,6 +94,7 @@
         style="@style/normal_line"
         />
     <RelativeLayout
+        android:id="@+id/addressRl"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:paddingLeft="8dp"

@@ -25,7 +25,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.vivifram.second.hitalk.wheelview.adapter.ArrayWheelAdapter;
 import com.vivifram.second.hitalk.wheelview.common.WheelConstants;
 import com.vivifram.second.hitalk.wheelview.util.WheelUtils;

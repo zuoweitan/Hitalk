@@ -1,8 +1,6 @@
 package com.zuowei.utils.common;
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by zuowei on 16-8-6.

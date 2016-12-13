@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.zuowei.utils.bridge.IEater;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.SharePreferenceParam;

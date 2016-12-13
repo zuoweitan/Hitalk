@@ -6,8 +6,6 @@ import com.vivifram.second.hitalk.bean.blackboard.BnCommentRemote;
 import com.vivifram.second.hitalk.bean.blackboard.BnItem;
 import com.vivifram.second.hitalk.bean.blackboard.BnRemote;
 import com.vivifram.second.hitalk.bean.blackboard.CommentItem;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 
 import java.util.concurrent.Callable;
 

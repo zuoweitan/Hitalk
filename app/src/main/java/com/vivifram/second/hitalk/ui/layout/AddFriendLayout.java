@@ -16,9 +16,17 @@ import com.vivifram.second.hitalk.ui.view.BGATitlebar;
  */
 public class AddFriendLayout extends BaseLayout{
 
+    private View scanQrV;
+    private View addressV;
+
     public interface OnTitleActionListener{
         void onBack();
         void showQR();
+    }
+
+    public interface OnItemClickListener{
+        void onScanQr();
+        void onAddAddress();
     }
 
     public AddFriendLayout(View rootView) {
@@ -26,6 +34,7 @@ public class AddFriendLayout extends BaseLayout{
     }
 
     private OnTitleActionListener onTitleActionListener;
+    private OnItemClickListener onItemClickListener;
 
     private BGATitlebar titlebar;
 
@@ -51,10 +60,36 @@ public class AddFriendLayout extends BaseLayout{
                 }
             }
         });
+
+        scanQrV = findViewById(R.id.scanQrRl);
+        addressV = findViewById(R.id.addressRl);
+
+        View.OnClickListener onClickListener = v -> {
+            switch (v.getId()){
+                case R.id.scanQrRl:
+                        if (onItemClickListener != null) {
+                            onItemClickListener.onScanQr();
+                        }
+                    break;
+                case R.id.addressRl:
+                        if (onItemClickListener != null) {
+                            onItemClickListener.onAddAddress();
+                        }
+                    break;
+            }
+        };
+
+        scanQrV.setOnClickListener(onClickListener);
+        addressV.setOnClickListener(onClickListener);
     }
 
     public AddFriendLayout setOnTitleActionListener(OnTitleActionListener onTitleActionListener) {
         this.onTitleActionListener = onTitleActionListener;
+        return this;
+    }
+
+    public AddFriendLayout setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
         return this;
     }
 }

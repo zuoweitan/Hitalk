@@ -1,26 +1,18 @@
 package com.vivifram.second.hitalk.ui.recycleview.address;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
-import android.graphics.PorterDuff;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
-import com.avos.avoscloud.LogUtil;
 import com.vivifram.second.hitalk.R;
 import com.zuowei.utils.common.DisplayUtil;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 
 
 public class DividerDecoration extends RecyclerView.ItemDecoration {

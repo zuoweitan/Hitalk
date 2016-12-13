@@ -9,7 +9,6 @@ import com.vivifram.second.hitalk.base.EatMark;
 import com.vivifram.second.hitalk.base.LayoutInject;
 import com.vivifram.second.hitalk.manager.chat.FriendsManager;
 import com.vivifram.second.hitalk.ui.page.layout.AddressFragmentLayout;
-import com.vivifram.second.hitalk.ui.page.layout.HitalkFragmentLayout;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
@@ -17,8 +16,6 @@ import com.zuowei.utils.bridge.params.push.InvitationParam;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.AbstractHandler;
-
-import cn.bingoogolapple.badgeview.BGABadgeable;
 
 /**
  * Created by zuowei on 16-7-25.

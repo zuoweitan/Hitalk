@@ -10,8 +10,6 @@ import com.vivifram.second.hitalk.ui.view.BGATitlebar;
 
 import cn.bingoogolapple.badgeview.BGABadgeRelativeLayout;
 
-import static com.avos.avoscloud.ops.AVOp.OpType.Add;
-
 /**
  * Created by zuowei on 16-9-26.
  */

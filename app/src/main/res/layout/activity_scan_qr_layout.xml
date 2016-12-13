@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MatchMatch">
+
+    <FrameLayout
+        android:id="@+id/qrscaner_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        ></FrameLayout>
+
+
+    <com.vivifram.second.hitalk.ui.view.BGATitlebar
+        android:id="@+id/titleBar"
+        style="@style/TitleBar"
+        android:background="@color/colorWhite"
+        app:bgatitlebar_leftDrawable="@drawable/back"
+        app:bgatitlebar_leftDrawablePadding="10dp"
+        app:bgatitlebar_titleText="@string/title_scan_qr"
+        app:bgatitlebar_titleTextColor="@color/color_272636" />
+
+
+</RelativeLayout>

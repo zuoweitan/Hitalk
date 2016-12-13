@@ -12,14 +12,17 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+
 import com.bumptech.glide.Glide;
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ObjectAnimator;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import me.iwf.photopicker.R;
 import me.iwf.photopicker.adapter.PhotoPagerAdapter;
 

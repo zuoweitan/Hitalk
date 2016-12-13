@@ -1,7 +1,6 @@
 package com.zuowei.utils.helper;
 
 import com.avos.avoscloud.AVFile;
-import com.avos.avoscloud.AVObject;
 import com.lzy.ninegrid.ImageInfo;
 import com.vivifram.second.hitalk.state.DoneCallback;
 import com.zuowei.utils.common.NLog;
@@ -11,7 +10,6 @@ import com.zuowei.utils.common.TagUtil;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

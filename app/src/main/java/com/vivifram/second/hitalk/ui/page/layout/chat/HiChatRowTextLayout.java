@@ -1,7 +1,12 @@
 package com.vivifram.second.hitalk.ui.page.layout.chat;
 
+import android.content.Context;
+import android.text.Spannable;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.TextView.BufferType;
+
 import com.avos.avoscloud.im.v2.AVIMMessage;
-import com.avos.avoscloud.im.v2.AVIMTypedMessage;
 import com.avos.avoscloud.im.v2.messages.AVIMTextMessage;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.IMessageWrap;
@@ -9,13 +14,6 @@ import com.vivifram.second.hitalk.ui.page.layout.adapter.ChatMessageListAdapter;
 import com.zuowei.utils.bridge.handler.ToolKit;
 import com.zuowei.utils.common.SmileUtils;
 import com.zuowei.utils.helper.ChatHelper;
-
-import android.content.Context;
-import android.text.Spannable;
-import android.view.View;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
-import android.widget.TextView.BufferType;
 
 public class HiChatRowTextLayout extends HiChatRowLayout<AVIMTextMessage>{
 

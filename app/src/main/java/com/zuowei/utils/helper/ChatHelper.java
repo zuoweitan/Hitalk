@@ -7,18 +7,13 @@ import android.widget.TextView;
 
 import com.avos.avoscloud.AVCallback;
 import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.im.v2.AVIMMessage;
 import com.bumptech.glide.Glide;
 import com.vivifram.second.hitalk.HiTalkApplication;
 import com.vivifram.second.hitalk.R;
 import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.common.GlideCircleTransform;
-import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
-
-import java.util.List;
 
 /**
  * Created by zuowei on 16-8-2.

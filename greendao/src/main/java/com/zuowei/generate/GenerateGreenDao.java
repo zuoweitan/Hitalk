@@ -4,9 +4,7 @@ import com.zuowei.func.Id;
 import com.zuowei.func.Property;
 import com.zuowei.utils.AnalysisDao;
 
-import java.io.File;
 import java.lang.reflect.Field;
-import java.util.Arrays;
 
 import de.greenrobot.daogenerator.DaoGenerator;
 import de.greenrobot.daogenerator.Entity;

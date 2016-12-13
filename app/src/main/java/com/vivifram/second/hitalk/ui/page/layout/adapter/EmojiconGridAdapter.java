@@ -1,7 +1,5 @@
 package com.vivifram.second.hitalk.ui.page.layout.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +11,8 @@ import com.bumptech.glide.Glide;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.Emojicon;
 import com.zuowei.utils.common.SmileUtils;
+
+import java.util.List;
 
 public class EmojiconGridAdapter extends ArrayAdapter<Emojicon>{
 

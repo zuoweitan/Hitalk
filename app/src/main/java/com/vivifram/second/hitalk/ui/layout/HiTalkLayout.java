@@ -1,10 +1,8 @@
 package com.vivifram.second.hitalk.ui.layout;
 
 import android.graphics.drawable.Drawable;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
@@ -16,12 +14,10 @@ import com.vivifram.second.hitalk.ui.page.BlackboardFragment;
 import com.vivifram.second.hitalk.ui.page.HiTalkFragment;
 import com.vivifram.second.hitalk.ui.page.MeFragment;
 import com.vivifram.second.hitalk.ui.page.MessageFragment;
-import com.zuowei.utils.common.DisplayUtil;
 
 import java.util.HashMap;
 
 import cn.bingoogolapple.badgeview.BGABadgeRadioButton;
-import cn.bingoogolapple.badgeview.BGABadgeViewHelper;
 
 /**
  * Created by zuowei on 16-7-22.

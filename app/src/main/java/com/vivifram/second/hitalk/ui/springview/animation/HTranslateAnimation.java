@@ -2,16 +2,10 @@ package com.vivifram.second.hitalk.ui.springview.animation;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
 
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
-
 import java.lang.reflect.Field;
-
-import static com.vivifram.second.hitalk.R.string.set;
 
 /**
  * 项目名称：Hitalk

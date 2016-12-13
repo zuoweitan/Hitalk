@@ -9,7 +9,6 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.View;
 
-
 import com.vivifram.second.hitalk.ui.spannable.SpannableClickable;
 
 import java.util.regex.Matcher;

@@ -17,7 +17,6 @@ import com.vivifram.second.hitalk.ui.view.BGATitlebar;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.params.LoginParam;
 import com.zuowei.utils.common.UIUtils;
-import com.zuowei.utils.helper.HiTalkHelper;
 
 /**
  * 项目名称：Hitalk
@@ -69,10 +68,6 @@ public class SettingActivity extends BaseActivity<SettingLayout> {
     }
 
     public static void start(Context context){
-        if (context != null) {
-            Intent intent = new Intent(context,SettingActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-        }
+        start(context,SettingActivity.class);
     }
 }

@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.vivifram.second.hitalk.R;
-import com.vivifram.second.hitalk.ui.page.layout.BaseFragmentLayout;
 import com.vivifram.second.hitalk.ui.springview.container.DefaultFooter;
 import com.vivifram.second.hitalk.ui.springview.container.DefaultHeader;
 import com.vivifram.second.hitalk.ui.springview.widget.SpringView;

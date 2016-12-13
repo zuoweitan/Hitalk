@@ -5,7 +5,6 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.vivifram.second.hitalk.R;
-import com.zuowei.utils.common.NotificationUtils;
 
 /**
  * Created by zuowei on 16-8-1.

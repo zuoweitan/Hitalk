@@ -10,8 +10,6 @@ import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.chat.ConversationParam;
 import com.zuowei.utils.bridge.params.chat.MessageParam;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.AbstractHandler;
 import com.zuowei.utils.helper.ConversationCacheHelper;
 

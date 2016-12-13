@@ -13,8 +13,6 @@ import com.zuowei.utils.common.TagUtil;
 
 import fr.tvbarthel.lib.blurdialogfragment.BlurDialogFragment;
 
-import static com.avos.avoscloud.Messages.StatusType.on;
-
 
 /**
  * 项目名称：Hitalk

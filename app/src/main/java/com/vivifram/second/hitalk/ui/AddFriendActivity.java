@@ -1,7 +1,6 @@
 package com.vivifram.second.hitalk.ui;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -9,6 +8,7 @@ import android.os.Bundle;
 import com.avos.avoscloud.AVUser;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.BaseActivity;
+import com.vivifram.second.hitalk.base.InterfaceInject;
 import com.vivifram.second.hitalk.base.LayoutInject;
 import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.broadcast.ConnectivityNotifier;
@@ -39,19 +39,37 @@ import cn.bingoogolapple.qrcode.zxing.QRCodeEncoder;
 public class AddFriendActivity extends BaseActivity<AddFriendLayout>{
 
     public static void start(Context c){
-        Intent intent = new Intent(c,AddFriendActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        c.startActivity(intent);
+        start(c,AddFriendActivity.class);
     }
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_add_friend_layout);
-        mLayout.setOnTitleActionListener(onTitleActionListener);
     }
 
+    @InterfaceInject(bindName = "onItemClickListener")
+    private AddFriendLayout.OnItemClickListener onItemClickListener
+            = new AddFriendLayout.OnItemClickListener() {
+        @Override
+        public void onScanQr() {
+            scanQr();
+        }
 
+        @Override
+        public void onAddAddress() {
+            addAddress();
+        }
+    };
+
+    private void addAddress() {
+    }
+
+    private void scanQr() {
+        ScanQRActivity.start(this);
+    }
+
+    @InterfaceInject(bindName = "onTitleActionListener")
     private AddFriendLayout.OnTitleActionListener onTitleActionListener
             = new AddFriendLayout.OnTitleActionListener() {
         @Override
@@ -75,7 +93,7 @@ public class AddFriendActivity extends BaseActivity<AddFriendLayout>{
         Task.callInBackground(() -> {
             Bitmap logo = BitmapFactory.decodeResource(getResources(),R.drawable.hitalk);
             return QRCodeEncoder.syncEncodeQRCode(userId, DisplayUtil.dip2px(150)
-                    ,getResources().getColor(R.color.hitalk_yellow),logo);
+                    ,getResources().getColor(R.color.black_deep),logo);
         }).continueWith(new Continuation<Bitmap, Void>() {
             @Override
             public Void then(Task<Bitmap> task) throws Exception {

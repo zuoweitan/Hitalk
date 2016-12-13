@@ -41,6 +41,8 @@ public class BaseLayout {
 
     public void onResume(){}
 
+    public void onStop(){}
+
     public void onDestroy(){}
 
     public void setOnLayoutEventListener (OnLayoutEventListener onLayoutEventListener){

@@ -16,11 +16,8 @@ import com.vivifram.second.hitalk.bean.address.AddRequest;
 import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.UserBeanCacheHelper;
-import com.zuowei.utils.helper.UserCacheHelper;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,7 +6,6 @@ import android.graphics.Rect;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,10 +17,6 @@ import android.widget.OverScroller;
 
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.ui.springview.animation.HTranslateAnimation;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
-
-import static android.R.attr.y;
 
 
 /**

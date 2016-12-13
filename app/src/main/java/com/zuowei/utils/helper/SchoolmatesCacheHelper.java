@@ -7,13 +7,10 @@ import com.zuowei.utils.common.TagUtil;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.concurrent.Callable;
 
 import bolts.Task;
 import de.greenrobot.dao.async.AsyncSession;
 import de.greenrobot.dao.query.Query;
-
-import static com.avos.avoscloud.feedback.ThreadActivity.cache;
 
 /**
  * Created by zuowei on 16-11-6.

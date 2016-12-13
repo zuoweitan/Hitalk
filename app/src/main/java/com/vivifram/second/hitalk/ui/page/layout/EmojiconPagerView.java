@@ -1,9 +1,6 @@
 package com.vivifram.second.hitalk.ui.page.layout;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -19,6 +16,9 @@ import com.vivifram.second.hitalk.bean.EmojiconGroupEntity;
 import com.vivifram.second.hitalk.ui.page.layout.adapter.EmojiconGridAdapter;
 import com.vivifram.second.hitalk.ui.page.layout.adapter.EmojiconPagerAdapter;
 import com.zuowei.utils.common.SmileUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by zuowei on 16-8-3.

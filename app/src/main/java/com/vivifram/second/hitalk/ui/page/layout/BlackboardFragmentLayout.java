@@ -1,11 +1,9 @@
 package com.vivifram.second.hitalk.ui.page.layout;
 
 import android.graphics.Rect;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -13,9 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.blackboard.BnItem;
 import com.vivifram.second.hitalk.bean.blackboard.CommentItem;

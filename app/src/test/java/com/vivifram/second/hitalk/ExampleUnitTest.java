@@ -4,10 +4,7 @@ import com.avos.avoscloud.AVObject;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vivifram.second.hitalk.base.LayoutInject;
-import com.vivifram.second.hitalk.manager.RetrofitManager;
 import com.zuowei.utils.common.Md5Utils;
-import com.zuowei.utils.helper.ILoginService;
-import com.zuowei.utils.helper.LoginHelper;
 import com.zuowei.utils.pinyin.CharacterParser;
 
 import org.junit.Test;
@@ -18,13 +15,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static android.R.attr.name;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * To work on unit tests, switch the Test Artifact in the Build Variants view.

@@ -6,9 +6,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.RequestManager;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import me.iwf.photopicker.R;
 import me.iwf.photopicker.entity.PhotoDirectory;
 

@@ -17,8 +17,6 @@ import com.vivifram.second.hitalk.ui.view.slidebar.IndexAdapter;
 import com.vivifram.second.hitalk.ui.view.slidebar.Indexable;
 import com.vivifram.second.hitalk.ui.view.slidebar.ZSideBar;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,6 +1,5 @@
 package com.vivifram.second.hitalk.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
