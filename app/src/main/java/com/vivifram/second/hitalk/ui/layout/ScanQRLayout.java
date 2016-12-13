@@ -1,12 +1,11 @@
 package com.vivifram.second.hitalk.ui.layout;
 
-import android.support.v4.app.FragmentManager;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.ui.view.BGATitlebar;
-import com.zuowei.qrcode.activity.CaptureFragment;
+
+import cn.bingoogolapple.qrcode.core.QRCodeView;
 
 
 /**
@@ -29,6 +28,8 @@ public class ScanQRLayout extends BaseLayout {
     }
 
     private BGATitlebar titlebar;
+    private QRCodeView qrCodeView;
+    private QRCodeView.Delegate delegate;
     private OnTitleActionListener onTitleActionListener;
 
     @Override
@@ -43,9 +44,42 @@ public class ScanQRLayout extends BaseLayout {
                 }
             }
         });
+
+        qrCodeView = (QRCodeView) findViewById(R.id.zbarview);
+        qrCodeView.setDelegate(delegate);
     }
 
-    public void bindScanFragment(FragmentManager fragmentManager, CaptureFragment captureFragment) {
-        fragmentManager.beginTransaction().replace(R.id.qrscaner_container, captureFragment).commit();
+    public void startScan(){
+        if (qrCodeView != null) {
+            qrCodeView.startSpotDelay(3000);
+        }
+    }
+
+    public void reScan(){
+        if (qrCodeView != null) {
+            qrCodeView.startSpot();
+        }
+    }
+
+    public void stopScan(){
+        if (qrCodeView != null) {
+            qrCodeView.stopCamera();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (qrCodeView != null) {
+            qrCodeView.showScanRect();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (qrCodeView != null) {
+            qrCodeView.onDestroy();
+        }
     }
 }

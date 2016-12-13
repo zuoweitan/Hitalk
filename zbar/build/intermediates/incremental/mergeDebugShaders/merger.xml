@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/home/zuowei/workspace/hitalk_lean/zbar/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/home/zuowei/workspace/hitalk_lean/zbar/src/debug/shaders"/></dataSet></merger>

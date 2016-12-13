@@ -60,7 +60,7 @@ dependencies {
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
     compile 'cn.leancloud.android:avoscloud-sdk:v3.+'
-    compile ('cn.leancloud.android:avoscloud-push:v3.+@aar'){transitive = true}
+    compile('cn.leancloud.android:avoscloud-push:v3.+@aar') { transitive = true }
     compile 'cn.leancloud.android:avoscloud-statistics:v3.+'
     compile 'cn.leancloud.android:avoscloud-feedback:v3.+@aar'
     compile 'cn.leancloud.android:avoscloud-search:v3.+@aar'
@@ -79,6 +79,7 @@ dependencies {
     compile project(':bolts-tasks')
     compile project(':recycleview-stickheader')
     compile 'com.afollestad.material-dialogs:core:0.8.6.2'
-    compile project(':qrcode')
     compile project(':blurdialog')
+    compile project(':zbar')
+    compile project(':zxing')
 }

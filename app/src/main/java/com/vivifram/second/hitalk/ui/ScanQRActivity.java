@@ -1,7 +1,6 @@
 package com.vivifram.second.hitalk.ui;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Vibrator;
 
@@ -11,9 +10,9 @@ import com.vivifram.second.hitalk.base.BaseActivity;
 import com.vivifram.second.hitalk.base.InterfaceInject;
 import com.vivifram.second.hitalk.base.LayoutInject;
 import com.vivifram.second.hitalk.ui.layout.ScanQRLayout;
-import com.zuowei.qrcode.activity.CaptureFragment;
-import com.zuowei.qrcode.activity.CodeUtils;
 import com.zuowei.utils.common.NToast;
+
+import cn.bingoogolapple.qrcode.core.QRCodeView;
 
 
 /**
@@ -32,37 +31,27 @@ public class ScanQRActivity extends BaseActivity<ScanQRLayout>{
         start(ctx,ScanQRActivity.class);
     }
 
-    private CaptureFragment captureFragment;
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_scan_qr_layout);
-
-        captureFragment = new CaptureFragment();
-        CodeUtils.setFragmentArgs(captureFragment, R.layout.scanqr_layout);
-        captureFragment.setAnalyzeCallback(analyzeCallback);
-        mLayout.bindScanFragment(getSupportFragmentManager(),captureFragment);
     }
 
-    private void reScan(){
-        if (captureFragment != null) {
-            captureFragment.getHandler().sendEmptyMessage(com.zuowei.qrcode.R.id.restart_preview);
-        }
-    }
 
     @InterfaceInject(bindName = "onTitleActionListener")
     ScanQRLayout.OnTitleActionListener onTitleActionListener = this::finish;
 
-    CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
+    @InterfaceInject(bindName = "delegate")
+    QRCodeView.Delegate delegate = new QRCodeView.Delegate() {
         @Override
-        public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+        public void onScanQRCodeSuccess(String result) {
             vibrate();
-            reScan();
+            mLayout.reScan();
             NToast.shortToast(HiTalkApplication.mAppContext,"onScanQRCodeSuccess result = "+result);
         }
 
         @Override
-        public void onAnalyzeFailed() {
+        public void onScanQRCodeOpenCameraError() {
             NToast.shortToast(HiTalkApplication.mAppContext,R.string.open_camera_error);
         }
     };
@@ -70,6 +59,18 @@ public class ScanQRActivity extends BaseActivity<ScanQRLayout>{
     private void vibrate() {
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         vibrator.vibrate(200);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mLayout.startScan();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mLayout.stopScan();
     }
 }
 

@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/home/zuowei/workspace/hitalk_lean/zxing/src/main/assets"/><source path="/home/zuowei/workspace/hitalk_lean/zxing/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/home/zuowei/workspace/hitalk_lean/zxing/src/release/assets"/></dataSet></merger>
