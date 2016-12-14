@@ -5,6 +5,8 @@ import android.view.View;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.ui.view.BGATitlebar;
 
+import static com.avos.avoscloud.Messages.StatusType.on;
+
 /**
  * 项目名称：Hitalk
  * 类描述：
@@ -18,6 +20,7 @@ public class AddFriendLayout extends BaseLayout{
 
     private View scanQrV;
     private View addressV;
+    private View searchLt;
 
     public interface OnTitleActionListener{
         void onBack();
@@ -29,12 +32,17 @@ public class AddFriendLayout extends BaseLayout{
         void onAddAddress();
     }
 
+    public interface OnSearchItemClickListener{
+        void onSearch();
+    }
+
     public AddFriendLayout(View rootView) {
         super(rootView);
     }
 
     private OnTitleActionListener onTitleActionListener;
     private OnItemClickListener onItemClickListener;
+    private OnSearchItemClickListener onSearchItemClickListener;
 
     private BGATitlebar titlebar;
 
@@ -81,6 +89,18 @@ public class AddFriendLayout extends BaseLayout{
 
         scanQrV.setOnClickListener(onClickListener);
         addressV.setOnClickListener(onClickListener);
+
+        searchLt = findViewById(R.id.searchLt);
+        searchLt.setOnClickListener(v->{
+            if (onSearchItemClickListener != null) {
+                onSearchItemClickListener.onSearch();
+            }
+        });
+
+    }
+
+    public View getShareElement(){
+        return searchLt;
     }
 
     public AddFriendLayout setOnTitleActionListener(OnTitleActionListener onTitleActionListener) {

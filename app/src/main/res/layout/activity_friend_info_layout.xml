@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.vivifram.second.hitalk.ui.view.BGATitlebar
+        android:id="@+id/titleBar"
+        style="@style/TitleBar"
+        android:background="@color/colorWhite"
+        app:bgatitlebar_leftDrawable="@drawable/back"
+        app:bgatitlebar_leftDrawablePadding="10dp"
+        app:bgatitlebar_titleText="@string/title_friend_info"
+        app:bgatitlebar_titleTextColor="@color/color_272636" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/colorWhite"
+        >
+
+        <com.vivifram.second.hitalk.ui.view.AvatarView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/default_avatar"/>
+
+
+        <TextView
+            android:id="@+id/nickTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            android:text="hello"
+            android:textColor="@color/black_deep"
+            />
+
+        <ImageView
+            android:id="@+id/sexIv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/profile_ic_male"
+            android:layout_toRightOf="@id/nickTv"
+            android:layout_marginLeft="3dp"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="40dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hitalkPrefix"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/hitalkNoTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                />
+
+            </LinearLayout>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/colorWhite"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:text="@string/setupNotes"
+            android:textSize="14sp"
+            />
+
+        <ImageView
+            style="@style/detail_arrow_style"
+            android:src="@drawable/detail_arrow"
+            android:layout_gravity="center_vertical|right"
+            />
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        style="@style/MatchWrap.Vertical"
+        android:background="@color/colorWhite"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:text="@string/collegeTitle"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="80dp"
+                android:text="重庆邮电大学"
+                android:textSize="16sp"
+                android:textColor="@color/black_deep"
+                />
+
+        </FrameLayout>
+
+        <View
+            style="@style/divider_style"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:text="@string/signTitle"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="80dp"
+                android:text="渴望自由"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="16sp"
+                android:textColor="@color/black_deep"
+                />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <com.vivifram.second.hitalk.ui.view.ShrinkButton
+        android:id="@+id/btnSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/heightMiddle"
+        android:layout_marginLeft="@dimen/marginLarge_large"
+        android:layout_marginRight="@dimen/marginLarge_large"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_rounded_color_accent_background"
+        android:text="@string/add_friend"
+        android:textSize="@dimen/button_sign_in_text_size"
+        android:textColor="@color/colorWhite"
+        android:elevation="6dp"/>
+
+
+</LinearLayout>

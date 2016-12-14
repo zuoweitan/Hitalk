@@ -1,10 +1,10 @@
 [
     {
-        "merged": "/home/zuowei/workspace/hitalk_lean/zbar/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/qrcode_default_grid_scan_line.png",
-        "source": "/home/zuowei/workspace/hitalk_lean/zbar/build/intermediates/exploded-aar/hitalk_lean/qrcodecore/unspecified/res/mipmap-xxhdpi-v4/qrcode_default_grid_scan_line.png"
+        "merged": "/home/zuowei/sundires/Hitalk/zbar/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/qrcode_default_grid_scan_line.png",
+        "source": "/home/zuowei/sundires/Hitalk/zbar/build/intermediates/exploded-aar/Hitalk/qrcodecore/unspecified/res/mipmap-xxhdpi-v4/qrcode_default_grid_scan_line.png"
     },
     {
-        "merged": "/home/zuowei/workspace/hitalk_lean/zbar/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/qrcode_default_scan_line.png",
-        "source": "/home/zuowei/workspace/hitalk_lean/zbar/build/intermediates/exploded-aar/hitalk_lean/qrcodecore/unspecified/res/mipmap-xxhdpi-v4/qrcode_default_scan_line.png"
+        "merged": "/home/zuowei/sundires/Hitalk/zbar/build/intermediates/res/merged/release/mipmap-xxhdpi-v4/qrcode_default_scan_line.png",
+        "source": "/home/zuowei/sundires/Hitalk/zbar/build/intermediates/exploded-aar/Hitalk/qrcodecore/unspecified/res/mipmap-xxhdpi-v4/qrcode_default_scan_line.png"
     }
 ]

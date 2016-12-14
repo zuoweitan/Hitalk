@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.Activity">
+        <item name="android:windowBackground">@color/color_eeeeee</item>
+    </style>
+
     <style name="inputStyle">
         <item name="android:textColor">@color/black_deep</item>
         <item name="android:background">@drawable/input_bg</item>

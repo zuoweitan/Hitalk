@@ -126,4 +126,9 @@ public class AddFriendActivity extends BaseActivity<AddFriendLayout>{
                 .setCollege((String) avUser.get(Constants.User.COLLEGE_C))
                 .setQR(qr));
     }
+
+    @InterfaceInject(bindName = "onSearchItemClickListener")
+    AddFriendLayout.OnSearchItemClickListener onSearchItemClickListener = ()->{
+        SearchActivity.startWithAnimation(this,mLayout.getShareElement());
+    };
 }

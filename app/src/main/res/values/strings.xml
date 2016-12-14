@@ -126,4 +126,9 @@
     <string name="title_scan_qr">二维码/条码</string>
     <string name="open_camera_error">打开相机出错</string>
     <string name="scan_qr_tips">将二维码放入框内，即可自动扫描</string>
+    <string name="title_friend_info">详细资料</string>
+    <string name="hitalkPrefix">HI聊号: </string>
+    <string name="setupNotes">设置与备注</string>
+    <string name="collegeTitle">学校</string>
+    <string name="signTitle">个性签名</string>
 </resources>

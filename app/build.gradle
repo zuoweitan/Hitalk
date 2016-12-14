@@ -82,4 +82,5 @@ dependencies {
     compile project(':blurdialog')
     compile project(':zbar')
     compile project(':zxing')
+    compile project(':searchbar')
 }

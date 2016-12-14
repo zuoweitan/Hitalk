@@ -81,4 +81,8 @@ public class HiTalkApplication extends Application {
             }
         });
     }
+
+    public static Context $() {
+        return mAppContext;
+    }
 }

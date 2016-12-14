@@ -87,6 +87,24 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.FriendInfoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.SearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <!-- for im -->
         <service android:name="com.avos.avoscloud.PushService"/>
         <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">

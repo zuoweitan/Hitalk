@@ -26,6 +26,7 @@
         android:layout_marginTop="20dp"
         android:background="@color/colorWhite"
         android:gravity="center_vertical|left"
+        android:transitionName="sharedName"
         >
 
         <ImageView
