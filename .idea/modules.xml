@@ -12,12 +12,9 @@
       <module fileurl="file://$PROJECT_DIR$/ninegridview/ninegridview.iml" filepath="$PROJECT_DIR$/ninegridview/ninegridview.iml" />
       <module fileurl="file://$PROJECT_DIR$/photopicker/photopicker.iml" filepath="$PROJECT_DIR$/photopicker/photopicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/qrcodecore/qrcodecore.iml" filepath="$PROJECT_DIR$/qrcodecore/qrcodecore.iml" />
-      <module fileurl="file://$PROJECT_DIR$/qrcodecore/qrcodecore.iml" filepath="$PROJECT_DIR$/qrcodecore/qrcodecore.iml" />
       <module fileurl="file://$PROJECT_DIR$/recycleview-stickheader/recycleview-stickheader.iml" filepath="$PROJECT_DIR$/recycleview-stickheader/recycleview-stickheader.iml" />
       <module fileurl="file://$PROJECT_DIR$/searchbar/searchbar.iml" filepath="$PROJECT_DIR$/searchbar/searchbar.iml" />
       <module fileurl="file://$PROJECT_DIR$/zbar/zbar.iml" filepath="$PROJECT_DIR$/zbar/zbar.iml" />
-      <module fileurl="file://$PROJECT_DIR$/zbar/zbar.iml" filepath="$PROJECT_DIR$/zbar/zbar.iml" />
-      <module fileurl="file://$PROJECT_DIR$/zxing/zxing.iml" filepath="$PROJECT_DIR$/zxing/zxing.iml" />
       <module fileurl="file://$PROJECT_DIR$/zxing/zxing.iml" filepath="$PROJECT_DIR$/zxing/zxing.iml" />
     </modules>
   </component>

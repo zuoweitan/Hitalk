@@ -1,10 +1,9 @@
 package com.zuowei.utils.common;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-
-import com.vivifram.second.hitalk.HiTalkApplication;
 
 public class DisplayUtil {
     /**
@@ -19,6 +18,12 @@ public class DisplayUtil {
         return (int) (pxValue / scale + 0.5f);
     }
 
+    public static int px2dip(float pxValue) {
+        final float scale = Resources.getSystem().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
+    }
+
+
     /**
      * 将dip或dp值转换为px值，保证尺寸大小不变
      *
@@ -32,7 +37,7 @@ public class DisplayUtil {
     }
 
     public static int dip2px(float dipValue) {
-        final float scale = HiTalkApplication.mAppContext.getResources().getDisplayMetrics().density;
+        final float scale = Resources.getSystem().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
     }
 

@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.ui.view.BGATitlebar;
+import com.zuowei.utils.helper.ViewClickHelper;
 
 import static com.avos.avoscloud.Messages.StatusType.on;
 
@@ -91,9 +92,12 @@ public class AddFriendLayout extends BaseLayout{
         addressV.setOnClickListener(onClickListener);
 
         searchLt = findViewById(R.id.searchLt);
-        searchLt.setOnClickListener(v->{
-            if (onSearchItemClickListener != null) {
-                onSearchItemClickListener.onSearch();
+        searchLt.setOnClickListener(new ViewClickHelper(false) {
+            @Override
+            public void onRealClick(View v) {
+                if (onSearchItemClickListener != null) {
+                    onSearchItemClickListener.onSearch();
+                }
             }
         });
 

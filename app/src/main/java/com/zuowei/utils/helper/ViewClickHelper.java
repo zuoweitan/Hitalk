@@ -22,10 +22,17 @@ import java.util.Calendar;
 public abstract class ViewClickHelper implements View.OnClickListener {
     public static final int MIN_CLICK_DELAY_TIME = 1000;
     private long lastClickTime = 0;
+
+    private boolean checkNetwork;
+
+    public ViewClickHelper(boolean checkNetwork){
+        this.checkNetwork = checkNetwork;
+    }
+
     @Override
     public void onClick(View v) {
         Context appContext = HiTalkApplication.$();
-        if (appContext != null && ConnectivityNotifier.isConnected(appContext)){
+        if (!checkNetwork || (appContext != null && ConnectivityNotifier.isConnected(appContext))){
             long currentTime = Calendar.getInstance().getTimeInMillis();
             if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {
                 lastClickTime = currentTime;
