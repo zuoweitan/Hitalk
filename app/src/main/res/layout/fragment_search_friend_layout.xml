@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <com.mypopsy.widget.FloatingSearchView
         android:id="@+id/search"
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
         android:paddingRight="8dp"
         android:paddingLeft="8dp"
         android:background="#90000000"
-        android:hint="@string/hint"
+        android:hint="@string/searcg_hint"
         app:fsv_menu="@menu/search" />
 
 </android.support.design.widget.CoordinatorLayout>
