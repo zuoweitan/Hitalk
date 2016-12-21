@@ -55,4 +55,9 @@ public class Constants {
         public static final boolean DEFAULT_USE_RENDERSCRIPT = true;
     }
 
+    public final class SearchType{
+        public static final String SEARCH_TYPE = "SEARCH_TYPE";
+        public static final int SEARCH_FRIEND_TYPE =  0x01;
+    }
+
 }

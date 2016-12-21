@@ -55,7 +55,6 @@ public class DisplayUtil {
 
     /**
      * 将sp值转换为px值，保证文字大小不变
-     *
      * @param spValue
      * @param fontScale （DisplayMetrics类中属性scaledDensity）
      * @return

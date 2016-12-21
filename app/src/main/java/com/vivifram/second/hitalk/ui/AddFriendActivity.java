@@ -129,6 +129,7 @@ public class AddFriendActivity extends BaseActivity<AddFriendLayout>{
 
     @InterfaceInject(bindName = "onSearchItemClickListener")
     AddFriendLayout.OnSearchItemClickListener onSearchItemClickListener = ()->{
-        SearchActivity.startWithAnimation(this,mLayout.getShareElement());
+        SearchActivity.startWithAnimation(this,mLayout.getShareElement()
+                ,Constants.SearchType.SEARCH_FRIEND_TYPE);
     };
 }

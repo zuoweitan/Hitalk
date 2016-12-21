@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:transitionName="sharedName"
-        android:background="@color/hitalk_deep_yellow"
+        android:background="@color/transparent"
         />
 
     <FrameLayout

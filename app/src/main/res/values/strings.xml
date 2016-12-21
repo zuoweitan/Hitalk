@@ -131,4 +131,5 @@
     <string name="setupNotes">设置与备注</string>
     <string name="collegeTitle">学校</string>
     <string name="signTitle">个性签名</string>
+    <string name="wrong_search_type">错误的搜索码</string>
 </resources>

@@ -10,7 +10,10 @@ import android.view.View;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.BaseActivity;
 import com.vivifram.second.hitalk.base.LayoutInject;
+import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.ui.layout.SearchLayout;
+import com.vivifram.second.hitalk.ui.page.SearchFriendFragment;
+import com.zuowei.utils.common.NToast;
 
 /**
  * 项目名称：Hitalk
@@ -28,9 +31,10 @@ public class SearchActivity extends BaseActivity<SearchLayout>{
         start(c,SearchActivity.class);
     }
 
-    public static void startWithAnimation(Activity activity, View shared){
+    public static void startWithAnimation(Activity activity, View shared, int searchType){
         Intent intent = new Intent(activity,SearchActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constants.SearchType.SEARCH_TYPE,searchType);
         activity.startActivity(intent
                 ,ActivityOptions.makeSceneTransitionAnimation(activity,shared,"sharedName").toBundle());
     }
@@ -39,6 +43,18 @@ public class SearchActivity extends BaseActivity<SearchLayout>{
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_search_layout);
+        Intent intent = getIntent();
+        int searchType = intent.getIntExtra(Constants.SearchType.SEARCH_TYPE,-1);
+        bindContent(searchType);
+    }
 
+    private void bindContent(int searchType) {
+        switch (searchType){
+            case Constants.SearchType.SEARCH_FRIEND_TYPE:
+                    mLayout.bind(getSupportFragmentManager(),new SearchFriendFragment());
+                return;
+        }
+
+        NToast.shortToast(mAppCtx,R.string.wrong_search_type);
     }
 }

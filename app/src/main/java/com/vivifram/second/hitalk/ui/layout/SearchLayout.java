@@ -1,6 +1,10 @@
 package com.vivifram.second.hitalk.ui.layout;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
+
+import com.vivifram.second.hitalk.R;
 
 /**
  * 项目名称：Hitalk
@@ -12,7 +16,19 @@ import android.view.View;
  * 修改备注：
  */
 public class SearchLayout extends BaseLayout{
+
     public SearchLayout(View rootView) {
         super(rootView);
+    }
+
+    @Override
+    public void onContentViewCreate(View view) {
+        super.onContentViewCreate(view);
+
+    }
+
+    public void bind(FragmentManager fragmentManager, Fragment fragment){
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment).commit();
     }
 }
