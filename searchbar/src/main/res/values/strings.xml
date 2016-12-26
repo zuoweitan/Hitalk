@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="fsv.transition.search.layout">fsv_transition_search_layout</string>
+    <string name="hint">Search</string>
+    <string name="speech_prompt">Say Something</string>
+    <string name="speech_not_supported">speech to text doesn\'t seems supported</string>
+    <string name="menu.clear">clear</string>
+    <string name="menu.tts">text to speech</string>
+    <string name="menu.toggle.icon">Icon Visible</string>
+    <string name="menu.icon.type">Icon Type</string>
 </resources>

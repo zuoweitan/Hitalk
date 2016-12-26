@@ -4,7 +4,7 @@ buildscript {
     repositories {
         jcenter()
         maven {
-            url "http://mvn.leancloud.cn/nexus/content/repositories/releases"
+            url "http://mvn.leancloud.cn/nexus/content/repositories/public"
         }
     }
     dependencies {
@@ -20,8 +20,9 @@ allprojects {
     repositories {
         jcenter()
         maven {
-            url "http://mvn.leancloud.cn/nexus/content/repositories/releases"
+            url "http://mvn.leancloud.cn/nexus/content/repositories/public"
         }
+        maven { url "https://jitpack.io" }
     }
 }
 

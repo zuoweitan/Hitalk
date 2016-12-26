@@ -59,7 +59,7 @@ dependencies {
     compile 'org.greenrobot:greendao:2.2.0'
     compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
     compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
-    compile 'cn.leancloud.android:avoscloud-sdk:v3.+'
+    compile ('cn.leancloud.android:avoscloud-sdk:v3.+')
     compile('cn.leancloud.android:avoscloud-push:v3.+@aar') { transitive = true }
     compile 'cn.leancloud.android:avoscloud-statistics:v3.+'
     compile 'cn.leancloud.android:avoscloud-feedback:v3.+@aar'

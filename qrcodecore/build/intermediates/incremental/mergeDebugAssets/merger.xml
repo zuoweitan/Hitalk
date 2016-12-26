@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/zuowei/sundires/Hitalk/qrcodecore/src/main/assets"/><source path="/home/zuowei/sundires/Hitalk/qrcodecore/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/home/zuowei/sundires/Hitalk/qrcodecore/src/debug/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/home/zuowei/workspace/hitalk_lean/qrcodecore/src/main/assets"/><source path="/home/zuowei/workspace/hitalk_lean/qrcodecore/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/home/zuowei/workspace/hitalk_lean/qrcodecore/src/debug/assets"/></dataSet></merger>
