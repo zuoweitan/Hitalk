@@ -6,6 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.vivifram.second.hitalk.ui.springview.widget.SpringView
+        android:id="@+id/searchSv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        app:give="both"
+        app:type="follow">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/searchRtRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.vivifram.second.hitalk.ui.springview.widget.SpringView>
+
+
     <com.mypopsy.widget.FloatingSearchView
         android:id="@+id/fSearch"
         android:layout_width="match_parent"

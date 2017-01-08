@@ -57,7 +57,7 @@ public class ImagePreviewActivity extends Activity implements ViewTreeObserver.O
         imagePreviewAdapter = new ImagePreviewAdapter(this, imageInfo);
         viewPager.setAdapter(imagePreviewAdapter);
         viewPager.setCurrentItem(currentItem);
-        viewPager.getViewTreeObserver().addOnPreDrawListener(this);
+        viewPager.getViewTreeObserver().addfOnPreDrawListener(this);
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {

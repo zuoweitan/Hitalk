@@ -3,6 +3,8 @@ package com.vivifram.second.hitalk.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,7 @@ import java.util.List;
 public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragment {
     private static final String TAG = TagUtil.makeTag(BaseFragment.class);
     private static final String PREFIX = "com.vivifram.second.hitalk.ui.page.layout.";
+    protected WorkHandler workHandler;
     protected Context mAppCtx;
     protected T mLayout;
 
@@ -44,6 +48,7 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
         if (mLayout != null) {
             mLayout.setActivity(getActivity());
             mLayout.onActivitySet();
+            bindAllInterfaces();
             mLayout.onViewCreate(view);
         }
 
@@ -77,6 +82,29 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
                         eater.add(iEater);
                         EaterManager.getInstance().registerEater(eatMark.action(),iEater);
                     }
+                }
+            }
+        }
+    }
+
+    private void bindAllInterfaces() {
+        Field[] declaredFields = getClass().getDeclaredFields();
+        if (declaredFields != null) {
+            for (Field injectField : declaredFields) {
+                InterfaceInject annotation = injectField.getAnnotation(InterfaceInject.class);
+                if (annotation == null) {
+                    continue;
+                }
+                String name = annotation.bindName();
+                try {
+                    Field field = mLayout.getClass().getDeclaredField(name);
+                    field.setAccessible(true);
+                    injectField.setAccessible(true);
+                    field.set(mLayout,injectField.get(this));
+                } catch (NoSuchFieldException e) {
+                    NLog.e(TAG,"bindAllInterfaces failed : ",e);
+                } catch (IllegalAccessException e) {
+                    NLog.e(TAG,"bindAllInterfaces failed : ",e);
                 }
             }
         }
@@ -130,6 +158,10 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
         if (mLayout != null) {
             mLayout.onDestroy();
         }
+        if (workHandler != null) {
+            workHandler.removeCallbacksAndMessages(null);
+            workHandler = null;
+        }
     }
 
     private void unInstallEatMark() {
@@ -137,6 +169,7 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
             EaterManager.getInstance().unRegisterEater(iEater);
         }
     }
+
 
     protected void onViewCreated(){}
 
@@ -164,6 +197,20 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
             }
         }
         return null;
+    }
+
+    protected class WorkHandler extends Handler{
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (isAdded()){
+                safeHandler(msg);
+            }
+        }
+
+        public void safeHandler(Message msg){
+
+        }
     }
 
 }

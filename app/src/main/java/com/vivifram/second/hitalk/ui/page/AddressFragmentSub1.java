@@ -7,6 +7,7 @@ import com.avos.avoscloud.AVUser;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.EatMark;
 import com.vivifram.second.hitalk.base.LayoutInject;
+import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.vivifram.second.hitalk.manager.chat.FriendsManager;
 import com.vivifram.second.hitalk.manager.chat.SchoolMatesManager;
@@ -15,15 +16,19 @@ import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.address.AddressActionParam;
+import com.zuowei.utils.common.Md5Utils;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.NToast;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.AbstractHandler;
+import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.UserCacheHelper;
 import com.zuowei.utils.pinyin.LetterComparator;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import bolts.Continuation;
 import bolts.Task;
@@ -113,7 +118,10 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
     }
 
     private void updateSchoolMates(Continuation<List<SchoolMate>,Void> continuation) {
-        SchoolMatesManager.getInstance().queryAllSchoolMates()
+        Map<String,Object> conditions = new HashMap<>();
+        conditions.put(Constants.User.COLLEGECODE_C
+                , Md5Utils.stringToMD5(HiTalkHelper.$().getCurrentUserCollege()));
+        SchoolMatesManager.getInstance().queryAllSchoolMates(conditions)
                 .continueWith(task -> {
                     final List<SchoolMate> result = task.getResult();
                     if (result != null){

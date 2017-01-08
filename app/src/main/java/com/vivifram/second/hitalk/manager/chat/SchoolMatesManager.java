@@ -17,6 +17,7 @@ import com.zuowei.utils.pinyin.CharacterParser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import bolts.Task;
 
@@ -46,7 +47,7 @@ public class SchoolMatesManager {
         return sInstance;
     }
 
-    public Task<List<SchoolMate>> queryAllSchoolMates(){
+    public Task<List<SchoolMate>> queryAllSchoolMates(Map<String,Object> conditions){
         return Task.callInBackground(()->{
             NLog.i(TagUtil.makeTag(getClass()),"queryAllSchoolMates");
             List<SchoolMate> results = new ArrayList<>();
@@ -55,10 +56,12 @@ public class SchoolMatesManager {
 
             avQuery.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
 
-            String collegeCode = Md5Utils.stringToMD5(HiTalkHelper.$().getCurrentUserCollege());
-
-            avQuery.whereEqualTo(Constants.User.COLLEGECODE_C,collegeCode)
-                    .whereNotEqualTo(Constants.User.OBJECTID_C,HiTalkHelper.getInstance().getCurrentUserId());
+            if (conditions != null) {
+                for (Map.Entry<String, Object> condition : conditions.entrySet()) {
+                    avQuery.whereEqualTo(condition.getKey(),condition.getValue());
+                }
+            }
+            avQuery.whereNotEqualTo(Constants.User.OBJECTID_C,HiTalkHelper.getInstance().getCurrentUserId());
 
             List<AVUser> list = avQuery.find();
             NLog.i(TagUtil.makeTag(getClass()),"queryAllSchoolMates list = "+list);
