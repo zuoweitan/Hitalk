@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/coordinator"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/searchBarLt"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebarHeight"
+        android:background="@drawable/search_h_divider"
+        android:gravity="center_vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            android:layout_marginLeft="@dimen/marginMiddle"/>
+
+        <View
+            android:layout_marginLeft="@dimen/marginMiddle"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/search_v_divider"/>
+
+        <ImageView
+            android:layout_marginLeft="@dimen/marginSmall"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/search_f"/>
+
+        <EditText
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/marginSmall"
+            android:layout_marginRight="@dimen/marginSmall"
+            android:layout_marginBottom="@dimen/marginSmall"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/text_size_16"
+            android:background="@null"
+            android:textCursorDrawable="@drawable/edit_cursor"/>
+
+        <ImageView
+            android:id="@+id/clearIv"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_clear"
+            android:layout_marginRight="@dimen/marginSmall"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

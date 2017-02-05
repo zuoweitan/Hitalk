@@ -12,6 +12,7 @@ import com.vivifram.second.hitalk.base.BaseActivity;
 import com.vivifram.second.hitalk.base.LayoutInject;
 import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.ui.layout.SearchLayout;
+import com.vivifram.second.hitalk.ui.page.SearchFriend2Fragment;
 import com.vivifram.second.hitalk.ui.page.SearchFriendFragment;
 import com.zuowei.utils.common.NToast;
 
@@ -51,7 +52,8 @@ public class SearchActivity extends BaseActivity<SearchLayout>{
     private void bindContent(int searchType) {
         switch (searchType){
             case Constants.SearchType.SEARCH_FRIEND_TYPE:
-                    mLayout.bind(getSupportFragmentManager(),new SearchFriendFragment());
+                    //mLayout.bind(getSupportFragmentManager(),new SearchFriendFragment());
+                    mLayout.bind(getSupportFragmentManager(),new SearchFriend2Fragment());
                 return;
         }
 

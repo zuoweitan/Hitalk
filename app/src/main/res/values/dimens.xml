@@ -33,6 +33,10 @@
     <dimen name="marginMiddle">10dp</dimen>
     <dimen name="marginLarge">15dp</dimen>
     <dimen name="marginLarge_large">20dp</dimen>
+    <dimen name="margin_30">30dp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="margin_50">50dp</dimen>
+    <dimen name="margin_60">60dp</dimen>
 
     <dimen name="heightSmall">32dp</dimen>
     <dimen name="heightMiddle">48dp</dimen>
