@@ -19,6 +19,8 @@
 
     <dimen name="tabHeight">48dp</dimen>
     <dimen name="titlebarHeight">52dp</dimen>
+    <dimen name="commonHeight">52dp</dimen>
+
     <dimen name="textSize16">16dp</dimen>
     <dimen name="textSize18">18dp</dimen>
     <dimen name="textSize20">20dp</dimen>

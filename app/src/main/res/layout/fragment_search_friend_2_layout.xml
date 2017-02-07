@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:id="@+id/coordinator"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -16,6 +15,7 @@
         android:weightSum="1">
 
         <ImageView
+            android:id="@+id/backIv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/back"
@@ -34,6 +34,7 @@
             android:src="@drawable/search_f"/>
 
         <EditText
+            android:id="@+id/searchEt"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -42,6 +43,8 @@
             android:layout_marginBottom="@dimen/marginSmall"
             android:gravity="center_vertical"
             android:textSize="@dimen/text_size_16"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:background="@null"
             android:textCursorDrawable="@drawable/edit_cursor"/>
 
@@ -52,6 +55,39 @@
             android:src="@drawable/ic_clear"
             android:layout_marginRight="@dimen/marginSmall"
             />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/searchStartLt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/commonHeight"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/search_start_bg"
+        android:orientation="horizontal"
+        >
+        <FrameLayout
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/search_start_icon"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp">
+            <View
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/search_w"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/searchStartTv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|left"
+            android:layout_marginLeft="10dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_size_16"
+            android:textColor="@color/black_deep"/>
 
     </LinearLayout>
 
