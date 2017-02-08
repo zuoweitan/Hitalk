@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import com.vivifram.second.hitalk.HiTalkApplication;
+import com.vivifram.second.hitalk.ui.ParamsPool;
 import com.vivifram.second.hitalk.ui.layout.BaseLayout;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.IEater;
@@ -20,7 +21,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -33,6 +36,8 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
     protected T mLayout;
     protected InputMethodManager inputMethodManager;
     private static CopyOnWriteArrayList<BaseActivity> sAliveActivities = new CopyOnWriteArrayList<>();
+    private Map<Integer,Object> sParamsPool = ParamsPool.$();
+    protected Object params;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -55,6 +60,8 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
 
         sAliveActivities.add(this);
         checkAndInstallEatMark();
+
+        params = removeParams(getIntent());
     }
 
     private List<IEater> eater = new ArrayList<>();
@@ -109,6 +116,7 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
         }
         sAliveActivities.remove(this);
         unInstallEatMark();
+
     }
 
     private void unInstallEatMark() {
@@ -238,5 +246,25 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
         Intent intent = new Intent(ctx,c);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         ctx.startActivity(intent);
+    }
+
+    public static <T extends BaseActivity> void start(Context ctx,Class<T> c,int key){
+        if (ctx == null) {
+            return;
+        }
+        Intent intent = new Intent(ctx,c);
+        intent.putExtra("key",key);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ctx.startActivity(intent);
+    }
+
+    private Object removeParams(Intent intent){
+        if (intent != null) {
+            int key = intent.getIntExtra("key",-1);
+            Object params = sParamsPool.get(key);
+            sParamsPool.remove(key);
+            return params;
+        }
+        return null;
     }
 }

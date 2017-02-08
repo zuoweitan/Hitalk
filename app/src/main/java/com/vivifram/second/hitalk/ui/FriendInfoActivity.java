@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.BaseActivity;
 import com.vivifram.second.hitalk.base.LayoutInject;
+import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.vivifram.second.hitalk.ui.layout.FriendInfoLayout;
 
 /**
@@ -20,13 +21,14 @@ import com.vivifram.second.hitalk.ui.layout.FriendInfoLayout;
 @LayoutInject(name = "FriendInfoLayout")
 public class FriendInfoActivity extends BaseActivity<FriendInfoLayout>{
 
-    public static void start(Context c){
-        start(c,FriendInfoActivity.class);
+    public static void start(Context c,int key){
+        start(c,FriendInfoActivity.class,key);
     }
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_friend_info_layout);
+        SchoolMate schoolMate = (SchoolMate) params;
     }
 }

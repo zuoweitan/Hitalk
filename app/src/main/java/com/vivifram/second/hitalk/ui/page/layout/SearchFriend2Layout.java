@@ -15,6 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.vivifram.second.hitalk.R;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.NoDoubleClickListener;
+import com.zuowei.utils.common.TagUtil;
 
 /**
  * Created by zuowei on 17-2-5.
@@ -24,6 +27,7 @@ public class SearchFriend2Layout extends BaseFragmentLayout{
 
     public interface OnSearchBarListener{
         void onback();
+        void onSearchStart(String s);
     }
 
     public SearchFriend2Layout(View root) {
@@ -35,6 +39,7 @@ public class SearchFriend2Layout extends BaseFragmentLayout{
     private TextView searchStartTv;
     private ImageView backIv;
     private ImageView clearIv;
+    private TextView notFountTv;
     private OnSearchBarListener onSearchBarListener;
 
     private SpannableStringBuilder startContentBuilder = new SpannableStringBuilder();
@@ -49,6 +54,7 @@ public class SearchFriend2Layout extends BaseFragmentLayout{
 
         backIv = (ImageView) findViewById(R.id.backIv);
         clearIv = (ImageView) findViewById(R.id.clearIv);
+        notFountTv = (TextView) findViewById(R.id.notFoundTv);
 
         backIv.setOnClickListener(View -> {
             if (onSearchBarListener != null) {
@@ -62,7 +68,18 @@ public class SearchFriend2Layout extends BaseFragmentLayout{
             }
         });
 
+        searchStartLt.setOnClickListener(new NoDoubleClickListener() {
+            @Override
+            public void onNoDoubleClick(View v) {
+                NLog.i(TagUtil.makeTag(getClass()),"onNoDoubleClick search key = "+searchEt.getText());
+                if (onSearchBarListener != null && !TextUtils.isEmpty(searchEt.getText())) {
+                    onSearchBarListener.onSearchStart(searchEt.getText() + "");
+                }
+            }
+        });
+
         showSearchContent(false);
+        showNotFount(false);
 
         searchEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -80,6 +97,8 @@ public class SearchFriend2Layout extends BaseFragmentLayout{
                     showClear(true);
                     setStartContent(s + "");
                 }
+
+                showNotFount(false);
             }
 
             @Override
@@ -89,7 +108,7 @@ public class SearchFriend2Layout extends BaseFragmentLayout{
         });
     }
 
-    private void showSearchContent(boolean show){
+    public void showSearchContent(boolean show){
         if (searchStartLt != null) {
             searchStartLt.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
         }
@@ -98,6 +117,12 @@ public class SearchFriend2Layout extends BaseFragmentLayout{
     private void showClear(boolean show){
         if (clearIv != null) {
             clearIv.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+        }
+    }
+
+    public void showNotFount(boolean show){
+        if (notFountTv != null) {
+            notFountTv.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
         }
     }
 

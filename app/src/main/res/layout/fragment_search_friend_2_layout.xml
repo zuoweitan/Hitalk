@@ -45,6 +45,7 @@
             android:textSize="@dimen/text_size_16"
             android:maxLines="1"
             android:ellipsize="end"
+            android:singleLine="true"
             android:background="@null"
             android:textCursorDrawable="@drawable/edit_cursor"/>
 
@@ -64,6 +65,7 @@
         android:layout_marginTop="2dp"
         android:background="@drawable/search_start_bg"
         android:orientation="horizontal"
+        android:clickable="true"
         >
         <FrameLayout
             android:layout_width="45dp"
@@ -85,10 +87,22 @@
             android:gravity="center_vertical|left"
             android:layout_marginLeft="10dp"
             android:maxLines="1"
+            android:singleLine="true"
             android:ellipsize="end"
             android:textSize="@dimen/text_size_16"
             android:textColor="@color/black_deep"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/notFoundTv"
+        android:layout_width="match_parent"
+        android:layout_height="102dp"
+        android:background="@color/colorWhite"
+        android:layout_marginTop="-52dp"
+        android:textColor="@color/color_888888"
+        android:text="@string/user_not_found"
+        android:textSize="@dimen/text_size_16"
+        android:gravity="center"/>
 
 </LinearLayout>

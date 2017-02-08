@@ -133,4 +133,5 @@
     <string name="signTitle">个性签名</string>
     <string name="wrong_search_type">错误的搜索码</string>
     <string name="searcg_hint">Search</string>
+    <string name="user_not_found">用户没有找到</string>
 </resources>
