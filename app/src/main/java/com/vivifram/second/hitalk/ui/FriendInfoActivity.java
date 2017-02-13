@@ -30,5 +30,11 @@ public class FriendInfoActivity extends BaseActivity<FriendInfoLayout>{
         super.onCreate(arg0);
         setContentView(R.layout.activity_friend_info_layout);
         SchoolMate schoolMate = (SchoolMate) params;
+        mLayout.bindSchoolMate(schoolMate);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

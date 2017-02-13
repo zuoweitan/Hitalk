@@ -73,7 +73,10 @@ public class SchoolMatesManager {
                     UserBeanCacheHelper.getInstance().cacheUser(user);
                     SchoolMate schoolMate  = new SchoolMate();
                     schoolMate.setNickName(user.getNick())
-                            .setUserId(user.getObjectId());
+                            .setUserId(user.getObjectId())
+                            .setSex(user.getSex())
+                            .setCollege(user.getCollege())
+                            .setInterest(user.getInterest());
                     fillLetters(schoolMate);
                     NLog.i(TagUtil.makeTag(getClass()),"schoolMate = "+schoolMate);
                     results.add(schoolMate);

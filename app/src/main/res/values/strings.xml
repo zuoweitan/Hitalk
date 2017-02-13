@@ -129,9 +129,11 @@
     <string name="title_friend_info">详细资料</string>
     <string name="hitalkPrefix">HI聊号: </string>
     <string name="setupNotes">设置与备注</string>
-    <string name="collegeTitle">学校</string>
-    <string name="signTitle">个性签名</string>
+    <string name="collegeTitle">学校:</string>
+    <string name="signTitle">个性签名:</string>
+    <string name="sinature">签名</string>
     <string name="wrong_search_type">错误的搜索码</string>
     <string name="searcg_hint">Search</string>
     <string name="user_not_found">用户没有找到</string>
+    <string name="blackboard">黑板报</string>
 </resources>

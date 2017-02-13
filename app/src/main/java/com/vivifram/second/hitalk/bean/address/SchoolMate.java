@@ -14,6 +14,12 @@ public class SchoolMate extends LetterMark implements Indexable{
 
     private String sInfo;
 
+    private int sex;
+
+    private String college;
+
+    private String interest;
+
     public String getNickName() {
         return nickName;
     }
@@ -38,6 +44,33 @@ public class SchoolMate extends LetterMark implements Indexable{
 
     public SchoolMate setUserId(String userId) {
         this.userId = userId;
+        return this;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public SchoolMate setSex(int sex) {
+        this.sex = sex;
+        return this;
+    }
+
+    public String getCollege() {
+        return college;
+    }
+
+    public SchoolMate setCollege(String college) {
+        this.college = college;
+        return this;
+    }
+
+    public String getInterest() {
+        return interest;
+    }
+
+    public SchoolMate setInterest(String interest) {
+        this.interest = interest;
         return this;
     }
 

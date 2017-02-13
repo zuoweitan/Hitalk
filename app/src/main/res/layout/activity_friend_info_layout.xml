@@ -15,6 +15,9 @@
         app:bgatitlebar_titleTextColor="@color/color_272636" />
 
 
+    <View
+        style="@style/divider_style"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -22,18 +25,21 @@
         >
 
         <com.vivifram.second.hitalk.ui.view.AvatarView
+            android:id="@+id/avtarIv"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
-            android:src="@drawable/default_avatar"/>
+            android:src="@drawable/default_avatar"
+            app:avatar_border_width="0dp"
+            app:avatar_border_color="@color/transparent"/>
 
 
         <TextView
             android:id="@+id/nickTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:layout_marginLeft="80dp"
             android:layout_marginTop="20dp"
             android:text="hello"
@@ -42,12 +48,12 @@
 
         <ImageView
             android:id="@+id/sexIv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginTop="25dp"
             android:src="@drawable/profile_ic_male"
             android:layout_toRightOf="@id/nickTv"
-            android:layout_marginLeft="3dp"
+            android:layout_marginLeft="6dp"
             />
 
         <LinearLayout
@@ -56,16 +62,16 @@
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:layout_marginLeft="80dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="45dp"
             >
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hitalkPrefix"
-                android:textSize="14sp"/>
+                android:text="@string/collegeTitle"
+                android:textSize="14sp"/>-->
 
             <TextView
-                android:id="@+id/hitalkNoTv"
+                android:id="@+id/collegeTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -82,7 +88,7 @@
         android:background="@color/colorWhite"
         >
 
-        <TextView
+        <!--<TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -95,7 +101,7 @@
             style="@style/detail_arrow_style"
             android:src="@drawable/detail_arrow"
             android:layout_gravity="center_vertical|right"
-            />
+            />-->
 
     </FrameLayout>
 
@@ -105,40 +111,12 @@
         android:background="@color/colorWhite"
         >
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_marginTop="12dp"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="8dp"
-                android:text="@string/collegeTitle"
-                android:textSize="14sp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="80dp"
-                android:text="重庆邮电大学"
-                android:textSize="16sp"
-                android:textColor="@color/black_deep"
-                />
-
-        </FrameLayout>
-
         <View
             style="@style/divider_style"/>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_marginTop="12dp"
+            android:layout_height="42dp"
             >
 
             <TextView
@@ -151,6 +129,7 @@
                 />
 
             <TextView
+                android:id="@+id/signatureTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -164,6 +143,31 @@
 
         </FrameLayout>
 
+        <View
+            style="@style/divider_style"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:text="@string/blackboard"
+                android:textSize="14sp"
+                />
+
+            <ImageView
+                style="@style/detail_arrow_style"
+                android:src="@drawable/detail_arrow"
+                android:layout_gravity="center_vertical|right"
+                />
+
+        </FrameLayout>
+
     </LinearLayout>
 
     <com.vivifram.second.hitalk.ui.view.ShrinkButton
@@ -173,11 +177,12 @@
         android:layout_marginLeft="@dimen/marginLarge_large"
         android:layout_marginRight="@dimen/marginLarge_large"
         android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
         android:background="@drawable/button_rounded_color_accent_background"
         android:text="@string/add_friend"
         android:textSize="@dimen/button_sign_in_text_size"
         android:textColor="@color/colorWhite"
-        android:elevation="6dp"/>
+        android:elevation="6dp" />
 
 
 </LinearLayout>

@@ -34,6 +34,12 @@ public class Constants {
         public static final String COLLEGECODE_C = "collegeCode";
         public static final String NICKNAME_C = "nickName";
         public static final String COLLEGE_C = "college";
+        public static final String SEX_C = "sex";
+
+        public class SEX{
+            public static final int MAIL = 1;
+            public static final int FEMALE = 2;
+        }
     }
 
     public final class BlurDialog{
