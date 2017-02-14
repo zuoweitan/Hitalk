@@ -91,9 +91,7 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
                             }else {
                                 NToast.shortToast(mAppCtx,R.string.request_send);
                             }
-                            if (dialog != null) {
-                                dialog.dismiss();
-                            }
+                            dialog.dismiss();
                             return error == null;
                         }, Task.UI_THREAD_EXECUTOR).continueWith(continueTask);
             }

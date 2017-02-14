@@ -3,6 +3,8 @@ package com.zuowei.utils.common;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -27,5 +29,24 @@ public class JsonUtils {
            return null;
         }
         return object.toString();
+    }
+
+    public static List<Object> toObjectList(String json){
+        List<Object> list;
+        if (json != null) {
+            try {
+                JSONObject jsonObject = new JSONObject(json);
+                list = new ArrayList<>();
+                Iterator<String> keys = jsonObject.keys();
+                while (keys.hasNext()){
+                    list.add(jsonObject.get(keys.next()));
+                }
+                return list;
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
     }
 }

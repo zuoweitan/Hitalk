@@ -1,13 +1,24 @@
 package com.vivifram.second.hitalk.ui.layout;
 
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
+import com.vivifram.second.hitalk.ui.view.BGATitlebar;
+import com.vivifram.second.hitalk.ui.view.ShrinkButton;
+import com.zuowei.utils.common.DisplayUtil;
+import com.zuowei.utils.common.JsonUtils;
+import com.zuowei.utils.common.TextSpanUtils;
 import com.zuowei.utils.helper.ChatHelper;
+
+import java.util.List;
 
 /**
  * 项目名称：Hitalk
@@ -28,7 +39,15 @@ public class FriendInfoLayout extends BaseLayout{
     private TextView nickTv;
     private ImageView sexIv;
     private TextView collegeTv;
-    private TextView signatureTv;
+    private EditText interestEt;
+    private BGATitlebar titlebar;
+    private ShrinkButton shrinkButton;
+    private OnLayoutActionListener onLayoutActionListener;
+
+    public interface OnLayoutActionListener{
+        void onBack();
+        void addFriend();
+    }
 
     @Override
     public void onContentViewCreate(View view) {
@@ -38,7 +57,28 @@ public class FriendInfoLayout extends BaseLayout{
         nickTv = (TextView) findViewById(R.id.nickTv);
         sexIv = (ImageView) findViewById(R.id.sexIv);
         collegeTv = (TextView) findViewById(R.id.collegeTv);
-        signatureTv = (TextView) findViewById(R.id.signatureTv);//// TODO: 17-2-13 change the signature to interest
+        interestEt = (EditText) findViewById(R.id.interestEt);
+
+        titlebar = (BGATitlebar) findViewById(R.id.titleBar);
+        titlebar.setDelegate(new BGATitlebar.BGATitlebarDelegate(){
+            @Override
+            public void onClickLeftCtv() {
+                super.onClickLeftCtv();
+                if (onLayoutActionListener != null) {
+                    onLayoutActionListener.onBack();
+                }
+            }
+        });
+
+        shrinkButton = (ShrinkButton) findViewById(R.id.addFriendSb);
+        shrinkButton.setOnClickListener(View -> {
+            shrinkButton.setEnabled(false);
+            if (onLayoutActionListener != null) {
+                onLayoutActionListener.addFriend();
+            } else {
+                enableAddFriend();
+            }
+        });
     }
 
     public void bindSchoolMate(SchoolMate schoolMate){
@@ -58,6 +98,31 @@ public class FriendInfoLayout extends BaseLayout{
         }
 
         collegeTv.setText(schoolMate.getCollege());
+        fillInterest(schoolMate.getInterest());
+    }
+
+    private void fillInterest(String interests){
+        List<Object> interestList = JsonUtils.toObjectList(interests);
+        if (interestList != null){
+            SpannableStringBuilder sb = new SpannableStringBuilder();
+            SpannableString s;
+            for (Object interestObj : interestList){
+                String item = interestObj + "";
+                s = new SpannableString(item);
+                s.setSpan(TextSpanUtils.getTextWithBackground(mRes.getDrawable(R.drawable.text_backgroud,null),
+                        DisplayUtil.dip2px(mAppCtx,16), DisplayUtil.dip2px(mAppCtx,12), mRes.getColor(R.color.hint)),
+                        0,item.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+                sb.append(s);
+                sb.append(" ");
+            }
+            interestEt.clearComposingText();
+            interestEt.setText(sb);
+        }
+    }
+
+    public void enableAddFriend(){
+        shrinkButton.setEnabled(true);
+        shrinkButton.reset();
     }
 
 }

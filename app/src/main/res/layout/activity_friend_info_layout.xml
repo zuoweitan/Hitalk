@@ -124,20 +124,22 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="8dp"
-                android:text="@string/signTitle"
+                android:text="@string/interestTips"
                 android:textSize="14sp"
                 />
 
-            <TextView
-                android:id="@+id/signatureTv"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/interestEt"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="80dp"
-                android:text="渴望自由"
-                android:maxLines="1"
+                android:layout_marginRight="8dp"
+                android:editable="false"
+                style="@style/inputStyle"
+                android:singleLine="true"
                 android:ellipsize="end"
-                android:textSize="16sp"
+                android:background="@color/transparent"
                 android:textColor="@color/black_deep"
                 />
 
@@ -171,7 +173,7 @@
     </LinearLayout>
 
     <com.vivifram.second.hitalk.ui.view.ShrinkButton
-        android:id="@+id/btnSignIn"
+        android:id="@+id/addFriendSb"
         android:layout_width="match_parent"
         android:layout_height="@dimen/heightMiddle"
         android:layout_marginLeft="@dimen/marginLarge_large"
