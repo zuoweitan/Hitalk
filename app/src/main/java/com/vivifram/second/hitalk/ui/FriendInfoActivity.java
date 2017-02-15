@@ -4,11 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.BaseActivity;
 import com.vivifram.second.hitalk.base.InterfaceInject;
 import com.vivifram.second.hitalk.base.LayoutInject;
+import com.vivifram.second.hitalk.bean.address.AddRequest;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.vivifram.second.hitalk.manager.chat.FriendsManager;
 import com.vivifram.second.hitalk.ui.layout.FriendInfoLayout;
@@ -16,6 +19,9 @@ import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.NToast;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.UserCacheHelper;
+
+import java.util.HashMap;
+import java.util.List;
 
 import bolts.Task;
 
@@ -43,6 +49,39 @@ public class FriendInfoActivity extends BaseActivity<FriendInfoLayout>{
         setContentView(R.layout.activity_friend_info_layout);
         schoolMate = (SchoolMate) params;
         mLayout.bindSchoolMate(schoolMate);
+        mLayout.disableButton();
+        updateLayout();
+    }
+
+    private void updateLayout() {
+        HashMap<String,Object> conditions = new HashMap<>();
+        conditions.put(AddRequest.TO_USER, UserCacheHelper.getInstance().getCachedAVUser(schoolMate.getUserId()));//this works
+        FriendsManager.getInstance().findSendRequests(new FindCallback<AddRequest>() {
+            @Override
+            public void done(List<AddRequest> list, AVException e) {
+                if (e == null){
+                    if (list != null) {
+                        if (list.size() > 0){
+                            AddRequest addRequest = list.get(0);
+                            int status = addRequest.getStatus();
+                            if (status == AddRequest.STATUS_DONE){
+                                mLayout.setButtonType(2);
+                                mLayout.enableButton();
+                            } else {
+                                mLayout.setButtonType(3);
+                                mLayout.disableButton();
+                            }
+                        } else {
+                            mLayout.setButtonType(1);
+                            mLayout.enableButton();
+                        }
+                    } else {
+                        mLayout.setButtonType(1);
+                        mLayout.enableButton();
+                    }
+                }
+            }
+        },false,conditions);
     }
 
     @InterfaceInject(bindName = "onLayoutActionListener")
@@ -56,9 +95,18 @@ public class FriendInfoActivity extends BaseActivity<FriendInfoLayout>{
         public void addFriend() {
             doAddFriend();
         }
+
+        @Override
+        public void onTalkWithFriend() {
+            doTalk();
+        }
     };
 
-    private void doAddFriend() {//// TODO: 17-2-14 need to upload schoolmate add 
+    private void doTalk() {
+
+    }
+
+    private void doAddFriend() {//// TODO: 17-2-14 need to upload schoolmate friend state
         final MaterialDialog dialog = new MaterialDialog.Builder(this)
                 .content(R.string.request_sending)
                 .progress(true, 0)
@@ -77,13 +125,12 @@ public class FriendInfoActivity extends BaseActivity<FriendInfoLayout>{
                         }else {
                             NToast.shortToast(mAppCtx,R.string.request_send);
                         }
-
                         dialog.dismiss();
-                        mLayout.enableAddFriend();
+                        finish();
                         return error == null;
                     }, Task.UI_THREAD_EXECUTOR);
         } else {
-            mLayout.enableAddFriend();
+            mLayout.enableButton();
         }
     }
 

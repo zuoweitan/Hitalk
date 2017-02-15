@@ -110,7 +110,7 @@ public class EmojiconScrollTabBar extends RelativeLayout{
                         return;
                     }
 
-                    int childWidth = (int)tabContainer.getChildAt(position).getWidth();
+                    int childWidth = tabContainer.getChildAt(position).getWidth();
                     int hsvWidth = scrollView.getWidth();
                     int childRight = childX + childWidth;
                     int scrollRight = mScrollX + hsvWidth;

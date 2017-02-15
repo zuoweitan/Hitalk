@@ -176,7 +176,7 @@ public class SnsPopupWindow extends PopupWindow implements OnClickListener{
 	/**
 	 * 功能描述：弹窗子类项按钮监听事件
 	 */
-	public static interface OnItemClickListener {
-		public void onItemClick(SnsActionItem item, int position);
+	public interface OnItemClickListener {
+		void onItemClick(SnsActionItem item, int position);
 	}
 }

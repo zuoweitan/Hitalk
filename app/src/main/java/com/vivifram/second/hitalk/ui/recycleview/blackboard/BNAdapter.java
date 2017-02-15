@@ -112,7 +112,7 @@ public class BNAdapter extends BaseRecycleViewAdapter<BnItem,RecyclerView.ViewHo
 
             final int bnPosition = position - HEADVIEW_SIZE;
             final BnItemViewHolder holder = (BnItemViewHolder) viewHolder;
-            BnItem bnItem = (BnItem) datas.get(bnPosition);
+            BnItem bnItem = datas.get(bnPosition);
             final String circleId = bnItem.getId();
             String name = bnItem.getUser().getNick();
             String headImg = bnItem.getUser().getAvatar();
@@ -291,13 +291,9 @@ public class BNAdapter extends BaseRecycleViewAdapter<BnItem,RecyclerView.ViewHo
     }
 
     private boolean isCommentFromMe(CommentItem commentItem){
-        if (commentItem != null
+        return commentItem != null
                 && BnDataProvider.$().curUser.getObjectId().equals(
-                commentItem.getUser().getObjectId())) {
-            return true;
-        } else {
-            return false;
-        }
+                commentItem.getUser().getObjectId());
     }
 
     @Override

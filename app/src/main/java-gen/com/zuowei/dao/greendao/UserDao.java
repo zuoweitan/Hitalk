@@ -28,7 +28,7 @@ public class UserDao extends AbstractDao<User, String> {
         public final static Property College = new Property(4, String.class, "college", false, "COLLEGE");
         public final static Property Sex = new Property(5, Integer.class, "sex", false, "SEX");
         public final static Property Interest = new Property(6, String.class, "interest", false, "INTEREST");
-    };
+    }
 
 
     public UserDao(DaoConfig config) {

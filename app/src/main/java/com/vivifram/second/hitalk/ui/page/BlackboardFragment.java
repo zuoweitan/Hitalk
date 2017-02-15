@@ -70,7 +70,7 @@ public class BlackboardFragment extends LazyFragment<BlackboardFragmentLayout>
         mLayout.setBnItemOnClickListener(this);
         mLayout.setBcItemsRefreshListener(this);
         mLayout.setmOnTitleClickListener(this);
-        loadData(mLayout.TYPE_PULLREFRESH);
+        loadData(BlackboardFragmentLayout.TYPE_PULLREFRESH);
     }
 
     @Override

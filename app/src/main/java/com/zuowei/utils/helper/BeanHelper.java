@@ -53,7 +53,7 @@ public class BeanHelper {
     }
 
     public static Task<Bean> deleteBean(final Bean bean){
-        return Task.<Bean>callInBackground(new Callable<Bean>() {
+        return Task.callInBackground(new Callable<Bean>() {
             @Override
             public Bean call() throws Exception {
                 BeanDao beanDao = DaoHelper.getInstance().getBeansDao();
@@ -64,7 +64,7 @@ public class BeanHelper {
     }
 
     public static Task<Void> deleteBean(final String id){
-        return Task.<Void>callInBackground(new Callable<Void>() {
+        return Task.callInBackground(new Callable<Void>() {
             @Override
             public Void call() throws Exception {
                 BeanDao beanDao = DaoHelper.getInstance().getBeansDao();

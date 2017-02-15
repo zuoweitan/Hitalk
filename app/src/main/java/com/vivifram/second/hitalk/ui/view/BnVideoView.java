@@ -45,7 +45,7 @@ public class BnVideoView extends LinearLayout implements VideoLoadMvpView, ListI
     private static final int STATE_DEACTIVED = 2;
     private int videoState = STATE_IDLE;
 
-    private int postion;;
+    private int postion;
     private String videoUrl;
 
     private OnPlayClickListener onPlayClickListener;
@@ -199,7 +199,7 @@ public class BnVideoView extends LinearLayout implements VideoLoadMvpView, ListI
         }
     }
 
-    public static interface OnPlayClickListener{
+    public interface OnPlayClickListener{
         void onPlayClick(int pos);
     }
 

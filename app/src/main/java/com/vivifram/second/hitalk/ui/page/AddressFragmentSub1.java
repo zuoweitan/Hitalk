@@ -119,13 +119,13 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
         Map<String,Object> conditions = new HashMap<>();
         conditions.put(Constants.User.COLLEGECODE_C
                 , Md5Utils.stringToMD5(HiTalkHelper.$().getCurrentUserCollege()));
-        SchoolMatesManager.getInstance().queryAllSchoolMates(conditions)
+        SchoolMatesManager.getInstance().queryAllSchoolMatesWithState(conditions)
                 .continueWith(task -> {
                     final List<SchoolMate> result = task.getResult();
                     if (result != null){
                         Collections.sort(result,new LetterComparator<>());
                         if (continuation != null) {
-                            Task.<List<SchoolMate>>forResult(result)
+                            Task.forResult(result)
                                     .continueWith(continuation,Task.UI_THREAD_EXECUTOR);
                         }
                     }else {

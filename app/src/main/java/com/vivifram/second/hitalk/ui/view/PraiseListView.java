@@ -116,7 +116,7 @@ public class PraiseListView extends TextView{
     }
 
 
-    public static interface OnItemClickListener{
-        public void onClick(int position);
+    public interface OnItemClickListener{
+        void onClick(int position);
     }
 }

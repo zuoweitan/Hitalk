@@ -42,8 +42,10 @@ public class SpringView extends ViewGroup{
     private int MOVE_TIME_OVER = 200;
 
     //是否需要回调接口：TOP 只回调刷新、BOTTOM 只回调加载更多、BOTH 都需要、NONE 都不
-    public enum Give {BOTH, TOP, BOTTOM,NONE};
-    public enum Type {OVERLAP,FOLLOW};
+    public enum Give {BOTH, TOP, BOTTOM,NONE}
+
+    public enum Type {OVERLAP,FOLLOW}
+
     private Give give = Give.BOTH;
     private Type type = Type.OVERLAP;
     private Type _type;
@@ -363,9 +365,9 @@ public class SpringView extends ViewGroup{
             //根据下拉高度计算位移距离，（越拉越慢）
             int movedy;
             if (dy>0) {
-                movedy = (int) ((float) ((MAX_HEADER_PULL_HEIGHT - contentView.getTop()) / (float) MAX_HEADER_PULL_HEIGHT) * dy / MOVE_PARA);
+                movedy = (int) ((MAX_HEADER_PULL_HEIGHT - contentView.getTop()) / (float) MAX_HEADER_PULL_HEIGHT * dy / MOVE_PARA);
             }else {
-                movedy = (int) ((float) ((MAX_FOOTER_PULL_HEIGHT - (getHeight()-contentView.getBottom())) / (float) MAX_FOOTER_PULL_HEIGHT) * dy / MOVE_PARA);
+                movedy = (int) ((MAX_FOOTER_PULL_HEIGHT - (getHeight()-contentView.getBottom())) / (float) MAX_FOOTER_PULL_HEIGHT * dy / MOVE_PARA);
             }
             int top = contentView.getTop() + movedy;
             contentView.layout(contentView.getLeft(), top, contentView.getRight(), top + contentView.getMeasuredHeight());
@@ -373,11 +375,11 @@ public class SpringView extends ViewGroup{
             //根据下拉高度计算位移距离，（越拉越慢）
             int movedx;
             if (dy>0) {
-                movedx = (int) ((float) ((MAX_HEADER_PULL_HEIGHT + getScrollY()) / (float) MAX_HEADER_PULL_HEIGHT) * dy / MOVE_PARA);
+                movedx = (int) ((MAX_HEADER_PULL_HEIGHT + getScrollY()) / (float) MAX_HEADER_PULL_HEIGHT * dy / MOVE_PARA);
             }else {
-                movedx = (int) ((float) ((MAX_FOOTER_PULL_HEIGHT - getScrollY()) / (float) MAX_FOOTER_PULL_HEIGHT) * dy / MOVE_PARA);
+                movedx = (int) ((MAX_FOOTER_PULL_HEIGHT - getScrollY()) / (float) MAX_FOOTER_PULL_HEIGHT * dy / MOVE_PARA);
             }
-            scrollBy(0, (int)(-movedx));
+            scrollBy(0, -movedx);
         }
     }
 

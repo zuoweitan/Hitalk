@@ -50,7 +50,7 @@ public class ConnectivityNotifier extends BroadcastReceiver{
             listenersCopy = new ArrayList<>(listeners);
         }
         boolean connectionLost = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
-        boolean isConnected = !connectionLost ? isConnected(context.getApplicationContext()) : false;
+        boolean isConnected = !connectionLost && isConnected(context.getApplicationContext());
         for (ConnectivityListener delegate : listenersCopy) {
             delegate.networkConnectivityStatusChanged(isConnected);
         }

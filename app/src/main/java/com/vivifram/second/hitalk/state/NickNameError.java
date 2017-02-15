@@ -18,7 +18,7 @@ public class NickNameError implements Error<NickNameError.EMessage> {
 
         private String mMessage;
 
-        private EMessage(String message){
+        EMessage(String message){
             mMessage = message;
         }
 

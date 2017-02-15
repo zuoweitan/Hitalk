@@ -136,4 +136,5 @@
     <string name="searcg_hint">Search</string>
     <string name="user_not_found">用户没有找到</string>
     <string name="blackboard">黑板报</string>
+    <string name="sendMessage">发送消息</string>
 </resources>

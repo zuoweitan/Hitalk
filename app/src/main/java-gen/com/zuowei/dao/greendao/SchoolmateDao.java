@@ -24,7 +24,7 @@ public class SchoolmateDao extends AbstractDao<Schoolmate, String> {
         public final static Property UserId = new Property(0, String.class, "userId", true, "USER_ID");
         public final static Property FriendState = new Property(1, Integer.class, "friendState", false, "FRIEND_STATE");
         public final static Property CreateAt = new Property(2, java.util.Date.class, "createAt", false, "CREATE_AT");
-    };
+    }
 
 
     public SchoolmateDao(DaoConfig config) {

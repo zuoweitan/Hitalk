@@ -57,9 +57,11 @@ public class SchoolmatesCacheHelper {
     }
 
     public void cache(String uid,int friendState){
-        caches.put(uid,friendState);
-        AsyncSession asyncSession = DaoHelper.getInstance().wrapDao(DaoHelper.getInstance().getSchoolmateDao());
-        asyncSession.insertOrReplaceInTx(Schoolmate.class,new Schoolmate(uid,friendState,new Date()));
+        if (!caches.containsKey(uid)) {
+            caches.put(uid, friendState);
+            AsyncSession asyncSession = DaoHelper.getInstance().wrapDao(DaoHelper.getInstance().getSchoolmateDao());
+            asyncSession.insertOrReplaceInTx(Schoolmate.class, new Schoolmate(uid, friendState, new Date()));
+        }
     }
 
     public void update(String uid,int state){

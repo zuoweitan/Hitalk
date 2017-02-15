@@ -35,9 +35,7 @@ public class ChatHelper {
     }
 
     public boolean isMe(AVIMMessage message){
-        if (HiTalkHelper.getInstance().getCurrentUserId().equals(message.getFrom()))
-            return true;
-        return false;
+        return HiTalkHelper.getInstance().getCurrentUserId().equals(message.getFrom());
     }
 
     /**

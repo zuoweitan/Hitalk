@@ -27,7 +27,7 @@ public class TaskQueue {
   private Task<Void> getTaskToAwait() {
     lock.lock();
     try {
-      Task<Void> toAwait = tail != null ? tail : Task.<Void> forResult(null);
+      Task<Void> toAwait = tail != null ? tail : Task.forResult(null);
       return toAwait.continueWith( new Continuation<Void, Void>() {
         @Override
         public Void then(Task<Void> task) throws Exception {
@@ -52,7 +52,7 @@ public class TaskQueue {
     lock.lock();
     try {
       Task<T> task;
-      Task<Void> oldTail = tail != null ? tail : Task.<Void> forResult(null);
+      Task<Void> oldTail = tail != null ? tail : Task.forResult(null);
       // The task created by taskStart is responsible for waiting for the task passed into it before
       // doing its work (this gives it an opportunity to do startup work or save state before
       // waiting for its turn in the queue)

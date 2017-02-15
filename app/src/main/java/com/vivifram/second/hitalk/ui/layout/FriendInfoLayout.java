@@ -47,6 +47,7 @@ public class FriendInfoLayout extends BaseLayout{
     public interface OnLayoutActionListener{
         void onBack();
         void addFriend();
+        void onTalkWithFriend();
     }
 
     @Override
@@ -71,12 +72,18 @@ public class FriendInfoLayout extends BaseLayout{
         });
 
         shrinkButton = (ShrinkButton) findViewById(R.id.addFriendSb);
+        shrinkButton.setTag(R.id.button_type,1);
         shrinkButton.setOnClickListener(View -> {
             shrinkButton.setEnabled(false);
             if (onLayoutActionListener != null) {
-                onLayoutActionListener.addFriend();
+                int type = (int) shrinkButton.getTag(R.id.button_type);
+                if (type == 1) {
+                    onLayoutActionListener.addFriend();
+                } else if (type == 2){
+                    onLayoutActionListener.onTalkWithFriend();
+                }
             } else {
-                enableAddFriend();
+                enableButton();
             }
         });
     }
@@ -120,9 +127,34 @@ public class FriendInfoLayout extends BaseLayout{
         }
     }
 
-    public void enableAddFriend(){
+    public void enableButton(){
         shrinkButton.setEnabled(true);
         shrinkButton.reset();
+        shrinkButton.setBackground(mRes.getDrawable(R.drawable.button_rounded_color_yellow_background));
+    }
+
+    public void disableButton(){
+        shrinkButton.setEnabled(false);
+        shrinkButton.setBackground(mRes.getDrawable(R.drawable.button_rounded_color_grey_background));
+    }
+
+    /**
+     *
+     * @param type type 1:add friend  type 2:talk type 3:wait
+     */
+    public void setButtonType(int type){
+        shrinkButton.setTag(R.id.button_type,type);
+        switch (type){
+            case 1:
+                    shrinkButton.setText(mRes.getString(R.string.sendMessage));
+                break;
+            case 2:
+                    shrinkButton.setText(mRes.getString(R.string.add_friend));
+                break;
+            case 3:
+                    shrinkButton.setText(mRes.getString(R.string.wait_for_verfiy));
+                break;
+        }
     }
 
 }

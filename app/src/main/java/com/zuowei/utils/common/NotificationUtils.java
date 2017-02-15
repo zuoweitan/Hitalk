@@ -38,7 +38,7 @@ public class NotificationUtils {
     }
 
     public static void showNotification(Context context, String title, String content, Intent intent) {
-        showNotification(context, title, content, (String)null, intent);
+        showNotification(context, title, content, null, intent);
     }
 
     public static void showNotification(Context context, String title, String content, String sound, Intent intent) {

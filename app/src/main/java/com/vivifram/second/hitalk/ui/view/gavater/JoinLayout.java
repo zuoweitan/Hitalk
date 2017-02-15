@@ -55,7 +55,7 @@ public class JoinLayout {
      */
     private static float[] offset5(int index, float dimension, float[] size) {
         // 圆的直径
-        float cd = (float) dimension * size[0];
+        float cd = dimension * size[0];
         // 边距
         float s1 = -cd * size[1];
 
@@ -117,7 +117,7 @@ public class JoinLayout {
      */
     private static float[] offset4(int index, float dimension, float[] size) {
         // 圆的直径
-        float cd = (float) dimension * size[0];
+        float cd = dimension * size[0];
         // 边距
         float s1 = cd * size[1];
 
@@ -168,7 +168,7 @@ public class JoinLayout {
      */
     private static float[] offset3(int index, float dimension, float[] size) {
         // 圆的直径
-        float cd = (float) dimension * size[0];
+        float cd = dimension * size[0];
         // 边距
         float s1 = cd * size[1];
         // 第二个圆的 Y坐标
@@ -208,7 +208,7 @@ public class JoinLayout {
      */
     private static float[] offset2(int index, float dimension, float[] size) {
         // 圆的直径
-        float cd = (float) dimension * size[0];
+        float cd = dimension * size[0];
         // 边距
         float s1 = cd * size[1];
 
@@ -247,7 +247,7 @@ public class JoinLayout {
      */
     private static float[] offset1(int index, float dimension, float[] size) {
         // 圆的直径
-        float cd = (float) dimension * size[0];
+        float cd = dimension * size[0];
         float offset = (dimension - cd) / 2;
         return new float[] { offset, offset };
     }

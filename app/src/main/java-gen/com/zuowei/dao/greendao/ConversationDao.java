@@ -23,7 +23,7 @@ public class ConversationDao extends AbstractDao<Conversation, String> {
     public static class Properties {
         public final static Property ConversationId = new Property(0, String.class, "conversationId", true, "CONVERSATION_ID");
         public final static Property Content = new Property(1, String.class, "content", false, "CONTENT");
-    };
+    }
 
 
     public ConversationDao(DaoConfig config) {

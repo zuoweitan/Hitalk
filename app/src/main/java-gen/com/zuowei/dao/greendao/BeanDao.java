@@ -26,7 +26,7 @@ public class BeanDao extends AbstractDao<Bean, String> {
         public final static Property ClassName = new Property(2, String.class, "className", false, "CLASS_NAME");
         public final static Property CommandType = new Property(3, Integer.class, "commandType", false, "COMMAND_TYPE");
         public final static Property CreateAt = new Property(4, java.util.Date.class, "createAt", false, "CREATE_AT");
-    };
+    }
 
 
     public BeanDao(DaoConfig config) {

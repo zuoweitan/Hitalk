@@ -62,7 +62,7 @@ public class UserBeanCacheHelper {
 
 
     public synchronized void getCachedUser(String id, final AVCallback<User> callback) {
-        getCachedUsers(Arrays.asList(new String[]{id}), new AVCallback<List<User>>() {
+        getCachedUsers(Arrays.asList(id), new AVCallback<List<User>>() {
             @Override
             protected void internalDone0(List<User> users, AVException e) {
                 User user = null != users && !users.isEmpty()?users.get(0):null;

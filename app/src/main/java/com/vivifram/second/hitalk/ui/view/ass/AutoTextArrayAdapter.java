@@ -378,7 +378,7 @@ public class AutoTextArrayAdapter<T> extends BaseAdapter implements Filterable {
         T item = getItem(position);
         if (item instanceof CharSequence) {
             if (indexStr != null) {
-                String strAll = ((CharSequence) item).toString();
+                String strAll = item.toString();
                 String strBefore = strAll.substring(0, strAll.indexOf(indexStr));
                 String strAfter = strAll.substring(strAll.indexOf(indexStr) + indexStr.length());
                 text.setText(Html.fromHtml(strBefore + "<u><font color= 'black' type='bold'>" + indexStr + "</font></u>" + strAfter));

@@ -99,7 +99,7 @@ public class EmojiconMenu extends EmojiconMenuBaseLayout {
         for(int i= 0; i < groupEntitieList.size(); i++){
             EmojiconGroupEntity groupEntity = groupEntitieList.get(i);
             emojiconGroupList.add(groupEntity);
-            pagerView.addEmojiconGroup(groupEntity, i == groupEntitieList.size()-1 ? true : false);
+            pagerView.addEmojiconGroup(groupEntity, i == groupEntitieList.size() - 1);
             tabBar.addTab(groupEntity.getIcon());
         }
 

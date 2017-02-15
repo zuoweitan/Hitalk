@@ -1,5 +1,9 @@
 [
     {
+        "outputFile": "/home/zuowei/sundires/Hitalk/qrcodecore/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml",
+        "map": []
+    },
+    {
         "outputFile": "/home/zuowei/workspace/hitalk_lean/qrcodecore/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml",
         "map": []
     }

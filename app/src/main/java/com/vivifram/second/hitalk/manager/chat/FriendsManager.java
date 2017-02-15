@@ -21,6 +21,7 @@ import com.zuowei.utils.helper.UserBeanCacheHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
@@ -113,6 +114,24 @@ public class FriendsManager {
         q.limit(limit);
         q.whereEqualTo(AddRequest.TO_USER, user);
         q.orderByDescending(AVObject.CREATED_AT);
+        q.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
+        q.findInBackground(findCallback);
+    }
+
+    public void findSendRequests(FindCallback findCallback,boolean orderAsc,Map<String,Object> conditions){
+        AVUser user = HiTalkHelper.getInstance().getCurrentUser();
+        AVQuery<AddRequest> q = AVObject.getQuery(AddRequest.class);
+        q.whereEqualTo(AddRequest.FROM_USER, user);
+        if (conditions != null) {
+            for (Map.Entry<String,Object> entry : conditions.entrySet()){
+                q.whereEqualTo(entry.getKey(),entry.getValue());
+            }
+        }
+        if (orderAsc) {
+            q.orderByAscending(AVObject.CREATED_AT);
+        } else {
+            q.orderByDescending(AVObject.CREATED_AT);
+        }
         q.setCachePolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
         q.findInBackground(findCallback);
     }

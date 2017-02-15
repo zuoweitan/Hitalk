@@ -313,7 +313,7 @@ public class BlackboardFragmentLayout extends BaseFragmentLayout
     }
 
     public void update2DeleteFavort(int bnPosition, String favortId) {
-        BnItem item = (BnItem) mBnAdapter.getDatas().get(bnPosition);
+        BnItem item = mBnAdapter.getDatas().get(bnPosition);
         List<FavortItem> items = item.getFavorters();
         for(int i=0; i<items.size(); i++){
             if(favortId.equals(items.get(i).getId())){
@@ -329,7 +329,7 @@ public class BlackboardFragmentLayout extends BaseFragmentLayout
 
     public void update2AddComment(int bnPosition, CommentItem addItem) {
         if(addItem != null){
-            BnItem item = (BnItem) mBnAdapter.getDatas().get(bnPosition);
+            BnItem item = mBnAdapter.getDatas().get(bnPosition);
             item.getComments().add(addItem);
             item.setHasComment(true);
             NLog.i(TagUtil.makeTag(getClass()),"update2AddComment bnPosition = "+bnPosition+",addItem = "+addItem);
@@ -339,7 +339,7 @@ public class BlackboardFragmentLayout extends BaseFragmentLayout
     }
 
     public void update2DeleteComment(int bnPosition, String commentId) {
-        BnItem item = (BnItem) mBnAdapter.getDatas().get(bnPosition);
+        BnItem item = mBnAdapter.getDatas().get(bnPosition);
         List<CommentItem> items = item.getComments();
         for(int i=0; i<items.size(); i++){
             if(commentId.equals(items.get(i).getId())){

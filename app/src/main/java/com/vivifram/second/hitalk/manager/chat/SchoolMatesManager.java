@@ -2,15 +2,20 @@ package com.vivifram.second.hitalk.manager.chat;
 
 import android.text.TextUtils;
 
+import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
+import com.avos.avoscloud.FindCallback;
 import com.vivifram.second.hitalk.bean.Constants;
+import com.vivifram.second.hitalk.bean.address.AddRequest;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.zuowei.dao.greendao.User;
-import com.zuowei.utils.common.Md5Utils;
+import com.zuowei.utils.bridge.EaterManager;
+import com.zuowei.utils.bridge.params.address.SchoolMateStateParam;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.HiTalkHelper;
+import com.zuowei.utils.helper.SchoolmatesCacheHelper;
 import com.zuowei.utils.helper.UserBeanCacheHelper;
 import com.zuowei.utils.helper.UserCacheHelper;
 import com.zuowei.utils.pinyin.CharacterParser;
@@ -45,6 +50,29 @@ public class SchoolMatesManager {
             }
         }
         return sInstance;
+    }
+
+    public Task<List<SchoolMate>> queryAllSchoolMatesWithState(Map<String,Object> conditions){
+        return queryAllSchoolMates(conditions).continueWithTask(task -> {
+            FriendsManager.getInstance().findSendRequests(new FindCallback<AddRequest>() {
+                @Override
+                public void done(List<AddRequest> list, AVException e) {
+                    if (list != null){
+                        for (AddRequest addRequest : list) {
+                            if (addRequest.getStatus() == AddRequest.STATUS_DONE){
+                                SchoolmatesCacheHelper.getInstance()
+                                        .update(addRequest.getToUser().getObjectId(),SchoolmatesCacheHelper.REQUEST_STATE_SUCCESS);
+                            } else if (addRequest.getStatus() == AddRequest.STATUS_WAIT){
+                                SchoolmatesCacheHelper.getInstance()
+                                        .update(addRequest.getToUser().getObjectId(),SchoolmatesCacheHelper.REQUEST_STATE_WATING);
+                            }
+                        }
+                        EaterManager.getInstance().broadcast(new SchoolMateStateParam());
+                    }
+                }
+            },true,null);
+            return task;
+        });
     }
 
     public Task<List<SchoolMate>> queryAllSchoolMates(Map<String,Object> conditions){
