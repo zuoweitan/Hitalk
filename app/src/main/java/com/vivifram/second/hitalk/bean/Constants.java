@@ -42,6 +42,12 @@ public class Constants {
         }
     }
 
+    public final class ParamsKey{
+        public class Chat {
+            public static final int TO_FRIEND = 1;
+        }
+    }
+
     public final class BlurDialog{
         public static final String BUNDLE_KEY_DOWN_SCALE_FACTOR = "bundle_key_down_scale_factor";
 

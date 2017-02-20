@@ -1,5 +1,7 @@
 package com.vivifram.second.hitalk;
 
+import android.util.SparseArray;
+
 import com.avos.avoscloud.AVObject;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -210,6 +212,14 @@ public class ExampleUnitTest {
         System.out.println(Md5Utils.stringToMD5("重庆邮电大学"));
     }
 
+    @Test
+    public void testSparseArray(){
+        SparseArray array = new SparseArray();
+        array.put(1,"12");
+        array.put(2,3);
+        System.out.println(array.get(1).getClass());
+        System.out.println(array.get(2).getClass());
+    }
 
     @Test
     public void testArrayList(){

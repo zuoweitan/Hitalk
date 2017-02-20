@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -21,9 +22,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -36,7 +35,7 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
     protected T mLayout;
     protected InputMethodManager inputMethodManager;
     private static CopyOnWriteArrayList<BaseActivity> sAliveActivities = new CopyOnWriteArrayList<>();
-    private Map<Integer,Object> sParamsPool = ParamsPool.$();
+    private SparseArray sParamsPool = ParamsPool.$();
     protected Object params;
 
     @Override

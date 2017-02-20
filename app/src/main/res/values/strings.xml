@@ -137,4 +137,5 @@
     <string name="user_not_found">用户没有找到</string>
     <string name="blackboard">黑板报</string>
     <string name="sendMessage">发送消息</string>
+    <string name="open_chat_room_failed">对话打开失败</string>
 </resources>

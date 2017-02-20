@@ -1,12 +1,12 @@
 package com.vivifram.second.hitalk.ui;
 
-import java.util.HashMap;
+import android.util.SparseArray;
 
 /**
  * Created by zuowei on 17-2-8.
  */
 
-public class ParamsPool extends HashMap<Integer,Object> {
+public class ParamsPool extends SparseArray {
 
     private static ParamsPool sInstance;
 
