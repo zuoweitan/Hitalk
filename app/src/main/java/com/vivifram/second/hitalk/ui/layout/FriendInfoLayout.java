@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.vivifram.second.hitalk.R;
+import com.vivifram.second.hitalk.base.BindView;
+import com.vivifram.second.hitalk.base.LayoutIdBinder;
 import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.vivifram.second.hitalk.ui.view.BGATitlebar;
@@ -19,6 +21,8 @@ import com.zuowei.utils.common.TextSpanUtils;
 import com.zuowei.utils.helper.ChatHelper;
 
 import java.util.List;
+
+import static android.R.attr.id;
 
 /**
  * 项目名称：Hitalk
@@ -35,12 +39,19 @@ public class FriendInfoLayout extends BaseLayout{
         super(rootView);
     }
 
+    @BindView(id = R.id.avtarIv)
     private ImageView avtarIv;
+    @BindView(id = R.id.nickTv)
     private TextView nickTv;
+    @BindView(id = R.id.sexIv)
     private ImageView sexIv;
+    @BindView(id = R.id.collegeTv)
     private TextView collegeTv;
+    @BindView(id = R.id.interestEt)
     private EditText interestEt;
+    @BindView(id = R.id.titleBar)
     private BGATitlebar titlebar;
+    @BindView(id = R.id.addFriendSb)
     private ShrinkButton shrinkButton;
     private OnLayoutActionListener onLayoutActionListener;
 
@@ -53,14 +64,7 @@ public class FriendInfoLayout extends BaseLayout{
     @Override
     public void onContentViewCreate(View view) {
         super.onContentViewCreate(view);
-
-        avtarIv = (ImageView) findViewById(R.id.avtarIv);
-        nickTv = (TextView) findViewById(R.id.nickTv);
-        sexIv = (ImageView) findViewById(R.id.sexIv);
-        collegeTv = (TextView) findViewById(R.id.collegeTv);
-        interestEt = (EditText) findViewById(R.id.interestEt);
-
-        titlebar = (BGATitlebar) findViewById(R.id.titleBar);
+        LayoutIdBinder.LAYOUT.bindViewToLayout(this);
         titlebar.setDelegate(new BGATitlebar.BGATitlebarDelegate(){
             @Override
             public void onClickLeftCtv() {
@@ -71,7 +75,6 @@ public class FriendInfoLayout extends BaseLayout{
             }
         });
 
-        shrinkButton = (ShrinkButton) findViewById(R.id.addFriendSb);
         shrinkButton.setTag(R.id.button_type,1);
         shrinkButton.setOnClickListener(View -> {
             shrinkButton.setEnabled(false);
