@@ -4,6 +4,7 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,15 +15,12 @@ import com.vivifram.second.hitalk.base.LayoutIdBinder;
 import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.vivifram.second.hitalk.ui.view.BGATitlebar;
-import com.vivifram.second.hitalk.ui.view.ShrinkButton;
 import com.zuowei.utils.common.DisplayUtil;
 import com.zuowei.utils.common.JsonUtils;
 import com.zuowei.utils.common.TextSpanUtils;
 import com.zuowei.utils.helper.ChatHelper;
 
 import java.util.List;
-
-import static android.R.attr.id;
 
 /**
  * 项目名称：Hitalk
@@ -52,7 +50,7 @@ public class FriendInfoLayout extends BaseLayout{
     @BindView(id = R.id.titleBar)
     private BGATitlebar titlebar;
     @BindView(id = R.id.addFriendSb)
-    private ShrinkButton shrinkButton;
+    private Button addFriendBtn;
     private OnLayoutActionListener onLayoutActionListener;
 
     public interface OnLayoutActionListener{
@@ -75,11 +73,11 @@ public class FriendInfoLayout extends BaseLayout{
             }
         });
 
-        shrinkButton.setTag(R.id.button_type,1);
-        shrinkButton.setOnClickListener(View -> {
-            shrinkButton.setEnabled(false);
+        addFriendBtn.setTag(R.id.button_type,1);
+        addFriendBtn.setOnClickListener(View -> {
+            addFriendBtn.setEnabled(false);
             if (onLayoutActionListener != null) {
-                int type = (int) shrinkButton.getTag(R.id.button_type);
+                int type = (int) addFriendBtn.getTag(R.id.button_type);
                 if (type == 1) {
                     onLayoutActionListener.addFriend();
                 } else if (type == 2){
@@ -131,14 +129,17 @@ public class FriendInfoLayout extends BaseLayout{
     }
 
     public void enableButton(){
-        shrinkButton.setEnabled(true);
-        shrinkButton.reset();
-        shrinkButton.setBackground(mRes.getDrawable(R.drawable.button_rounded_color_yellow_background));
+        addFriendBtn.setEnabled(true);
+        addFriendBtn.setBackground(mRes.getDrawable(R.drawable.button_rounded_color_yellow_background));
     }
 
     public void disableButton(){
-        shrinkButton.setEnabled(false);
-        shrinkButton.setBackground(mRes.getDrawable(R.drawable.button_rounded_color_grey_background));
+        addFriendBtn.setEnabled(false);
+        addFriendBtn.setBackground(mRes.getDrawable(R.drawable.button_rounded_color_grey_background));
+    }
+
+    public void showButton(boolean show){
+        addFriendBtn.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -146,16 +147,16 @@ public class FriendInfoLayout extends BaseLayout{
      * @param type type 1:add friend  type 2:talk type 3:wait
      */
     public void setButtonType(int type){
-        shrinkButton.setTag(R.id.button_type,type);
+        addFriendBtn.setTag(R.id.button_type,type);
         switch (type){
-            case 1:
-                    shrinkButton.setText(mRes.getString(R.string.sendMessage));
-                break;
             case 2:
-                    shrinkButton.setText(mRes.getString(R.string.add_friend));
+                addFriendBtn.setText(mRes.getString(R.string.sendMessage));
+                break;
+            case 1:
+                addFriendBtn.setText(mRes.getString(R.string.add_friend));
                 break;
             case 3:
-                    shrinkButton.setText(mRes.getString(R.string.wait_for_verfiy));
+                addFriendBtn.setText(mRes.getString(R.string.wait_for_verfiy));
                 break;
         }
     }

@@ -37,7 +37,9 @@ import bolts.Task;
 @LayoutInject(name = "FriendInfoLayout")
 public class FriendInfoActivity extends BaseActivity<FriendInfoLayout>{
 
-    public static void start(Context c,int key){
+    private static final String TAG = TagUtil.makeTag(FriendInfoActivity.class);
+
+    public static void start(Context c, int key){
         start(c,FriendInfoActivity.class,key);
     }
 
@@ -49,7 +51,7 @@ public class FriendInfoActivity extends BaseActivity<FriendInfoLayout>{
         setContentView(R.layout.activity_friend_info_layout);
         schoolMate = (SchoolMate) params;
         mLayout.bindSchoolMate(schoolMate);
-        mLayout.disableButton();
+        mLayout.showButton(false);
         updateLayout();
     }
 
@@ -59,26 +61,34 @@ public class FriendInfoActivity extends BaseActivity<FriendInfoLayout>{
         FriendsManager.getInstance().findSendRequests(new FindCallback<AddRequest>() {
             @Override
             public void done(List<AddRequest> list, AVException e) {
+                NLog.i(TAG,"updateLayout = "+list+",Thread "+Thread.currentThread().getName());
                 if (e == null){
                     if (list != null) {
                         if (list.size() > 0){
                             AddRequest addRequest = list.get(0);
                             int status = addRequest.getStatus();
+                            NLog.i(TAG,"status = "+status);
                             if (status == AddRequest.STATUS_DONE){
                                 mLayout.setButtonType(2);
                                 mLayout.enableButton();
+                                mLayout.showButton(true);
                             } else {
                                 mLayout.setButtonType(3);
                                 mLayout.disableButton();
+                                mLayout.showButton(true);
                             }
                         } else {
                             mLayout.setButtonType(1);
                             mLayout.enableButton();
+                            mLayout.showButton(true);
                         }
                     } else {
                         mLayout.setButtonType(1);
                         mLayout.enableButton();
+                        mLayout.showButton(true);
                     }
+                } else {
+                    NLog.e(TagUtil.makeTag(FriendInfoActivity.class),"exception = ",e);
                 }
             }
         },false,conditions);

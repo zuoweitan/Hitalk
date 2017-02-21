@@ -125,7 +125,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="8dp"
                 android:text="@string/interestTips"
-                android:textSize="14sp"
+                android:textSize="16sp"
+                android:textColor="@color/black_deep"
                 />
 
             <EditText
@@ -159,7 +160,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="8dp"
                 android:text="@string/blackboard"
-                android:textSize="14sp"
+                android:textSize="16sp"
+                android:textColor="@color/black_deep"
                 />
 
             <ImageView
@@ -172,7 +174,7 @@
 
     </LinearLayout>
 
-    <com.vivifram.second.hitalk.ui.view.ShrinkButton
+    <Button
         android:id="@+id/addFriendSb"
         android:layout_width="match_parent"
         android:layout_height="@dimen/heightMiddle"
