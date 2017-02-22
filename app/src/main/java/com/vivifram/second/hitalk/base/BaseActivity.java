@@ -169,6 +169,7 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
         mLayout = generateLayout();
         if (mLayout != null) {
             bindAllInterfaces();
+            LayoutIdBinder.LAYOUT.bindViewToLayout(mLayout);
             mLayout.onContentViewCreate(getBaseView());
         }
     }

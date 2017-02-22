@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.BindView;
-import com.vivifram.second.hitalk.base.LayoutIdBinder;
 import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.vivifram.second.hitalk.ui.view.BGATitlebar;
@@ -62,7 +61,6 @@ public class FriendInfoLayout extends BaseLayout{
     @Override
     public void onContentViewCreate(View view) {
         super.onContentViewCreate(view);
-        LayoutIdBinder.LAYOUT.bindViewToLayout(this);
         titlebar.setDelegate(new BGATitlebar.BGATitlebarDelegate(){
             @Override
             public void onClickLeftCtv() {

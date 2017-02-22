@@ -49,6 +49,7 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
             mLayout.setActivity(getActivity());
             mLayout.onActivitySet();
             bindAllInterfaces();
+            LayoutIdBinder.FLAYOUT.bindViewToFLayout(mLayout);
             mLayout.onViewCreate(view);
         }
 

@@ -43,6 +43,11 @@ public enum LayoutIdBinder {
                 }
             }
         }
+
+        @Override
+        public <T extends BaseFragmentLayout> void bindViewToFLayout(T t) {
+            throw new RuntimeException();
+        }
     },
     //for FragmentLayout
     FLAYOUT(){
@@ -64,6 +69,11 @@ public enum LayoutIdBinder {
                     }
                 }
             }
+        }
+
+        @Override
+        public <T extends BaseLayout> void bindViewToLayout(T t) {
+            throw new RuntimeException();
         }
     };
 

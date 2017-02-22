@@ -26,7 +26,7 @@ import com.zuowei.utils.helper.UserBeanCacheHelper;
  */
 
 @LayoutInject(name = "ChatRoomLayout")
-public class ChatRoomActivity extends BaseActivity<ChatRoomLayout>{
+    public class ChatRoomActivity extends BaseActivity<ChatRoomLayout>{
 
     public static void start(Context c,int key){
         start(c,ChatRoomActivity.class,key);
@@ -55,6 +55,7 @@ public class ChatRoomActivity extends BaseActivity<ChatRoomLayout>{
     }
 
     private void doInitChatRoom(User user) {
-
+        mLayout.setTitle(user.getNick());
+        
     }
 }
