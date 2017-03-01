@@ -1,5 +1,7 @@
 package com.vivifram.second.hitalk;
 
+import android.os.Message;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.avos.avoscloud.AVObject;
@@ -7,6 +9,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vivifram.second.hitalk.base.LayoutInject;
 import com.zuowei.utils.common.Md5Utils;
+import com.zuowei.utils.fsm.State;
+import com.zuowei.utils.fsm.StateMachine;
 import com.zuowei.utils.pinyin.CharacterParser;
 
 import org.junit.Test;
@@ -261,5 +265,106 @@ public class ExampleUnitTest {
             }
         }).start();
 
+    }
+
+    @Test
+    public void testStateMachine(){
+        TestStateMachine testStateMachine = new TestStateMachine("TestStateMachine");
+        testStateMachine.sendMessage(1);
+    }
+
+    class TestStateMachine extends StateMachine{
+
+        AState aState = new AState();
+        BState bState = new BState();
+        CState cState = new CState();
+        DState dState = new DState();
+        EState eState = new EState();
+
+
+        protected TestStateMachine(String name) {
+            super(name);
+            addState(aState);
+            addState(bState, aState);
+            addState(cState, bState);
+            addState(dState, bState);
+            addState(eState, aState);
+
+            setInitialState(cState);
+            start();
+        }
+
+
+        class AState extends State{
+            @Override
+            public void enter() {
+                super.enter();
+                Log.i("zuowei","AState enter");
+            }
+
+            @Override
+            public void exit() {
+                super.exit();
+                Log.i("zuowei","AState exit");
+            }
+        }
+        class BState extends State{
+            @Override
+            public void exit() {
+                super.exit();
+                Log.i("zuowei","BState exit");
+            }
+
+            @Override
+            public void enter() {
+                super.enter();
+                Log.i("zuowei","BState enter");
+            }
+        }
+        class CState extends State{
+            @Override
+            public void enter() {
+                super.enter();
+                Log.i("zuowei","CState enter");
+            }
+
+            @Override
+            public boolean processMessage(Message msg) {
+                transitionTo(dState);
+                return super.processMessage(msg);
+            }
+
+            @Override
+            public void exit() {
+                super.exit();
+                Log.i("zuowei","CState exit");
+            }
+        }
+        class DState extends State{
+            @Override
+            public void enter() {
+                super.enter();
+                Log.i("zuowei","DState enter");
+            }
+
+            @Override
+            public void exit() {
+                super.exit();
+                Log.i("zuowei","DState exit");
+            }
+        }
+        class EState extends State{
+            @Override
+            public void enter() {
+                super.enter();
+                Log.i("zuowei","EState enter");
+            }
+
+            @Override
+            public void exit() {
+                super.exit();
+                Log.i("zuowei","EState exit");
+            }
+        }
     }
 }
