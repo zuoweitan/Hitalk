@@ -24,10 +24,11 @@ public class MessageParam extends LightParam {
         super(EaterAction.ACTION_DO_CHECK_MESSAGE);
     }
 
-    public static MessageParam obtainTextMessage(String content){
+    public static MessageParam obtainTextMessage(String content, AVIMConversation conversation){
         MessageParam messageParam = new MessageParam();
         messageParam.mMessageAction = MESSAGE_ACTION_SEND_TEXT;
         messageParam.messageText = content;
+        messageParam.conversation = conversation;
         return messageParam;
     }
 }

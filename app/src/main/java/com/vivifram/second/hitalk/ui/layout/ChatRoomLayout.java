@@ -3,6 +3,7 @@ package com.vivifram.second.hitalk.ui.layout;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMTypedMessage;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.BindView;
@@ -48,6 +49,8 @@ public class ChatRoomLayout extends BaseLayout{
     @BindView(id = R.id.chatInput)
     private ChatInputMenuLayout chatMeunLt;
 
+    private ChatInputMenuLayout.ChatInputMenuListener chatInputMenuListener;
+
     private MessageCacheQueue cache;
 
     @Override
@@ -65,22 +68,7 @@ public class ChatRoomLayout extends BaseLayout{
         registerExtendMenuItem();
         menuItemClickListener = new MenuItemClickListener();
         chatMeunLt.init(null);
-        chatMeunLt.setChatInputMenuListener(new ChatInputMenuLayout.ChatInputMenuListener() {
-
-            @Override
-            public void onSendMessage(String content) {
-                EaterManager.getInstance().broadcast(MessageParam.obtainTextMessage(content));
-            }
-
-            @Override
-            public boolean onPressToSpeakBtnTouch(View v, MotionEvent event) {
-                return false;
-            }
-
-            @Override
-            public void onBigExpressionClicked(Emojicon emojicon) {
-            }
-        });
+        chatMeunLt.setChatInputMenuListener(chatInputMenuListener);
 
     }
 
@@ -115,6 +103,10 @@ public class ChatRoomLayout extends BaseLayout{
         if (chatLt != null) {
             chatLt.setMessageListFreshListener(mMessageListFreshListener);
         }
+    }
+
+    public ChatMessageListLayout getChatLt() {
+        return chatLt;
     }
 
     @Override

@@ -10,12 +10,13 @@ import com.jiang.android.lib.adapter.BaseAdapter;
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersAdapter;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.address.Friend;
+import com.zuowei.utils.common.NoDoubleClickListener;
 
 /**
  * Created by zuowei on 16-10-13.
  */
 
-public class FriendsAdapter extends BaseAdapter<Friend,RecyclerView.ViewHolder> implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder> {
+public class FriendsAdapter extends BaseAdapter<Friend,BaseAdapter.BaseViewHolder> implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder> {
 
     public static final int HEADER = 0X01;
     public static final int NORMAL = 0x02;
@@ -30,13 +31,13 @@ public class FriendsAdapter extends BaseAdapter<Friend,RecyclerView.ViewHolder> 
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = null;
         if (viewType == HEADER) {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.friendheader, parent, false);
-            return new RecyclerView.ViewHolder(view) {};
+            return new BaseViewHolder(view) {};
         }
 
         view = LayoutInflater.from(parent.getContext())
@@ -45,9 +46,17 @@ public class FriendsAdapter extends BaseAdapter<Friend,RecyclerView.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(BaseViewHolder holder, int position) {
         if (position != 0 && holder instanceof FriendViewHolder) {
             ((FriendViewHolder)holder).initWithModel(getItem(position));
+            if (onItemClickListener != null){
+                holder.setOnClickListener(new NoDoubleClickListener() {
+                    @Override
+                    public void onNoDoubleClick(View v) {
+                        onItemClickListener.onItemClick(getItem(position), position);
+                    }
+                });
+            }
         }
     }
 
@@ -126,7 +135,7 @@ public class FriendsAdapter extends BaseAdapter<Friend,RecyclerView.ViewHolder> 
         return false;
     }
 
-    public class FriendViewHolder extends RecyclerView.ViewHolder{
+    public class FriendViewHolder extends BaseViewHolder{
 
         TextView nickNameTv;
 

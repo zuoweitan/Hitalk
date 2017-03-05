@@ -28,6 +28,7 @@ public class HitalkFragmentSub1Layout extends BaseFragmentLayout{
     private ChatInputMenuLayout mChatMenuLayout;
     private MenuItemClickListener mItemClickListener;
     private MessageCacheQueue mCache;
+    private ChatInputMenuLayout.ChatInputMenuListener chatInputMenuListener;
 
     public HitalkFragmentSub1Layout(View root) {
         super(root);
@@ -52,22 +53,7 @@ public class HitalkFragmentSub1Layout extends BaseFragmentLayout{
         registerExtendMenuItem();
 
         mChatMenuLayout.init(null);
-        mChatMenuLayout.setChatInputMenuListener(new ChatInputMenuLayout.ChatInputMenuListener() {
-
-            @Override
-            public void onSendMessage(String content) {
-                EaterManager.getInstance().broadcast(MessageParam.obtainTextMessage(content));
-            }
-
-            @Override
-            public boolean onPressToSpeakBtnTouch(View v, MotionEvent event) {
-                return false;
-            }
-
-            @Override
-            public void onBigExpressionClicked(Emojicon emojicon) {
-            }
-        });
+        mChatMenuLayout.setChatInputMenuListener(chatInputMenuListener);
     }
 
     public ChatMessageListLayout getChatLt() {

@@ -6,7 +6,7 @@ import android.util.SparseArray;
  * Created by zuowei on 17-2-8.
  */
 
-public class ParamsPool extends SparseArray {
+public class ParamsPool extends SparseArray<Object> {
 
     private static ParamsPool sInstance;
 

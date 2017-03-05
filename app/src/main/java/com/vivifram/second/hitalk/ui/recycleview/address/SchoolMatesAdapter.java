@@ -22,7 +22,7 @@ import bolts.Task;
  * Created by zuowei on 16-10-13.
  */
 
-public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.ViewHolder> implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder> {
+public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,BaseAdapter.BaseViewHolder> implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder> {
 
     public static final int HEADER = 0X01;
     public static final int NORMAL = 0x02;
@@ -47,12 +47,12 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
         if (viewType == HEADER) {
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.schoolmateheader, parent, false);
-            return new RecyclerView.ViewHolder(view) {};
+            return new BaseViewHolder(view) {};
         }
 
         view = LayoutInflater.from(parent.getContext())
@@ -61,7 +61,7 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(BaseViewHolder holder, int position) {
         if (position != 0) {
             ((SchoolMateViewHolder)holder).initWithModel(getItem(position));
         }
@@ -147,7 +147,7 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,RecyclerView.View
         return this;
     }
 
-    public class SchoolMateViewHolder extends RecyclerView.ViewHolder{
+    public class SchoolMateViewHolder extends BaseViewHolder{
 
         Context ctx;
         TextView nickNameTv;

@@ -1,15 +1,23 @@
 package com.jiang.android.lib.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
 
-public abstract class BaseAdapter<T,VH extends RecyclerView.ViewHolder>
+public abstract class BaseAdapter<T,VH extends BaseAdapter.BaseViewHolder>
         extends RecyclerView.Adapter<VH> {
+
+    public interface OnItemClickListener<T>{
+        void onItemClick(T item, int position);
+    }
+
     private ArrayList<T> items = new ArrayList<>();
+
+    protected OnItemClickListener<T> onItemClickListener;
 
     public BaseAdapter() {
         setHasStableIds(true);
@@ -71,5 +79,24 @@ public abstract class BaseAdapter<T,VH extends RecyclerView.ViewHolder>
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public void setOnItemClickListener(OnItemClickListener<T> onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public static class BaseViewHolder extends RecyclerView.ViewHolder {
+
+        public BaseViewHolder(View itemView) {
+            super(itemView);
+        }
+
+        public void setOnClickListener(View v,View.OnClickListener onClickListener){
+            v.setOnClickListener(onClickListener);
+        }
+
+        public void setOnClickListener(View.OnClickListener onClickListener){
+            itemView.setOnClickListener(onClickListener);
+        }
     }
 }

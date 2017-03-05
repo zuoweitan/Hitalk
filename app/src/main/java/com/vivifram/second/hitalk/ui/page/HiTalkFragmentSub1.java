@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,10 +18,13 @@ import com.avos.avoscloud.im.v2.callback.AVIMConversationQueryCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMMessagesQueryCallback;
 import com.avos.avoscloud.im.v2.messages.AVIMTextMessage;
 import com.vivifram.second.hitalk.R;
+import com.vivifram.second.hitalk.base.InterfaceInject;
 import com.vivifram.second.hitalk.base.LayoutInject;
+import com.vivifram.second.hitalk.bean.Emojicon;
 import com.vivifram.second.hitalk.bean.IMessageWrap;
 import com.vivifram.second.hitalk.manager.chat.ClientManager;
 import com.vivifram.second.hitalk.manager.chat.ConversationClient;
+import com.vivifram.second.hitalk.ui.page.layout.ChatInputMenuLayout;
 import com.vivifram.second.hitalk.ui.page.layout.ChatMessageListLayout;
 import com.vivifram.second.hitalk.ui.page.layout.HitalkFragmentSub1Layout;
 import com.zuowei.utils.bridge.EaterManager;
@@ -38,6 +42,7 @@ import com.zuowei.utils.handlers.AbstractHandler;
 import com.zuowei.utils.helper.ConversationCacheHelper;
 import com.zuowei.utils.helper.HiTalkHelper;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.Callable;
@@ -336,6 +341,24 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
         return null == e;
     }
 
+    @InterfaceInject(bindName = "chatInputMenuListener")
+    ChatInputMenuLayout.ChatInputMenuListener chatInputMenuListener = new ChatInputMenuLayout.ChatInputMenuListener() {
+        @Override
+        public void onSendMessage(String content) {
+            EaterManager.getInstance().broadcast(MessageParam.obtainTextMessage(content, mAvimConversation));
+        }
+
+        @Override
+        public void onBigExpressionClicked(Emojicon emojicon) {
+
+        }
+
+        @Override
+        public boolean onPressToSpeakBtnTouch(View v, MotionEvent event) {
+            return false;
+        }
+    };
+
     class MessageReceiver extends AbstractHandler<MessageParam> {
 
         @Override
@@ -350,7 +373,9 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
                     onMessageReceived(param.conversation,param.message);
                     break;
                 case MessageParam.MESSAGE_ACTION_SEND_TEXT:
-                    sendTextMessage(param.messageText);
+                    if (isValidMessage(param)) {
+                        sendTextMessage(param.messageText);
+                    }
                     break;
                 case MessageParam.MESSAGE_ACTION_SEND_IMAGE:
                     break;
@@ -366,6 +391,10 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
         }
     }
 
+    private boolean isValidMessage(MessageParam param) {
+        return param.conversation != null && param.conversation.getConversationId() == mAvimConversation.getConversationId();
+    }
+
     private void sendTextMessage(String messageText) {
         AVIMTextMessage message = new AVIMTextMessage();
         message.setText(messageText);
@@ -375,6 +404,11 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
     private void onMessageReceived(AVIMConversation conversation, AVIMTypedMessage message) {
         if(mAvimConversation != null && conversation != null &&
                 mAvimConversation.getConversationId().equals(conversation.getConversationId())) {
+            switch (message.getMessageType()){
+                case IMessageWrap.MESSAGE_TYPE_TEXT:
+                    mLayout.pushMessagesAndRefreshToBottom(IMessageWrap.buildFrom(Collections.<AVIMMessage>singletonList(message), false));
+                    break;
+            }
         }
     }
 
