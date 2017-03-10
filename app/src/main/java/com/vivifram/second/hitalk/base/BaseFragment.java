@@ -64,20 +64,20 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
         if (declaredClasses != null) {
             for (Class<?> declaredClass : declaredClasses) {
                 EatMark eatMark = declaredClass.getAnnotation(EatMark.class);
-                if (eatMark != null && eatMark.action() != null) {
+                if (eatMark != null) {
                     IEater iEater = null;
                     try {
-                        Constructor<?> constructor = declaredClass.getConstructor(this.getClass());
+                        Constructor<?> constructor = declaredClass.getDeclaredConstructor(this.getClass());
                         constructor.setAccessible(true);
                         iEater = (IEater) constructor.newInstance(this);
                     } catch (java.lang.InstantiationException e) {
-                        e.printStackTrace();
+                        NLog.e(TAG, "checkAndInstallEatMark failed :",e);
                     } catch (IllegalAccessException e) {
-                        e.printStackTrace();
+                        NLog.e(TAG, "checkAndInstallEatMark failed :",e);
                     } catch (NoSuchMethodException e) {
-                        e.printStackTrace();
+                        NLog.e(TAG, "checkAndInstallEatMark failed :",e);
                     } catch (InvocationTargetException e) {
-                        e.printStackTrace();
+                        NLog.e(TAG, "checkAndInstallEatMark failed :",e);
                     }
                     if (iEater != null) {
                         eater.add(iEater);

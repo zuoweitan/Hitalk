@@ -22,6 +22,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -55,6 +56,7 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
             }
         }
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        hideSoftKeyboard();
         mAppCtx = HiTalkApplication.mAppContext;
 
         sAliveActivities.add(this);
@@ -69,20 +71,20 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
         if (declaredClasses != null) {
             for (Class<?> declaredClass : declaredClasses) {
                 EatMark eatMark = declaredClass.getAnnotation(EatMark.class);
-                if (eatMark != null && eatMark.action() != null) {
+                if (eatMark != null) {
                     IEater iEater = null;
                     try {
-                        Constructor<?> constructor = declaredClass.getConstructor(this.getClass());
+                        Constructor<?> constructor = declaredClass.getDeclaredConstructor(this.getClass());
                         constructor.setAccessible(true);
                         iEater = (IEater) constructor.newInstance(this);
                     } catch (InstantiationException e) {
-                        e.printStackTrace();
+                        NLog.e(TAG, "checkAndInstallEatMark failed :",e);
                     } catch (IllegalAccessException e) {
-                        e.printStackTrace();
+                        NLog.e(TAG, "checkAndInstallEatMark failed :",e);
                     } catch (NoSuchMethodException e) {
-                        e.printStackTrace();
+                        NLog.e(TAG, "checkAndInstallEatMark failed :",e);
                     } catch (InvocationTargetException e) {
-                        e.printStackTrace();
+                        NLog.e(TAG, "checkAndInstallEatMark failed :",e);
                     }
                     if (iEater != null) {
                         eater.add(iEater);
@@ -90,6 +92,8 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
                     }
                 }
             }
+        } else {
+            NLog.i(TAG, "No EatMarks");
         }
     }
 

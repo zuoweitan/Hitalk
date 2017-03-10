@@ -42,6 +42,7 @@ import com.zuowei.utils.helper.UserBeanCacheHelper;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 
 import bolts.Task;
@@ -204,6 +205,7 @@ import bolts.Task;
     ChatInputMenuLayout.ChatInputMenuListener chatInputMenuListener = new ChatInputMenuLayout.ChatInputMenuListener() {
         @Override
         public void onSendMessage(String content) {
+            NLog.i(TAG, "onSendMessage content = "+content);
             EaterManager.getInstance().broadcast(MessageParam.obtainTextMessage(content, conversation));
         }
 
@@ -218,6 +220,9 @@ import bolts.Task;
         }
     };
 
+    @InterfaceInject(bindName = "layoutActionListener")
+    ChatRoomLayout.OnLayoutActionListener layoutActionListener = this::finish;
+
     @EatMark(action = EaterAction.ACTION_DO_CHECK_MESSAGE)
     class MessageReceiver extends AbstractHandler<MessageParam> {
 
@@ -230,9 +235,10 @@ import bolts.Task;
         public void doJobWithParam(MessageParam param) {
             switch (param.mMessageAction){
                 case MessageParam.MESSAGE_ACTION_RECEIVED:
-                    onMessageReceived(param.conversation,param.message);
+                    onMessageReceived(param.conversation, param.message);
                     break;
                 case MessageParam.MESSAGE_ACTION_SEND_TEXT:
+                    NLog.i(TAG, "MESSAGE_ACTION_SEND_TEXT param.messageText = "+param.messageText);
                     if (isValidMessage(param)) {
                         sendTextMessage(param.messageText);
                     }
@@ -252,7 +258,7 @@ import bolts.Task;
     }
 
     private boolean isValidMessage(MessageParam param) {
-        return param.conversation != null && param.conversation.getConversationId() == conversation.getConversationId();
+        return Objects.equals(param.conversation.getConversationId(), conversation.getConversationId());
     }
 
     private void sendTextMessage(String messageText) {

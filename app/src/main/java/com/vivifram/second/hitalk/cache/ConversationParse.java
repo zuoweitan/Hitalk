@@ -79,11 +79,7 @@ public class ConversationParse {
 
         @Override
         public int compareTo(Wrap another) {
-            if (conversationId == null && another.conversationId == null) return 0;
-            if (conversationId == null) return -1;
-            if (another.conversationId == null) return 1;
-
-            return conversationId.compareTo(another.conversationId);
+            return new Long(updateTime).compareTo(new Long(another.updateTime));
         }
     }
 }

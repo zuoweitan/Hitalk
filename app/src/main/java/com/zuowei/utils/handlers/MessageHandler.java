@@ -48,18 +48,19 @@ public class MessageHandler extends AVIMTypedMessageHandler<AVIMTypedMessage> {
     public void onMessage(AVIMTypedMessage message, AVIMConversation conversation, AVIMClient client) {
         super.onMessage(message, conversation, client);
         NLog.i(TagUtil.makeTag(MessageHandler.class),"message = "+message);
-        if (message != null && message.getMessageId() != null){
+        if (message == null || message.getMessageId() != null || message.getFrom() == null){
+            NLog.e(TagUtil.makeTag(MessageHandler.class), "message or message id is null");
+        }else if (HiTalkHelper.getInstance().getCurrentUserId() == null ||
+                !client.getClientId().equals(HiTalkHelper.getInstance().getCurrentUserId())){
             client.close(null);
-        }else if (!client.getClientId().equals(HiTalkHelper.getInstance().getCurrentUserId())){
-            client.close(null);
-        }else if (!message.getFrom().equals(client.getClientId())){
+        }else if (message.getFrom().equals(client.getClientId())){
+            ConversationCacheHelper.getInstance().insertConversation(message.getConversationId());
+        } else {
             if (NotificationUtils.isShowNotification(conversation.getConversationId())){
                 sendNotification(message,conversation);
             }
             ConversationCacheHelper.getInstance().increaseUnreadCount(message.getConversationId());
             sendEvent(message,conversation);
-        }else {
-            ConversationCacheHelper.getInstance().insertConversation(message.getConversationId());
         }
     }
 

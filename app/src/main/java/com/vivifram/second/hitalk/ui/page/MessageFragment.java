@@ -10,6 +10,8 @@ import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.chat.ConversationParam;
 import com.zuowei.utils.bridge.params.chat.MessageParam;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.AbstractHandler;
 import com.zuowei.utils.helper.ConversationCacheHelper;
 
@@ -62,7 +64,6 @@ public class MessageFragment extends LazyFragment<MessageFragmentLayout> {
         mLayout.setData(conversationList);
     }
 
-
     @EatMark(action = EaterAction.ACTION_DO_CHECK_MESSAGE)
     public class MessageReceiver extends AbstractHandler<MessageParam>{
 
@@ -73,6 +74,7 @@ public class MessageFragment extends LazyFragment<MessageFragmentLayout> {
 
         @Override
         public void doJobWithParam(MessageParam param) {
+            NLog.i(TagUtil.makeTag(MessageFragment.class), "MessageReceiver param = " + param);
             updateConversationList();
         }
     }

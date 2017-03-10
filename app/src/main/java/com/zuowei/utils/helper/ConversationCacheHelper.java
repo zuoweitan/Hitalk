@@ -114,9 +114,9 @@ public class ConversationCacheHelper {
 
     public synchronized void insertConversation(String convid) {
         if(!TextUtils.isEmpty(convid)) {
-            syncToCache(getConversationItemFromMap(convid));
+            ConversationParse.Wrap conversationItemFromMap = getConversationItemFromMap(convid);
+            syncToCache(conversationItemFromMap);
         }
-
     }
 
     public synchronized int getUnreadCount(String convid) {

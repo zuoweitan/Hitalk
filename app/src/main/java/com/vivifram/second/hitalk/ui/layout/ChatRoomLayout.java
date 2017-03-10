@@ -1,21 +1,16 @@
 package com.vivifram.second.hitalk.ui.layout;
 
-import android.view.MotionEvent;
 import android.view.View;
 
-import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMTypedMessage;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.BindView;
-import com.vivifram.second.hitalk.bean.Emojicon;
 import com.vivifram.second.hitalk.bean.IMessageWrap;
 import com.vivifram.second.hitalk.cache.MessageCacheQueue;
 import com.vivifram.second.hitalk.ui.page.layout.ChatExtendMenuLayout;
 import com.vivifram.second.hitalk.ui.page.layout.ChatInputMenuLayout;
 import com.vivifram.second.hitalk.ui.page.layout.ChatMessageListLayout;
 import com.vivifram.second.hitalk.ui.view.BGATitlebar;
-import com.zuowei.utils.bridge.EaterManager;
-import com.zuowei.utils.bridge.params.chat.MessageParam;
 
 import java.util.List;
 
@@ -50,8 +45,13 @@ public class ChatRoomLayout extends BaseLayout{
     private ChatInputMenuLayout chatMeunLt;
 
     private ChatInputMenuLayout.ChatInputMenuListener chatInputMenuListener;
+    private OnLayoutActionListener layoutActionListener;
 
     private MessageCacheQueue cache;
+
+    public interface OnLayoutActionListener{
+        void onBack();
+    }
 
     @Override
     public void onContentViewCreate(View view) {
@@ -69,6 +69,15 @@ public class ChatRoomLayout extends BaseLayout{
         menuItemClickListener = new MenuItemClickListener();
         chatMeunLt.init(null);
         chatMeunLt.setChatInputMenuListener(chatInputMenuListener);
+
+        titlebar.setDelegate(new BGATitlebar.BGATitlebarDelegate(){
+            @Override
+            public void onClickLeftCtv() {
+                if (layoutActionListener != null) {
+                    layoutActionListener.onBack();
+                }
+            }
+        });
 
     }
 

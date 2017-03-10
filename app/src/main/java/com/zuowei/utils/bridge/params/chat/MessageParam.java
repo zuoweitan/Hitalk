@@ -31,4 +31,14 @@ public class MessageParam extends LightParam {
         messageParam.conversation = conversation;
         return messageParam;
     }
+
+    @Override
+    public String toString() {
+        return "MessageParam{" +
+                "message=" + message +
+                ", conversation=" + conversation +
+                ", messageText='" + messageText + '\'' +
+                ", mMessageAction=" + mMessageAction +
+                '}';
+    }
 }
