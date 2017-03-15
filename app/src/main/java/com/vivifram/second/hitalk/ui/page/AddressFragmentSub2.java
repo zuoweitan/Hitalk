@@ -20,6 +20,8 @@ import com.zuowei.utils.bridge.params.address.AddressActionParam;
 import com.zuowei.utils.bridge.params.address.SchoolMateStateParam;
 import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
 import com.zuowei.utils.bridge.params.push.InvitationParam;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.AbstractHandler;
 import com.zuowei.utils.helper.SchoolmatesCacheHelper;
 import com.zuowei.utils.pinyin.CharacterParser;
@@ -142,8 +144,12 @@ public class AddressFragmentSub2 extends LazyFragment<AddressFragmentSub2Layout>
 
         @Override
         public void doJobWithParam(InvitationParam param) {
-            FriendsManager.getInstance().unreadRequestsIncrement();
-            updateNewRequestBadge();
+            if (param.justRefresh) {
+                refresh();
+            } else {
+                FriendsManager.getInstance().unreadRequestsIncrement();
+                updateNewRequestBadge();
+            }
         }
     }
 
@@ -153,12 +159,7 @@ public class AddressFragmentSub2 extends LazyFragment<AddressFragmentSub2Layout>
     }
 
     private void refresh() {
-        FriendsManager.getInstance().countUnreadRequests(new CountCallback() {
-            @Override
-            public void done(int i, AVException e) {
-                EaterManager.getInstance().broadcast(new UnReadRequestCountParam().setUnReadCount(i));
-            }
-        });
+        FriendsManager.getInstance().countUnreadRequests(null);
     }
 
     @EatMark(action = EaterAction.ACTION_ON_ADDRESS)

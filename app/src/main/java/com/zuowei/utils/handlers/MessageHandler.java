@@ -47,15 +47,18 @@ public class MessageHandler extends AVIMTypedMessageHandler<AVIMTypedMessage> {
     @Override
     public void onMessage(AVIMTypedMessage message, AVIMConversation conversation, AVIMClient client) {
         super.onMessage(message, conversation, client);
-        NLog.i(TagUtil.makeTag(MessageHandler.class),"message = "+message);
-        if (message == null || message.getMessageId() != null || message.getFrom() == null){
+        NLog.i(TagUtil.makeTag(MessageHandler.class),"message = { from = "+message.getFrom() + " }");
+        if (message == null || message.getMessageId() == null || message.getFrom() == null){
             NLog.e(TagUtil.makeTag(MessageHandler.class), "message or message id is null");
         }else if (HiTalkHelper.getInstance().getCurrentUserId() == null ||
                 !client.getClientId().equals(HiTalkHelper.getInstance().getCurrentUserId())){
+            NLog.i(TagUtil.makeTag(MessageHandler.class), "onMessage client id not equal currentUser Id");
             client.close(null);
         }else if (message.getFrom().equals(client.getClientId())){
+            NLog.i(TagUtil.makeTag(MessageHandler.class), "insertConversation");
             ConversationCacheHelper.getInstance().insertConversation(message.getConversationId());
         } else {
+            NLog.i(TagUtil.makeTag(MessageHandler.class), "sendEvent");
             if (NotificationUtils.isShowNotification(conversation.getConversationId())){
                 sendNotification(message,conversation);
             }
@@ -65,6 +68,7 @@ public class MessageHandler extends AVIMTypedMessageHandler<AVIMTypedMessage> {
     }
 
     private void sendEvent(AVIMTypedMessage message, AVIMConversation conversation) {
+        NLog.i(TagUtil.makeTag(MessageHandler.class), "sendEvent");
         MessageParam messageParam = new MessageParam();
         messageParam.mMessageAction = MessageParam.MESSAGE_ACTION_RECEIVED;
         messageParam.message = message;

@@ -2,6 +2,8 @@ package com.vivifram.second.hitalk.ui;
 
 import android.os.Bundle;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.CountCallback;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.BaseActivity;
 import com.vivifram.second.hitalk.base.EatMark;
@@ -90,8 +92,12 @@ public class HiTalkActivity extends BaseActivity<HiTalkLayout> {
 
         @Override
         public void doJobWithParam(InvitationParam param) {
-            FriendsManager.getInstance().unreadRequestsIncrement();
-            updateNewRequestBadge();
+            if (param.justRefresh){
+                FriendsManager.getInstance().countUnreadRequests(null);
+            } else {
+                FriendsManager.getInstance().unreadRequestsIncrement();
+                updateNewRequestBadge();
+            }
         }
     }
 

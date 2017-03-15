@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 
-import com.jiang.android.lib.adapter.BaseAdapter;
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersDecoration;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.Constants;
@@ -55,9 +54,7 @@ public class AddressFragmentSub2Layout extends BaseFragmentLayout {
         newfCi = (CommonItem) findViewById(R.id.newf);
         fillCommonItem(newfCi,R.drawable.newf,mRes.getString(R.string.newf));
         newfCi.showDivider(true);
-        newfCi.setOnClickListener(view->{
-            NewFriendConfirmActivity.start(mAct);
-        });
+        newfCi.setOnClickListener(view-> NewFriendConfirmActivity.start(mAct));
 
         nearByCi = (CommonItem) findViewById(R.id.nearbyp);
         fillCommonItem(nearByCi,R.drawable.nearby,mRes.getString(R.string.nearbyp));

@@ -268,8 +268,9 @@ import bolts.Task;
     }
 
     private void onMessageReceived(AVIMConversation conversation, AVIMTypedMessage message) {
-        if(conversation != null && conversation != null &&
-                conversation.getConversationId().equals(conversation.getConversationId())) {
+        NLog.i(TAG, "onMessageReceived");
+        if(conversation != null && this.conversation != null &&
+                conversation.getConversationId().equals(this.conversation.getConversationId())) {
             switch (message.getMessageType()){
                 case IMessageWrap.MESSAGE_TYPE_TEXT:
                     mLayout.pushMessagesAndRefreshToBottom(IMessageWrap.buildFrom(Collections.singletonList(message), false));

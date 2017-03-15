@@ -98,7 +98,8 @@
 
         <activity android:name=".ui.ChatRoomActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Activity">
+            android:theme="@style/AppTheme.Activity"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />

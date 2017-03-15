@@ -39,19 +39,19 @@ public class HitalkReceiver extends BroadcastReceiver {
                 if (!TextUtils.isEmpty(avosData)) {
                     try {
                         JSONObject json = new JSONObject(avosData);
-                        if (null != json) {
-                            String alertStr = json.getString(PushManager.AVOS_ALERT);
+                        String alertStr = json.getString(PushManager.AVOS_ALERT);
 
-                            Intent notificationIntent = new Intent(context, NotificationBroadcastReceiver.class);
-                            notificationIntent.putExtra(Constants.NOTOFICATION_TAG, Constants.NOTIFICATION_SYSTEM);
-                            NotificationUtils.showNotification(context, "Hitalk", alertStr, notificationIntent);
-                        }
+                        Intent notificationIntent = new Intent(context, NotificationBroadcastReceiver.class);
+                        notificationIntent.putExtra(Constants.NOTOFICATION_TAG, Constants.NOTIFICATION_SYSTEM);
+                        NotificationUtils.showNotification(context, "Hitalk", alertStr, notificationIntent);
                     } catch (JSONException e) {
                         NLog.e(TagUtil.makeTag(getClass()),e);
                     }
                 }
+                EaterManager.getInstance().broadCastSticky(new InvitationParam().setJustRefresh(false));
+                return;
             }
         }
-        EaterManager.getInstance().broadCastSticky(new InvitationParam());
+        EaterManager.getInstance().broadCastSticky(new InvitationParam().setJustRefresh(true));
     }
 }

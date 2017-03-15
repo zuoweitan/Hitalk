@@ -11,7 +11,9 @@ import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.BaseActivity;
 import com.vivifram.second.hitalk.manager.chat.ClientManager;
+import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.NToast;
+import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.common.UIUtils;
 import com.zuowei.utils.helper.HiTalkHelper;
 
@@ -48,7 +50,7 @@ public class SplashActivity extends BaseActivity {
         super.onStart();
         new Thread(() -> {
             if (HiTalkHelper.getInstance().isLoggedIn()) {
-
+                NLog.i(TagUtil.makeTag(SplashActivity.class), "updateUserInfo");
                 HiTalkHelper.getInstance().updateUserInfo();
                 tryToOpenClient();
                 mHandler.sendEmptyMessageDelayed(MSG_GO_MAIN,MAX_SLEEPTIME);

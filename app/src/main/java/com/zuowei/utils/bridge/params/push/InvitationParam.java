@@ -14,7 +14,14 @@ import com.zuowei.utils.bridge.params.LightParam;
  */
 public class InvitationParam extends LightParam{
 
+    public boolean justRefresh;
+
     public InvitationParam() {
         super(EaterAction.ACTION_DO_INVITATION);
+    }
+
+    public InvitationParam setJustRefresh(boolean justRefresh) {
+        this.justRefresh = justRefresh;
+        return this;
     }
 }

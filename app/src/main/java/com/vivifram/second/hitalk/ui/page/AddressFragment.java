@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.CountCallback;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.EatMark;
 import com.vivifram.second.hitalk.base.LayoutInject;
@@ -13,8 +15,6 @@ import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
 import com.zuowei.utils.bridge.params.push.InvitationParam;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.AbstractHandler;
 
 /**
@@ -103,9 +103,12 @@ public class AddressFragment extends LazyFragment<AddressFragmentLayout> {
 
         @Override
         public void doJobWithParam(InvitationParam param) {
-            NLog.i(TagUtil.makeTag(getClass()),"InvitateListener received");
-            FriendsManager.getInstance().unreadRequestsIncrement();
-            updateNewRequestBadge();
+            if (param.justRefresh){
+                FriendsManager.getInstance().countUnreadRequests(null);
+            } else {
+                FriendsManager.getInstance().unreadRequestsIncrement();
+                updateNewRequestBadge();
+            }
         }
     }
 

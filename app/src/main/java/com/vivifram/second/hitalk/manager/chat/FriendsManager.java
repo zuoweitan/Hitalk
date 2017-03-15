@@ -78,8 +78,10 @@ public class FriendsManager {
         addRequestAVQuery.countInBackground(new CountCallback() {
             @Override
             public void done(int i, AVException e) {
-                unreadAddRequestsCount = i;
-                EaterManager.getInstance().broadcast(new UnReadRequestCountParam().setUnReadCount(i));
+                if (e == null) {
+                    unreadAddRequestsCount = i;
+                    EaterManager.getInstance().broadcast(new UnReadRequestCountParam().setUnReadCount(i));
+                }
                 if (null != countCallback) {
                     countCallback.done(i, e);
                 }
