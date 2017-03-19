@@ -17,11 +17,13 @@ import com.avos.avoscloud.im.v2.callback.AVIMConversationMemberCountCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationQueryCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMMessagesQueryCallback;
 import com.avos.avoscloud.im.v2.messages.AVIMTextMessage;
+import com.vivifram.second.hitalk.HitalkMonitor;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.InterfaceInject;
 import com.vivifram.second.hitalk.base.LayoutInject;
 import com.vivifram.second.hitalk.bean.Emojicon;
 import com.vivifram.second.hitalk.bean.IMessageWrap;
+import com.vivifram.second.hitalk.broadcast.ConnectivityNotifier;
 import com.vivifram.second.hitalk.manager.chat.ClientManager;
 import com.vivifram.second.hitalk.manager.chat.ConversationClient;
 import com.vivifram.second.hitalk.ui.page.layout.ChatInputMenuLayout;
@@ -39,6 +41,7 @@ import com.zuowei.utils.common.NotificationUtils;
 import com.zuowei.utils.common.SyncUtils;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.AbstractHandler;
+import com.zuowei.utils.handlers.ClientOpenHandler;
 import com.zuowei.utils.helper.ConversationCacheHelper;
 import com.zuowei.utils.helper.HiTalkHelper;
 
@@ -67,6 +70,37 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
         super.onAttach(context);
         NLog.i(TagUtil.makeTag(HiTalkFragmentSub1.class),"onAttach");
         mRequest = new ConcurrentLinkedQueue<>();
+        createAndInitConversation();
+        new HitalkMonitor.MonitorEvent(){
+
+            @Override
+            public boolean check() {
+                return mAvimConversation != null;
+            }
+
+            @Override
+            public void run() {
+                if (!ClientManager.getInstance().isOpend()) {
+                    if (ConnectivityNotifier.isConnected(mAppCtx)) {
+                        ClientManager.getInstance().open(HiTalkHelper.getInstance().getCurrentUserId(),null);
+                    } else {
+                        //NToast.shortToast(mAppCtx, R.string.internet_not_connect_warn);
+                    }
+
+                }
+                if (ClientManager.getInstance().isOpend()) {
+                    initSquareConversation();
+                }
+            }
+
+            @Override
+            public int getMsgType() {
+                return HitalkMonitor.CHECK_HITALK_CONVERSATION;
+            }
+        }.sendToMonitor();
+    }
+
+    private void createAndInitConversation() {
         if (ClientManager.getInstance().isOpend()) {
             initSquareConversation();
         }
@@ -109,12 +143,7 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
     }
 
     private void listenToClient() {
-        mClientOpenListener = new AbstractHandler<ClientOpenParam>() {
-            @Override
-            public boolean isParamAvailable(LightParam param) {
-                return param != null && param instanceof ClientOpenParam;
-            }
-
+        mClientOpenListener = new ClientOpenHandler() {
             @Override
             public void doJobWithParam(ClientOpenParam param) {
                 NLog.i(TagUtil.makeTag(getClass()),"mClientOpenListener callback and param.mOpened = "+param.mOpened);
@@ -212,6 +241,13 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
             @Override
             public void onRefresh() {
                 NLog.i(TagUtil.makeTag(getClass()),"mAvimConversation = "+mAvimConversation);
+                if (mAvimConversation == null || !isInternetConnected){
+                    if (!isInternetConnected){
+                        NToast.shortToast(mAppCtx, R.string.internet_not_connect_warn);
+                    } else {
+                        return;
+                    }
+                }
                 if (mLayout != null){
                     IMessageWrap firstMessage = mLayout.getChatLt().getFirstMessage();
                     if (firstMessage == null){

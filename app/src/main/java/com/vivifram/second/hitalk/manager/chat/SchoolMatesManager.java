@@ -57,6 +57,7 @@ public class SchoolMatesManager {
             FriendsManager.getInstance().findSendRequests(new FindCallback<AddRequest>() {
                 @Override
                 public void done(List<AddRequest> list, AVException e) {
+                    NLog.i(TagUtil.makeTag(SchoolMatesManager.class), "queryAllSchoolMatesWithState list = " + list);
                     if (list != null){
                         for (AddRequest addRequest : list) {
                             if (addRequest.getStatus() == AddRequest.STATUS_DONE){

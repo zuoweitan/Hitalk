@@ -2,12 +2,12 @@ package com.vivifram.second.hitalk.ui;
 
 import android.os.Bundle;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.CountCallback;
+import com.vivifram.second.hitalk.HitalkMonitor;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.BaseActivity;
 import com.vivifram.second.hitalk.base.EatMark;
 import com.vivifram.second.hitalk.base.LayoutInject;
+import com.vivifram.second.hitalk.broadcast.ConnectivityNotifier;
 import com.vivifram.second.hitalk.manager.chat.ClientManager;
 import com.vivifram.second.hitalk.manager.chat.FriendsManager;
 import com.vivifram.second.hitalk.ui.layout.HiTalkLayout;
@@ -54,6 +54,8 @@ public class HiTalkActivity extends BaseActivity<HiTalkLayout> {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        HitalkMonitor.destory();
+        ConnectivityNotifier.getNotifier(mAppCtx).destroy();
     }
     //
     @EatMark(action = EaterAction.ACTION_DO_CHECK_CLIENT)

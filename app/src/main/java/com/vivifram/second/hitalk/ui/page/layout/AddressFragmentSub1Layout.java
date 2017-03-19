@@ -15,6 +15,8 @@ import com.vivifram.second.hitalk.ui.springview.container.AddressRotationHeader;
 import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
 import com.vivifram.second.hitalk.ui.view.CommonItem;
 import com.vivifram.second.hitalk.ui.view.SRecyclerView;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.TagUtil;
 
 import java.util.Collection;
 import java.util.List;
@@ -140,6 +142,7 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
 
     public void refresh(){
         if (schoolMatesAdapter != null) {
+            NLog.i(TagUtil.makeTag(AddressFragmentSub1Layout.class), "schoolMatesAdapter notifyDataSetChanged");
             schoolMatesAdapter.notifyDataSetChanged();
         }
     }
@@ -164,5 +167,10 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
         commonItem.setSummaryImg(drawable,54,54);
         commonItem.setSummaryText(title);
         commonItem.setDetailImg(R.drawable.detail_arrow);
+    }
+
+    @Override
+    public void onClientOpen() {
+        super.onClientOpen();
     }
 }

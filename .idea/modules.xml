@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Hitalk.iml" filepath="$PROJECT_DIR$/Hitalk.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/blurdialog/blurdialog.iml" filepath="$PROJECT_DIR$/blurdialog/blurdialog.iml" />
       <module fileurl="file://$PROJECT_DIR$/bolts-tasks/bolts-tasks.iml" filepath="$PROJECT_DIR$/bolts-tasks/bolts-tasks.iml" />
       <module fileurl="file://$PROJECT_DIR$/greendao/greendao.iml" filepath="$PROJECT_DIR$/greendao/greendao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hitalk_lean.iml" filepath="$PROJECT_DIR$/hitalk_lean.iml" />
       <module fileurl="file://$PROJECT_DIR$/httplib/httplib.iml" filepath="$PROJECT_DIR$/httplib/httplib.iml" />
       <module fileurl="file://$PROJECT_DIR$/ninegridview/ninegridview.iml" filepath="$PROJECT_DIR$/ninegridview/ninegridview.iml" />
       <module fileurl="file://$PROJECT_DIR$/photopicker/photopicker.iml" filepath="$PROJECT_DIR$/photopicker/photopicker.iml" />

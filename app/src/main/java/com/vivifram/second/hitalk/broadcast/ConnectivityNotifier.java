@@ -68,6 +68,12 @@ public class ConnectivityNotifier extends BroadcastReceiver{
         }
     }
 
+    public void destroy(){
+        synchronized (lock){
+            listeners.clear();
+        }
+    }
+
     public void addAndRequestOneShot(Context context,ConnectivityListener delegate){
         addListener(delegate);
         delegate.networkConnectivityStatusChanged(isConnected(context.getApplicationContext()));

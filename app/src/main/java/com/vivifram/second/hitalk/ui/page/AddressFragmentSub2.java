@@ -2,7 +2,6 @@ package com.vivifram.second.hitalk.ui.page;
 
 import com.avos.avoscloud.AVCallback;
 import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.CountCallback;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.EatMark;
 import com.vivifram.second.hitalk.base.LayoutInject;
@@ -20,8 +19,6 @@ import com.zuowei.utils.bridge.params.address.AddressActionParam;
 import com.zuowei.utils.bridge.params.address.SchoolMateStateParam;
 import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
 import com.zuowei.utils.bridge.params.push.InvitationParam;
-import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.AbstractHandler;
 import com.zuowei.utils.helper.SchoolmatesCacheHelper;
 import com.zuowei.utils.pinyin.CharacterParser;
@@ -38,6 +35,15 @@ import java.util.List;
 public class AddressFragmentSub2 extends LazyFragment<AddressFragmentSub2Layout> {
     @Override
     protected void lazyLoad() {
+    }
+
+    @Override
+    public void onClientOpen() {
+        super.onClientOpen();
+        /*if (mLayout != null) {
+            refresh();
+            fetchFriends(true,null);
+        }*/
     }
 
     @Override

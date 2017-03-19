@@ -44,6 +44,19 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
     }
 
     @Override
+    public void onClientOpen() {
+        super.onClientOpen();
+        /*if (mLayout != null) {
+            updateSchoolMates(task -> {
+                if (task.getResult() != null) {
+                    mLayout.setData(task.getResult());
+                }
+                return null;
+            });
+        }*/
+    }
+
+    @Override
     protected void onViewCreated() {
         super.onViewCreated();
         updateSchoolMates(task -> {
@@ -110,6 +123,7 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
         @Override
         public void doJobWithParam(AddressActionParam param) {
             if (param.getActionType() == AddressActionParam.ACTION_SCHOOLMATE_STATE_CHANGED){
+                NLog.i(TagUtil.makeTag(AddressFragmentSub1.class), "receive SchoolStateChangedListener " + param.getActionType());
                 mLayout.refresh();
             }
         }

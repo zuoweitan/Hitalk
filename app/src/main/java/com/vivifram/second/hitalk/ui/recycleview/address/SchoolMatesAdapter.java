@@ -12,7 +12,10 @@ import com.jiang.android.lib.adapter.BaseAdapter;
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersAdapter;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
+import com.vivifram.second.hitalk.ui.page.layout.AddressFragmentSub1Layout;
+import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.NoDoubleClickListener;
+import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.SchoolmatesCacheHelper;
 
 import bolts.Continuation;
@@ -63,6 +66,7 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,BaseAdapter.BaseV
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
         if (position != 0) {
+            NLog.i(TagUtil.makeTag(AddressFragmentSub1Layout.class), "schoolMatesAdapter onBindViewHolder initWithModel");
             ((SchoolMateViewHolder)holder).initWithModel(getItem(position));
         }
     }

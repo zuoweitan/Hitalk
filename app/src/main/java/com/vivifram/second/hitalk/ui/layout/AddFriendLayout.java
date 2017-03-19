@@ -6,8 +6,6 @@ import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.ui.view.BGATitlebar;
 import com.zuowei.utils.helper.ViewClickHelper;
 
-import static com.avos.avoscloud.Messages.StatusType.on;
-
 /**
  * 项目名称：Hitalk
  * 类描述：

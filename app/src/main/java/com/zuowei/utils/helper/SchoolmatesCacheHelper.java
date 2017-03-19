@@ -64,7 +64,23 @@ public class SchoolmatesCacheHelper {
         }
     }
 
+    public void cache(String uid,int friendState, boolean force){
+        if (force) {
+            caches.remove(uid);
+            cache(uid, friendState);
+        } else {
+            cache(uid, friendState);
+        }
+    }
+
     public void update(String uid,int state){
-        cache(uid,state);
+        cache(uid,state,true);
+    }
+
+    @Override
+    public String toString() {
+        return "SchoolmatesCacheHelper{" +
+                "caches=" + caches +
+                '}';
     }
 }

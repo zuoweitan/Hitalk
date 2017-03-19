@@ -1,6 +1,7 @@
 package com.vivifram.second.hitalk.base;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,11 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vivifram.second.hitalk.HiTalkApplication;
+import com.vivifram.second.hitalk.broadcast.ConnectivityNotifier;
 import com.vivifram.second.hitalk.ui.page.layout.BaseFragmentLayout;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.IEater;
+import com.zuowei.utils.bridge.constant.EaterAction;
+import com.zuowei.utils.bridge.params.chat.ClientOpenParam;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
+import com.zuowei.utils.handlers.ClientOpenHandler;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -33,11 +38,20 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
     protected WorkHandler workHandler;
     protected Context mAppCtx;
     protected T mLayout;
+    protected boolean isInternetConnected;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mAppCtx = HiTalkApplication.mAppContext;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAppCtx = HiTalkApplication.mAppContext;
+        EaterManager.getInstance().registerEater(EaterAction.ACTION_DO_CHECK_CLIENT, clientOpenHandler);
+        ConnectivityNotifier.getNotifier(mAppCtx).addListener(this::onInternetConnected);
+        workHandler = new WorkHandler();
     }
 
     @Nullable
@@ -163,6 +177,16 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
             workHandler.removeCallbacksAndMessages(null);
             workHandler = null;
         }
+
+        EaterManager.getInstance().unRegisterEater(clientOpenHandler);
+    }
+
+    public void onClientOpen() {
+
+    }
+
+    public void onInternetConnected(boolean connected){
+        isInternetConnected = connected;
     }
 
     private void unInstallEatMark() {
@@ -214,4 +238,12 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
         }
     }
 
+    private ClientOpenHandler clientOpenHandler = new ClientOpenHandler() {
+        @Override
+        public void doJobWithParam(ClientOpenParam param) {
+            if (param.mOpened){
+                onClientOpen();
+            }
+        }
+    };
 }

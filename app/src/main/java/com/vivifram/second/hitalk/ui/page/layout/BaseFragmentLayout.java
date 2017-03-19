@@ -8,6 +8,8 @@ import android.view.View;
 
 import com.vivifram.second.hitalk.HiTalkApplication;
 import com.vivifram.second.hitalk.ui.layout.BaseLayout;
+import com.zuowei.utils.bridge.params.chat.ClientOpenParam;
+import com.zuowei.utils.handlers.ClientOpenHandler;
 
 /**
  * Created by zuowei on 16-8-1.
@@ -38,7 +40,8 @@ public class BaseFragmentLayout {
         return mRootView.findViewById(id);
     }
 
-    public void onViewCreate(View root){}
+    public void onViewCreate(View root){
+    }
 
     public void onActivitySet(){}
 
@@ -50,7 +53,19 @@ public class BaseFragmentLayout {
 
     public void onStop(){}
 
-    public void onViewDestroy(){}
+    public void onViewDestroy(){
+    }
 
     public void onDestroy(){}
+
+    public void onClientOpen(){}
+
+    private ClientOpenHandler clientOpenHandler = new ClientOpenHandler() {
+        @Override
+        public void doJobWithParam(ClientOpenParam param) {
+            if (param.mOpened){
+                //onClientOpen();
+            }
+        }
+    };
 }

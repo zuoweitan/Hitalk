@@ -37,6 +37,7 @@ public class HiTalkApplication extends Application {
             NineGridHelper.initWithGlide();
             ConnectivityNotifier.getNotifier(mAppContext);
             HiTalkHelper.getInstance().init(mAppContext);
+            HitalkMonitor.runLoop();
             //start Queue
             //test
             //tryGetAllBnRemotes();
