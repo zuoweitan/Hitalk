@@ -1,5 +1,6 @@
 package com.zuowei.utils.helper;
 
+import com.vivifram.second.hitalk.bean.Constants;
 import com.zuowei.dao.greendao.Schoolmate;
 import com.zuowei.dao.greendao.SchoolmateDao;
 import com.zuowei.utils.common.NLog;
@@ -18,9 +19,9 @@ import de.greenrobot.dao.query.Query;
 
 public class SchoolmatesCacheHelper {
 
-    public static final int REQUEST_STATE_SUCCESS = 0x01;
-    public static final int REQUEST_STATE_WATING = 0x02;
-    public static final int REQUEST_STATE_FAILED = 0x03;
+    public static final int REQUEST_STATE_SUCCESS = Constants.SchoolMateState.REQUEST_STATE_SUCCESS;
+    public static final int REQUEST_STATE_WATING = Constants.SchoolMateState.REQUEST_STATE_WATING;
+    public static final int REQUEST_STATE_FAILED = Constants.SchoolMateState.REQUEST_STATE_FAILED;
 
     private static final SchoolmatesCacheHelper schoolmatesCacheHelper
             = new SchoolmatesCacheHelper();

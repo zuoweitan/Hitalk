@@ -1,5 +1,6 @@
 package com.vivifram.second.hitalk.manager.chat;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.avos.avoscloud.AVCallback;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
@@ -16,8 +17,12 @@ import com.vivifram.second.hitalk.bean.address.AddRequest;
 import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.NToast;
+import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.UserBeanCacheHelper;
+import com.zuowei.utils.helper.UserCacheHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -273,6 +278,38 @@ public class FriendsManager {
         q.setCachePolicy(cachePolicy);
         q.setMaxCacheAge(TimeUnit.MINUTES.toMillis(1));
         q.findInBackground(findCallback);
+    }
+
+    public static class FriendsManagerUIHelper {
+
+        public static void requestFriend(String userId, Continuation<Boolean, Void> continueTask) {
+
+            if (continueTask == null) {
+                continueTask = task -> null;
+            }
+            final MaterialDialog dialog = new MaterialDialog.Builder(HiTalkApplication.$())
+                    .content(R.string.request_sending)
+                    .progress(true, 0)
+                    .progressIndeterminateStyle(false)
+                    .widgetColor(HiTalkApplication.$().getResources().getColor(R.color.hitalk_deep_yellow))
+                    .build();
+            AVUser avUser = UserCacheHelper.getInstance().getCachedAVUser(userId);
+            if (avUser != null) {
+                dialog.show();
+                Task.forResult(null).continueWithTask(task -> FriendsManager.getInstance().createAddRequestInBackground(avUser))
+                        .continueWith(task -> {
+                            Exception error = task.getError();
+                            if (error != null){
+                                NLog.i(TagUtil.makeTag(FriendsManagerUIHelper.class),"error = "+error.getMessage());
+                                NToast.shortToast(HiTalkApplication.$(),error.getMessage());
+                            }else {
+                                NToast.shortToast(HiTalkApplication.$(),R.string.request_send);
+                            }
+                            dialog.dismiss();
+                            return error == null;
+                        }, Task.UI_THREAD_EXECUTOR).continueWith(continueTask);
+            }
+        }
     }
 
 }

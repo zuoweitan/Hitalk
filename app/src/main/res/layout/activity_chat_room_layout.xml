@@ -31,4 +31,52 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/flowWarnLt"
+        style="@style/match_horizontal"
+        android:layout_height="38dp"
+        android:gravity="center_vertical"
+        android:background="@color/color_alpha_757575"
+        android:layout_marginTop="@dimen/titlebarHeight"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@color/color_eeeeee"
+            android:text="@string/not_friend_warn"
+            android:layout_marginLeft="20dp"
+            />
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="0.5"/>
+
+        <Button
+            android:id="@+id/addFriendBt"
+            android:layout_width="52dp"
+            android:layout_height="32dp"
+            android:background="@drawable/button_rounded_color_grey_smallr_background"
+            android:text="@string/to_add_friend"
+            android:textColor="@color/color_eeeeee"
+            android:textSize="@dimen/text_size_14"
+            />
+
+        <Button
+            android:id="@+id/cancelBt"
+            android:layout_width="52dp"
+            android:layout_height="32dp"
+            android:background="@drawable/button_rounded_color_grey_smallr_background"
+            android:text="@string/cancel"
+            android:textColor="@color/color_eeeeee"
+            android:textSize="@dimen/text_size_14"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
+            />
+
+    </LinearLayout>
+
 </FrameLayout>

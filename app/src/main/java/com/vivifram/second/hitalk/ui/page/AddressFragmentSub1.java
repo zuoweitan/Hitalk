@@ -2,8 +2,6 @@ package com.vivifram.second.hitalk.ui.page;
 
 import android.os.Handler;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.avos.avoscloud.AVUser;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.EatMark;
 import com.vivifram.second.hitalk.base.LayoutInject;
@@ -11,18 +9,19 @@ import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.vivifram.second.hitalk.manager.chat.FriendsManager;
 import com.vivifram.second.hitalk.manager.chat.SchoolMatesManager;
+import com.vivifram.second.hitalk.ui.ChatRoomActivity;
 import com.vivifram.second.hitalk.ui.page.layout.AddressFragmentSub1Layout;
+import com.vivifram.second.hitalk.ui.recycleview.address.SchoolMatesAdapter;
 import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.address.AddressActionParam;
 import com.zuowei.utils.common.Md5Utils;
 import com.zuowei.utils.common.NLog;
-import com.zuowei.utils.common.NToast;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.AbstractHandler;
 import com.zuowei.utils.helper.HiTalkHelper;
-import com.zuowei.utils.helper.UserCacheHelper;
+import com.zuowei.utils.helper.SchoolmatesCacheHelper;
 import com.zuowei.utils.pinyin.LetterComparator;
 
 import java.util.Collections;
@@ -84,31 +83,21 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
         });
         handler = new Handler();
 
-        mLayout.setOnSchoolMatesActionListener((userId,continueTask) -> {
-
-            final MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
-                    .content(R.string.request_sending)
-                    .progress(true, 0)
-                    .progressIndeterminateStyle(false)
-                    .widgetColor(mAppCtx.getResources().getColor(R.color.hitalk_deep_yellow))
-                    .build();
-            AVUser avUser = UserCacheHelper.getInstance().getCachedAVUser(userId);
-            if (avUser != null) {
-                dialog.show();
-                Task.forResult(null).continueWithTask(task -> FriendsManager.getInstance().createAddRequestInBackground(avUser))
-                        .continueWith(task -> {
-                            Exception error = task.getError();
-                            if (error != null){
-                                NLog.i(TagUtil.makeTag(getClass()),"error = "+error.getMessage());
-                                NToast.shortToast(mAppCtx,error.getMessage());
-                            }else {
-                                NToast.shortToast(mAppCtx,R.string.request_send);
-                            }
-                            dialog.dismiss();
-                            return error == null;
-                        }, Task.UI_THREAD_EXECUTOR).continueWith(continueTask);
+        mLayout.setOnSchoolMatesActionListener(new SchoolMatesAdapter.OnSchoolMatesActionListener() {
+            @Override
+            public void onAddFriendRequest(String userId, Continuation<Boolean, Void> callback) {
+                FriendsManager.FriendsManagerUIHelper.requestFriend(userId, callback);
             }
 
+            @Override
+            public void onSchoolMateItemClick(String userId, int state) {
+                NLog.i(TagUtil.makeTag(AddressFragmentSub1.class), "onSchoolMateItemClick userId = "+ userId + ", state = "+ state);
+                if (state == SchoolmatesCacheHelper.REQUEST_STATE_FAILED) {
+                    ChatRoomActivity.start(getActivity(), Constants.ParamsKey.Chat.TO_SCHOOL_MATE, userId);
+                } else {
+                    ChatRoomActivity.start(getActivity(), Constants.ParamsKey.Chat.TO_FRIEND, userId);
+                }
+            }
         });
     }
 

@@ -42,10 +42,17 @@ public class Constants {
         }
     }
 
-    public final class ParamsKey{
+    public final class ParamsKey {
         public class Chat {
             public static final int TO_FRIEND = 1;
+            public static final int TO_SCHOOL_MATE = 2;
         }
+    }
+
+    public final class SchoolMateState {
+        public static final int REQUEST_STATE_SUCCESS = 0x01;
+        public static final int REQUEST_STATE_WATING = 0x02;
+        public static final int REQUEST_STATE_FAILED = 0x03;
     }
 
     public final class BlurDialog{

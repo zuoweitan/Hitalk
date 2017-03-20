@@ -1,9 +1,11 @@
 package com.vivifram.second.hitalk.ui.layout;
 
 import android.view.View;
+import android.widget.Button;
 
 import com.avos.avoscloud.im.v2.AVIMTypedMessage;
 import com.vivifram.second.hitalk.R;
+import com.vivifram.second.hitalk.base.BaseLayoutBean;
 import com.vivifram.second.hitalk.base.BindView;
 import com.vivifram.second.hitalk.bean.IMessageWrap;
 import com.vivifram.second.hitalk.cache.MessageCacheQueue;
@@ -37,6 +39,8 @@ public class ChatRoomLayout extends BaseLayout{
 
     @BindView(id = R.id.titleBar)
     private BGATitlebar titlebar;
+
+    private FlowBar flowBar;
 
     private ChatMessageListLayout chatLt;
     private MenuItemClickListener menuItemClickListener;
@@ -79,6 +83,8 @@ public class ChatRoomLayout extends BaseLayout{
             }
         });
 
+        //delay init
+        //flowBar = new FlowBar(findViewById(R.id.flowWarnLt));
     }
 
     public void setTitle(String title){
@@ -118,6 +124,13 @@ public class ChatRoomLayout extends BaseLayout{
         return chatLt;
     }
 
+    public FlowBar flowBar() {
+        if (flowBar == null) {
+            flowBar = new FlowBar(findViewById(R.id.flowWarnLt));
+        }
+        return flowBar;
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -129,6 +142,48 @@ public class ChatRoomLayout extends BaseLayout{
         @Override
         public void onClick(int itemId, View view) {
 
+        }
+    }
+
+    public static class FlowBar extends BaseLayoutBean{
+        @BindView(id = R.id.addFriendBt, boundClick = true)
+        Button addFriendBt;
+        @BindView(id = R.id.cancelBt, boundClick = true)
+        Button cancelBt;
+
+        private OnFlowBarActionListener onFlowBarActionListener;
+
+        public FlowBar(View base) {
+            super(base);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (onFlowBarActionListener == null) {
+                return;
+            }
+            switch (v.getId()) {
+                case R.id.addFriendBt:
+                        onFlowBarActionListener.onAddFriend();
+                    break;
+                case R.id.cancelBt:
+                        onFlowBarActionListener.onCancel();
+                    break;
+            }
+        }
+
+        public void show(boolean show) {
+            base.setVisibility(show ? View.VISIBLE : View.GONE);
+        }
+
+        public FlowBar setOnFlowBarActionListener(OnFlowBarActionListener onFlowBarActionListener) {
+            this.onFlowBarActionListener = onFlowBarActionListener;
+            return this;
+        }
+
+        public interface OnFlowBarActionListener {
+            void onAddFriend();
+            void onCancel();
         }
     }
 }

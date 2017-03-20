@@ -37,6 +37,7 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,BaseAdapter.BaseV
 
     public interface OnSchoolMatesActionListener{
         void onAddFriendRequest(String userId, Continuation<Boolean,Void> callback);
+        void onSchoolMateItemClick(String userId, int state);
     }
 
     private OnSchoolMatesActionListener onSchoolMatesActionListener;
@@ -185,6 +186,19 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,BaseAdapter.BaseV
                     }
                 }
             });
+
+            itemView.setOnClickListener(v -> {
+                SchoolMate item = getItem(getAdapterPosition());
+                if (onSchoolMatesActionListener != null) {
+                    Object tag = addFriendBtn.getTag(R.id.schoolmate_state);
+                    int state = REQUEST_STATE_FAILED;
+                    if (tag != null) {
+                        state = (int) tag;
+                    }
+
+                    onSchoolMatesActionListener.onSchoolMateItemClick(item.getUserId(), state);
+                }
+            });
         }
 
         public void initWithModel(SchoolMate schoolMate){
@@ -202,6 +216,7 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,BaseAdapter.BaseV
         }
 
         public void setRequestState(int success){
+            addFriendBtn.setTag(R.id.schoolmate_state, success);
             switch (success){
                 case REQUEST_STATE_FAILED:
                         addFriendBtn.setVisibility(View.VISIBLE);

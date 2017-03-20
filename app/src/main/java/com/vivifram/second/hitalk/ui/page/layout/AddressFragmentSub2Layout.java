@@ -3,7 +3,6 @@ package com.vivifram.second.hitalk.ui.page.layout;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
 import android.view.View;
 
 import com.jiang.android.lib.adapter.expand.StickyRecyclerHeadersDecoration;
@@ -12,7 +11,6 @@ import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.address.Friend;
 import com.vivifram.second.hitalk.ui.ChatRoomActivity;
 import com.vivifram.second.hitalk.ui.NewFriendConfirmActivity;
-import com.vivifram.second.hitalk.ui.ParamsPool;
 import com.vivifram.second.hitalk.ui.recycleview.address.DividerDecoration;
 import com.vivifram.second.hitalk.ui.recycleview.address.FriendsAdapter;
 import com.vivifram.second.hitalk.ui.springview.container.AddressRotationHeader;
@@ -69,11 +67,7 @@ public class AddressFragmentSub2Layout extends BaseFragmentLayout {
 
         friendsAdapter = new FriendsAdapter();
         friendsAdapter.setOnItemClickListener((item, position) -> {
-            SparseArray<String> sparseArray = new SparseArray<>();
-            sparseArray.put(Constants.ParamsKey.Chat.TO_FRIEND, item.getUserId());
-            int key = sparseArray.hashCode();
-            ParamsPool.$().put(key, sparseArray);
-            ChatRoomActivity.start(mAct, key);
+            ChatRoomActivity.start(mAct, Constants.ParamsKey.Chat.TO_FRIEND, item.getUserId());
         });
         recyclerView.setAdapter(friendsAdapter);
         final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(friendsAdapter);

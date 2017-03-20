@@ -3,4 +3,5 @@
     <item name="action_delete" type="id"/>
     <item name="action_copy" type="id"/>
     <item name="button_type" type="id"/>
+    <item name="schoolmate_state" type="id"/>
 </resources>

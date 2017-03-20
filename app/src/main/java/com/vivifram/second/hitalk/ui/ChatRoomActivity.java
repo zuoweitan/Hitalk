@@ -25,6 +25,7 @@ import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.Emojicon;
 import com.vivifram.second.hitalk.bean.IMessageWrap;
 import com.vivifram.second.hitalk.manager.chat.ClientManager;
+import com.vivifram.second.hitalk.manager.chat.FriendsManager;
 import com.vivifram.second.hitalk.ui.layout.ChatRoomLayout;
 import com.vivifram.second.hitalk.ui.page.layout.ChatInputMenuLayout;
 import com.vivifram.second.hitalk.ui.page.layout.ChatMessageListLayout;
@@ -61,32 +62,54 @@ import bolts.Task;
     public class ChatRoomActivity extends BaseActivity<ChatRoomLayout>{
     private static final String TAG = TagUtil.makeTag(ChatRoomActivity.class);
 
-    public static void start(Context c,int key){
+    private static void start(Context c,int key){
         start(c,ChatRoomActivity.class,key);
     }
 
-    private AVIMConversation conversation;
+    public static void start(Context c, int toType, String UserId) {
+        SparseArray<String> sparseArray = new SparseArray<>();
+        sparseArray.put(toType, UserId);
+        int key = sparseArray.hashCode();
+        ParamsPool.$().put(key, sparseArray);
+        start(c, key);
+    }
 
+    private AVIMConversation conversation;
+    boolean isToFriend =  false;
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_chat_room_layout);
         SparseArray chatParams = (SparseArray) params;
+        String toUserId = null;
+        if (chatParams == null) {
+            finish();
+        }
         switch (chatParams.keyAt(0)){
             case Constants.ParamsKey.Chat.TO_FRIEND:
-                    String toUserId = (String) chatParams.get(Constants.ParamsKey.Chat.TO_FRIEND);
-                    UserBeanCacheHelper.getInstance().getCachedUser(toUserId, new AVCallback<User>() {
-                        @Override
-                        protected void internalDone0(User user, AVException e) {
-                            if (e == null) {
-                                doInitChatRoom(user);
-                            } else {
-                                NToast.shortToast(mAppCtx,getResources().getString(R.string.open_chat_room_failed));
-                                finish();
-                            }
-                        }
-                    });
+                    isToFriend = true;
+                    toUserId = (String) chatParams.get(Constants.ParamsKey.Chat.TO_FRIEND);
                 break;
+            case Constants.ParamsKey.Chat.TO_SCHOOL_MATE:
+                    toUserId = (String) chatParams.get(Constants.ParamsKey.Chat.TO_SCHOOL_MATE);
+                break;
+        }
+
+        if (toUserId != null) {
+            UserBeanCacheHelper.getInstance().getCachedUser(toUserId, new AVCallback<User>() {
+                @Override
+                protected void internalDone0(User user, AVException e) {
+                    if (e == null) {
+                        doInitChatRoom(user);
+                    } else {
+                        NToast.shortToast(mAppCtx,getResources().getString(R.string.open_chat_room_failed));
+                        finish();
+                    }
+                }
+            });
+        } else {
+            NToast.shortToast(mAppCtx,getResources().getString(R.string.open_chat_room_failed));
+            finish();
         }
     }
 
@@ -180,6 +203,20 @@ import bolts.Task;
 
     private void doInitChatRoom(User user) {
         mLayout.setTitle(user.getNick());
+        if (!isToFriend) {
+            mLayout.flowBar().show(true);
+            mLayout.flowBar().setOnFlowBarActionListener(new ChatRoomLayout.FlowBar.OnFlowBarActionListener() {
+                @Override
+                public void onAddFriend() {
+                    FriendsManager.FriendsManagerUIHelper.requestFriend(user.getObjectId(), null);
+                }
+
+                @Override
+                public void onCancel() {
+                    mLayout.flowBar().show(false);
+                }
+            });
+        }
         if (ClientManager.getInstance().isOpend()){
             ClientManager.getInstance().getClient().createConversation(Collections.singletonList(user.getObjectId()),
                     user.getNick(), null, false, true, new AVIMConversationCreatedCallback() {

@@ -1,10 +1,18 @@
 [
     {
+        "merged": "/home/zuowei/sundires/Hitalk/qrcodecore/build/intermediates/res/merged/androidTest/debug/mipmap-xxhdpi-v4/qrcode_default_grid_scan_line.png",
+        "source": "/home/zuowei/sundires/Hitalk/qrcodecore/build/intermediates/bundles/debug/res/mipmap-xxhdpi-v4/qrcode_default_grid_scan_line.png"
+    },
+    {
         "merged": "/home/zuowei/workspace/hitalk_lean/qrcodecore/build/intermediates/res/merged/androidTest/debug/mipmap-xxhdpi-v4/qrcode_default_grid_scan_line.png",
         "source": "/home/zuowei/workspace/hitalk_lean/qrcodecore/build/intermediates/bundles/debug/res/mipmap-xxhdpi-v4/qrcode_default_grid_scan_line.png"
     },
     {
         "merged": "/home/zuowei/workspace/hitalk_lean/qrcodecore/build/intermediates/res/merged/androidTest/debug/mipmap-xxhdpi-v4/qrcode_default_scan_line.png",
         "source": "/home/zuowei/workspace/hitalk_lean/qrcodecore/build/intermediates/bundles/debug/res/mipmap-xxhdpi-v4/qrcode_default_scan_line.png"
+    },
+    {
+        "merged": "/home/zuowei/sundires/Hitalk/qrcodecore/build/intermediates/res/merged/androidTest/debug/mipmap-xxhdpi-v4/qrcode_default_scan_line.png",
+        "source": "/home/zuowei/sundires/Hitalk/qrcodecore/build/intermediates/bundles/debug/res/mipmap-xxhdpi-v4/qrcode_default_scan_line.png"
     }
 ]

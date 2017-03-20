@@ -140,4 +140,5 @@
     <string name="open_chat_room_failed">对话打开失败</string>
     <string name="create_chat_room_failed">对话创建失败</string>
     <string name="message_fetch_failed_warn">消息获取失败，请重新尝试</string>
+    <string name="not_friend_warn">对方还不是好友</string>
 </resources>
