@@ -33,12 +33,14 @@ import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
+import com.zuowei.utils.bridge.params.address.SchoolMateStateParam;
 import com.zuowei.utils.bridge.params.chat.MessageParam;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.NToast;
 import com.zuowei.utils.common.SyncUtils;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.AbstractHandler;
+import com.zuowei.utils.helper.SchoolmatesCacheHelper;
 import com.zuowei.utils.helper.UserBeanCacheHelper;
 
 import java.util.Collections;
@@ -46,6 +48,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 
+import bolts.Continuation;
 import bolts.Task;
 
 /**
@@ -201,14 +204,20 @@ import bolts.Task;
         return null == e;
     }
 
-    private void doInitChatRoom(User user) {
+    private void doInitChatRoom(final User user) {
         mLayout.setTitle(user.getNick());
         if (!isToFriend) {
             mLayout.flowBar().show(true);
             mLayout.flowBar().setOnFlowBarActionListener(new ChatRoomLayout.FlowBar.OnFlowBarActionListener() {
                 @Override
                 public void onAddFriend() {
-                    FriendsManager.FriendsManagerUIHelper.requestFriend(user.getObjectId(), null);
+                    FriendsManager.FriendsManagerUIHelper.requestFriend(user.getObjectId(), task -> {
+                        if (task.getResult()) {
+                            SchoolmatesCacheHelper.getInstance().cache(user.getObjectId(), SchoolmatesCacheHelper.REQUEST_STATE_WATING);
+                        }
+                        EaterManager.getInstance().broadcast(new SchoolMateStateParam());
+                        return null;
+                    });
                 }
 
                 @Override

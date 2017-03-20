@@ -11,18 +11,23 @@ import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.BaseActivity;
 import com.vivifram.second.hitalk.base.InterfaceInject;
 import com.vivifram.second.hitalk.base.LayoutInject;
+import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.address.AddRequest;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.vivifram.second.hitalk.manager.chat.FriendsManager;
 import com.vivifram.second.hitalk.ui.layout.FriendInfoLayout;
+import com.zuowei.utils.bridge.EaterManager;
+import com.zuowei.utils.bridge.params.address.SchoolMateStateParam;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.NToast;
 import com.zuowei.utils.common.TagUtil;
+import com.zuowei.utils.helper.SchoolmatesCacheHelper;
 import com.zuowei.utils.helper.UserCacheHelper;
 
 import java.util.HashMap;
 import java.util.List;
 
+import bolts.Continuation;
 import bolts.Task;
 
 /**
@@ -113,35 +118,20 @@ public class FriendInfoActivity extends BaseActivity<FriendInfoLayout>{
     };
 
     private void doTalk() {
-
+        ChatRoomActivity.start(this, Constants.ParamsKey.Chat.TO_FRIEND, schoolMate.getUserId());
+        finish();
     }
 
-    private void doAddFriend() {//// TODO: 17-2-14 need to upload schoolmate friend state
-        final MaterialDialog dialog = new MaterialDialog.Builder(this)
-                .content(R.string.request_sending)
-                .progress(true, 0)
-                .progressIndeterminateStyle(false)
-                .widgetColor(mAppCtx.getResources().getColor(R.color.hitalk_deep_yellow))
-                .build();
-        AVUser avUser = UserCacheHelper.getInstance().getCachedAVUser(schoolMate.getUserId());
-        if (avUser != null) {
-            dialog.show();
-            Task.forResult(null).continueWithTask(task -> FriendsManager.getInstance().createAddRequestInBackground(avUser))
-                    .continueWith(task -> {
-                        Exception error = task.getError();
-                        if (error != null){
-                            NLog.i(TagUtil.makeTag(getClass()),"error = "+error.getMessage());
-                            NToast.shortToast(mAppCtx,error.getMessage());
-                        }else {
-                            NToast.shortToast(mAppCtx,R.string.request_send);
-                        }
-                        dialog.dismiss();
-                        finish();
-                        return error == null;
-                    }, Task.UI_THREAD_EXECUTOR);
-        } else {
-            mLayout.enableButton();
-        }
+    private void doAddFriend() {
+        FriendsManager.FriendsManagerUIHelper.requestFriend(schoolMate.getUserId(), task -> {
+            Boolean result = task.getResult();
+            if (result) {
+                SchoolmatesCacheHelper.getInstance().cache(schoolMate.getUserId(), SchoolmatesCacheHelper.REQUEST_STATE_WATING);
+                EaterManager.getInstance().broadcast(new SchoolMateStateParam());
+            }
+            finish();
+            return null;
+        });
     }
 
     @Override

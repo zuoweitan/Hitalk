@@ -308,6 +308,8 @@ public class FriendsManager {
                             dialog.dismiss();
                             return error == null;
                         }, Task.UI_THREAD_EXECUTOR).continueWith(continueTask);
+            } else {
+                Task.forResult(false).continueWith(continueTask);
             }
         }
     }
