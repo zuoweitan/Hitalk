@@ -575,6 +575,8 @@ public class SpringView extends ViewGroup{
                         listener.onRefresh();
                     if (callFreshORload == 2)
                         listener.onLoadmore();
+                } else {
+                    onFinishFreshAndLoad();
                 }
             }
         }
@@ -586,7 +588,7 @@ public class SpringView extends ViewGroup{
     private void resetPosition() {
         isFullAnim = true;
         isInControl = false;    //重置位置的时候，滑动事件已经不在控件的控制中了
-        if (type== Type.OVERLAP){
+        if (type == Type.OVERLAP){
             if (mRect.bottom==0||mRect.right==0) return;
             //根据下拉高度计算弹回时间，时间最小100，最大400
             int time = 0;

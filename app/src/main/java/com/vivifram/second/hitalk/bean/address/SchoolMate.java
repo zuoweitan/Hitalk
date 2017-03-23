@@ -20,6 +20,8 @@ public class SchoolMate extends LetterMark implements Indexable{
 
     private String interest;
 
+    private String avater;
+
     public String getNickName() {
         return nickName;
     }
@@ -71,6 +73,15 @@ public class SchoolMate extends LetterMark implements Indexable{
 
     public SchoolMate setInterest(String interest) {
         this.interest = interest;
+        return this;
+    }
+
+    public String getAvater() {
+        return avater;
+    }
+
+    public SchoolMate setAvater(String avater) {
+        this.avater = avater;
         return this;
     }
 

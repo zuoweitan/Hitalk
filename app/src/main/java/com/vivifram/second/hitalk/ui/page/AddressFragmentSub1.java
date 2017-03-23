@@ -67,7 +67,9 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
         mLayout.setOnFreshListener(new SpringView.OnFreshListener() {
             @Override
             public void onRefresh() {
+                NLog.i(TagUtil.makeTag(AddressFragmentSub1.class) + "####", "onRefresh started");
                 updateSchoolMates(task -> {
+                    NLog.i(TagUtil.makeTag(AddressFragmentSub1.class) + "####", "onRefresh finished");
                     mLayout.notifyFreshDone();
                     if (task.getResult() != null) {
                         mLayout.refresh(task.getResult());
@@ -91,7 +93,6 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
 
             @Override
             public void onSchoolMateItemClick(String userId, int state) {
-                NLog.i(TagUtil.makeTag(AddressFragmentSub1.class), "onSchoolMateItemClick userId = "+ userId + ", state = "+ state);
                 if (state == SchoolmatesCacheHelper.REQUEST_STATE_FAILED) {
                     ChatRoomActivity.start(getActivity(), Constants.ParamsKey.Chat.TO_SCHOOL_MATE, userId);
                 } else {
@@ -112,7 +113,6 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
         @Override
         public void doJobWithParam(AddressActionParam param) {
             if (param.getActionType() == AddressActionParam.ACTION_SCHOOLMATE_STATE_CHANGED){
-                NLog.i(TagUtil.makeTag(AddressFragmentSub1.class), "receive SchoolStateChangedListener " + param.getActionType());
                 mLayout.refresh();
             }
         }
@@ -124,6 +124,7 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
                 , Md5Utils.stringToMD5(HiTalkHelper.$().getCurrentUserCollege()));
         SchoolMatesManager.getInstance().queryAllSchoolMatesWithState(conditions)
                 .continueWith(task -> {
+                    NLog.i(TagUtil.makeTag(AddressFragmentSub1.class) + "####", "updateSchoolMates finish");
                     final List<SchoolMate> result = task.getResult();
                     if (result != null){
                         Collections.sort(result,new LetterComparator<>());

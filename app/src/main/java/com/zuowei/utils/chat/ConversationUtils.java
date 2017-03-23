@@ -67,6 +67,13 @@ public class ConversationUtils {
         }
     }
 
+    public static void createGroupConversation(final List<String> memberIds, String name, final AVIMConversationCreatedCallback callback) {
+        Map<String, Object> attrs = new HashMap<>();
+        attrs.put(ConversationType.TYPE_KEY, ConversationType.Group.getValue());
+        attrs.put("name", name);
+        ClientManager.getInstance().getClient().createConversation(memberIds, "", attrs, false, true, callback);
+    }
+
     public static void createSingleConversation(String memberId, AVIMConversationCreatedCallback callback) {
         Map<String, Object> attrs = new HashMap<>();
         attrs.put(ConversationType.TYPE_KEY, ConversationType.Single.getValue());

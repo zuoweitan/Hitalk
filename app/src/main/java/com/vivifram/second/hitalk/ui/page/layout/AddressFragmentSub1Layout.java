@@ -149,6 +149,15 @@ public class AddressFragmentSub1Layout extends BaseFragmentLayout {
 
 
     public void setData(Collection<SchoolMate> schoolMates){
+        //fake data
+        /*for (int i = 0; i < 30 ; i ++){
+            SchoolMate schoolMate = new SchoolMate();
+            schoolMate.setNickName("哈哈");
+            schoolMate.setCollege("邮电大学");
+            schoolMate.setUserId(i + "");
+            schoolMate.setSortLetters("ABC");
+            schoolMatesAdapter.add(schoolMate);
+        }*/
         if (schoolMates != null) {
             for (SchoolMate schoolMate : schoolMates) {
                 schoolMatesAdapter.add(schoolMate);

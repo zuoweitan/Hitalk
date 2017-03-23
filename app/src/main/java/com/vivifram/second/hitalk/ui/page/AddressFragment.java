@@ -4,8 +4,6 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.CountCallback;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.EatMark;
 import com.vivifram.second.hitalk.base.LayoutInject;
@@ -37,8 +35,6 @@ public class AddressFragment extends LazyFragment<AddressFragmentLayout> {
         addressFragmentSub3 = new AddressFragmentSub3();
 
         mFragments = new Fragment[]{addressFragmentSub1,addressFragmentSub2,addressFragmentSub3};
-        
-        //// TODO: 17-2-14 try to update the schoolmate friendstate.{AddressFragmentsub2} 
     }
 
     @Override

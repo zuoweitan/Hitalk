@@ -62,7 +62,7 @@ public class AddressRotationHeader extends BaseHeader {
 
     @Override
     public int getDragLimitHeight(View rootView) {
-        return rootView.getMeasuredHeight()/3;
+        return (int) (rootView.getMeasuredHeight() * .5f);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class AddressRotationHeader extends BaseHeader {
         if (y > maxY) return;
         rootView.setTranslationY(y);
 
-        float rota = 360*dy/rootView.getMeasuredHeight();
+        float rota = 360*dy / rootView.getMeasuredHeight();
         progress.setRotation(rota);
     }
 

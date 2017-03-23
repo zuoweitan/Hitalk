@@ -57,7 +57,6 @@ public class SchoolMatesManager {
             FriendsManager.getInstance().findSendRequests(new FindCallback<AddRequest>() {
                 @Override
                 public void done(List<AddRequest> list, AVException e) {
-                    NLog.i(TagUtil.makeTag(SchoolMatesManager.class), "queryAllSchoolMatesWithState list = " + list);
                     if (list != null){
                         for (AddRequest addRequest : list) {
                             if (addRequest.getStatus() == AddRequest.STATUS_DONE){
@@ -78,7 +77,6 @@ public class SchoolMatesManager {
 
     public Task<List<SchoolMate>> queryAllSchoolMates(Map<String,Object> conditions){
         return Task.callInBackground(()->{
-            NLog.i(TagUtil.makeTag(getClass()),"queryAllSchoolMates");
             List<SchoolMate> results = new ArrayList<>();
 
             AVQuery<AVUser> avQuery = AVUser.getQuery();
@@ -93,7 +91,6 @@ public class SchoolMatesManager {
             avQuery.whereNotEqualTo(Constants.User.OBJECTID_C,HiTalkHelper.getInstance().getCurrentUserId());
 
             List<AVUser> list = avQuery.find();
-            NLog.i(TagUtil.makeTag(getClass()),"queryAllSchoolMates list = "+list);
             if (list != null) {
                 for (AVUser avUser : list) {
                     UserCacheHelper.getInstance().cacheUser(avUser);
@@ -105,9 +102,10 @@ public class SchoolMatesManager {
                             .setUserId(user.getObjectId())
                             .setSex(user.getSex())
                             .setCollege(user.getCollege())
-                            .setInterest(user.getInterest());
+                            .setInterest(user.getInterest())
+                            .setAvater(user.getAvatar());
                     fillLetters(schoolMate);
-                    NLog.i(TagUtil.makeTag(getClass()),"schoolMate = "+schoolMate);
+                    NLog.i(TagUtil.makeTag(getClass()) + "####","schoolMate = "+schoolMate);
                     results.add(schoolMate);
                 }
             }

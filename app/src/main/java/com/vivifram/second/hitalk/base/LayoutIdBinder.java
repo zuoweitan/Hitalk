@@ -1,9 +1,7 @@
 package com.vivifram.second.hitalk.base;
 
-import android.content.Context;
 import android.view.View;
 
-import com.vivifram.second.hitalk.HiTalkApplication;
 import com.vivifram.second.hitalk.ui.layout.BaseLayout;
 import com.vivifram.second.hitalk.ui.page.layout.BaseFragmentLayout;
 import com.zuowei.utils.common.NLog;
@@ -11,8 +9,6 @@ import com.zuowei.utils.common.TagUtil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-
-import static android.R.attr.name;
 
 /**
  * 项目名称：AazenWearHome
@@ -45,11 +41,6 @@ public enum LayoutIdBinder {
                 }
             }
         }
-
-        @Override
-        public <T extends BaseFragmentLayout> void bindViewToFLayout(T t) {
-            throw new RuntimeException();
-        }
     },
     //for FragmentLayout
     FLAYOUT(){
@@ -72,11 +63,6 @@ public enum LayoutIdBinder {
                 }
             }
         }
-
-        @Override
-        public <T extends BaseLayout> void bindViewToLayout(T t) {
-            throw new RuntimeException();
-        }
     },
 
     LAYOUT_BEAN(){
@@ -96,7 +82,36 @@ public enum LayoutIdBinder {
 
                         if (annotation.boundClick()) {
                             Object bindObj = bindField.get(t);
-                            NLog.i(TAG, "bindObj type = " + bindObj.getClass().getName());
+                            Method setOnClickListener = View.class.getDeclaredMethod("setOnClickListener", View.OnClickListener.class);
+                            setOnClickListener.setAccessible(true);
+                            setOnClickListener.invoke(bindObj, t);
+                        }
+
+                    } catch (Exception e) {
+                        NLog.i(TAG,"bindField failed : ",e);
+                    }
+                }
+            }
+        }
+    },
+
+    LAYOUT_RECYCLER_VIEWHOLDER(){
+        @Override
+        public <T extends BaseRecyclerViewHolder> void bindViewToHolder(T t) {
+            Field[] fields = t.getClass().getDeclaredFields();
+            if (fields != null) {
+                for (Field bindField : fields) {
+                    BindView annotation = bindField.getAnnotation(BindView.class);
+                    if (annotation == null) {
+                        continue;
+                    }
+                    int id = annotation.id();
+                    try {
+                        bindField.setAccessible(true);
+                        bindField.set(t,t.findViewById(id));
+
+                        if (annotation.boundClick()) {
+                            Object bindObj = bindField.get(t);
                             Method setOnClickListener = View.class.getDeclaredMethod("setOnClickListener", View.OnClickListener.class);
                             setOnClickListener.setAccessible(true);
                             setOnClickListener.invoke(bindObj, t);
@@ -112,7 +127,16 @@ public enum LayoutIdBinder {
 
     static String TAG = TagUtil.makeTag(LayoutIdBinder.class);
 
-    public <T extends BaseLayout> void bindViewToLayout(T t){}
-    public <T extends BaseFragmentLayout> void bindViewToFLayout(T t){}
-    public <T extends BaseLayoutBean> void bindView(T t){}
+    public <T extends BaseLayout> void bindViewToLayout(T t){
+        throw new UnsupportedOperationException();
+    }
+    public <T extends BaseFragmentLayout> void bindViewToFLayout(T t){
+        throw new UnsupportedOperationException();
+    }
+    public <T extends BaseLayoutBean> void bindView(T t){
+        throw new UnsupportedOperationException();
+    }
+    public <T extends BaseRecyclerViewHolder> void bindViewToHolder(T t){
+        throw new UnsupportedOperationException();
+    }
 }

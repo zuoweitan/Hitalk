@@ -102,7 +102,7 @@ import bolts.Task;
             UserBeanCacheHelper.getInstance().getCachedUser(toUserId, new AVCallback<User>() {
                 @Override
                 protected void internalDone0(User user, AVException e) {
-                    if (e == null) {
+                    if (e == null && user != null) {
                         doInitChatRoom(user);
                     } else {
                         NToast.shortToast(mAppCtx,getResources().getString(R.string.open_chat_room_failed));

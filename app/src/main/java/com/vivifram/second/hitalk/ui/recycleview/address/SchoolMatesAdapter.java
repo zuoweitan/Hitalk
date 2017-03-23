@@ -67,7 +67,6 @@ public class SchoolMatesAdapter extends BaseAdapter<SchoolMate,BaseAdapter.BaseV
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
         if (position != 0) {
-            NLog.i(TagUtil.makeTag(AddressFragmentSub1Layout.class), "schoolMatesAdapter onBindViewHolder initWithModel");
             ((SchoolMateViewHolder)holder).initWithModel(getItem(position));
         }
     }

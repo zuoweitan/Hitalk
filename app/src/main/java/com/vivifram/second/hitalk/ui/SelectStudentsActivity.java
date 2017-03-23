@@ -1,14 +1,22 @@
 package com.vivifram.second.hitalk.ui;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
+import com.avos.avoscloud.AVCallback;
+import com.avos.avoscloud.AVException;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.BaseActivity;
 import com.vivifram.second.hitalk.base.LayoutInject;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
+import com.vivifram.second.hitalk.manager.chat.FriendsManager;
+import com.vivifram.second.hitalk.manager.chat.SchoolMatesManager;
+import com.vivifram.second.hitalk.state.DoneCallback;
 import com.vivifram.second.hitalk.ui.layout.SelectStudentsLayout;
+import com.zuowei.dao.greendao.User;
+import com.zuowei.utils.common.NLog;
+import com.zuowei.utils.common.NToast;
+import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.pinyin.CharacterParser;
 import com.zuowei.utils.pinyin.LetterComparator;
 
@@ -22,15 +30,12 @@ import java.util.List;
 @LayoutInject(name = "SelectStudentsLayout")
 public class SelectStudentsActivity extends BaseActivity<SelectStudentsLayout> {
 
-
     CharacterParser characterParser;
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_select_students);
-
         characterParser = CharacterParser.getInstance();
-        mLayout.addSchoolMates(mockStudents());
         mLayout.setOnTitleActionListener(new SelectStudentsLayout.OnTitleActionListener() {
             @Override
             public void onBack() {
@@ -39,9 +44,57 @@ public class SelectStudentsActivity extends BaseActivity<SelectStudentsLayout> {
 
             @Override
             public void onConfirm() {
-
+                NLog.i(TagUtil.makeTag(SelectStudentsActivity.class), mLayout.getSelectedSchoolMates());
             }
         });
+
+        fetchFriends(true, (list, e) -> {
+            if (e != null && list == null) {
+                NToast.shortToast(this, R.string.friends_fetch_error);
+                finish();
+            }
+        });
+    }
+
+    private void fetchFriends(final boolean isforce, DoneCallback<SchoolMate> doneCallback) {
+        FriendsManager.getInstance().fetchFriends(isforce, new AVCallback<List<User>>() {
+            @Override
+            protected void internalDone0(List<User> users, AVException e) {
+
+                ArrayList<SchoolMate> friends = new ArrayList<>();
+                if (e == null && users != null){
+                    for (User user : users) {
+                        SchoolMate schoolMate = convertToSchoolMate(user);
+                        if (schoolMate != null){
+                            friends.add(schoolMate);
+                        }
+                    }
+                    if (friends.size() > 0) {
+                        Collections.sort(friends, new LetterComparator<>());
+                        mLayout.addSchoolMates(friends);
+                    }
+                }
+
+                if (doneCallback != null) {
+                    doneCallback.done(friends,e);
+                }
+            }
+        });
+    }
+
+    private SchoolMate convertToSchoolMate(User user) {
+        if (user != null) {
+            SchoolMate schoolMate  = new SchoolMate();
+            schoolMate.setNickName(user.getNick())
+                    .setUserId(user.getObjectId())
+                    .setSex(user.getSex())
+                    .setCollege(user.getCollege())
+                    .setInterest(user.getInterest())
+                    .setAvater(user.getAvatar());
+            SchoolMatesManager.getInstance().fillLetters(schoolMate);
+            return schoolMate;
+        }
+        return null;
     }
 
 
