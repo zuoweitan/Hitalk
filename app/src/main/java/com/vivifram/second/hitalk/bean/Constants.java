@@ -42,10 +42,17 @@ public class Constants {
         }
     }
 
+    public final class ViewHolderType {
+        public static final int VIEWHOLDER_BASE_TYPE = 0x00;
+        public static final int VIEWHOLDER_IN_MESSAGEFRAGMENT = 0x01;
+    }
+
     public final class ParamsKey {
         public class Chat {
             public static final int TO_FRIEND = 1;
             public static final int TO_SCHOOL_MATE = 2;
+            public static final int TO_GROUP = 3;
+            public static final int TO_CONVERSATION = 4;
         }
     }
 

@@ -47,7 +47,6 @@ public class MessageHandler extends AVIMTypedMessageHandler<AVIMTypedMessage> {
     @Override
     public void onMessage(AVIMTypedMessage message, AVIMConversation conversation, AVIMClient client) {
         super.onMessage(message, conversation, client);
-        NLog.i(TagUtil.makeTag(MessageHandler.class),"message = { from = "+message.getFrom() + " }");
         if (message == null || message.getMessageId() == null || message.getFrom() == null){
             NLog.e(TagUtil.makeTag(MessageHandler.class), "message or message id is null");
         }else if (HiTalkHelper.getInstance().getCurrentUserId() == null ||

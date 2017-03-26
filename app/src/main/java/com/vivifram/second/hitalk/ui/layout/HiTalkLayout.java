@@ -66,6 +66,10 @@ public class HiTalkLayout extends BaseLayout {
         mPagerTab.setViewPager(mPager);
     }
 
+    public void setPage(int index) {
+        mPager.setCurrentItem(index);
+    }
+
     public BGABadgeRadioButton getRadioBtn(int index){
         if (index < 0 || index >= radioBtns.size())
             return null;

@@ -13,6 +13,7 @@ import com.vivifram.second.hitalk.manager.chat.FriendsManager;
 import com.vivifram.second.hitalk.ui.layout.HiTalkLayout;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
+import com.zuowei.utils.bridge.params.MainPageParam;
 import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
 import com.zuowei.utils.bridge.params.chat.ClientEventParam;
 import com.zuowei.utils.bridge.params.chat.ConnectChangedParam;
@@ -128,6 +129,15 @@ public class HiTalkActivity extends BaseActivity<HiTalkLayout> {
 
     private void tryReOpenClient() {
         ClientManager.getInstance().open(HiTalkHelper.getInstance().getCurrentUserId(),null);
+    }
+
+    @EatMark(action = EaterAction.ACTION_SET_MAIN_PAGE, target = MainPageParam.class)
+    public class MainPageSet extends AbstractHandler<MainPageParam> {
+
+        @Override
+        public void doJobWithParam(MainPageParam param) {
+            mLayout.setPage(param.getPageIndex());
+        }
     }
 
 }

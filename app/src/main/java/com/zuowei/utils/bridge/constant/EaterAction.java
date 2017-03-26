@@ -13,4 +13,7 @@ public final class EaterAction {
 
     public static final String ACTION_DO_INVITATION = "action_do_invitation";
     public static final String ACTION_ON_ADDRESS = "action_on_address";
+
+    public static final String ACTION_VIEWHOLDER_ONCLICK = "action_viewholder_onclick";
+    public static final String ACTION_SET_MAIN_PAGE = "action_set_main_page";
 }

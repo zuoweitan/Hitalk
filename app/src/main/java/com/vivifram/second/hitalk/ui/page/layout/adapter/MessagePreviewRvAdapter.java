@@ -23,6 +23,9 @@ import com.avos.avoscloud.im.v2.messages.AVIMTextMessage;
 import com.bumptech.glide.Glide;
 import com.vivifram.second.hitalk.HiTalkApplication;
 import com.vivifram.second.hitalk.R;
+import com.vivifram.second.hitalk.base.BaseRecyclerViewHolder;
+import com.vivifram.second.hitalk.base.BindView;
+import com.vivifram.second.hitalk.bean.Constants;
 import com.zuowei.utils.chat.ConversationUtils;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
@@ -44,7 +47,7 @@ public class MessagePreviewRvAdapter extends RecyclerView.Adapter<RecyclerView.V
     private static final int TYPE_BOOK = 0x02;
     private static final int TYPE_NORMAL = 0x03;
 
-    private static final int SPECIAL_ITEMS = 2;
+    public static final int SPECIAL_ITEMS = 2;
 
     private List<AVIMConversation> conversationList;
 
@@ -110,7 +113,7 @@ public class MessagePreviewRvAdapter extends RecyclerView.Adapter<RecyclerView.V
         return conversationList.size() + SPECIAL_ITEMS;
     }
 
-    public class MessageHolder<T> extends RecyclerView.ViewHolder{
+    public class MessageHolder<T> extends BaseRecyclerViewHolder{
         BGABadgeRelativeLayout bgaBadgeRelativeLayout;
         public MessageHolder(View itemView) {
             super(itemView);
@@ -132,18 +135,21 @@ public class MessagePreviewRvAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     public class NormalMessageHolder extends MessageHolder<AVIMConversation>{
+        @BindView(id = R.id.profileIv)
         ImageView avatarView;
+        @BindView(id = R.id.nickTv)
         TextView nickTv;
+        @BindView(id = R.id.contentTv)
         TextView contentTv;
+        @BindView(id = R.id.timeTv)
         TextView timeTv;
         public NormalMessageHolder(View itemView) {
             super(itemView);
+        }
 
-            avatarView = (ImageView) itemView.findViewById(R.id.profileIv);
-            nickTv = (TextView) itemView.findViewById(R.id.nickTv);
-            contentTv = (TextView) itemView.findViewById(R.id.contentTv);
-            timeTv = (TextView) itemView.findViewById(R.id.timeTv);
-
+        @Override
+        protected int getViewHolderType() {
+            return Constants.ViewHolderType.VIEWHOLDER_IN_MESSAGEFRAGMENT;
         }
 
         @Override

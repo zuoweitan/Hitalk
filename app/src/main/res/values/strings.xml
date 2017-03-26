@@ -142,4 +142,5 @@
     <string name="message_fetch_failed_warn">消息获取失败，请重新尝试</string>
     <string name="not_friend_warn">对方还不是好友</string>
     <string name="friends_fetch_error">好友列表获取失败</string>
+    <string name="select_student_warn">请至少选择一位朋友</string>
 </resources>

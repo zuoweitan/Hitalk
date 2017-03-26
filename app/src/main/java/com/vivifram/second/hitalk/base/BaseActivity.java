@@ -17,12 +17,12 @@ import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.IEater;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
+import com.zuowei.utils.handlers.AbstractHandler;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -77,6 +77,16 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
                         Constructor<?> constructor = declaredClass.getDeclaredConstructor(this.getClass());
                         constructor.setAccessible(true);
                         iEater = (IEater) constructor.newInstance(this);
+                        if (eatMark.target() != Object.class) {
+                            Class abstractHandlerClass = declaredClass;
+                            for(; abstractHandlerClass != AbstractHandler.class && abstractHandlerClass != Object.class
+                                    ; abstractHandlerClass = abstractHandlerClass.getSuperclass());
+                            if (abstractHandlerClass == AbstractHandler.class) {
+                                Field target = abstractHandlerClass.getDeclaredField("target");
+                                target.setAccessible(true);
+                                target.set(iEater, eatMark.target());
+                            }
+                        }
                     } catch (InstantiationException e) {
                         NLog.e(TAG, "checkAndInstallEatMark failed :",e);
                     } catch (IllegalAccessException e) {
@@ -84,6 +94,8 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
                     } catch (NoSuchMethodException e) {
                         NLog.e(TAG, "checkAndInstallEatMark failed :",e);
                     } catch (InvocationTargetException e) {
+                        NLog.e(TAG, "checkAndInstallEatMark failed :",e);
+                    } catch (NoSuchFieldException e) {
                         NLog.e(TAG, "checkAndInstallEatMark failed :",e);
                     }
                     if (iEater != null) {

@@ -4,20 +4,27 @@ import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.EatMark;
 import com.vivifram.second.hitalk.base.LayoutInject;
+import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.manager.chat.ClientManager;
+import com.vivifram.second.hitalk.ui.ChatRoomActivity;
 import com.vivifram.second.hitalk.ui.page.layout.MessageFragmentLayout;
+import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
+import com.zuowei.utils.bridge.params.MainPageParam;
+import com.zuowei.utils.bridge.params.ViewHolderOnclickParam;
 import com.zuowei.utils.bridge.params.chat.ConversationParam;
 import com.zuowei.utils.bridge.params.chat.MessageParam;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.AbstractHandler;
 import com.zuowei.utils.helper.ConversationCacheHelper;
+import com.zuowei.utils.helper.HiTalkHelper;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by zuowei on 16-7-25.
@@ -58,7 +65,8 @@ public class MessageFragment extends LazyFragment<MessageFragmentLayout> {
 
         while(i$.hasNext()) {
             String convId = (String)i$.next();
-            conversationList.add(ClientManager.getInstance().getClient().getConversation(convId));
+            AVIMConversation conversation = ClientManager.getInstance().getClient().getConversation(convId);
+            conversationList.add(conversation);
         }
 
         mLayout.setData(conversationList);
@@ -94,6 +102,28 @@ public class MessageFragment extends LazyFragment<MessageFragmentLayout> {
         @Override
         public void doJobWithParam(ConversationParam param) {
             updateConversationList();
+        }
+    }
+
+    @EatMark(action = EaterAction.ACTION_VIEWHOLDER_ONCLICK)
+    public class ViewHolderOnClick extends AbstractHandler<ViewHolderOnclickParam> {
+
+        @Override
+        public boolean isParamAvailable(LightParam param) {
+            return param != null && param instanceof ViewHolderOnclickParam;
+        }
+
+        @Override
+        public void doJobWithParam(ViewHolderOnclickParam param) {
+            if (param.getType() == Constants.ViewHolderType.VIEWHOLDER_IN_MESSAGEFRAGMENT) {
+                AVIMConversation avimConversation =
+                        (AVIMConversation) mLayout.getData(param.getPosition());
+                if (Objects.equals(avimConversation.getConversationId(), HiTalkHelper.getInstance().getModel().getSquareConversationId())) {
+                    EaterManager.getInstance().broadcast(new MainPageParam());
+                } else {
+                    ChatRoomActivity.start(getActivity(), avimConversation);
+                }
+            }
         }
     }
 }

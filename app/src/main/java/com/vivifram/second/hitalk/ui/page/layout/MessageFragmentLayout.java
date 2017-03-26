@@ -77,4 +77,7 @@ public class MessageFragmentLayout extends BaseFragmentLayout {
         }
     }
 
+    public Object getData(int position) {
+        return messagePreviewRvAdapter.getItem(position);
+    }
 }

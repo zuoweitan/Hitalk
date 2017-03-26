@@ -35,20 +35,24 @@ import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.address.SchoolMateStateParam;
 import com.zuowei.utils.bridge.params.chat.MessageParam;
+import com.zuowei.utils.chat.ConversationUtils;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.NToast;
 import com.zuowei.utils.common.SyncUtils;
 import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.AbstractHandler;
+import com.zuowei.utils.helper.ConversationCacheHelper;
+import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.SchoolmatesCacheHelper;
 import com.zuowei.utils.helper.UserBeanCacheHelper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 
-import bolts.Continuation;
 import bolts.Task;
 
 /**
@@ -69,9 +73,17 @@ import bolts.Task;
         start(c,ChatRoomActivity.class,key);
     }
 
-    public static void start(Context c, int toType, String UserId) {
-        SparseArray<String> sparseArray = new SparseArray<>();
-        sparseArray.put(toType, UserId);
+    public static void start(Context c, int toType, String... UserIds) {
+        SparseArray<List<String>> sparseArray = new SparseArray<>();
+        sparseArray.put(toType, Arrays.asList(UserIds));
+        int key = sparseArray.hashCode();
+        ParamsPool.$().put(key, sparseArray);
+        start(c, key);
+    }
+
+    public static void start(Context c, AVIMConversation conversation) {
+        SparseArray sparseArray = new SparseArray();
+        sparseArray.put(Constants.ParamsKey.Chat.TO_CONVERSATION, conversation);
         int key = sparseArray.hashCode();
         ParamsPool.$().put(key, sparseArray);
         start(c, key);
@@ -84,6 +96,8 @@ import bolts.Task;
         super.onCreate(arg0);
         setContentView(R.layout.activity_chat_room_layout);
         SparseArray chatParams = (SparseArray) params;
+        List<String> toUserIds = null;
+        AVIMConversation conversation = null;
         String toUserId = null;
         if (chatParams == null) {
             finish();
@@ -91,34 +105,100 @@ import bolts.Task;
         switch (chatParams.keyAt(0)){
             case Constants.ParamsKey.Chat.TO_FRIEND:
                     isToFriend = true;
-                    toUserId = (String) chatParams.get(Constants.ParamsKey.Chat.TO_FRIEND);
+                    toUserIds = (List<String>) chatParams.get(Constants.ParamsKey.Chat.TO_FRIEND);
                 break;
             case Constants.ParamsKey.Chat.TO_SCHOOL_MATE:
-                    toUserId = (String) chatParams.get(Constants.ParamsKey.Chat.TO_SCHOOL_MATE);
+                    toUserIds = (List<String>) chatParams.get(Constants.ParamsKey.Chat.TO_SCHOOL_MATE);
+                break;
+            case Constants.ParamsKey.Chat.TO_GROUP:
+                    isToFriend = true;
+                    toUserIds = (List<String>) chatParams.get(Constants.ParamsKey.Chat.TO_GROUP);
+                break;
+            case Constants.ParamsKey.Chat.TO_CONVERSATION:
+                    conversation = (AVIMConversation) chatParams.get(Constants.ParamsKey.Chat.TO_CONVERSATION);
                 break;
         }
 
-        if (toUserId != null) {
-            UserBeanCacheHelper.getInstance().getCachedUser(toUserId, new AVCallback<User>() {
-                @Override
-                protected void internalDone0(User user, AVException e) {
-                    if (e == null && user != null) {
-                        doInitChatRoom(user);
-                    } else {
-                        NToast.shortToast(mAppCtx,getResources().getString(R.string.open_chat_room_failed));
-                        finish();
-                    }
+        if (toUserIds != null) {
+            if (toUserIds.size() == 1) {
+                toUserId = toUserIds.get(0);
+                if (toUserId != null) {
+                    initWithUserId(toUserId);
+                    return;
                 }
-            });
+            } else if (toUserIds.size() > 1){
+                initWithUserids(toUserIds, toUserIds);
+                return;
+            }
+        }
+
+        if (conversation != null) {
+            updateConversation(conversation, true);
+            return;
+        }
+
+        NToast.shortToast(mAppCtx, getResources().getString(R.string.open_chat_room_failed));
+        finish();
+    }
+
+    private void initWithUserids(List<String> toUserIds, final List<String> finalToUserIds) {
+        UserBeanCacheHelper.getInstance().getCachedUsers(toUserIds, new AVCallback<List<User>>() {
+            @Override
+            protected void internalDone0(List<User> users, AVException e) {
+                if (e == null && users != null && users.size() > 1) {
+                    doInitChatRoom(users, finalToUserIds);
+
+                } else {
+                    NToast.shortToast(mAppCtx, getResources().getString(R.string.open_chat_room_failed));
+                    finish();
+                }
+            }
+        });
+    }
+
+    private void initWithUserId(String toUserId) {
+        UserBeanCacheHelper.getInstance().getCachedUser(toUserId, new AVCallback<User>() {
+            @Override
+            protected void internalDone0(User user, AVException e) {
+                if (e == null && user != null) {
+                    doInitChatRoom(user);
+                } else {
+                    NToast.shortToast(mAppCtx, getResources().getString(R.string.open_chat_room_failed));
+                    finish();
+                }
+            }
+        });
+    }
+
+    private void updateConversation(AVIMConversation conversation, boolean toConverstaion) {
+        if (!toConverstaion) {
+            updateConversation(conversation);
         } else {
-            NToast.shortToast(mAppCtx,getResources().getString(R.string.open_chat_room_failed));
-            finish();
+            List<String> members = new ArrayList<>(conversation.getMembers());
+            if (members.size() == 2) {
+                members.remove(HiTalkHelper.getInstance().getCurrentUserId());
+                String userId = members.get(0);
+                SchoolmatesCacheHelper.getInstance().getSchoolmateFriendState(userId)
+                        .continueWith(task -> {
+                            if (task.getResult() == Constants.SchoolMateState.REQUEST_STATE_FAILED) {
+                                isToFriend = false;
+                            } else {
+                                isToFriend = true;
+                            }
+                            initWithUserId(userId);
+                            return null;
+                        }, Task.UI_THREAD_EXECUTOR);
+            } else {
+                isToFriend = false;
+                updateConversation(conversation);
+            }
         }
     }
 
-
     private void updateConversation(AVIMConversation conversation){
         this.conversation = conversation;
+        mLayout.setTitle(conversation.getName());
+        ConversationCacheHelper.getInstance().clearUnread(conversation.getConversationId());
         fetchMessages().continueWith(task -> {
             if (task.getResult() == null){
                 NToast.shortToast(mAppCtx, getString(R.string.message_fetch_failed_warn));
@@ -134,20 +214,16 @@ import bolts.Task;
                                     return null;
                                 });
                             }else {
-                                if (conversation != null) {
-                                    conversation.queryMessages(firstMessage.message_.getMessageId(),
-                                            firstMessage.message_.getTimestamp(), 20, new AVIMMessagesQueryCallback() {
-                                                @Override
-                                                public void done(List<AVIMMessage> list, AVIMException e) {
-                                                    if (e == null && list != null){
-                                                        mLayout.pushMessagesAndRefreshToTop(IMessageWrap.buildFrom(list,true));
-                                                    }
-                                                    mLayout.getChatLt().finshRefresh();
+                                conversation.queryMessages(firstMessage.message_.getMessageId(),
+                                        firstMessage.message_.getTimestamp(), 20, new AVIMMessagesQueryCallback() {
+                                            @Override
+                                            public void done(List<AVIMMessage> list, AVIMException e) {
+                                                if (e == null && list != null){
+                                                    mLayout.pushMessagesAndRefreshToTop(IMessageWrap.buildFrom(list,true));
                                                 }
-                                            });
-                                }else {
-                                    mLayout.getChatLt().finshRefresh();
-                                }
+                                                mLayout.getChatLt().finshRefresh();
+                                            }
+                                        });
 
                             }
                         }
@@ -205,7 +281,6 @@ import bolts.Task;
     }
 
     private void doInitChatRoom(final User user) {
-        mLayout.setTitle(user.getNick());
         if (!isToFriend) {
             mLayout.flowBar().show(true);
             mLayout.flowBar().setOnFlowBarActionListener(new ChatRoomLayout.FlowBar.OnFlowBarActionListener() {
@@ -245,6 +320,32 @@ import bolts.Task;
             NToast.shortToast(mAppCtx,getResources().getString(R.string.open_chat_room_failed));
             finish();
         }
+    }
+
+    private void doInitChatRoom(List<User> users, List<String> userIds) {
+        StringBuilder title = new StringBuilder();
+        title.append(HiTalkHelper.getInstance().getCurrentUser().get(Constants.User.NICKNAME_C));
+        title.append(",");
+        for (User user : users) {
+            title.append(user.getNick());
+            title.append(",");
+        }
+        title.deleteCharAt(title.length() - 1);
+
+        mLayout.flowBar().show(false);
+
+        ConversationUtils.createGroupConversation(userIds, title.toString(), new AVIMConversationCreatedCallback() {
+            @Override
+            public void done(AVIMConversation avimConversation, AVIMException e) {
+                if (e == null && avimConversation != null) {
+                    updateConversation(avimConversation);
+                } else {
+                    NToast.shortToast(mAppCtx,getResources().getString(R.string.create_chat_room_failed));
+                    NLog.e(TAG, "conversation create failed");
+                    finish();
+                }
+            }
+        });
     }
 
     @InterfaceInject(bindName = "chatInputMenuListener")

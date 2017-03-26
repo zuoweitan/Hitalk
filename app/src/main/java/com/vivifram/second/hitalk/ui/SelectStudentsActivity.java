@@ -8,15 +8,14 @@ import com.avos.avoscloud.AVException;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.base.BaseActivity;
 import com.vivifram.second.hitalk.base.LayoutInject;
+import com.vivifram.second.hitalk.bean.Constants;
 import com.vivifram.second.hitalk.bean.address.SchoolMate;
 import com.vivifram.second.hitalk.manager.chat.FriendsManager;
 import com.vivifram.second.hitalk.manager.chat.SchoolMatesManager;
 import com.vivifram.second.hitalk.state.DoneCallback;
 import com.vivifram.second.hitalk.ui.layout.SelectStudentsLayout;
 import com.zuowei.dao.greendao.User;
-import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.NToast;
-import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.pinyin.CharacterParser;
 import com.zuowei.utils.pinyin.LetterComparator;
 
@@ -44,7 +43,17 @@ public class SelectStudentsActivity extends BaseActivity<SelectStudentsLayout> {
 
             @Override
             public void onConfirm() {
-                NLog.i(TagUtil.makeTag(SelectStudentsActivity.class), mLayout.getSelectedSchoolMates());
+                List<SchoolMate> selectedSchoolMates = mLayout.getSelectedSchoolMates();
+                if (selectedSchoolMates.size() <= 0) {
+                    NToast.shortToast(SelectStudentsActivity.this, R.string.select_student_warn);
+                } else {
+                    String[] userIds = new String[selectedSchoolMates.size()];
+                    for (int i = 0; i < selectedSchoolMates.size(); i++) {
+                        userIds[i] = selectedSchoolMates.get(i).getUserId();
+                    }
+                    ChatRoomActivity.start(SelectStudentsActivity.this, Constants.ParamsKey.Chat.TO_GROUP,userIds);
+                    finish();
+                }
             }
         });
 

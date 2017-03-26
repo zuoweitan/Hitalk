@@ -73,6 +73,7 @@ public class HiTalkHelper {
         mHitalkModel = new HiTalkModel(appContext);
         EaterManager.getInstance().registerEater(EaterAction.ACTION_DO_WITH_PREFERENCE,
                 SharePreferenceHandler.getInstance().setContext(appContext));
+        AVOSCloud.setLastModifyEnabled(true);
         initRemoteClass();
         initChatkit();
         initPushManager();
@@ -118,6 +119,7 @@ public class HiTalkHelper {
     }
 
     private void initChatkit() {
+        NLog.i(TAG, "initChatkit");
         AVOSCloud.initialize(mAppContext, HiTalkModel.APPID, HiTalkModel.APPKEY);
         AVIMMessageManager.registerMessageHandler(AVIMTypedMessage.class, MessageHandler.getInstance());
         AVIMClient.setClientEventHandler(ClientEventHandler.getInstance());
