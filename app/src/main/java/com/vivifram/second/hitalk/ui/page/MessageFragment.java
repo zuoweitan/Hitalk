@@ -12,7 +12,9 @@ import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.MainPageParam;
+import com.zuowei.utils.bridge.params.ParamWrap;
 import com.zuowei.utils.bridge.params.ViewHolderOnclickParam;
+import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
 import com.zuowei.utils.bridge.params.chat.ConversationParam;
 import com.zuowei.utils.bridge.params.chat.MessageParam;
 import com.zuowei.utils.common.NLog;
@@ -76,13 +78,8 @@ public class MessageFragment extends LazyFragment<MessageFragmentLayout> {
     public class MessageReceiver extends AbstractHandler<MessageParam>{
 
         @Override
-        public boolean isParamAvailable(LightParam param) {
-            return param != null && param instanceof MessageParam;
-        }
-
-        @Override
-        public void doJobWithParam(MessageParam param) {
-            NLog.i(TagUtil.makeTag(MessageFragment.class), "MessageReceiver param = " + param);
+        public void doJobWithParam(ParamWrap<MessageParam> paramWrap) {
+            NLog.i(TagUtil.makeTag(MessageFragment.class), "MessageReceiver param = " + paramWrap.getParam());
             updateConversationList();
         }
     }
@@ -100,7 +97,7 @@ public class MessageFragment extends LazyFragment<MessageFragmentLayout> {
         }
 
         @Override
-        public void doJobWithParam(ConversationParam param) {
+        public void doJobWithParam(ParamWrap<ConversationParam> paramWrap) {
             updateConversationList();
         }
     }
@@ -109,12 +106,8 @@ public class MessageFragment extends LazyFragment<MessageFragmentLayout> {
     public class ViewHolderOnClick extends AbstractHandler<ViewHolderOnclickParam> {
 
         @Override
-        public boolean isParamAvailable(LightParam param) {
-            return param != null && param instanceof ViewHolderOnclickParam;
-        }
-
-        @Override
-        public void doJobWithParam(ViewHolderOnclickParam param) {
+        public void doJobWithParam(ParamWrap<ViewHolderOnclickParam> paramWrap) {
+            ViewHolderOnclickParam param = paramWrap.getParam();
             if (param.getType() == Constants.ViewHolderType.VIEWHOLDER_IN_MESSAGEFRAGMENT) {
                 AVIMConversation avimConversation =
                         (AVIMConversation) mLayout.getData(param.getPosition());

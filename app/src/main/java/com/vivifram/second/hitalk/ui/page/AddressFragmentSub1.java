@@ -15,6 +15,7 @@ import com.vivifram.second.hitalk.ui.recycleview.address.SchoolMatesAdapter;
 import com.vivifram.second.hitalk.ui.springview.widget.SpringView;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
+import com.zuowei.utils.bridge.params.ParamWrap;
 import com.zuowei.utils.bridge.params.address.AddressActionParam;
 import com.zuowei.utils.common.Md5Utils;
 import com.zuowei.utils.common.NLog;
@@ -106,13 +107,8 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
     public class SchoolStateChangedListener extends AbstractHandler<AddressActionParam> {
 
         @Override
-        public boolean isParamAvailable(LightParam param) {
-            return param != null && param instanceof AddressActionParam;
-        }
-
-        @Override
-        public void doJobWithParam(AddressActionParam param) {
-            if (param.getActionType() == AddressActionParam.ACTION_SCHOOLMATE_STATE_CHANGED){
+        public void doJobWithParam(ParamWrap<AddressActionParam> paramWrap) {
+            if (paramWrap.getParam().getActionType() == AddressActionParam.ACTION_SCHOOLMATE_STATE_CHANGED){
                 mLayout.refresh();
             }
         }

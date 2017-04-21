@@ -14,9 +14,11 @@ import com.vivifram.second.hitalk.ui.layout.HiTalkLayout;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.MainPageParam;
+import com.zuowei.utils.bridge.params.ParamWrap;
 import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
 import com.zuowei.utils.bridge.params.chat.ClientEventParam;
 import com.zuowei.utils.bridge.params.chat.ConnectChangedParam;
+import com.zuowei.utils.bridge.params.chat.MessageParam;
 import com.zuowei.utils.bridge.params.push.InvitationParam;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.NToast;
@@ -63,12 +65,8 @@ public class HiTalkActivity extends BaseActivity<HiTalkLayout> {
     public class ClientProxy extends AbstractHandler<ClientEventParam>{
 
         @Override
-        public boolean isParamAvailable(LightParam param) {
-            return param != null && param instanceof ClientEventParam;
-        }
-
-        @Override
-        public void doJobWithParam(ClientEventParam param) {
+        public void doJobWithParam(ParamWrap<ClientEventParam> paramWrap) {
+            ClientEventParam param = paramWrap.getParam();
             switch (param.getActionType()){
                 case ClientEventParam.ACTION_CONNECT_CHANGED:
                         ConnectChangedParam connectChangedParam = (ConnectChangedParam) param;
@@ -89,12 +87,8 @@ public class HiTalkActivity extends BaseActivity<HiTalkLayout> {
     public class InvitateListener extends AbstractHandler<InvitationParam>{
 
         @Override
-        public boolean isParamAvailable(LightParam param) {
-            return param != null && param instanceof InvitationParam;
-        }
-
-        @Override
-        public void doJobWithParam(InvitationParam param) {
+        public void doJobWithParam(ParamWrap<InvitationParam> paramWrap) {
+            InvitationParam param = paramWrap.getParam();
             if (param.justRefresh){
                 FriendsManager.getInstance().countUnreadRequests(null);
             } else {
@@ -117,12 +111,7 @@ public class HiTalkActivity extends BaseActivity<HiTalkLayout> {
     public class RequestCountUpdate extends AbstractHandler<UnReadRequestCountParam>{
 
         @Override
-        public boolean isParamAvailable(LightParam param) {
-            return param != null && param instanceof UnReadRequestCountParam;
-        }
-
-        @Override
-        public void doJobWithParam(UnReadRequestCountParam param) {
+        public void doJobWithParam(ParamWrap<UnReadRequestCountParam> paramWrap) {
             updateNewRequestBadge();
         }
     }
@@ -131,12 +120,12 @@ public class HiTalkActivity extends BaseActivity<HiTalkLayout> {
         ClientManager.getInstance().open(HiTalkHelper.getInstance().getCurrentUserId(),null);
     }
 
-    @EatMark(action = EaterAction.ACTION_SET_MAIN_PAGE, target = MainPageParam.class)
+    @EatMark(action = EaterAction.ACTION_SET_MAIN_PAGE)
     public class MainPageSet extends AbstractHandler<MainPageParam> {
 
         @Override
-        public void doJobWithParam(MainPageParam param) {
-            mLayout.setPage(param.getPageIndex());
+        public void doJobWithParam(ParamWrap<MainPageParam> paramWrap) {
+            mLayout.setPage(paramWrap.getParam().getPageIndex());
         }
     }
 

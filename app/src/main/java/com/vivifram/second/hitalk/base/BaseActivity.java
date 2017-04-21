@@ -77,7 +77,7 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
                         Constructor<?> constructor = declaredClass.getDeclaredConstructor(this.getClass());
                         constructor.setAccessible(true);
                         iEater = (IEater) constructor.newInstance(this);
-                        if (eatMark.target() != Object.class) {
+                        /*if (eatMark.target() != Object.class) {
                             Class abstractHandlerClass = declaredClass;
                             for(; abstractHandlerClass != AbstractHandler.class && abstractHandlerClass != Object.class
                                     ; abstractHandlerClass = abstractHandlerClass.getSuperclass());
@@ -86,7 +86,7 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
                                 target.setAccessible(true);
                                 target.set(iEater, eatMark.target());
                             }
-                        }
+                        }*/
                     } catch (InstantiationException e) {
                         NLog.e(TAG, "checkAndInstallEatMark failed :",e);
                     } catch (IllegalAccessException e) {
@@ -95,9 +95,9 @@ public class BaseActivity<T extends BaseLayout> extends FragmentActivity {
                         NLog.e(TAG, "checkAndInstallEatMark failed :",e);
                     } catch (InvocationTargetException e) {
                         NLog.e(TAG, "checkAndInstallEatMark failed :",e);
-                    } catch (NoSuchFieldException e) {
+                    } /*catch (NoSuchFieldException e) {
                         NLog.e(TAG, "checkAndInstallEatMark failed :",e);
-                    }
+                    }*/
                     if (iEater != null) {
                         eater.add(iEater);
                         EaterManager.getInstance().registerEater(eatMark.action(),iEater);

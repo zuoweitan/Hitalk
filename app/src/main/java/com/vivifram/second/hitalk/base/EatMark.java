@@ -18,5 +18,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface EatMark {
     String action();
+    @Deprecated
     Class target() default Object.class;
 }

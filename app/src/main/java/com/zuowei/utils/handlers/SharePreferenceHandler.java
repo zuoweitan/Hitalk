@@ -4,8 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.zuowei.utils.bridge.constant.EaterAction;
-import com.zuowei.utils.bridge.params.LightParam;
+import com.zuowei.utils.bridge.params.ParamWrap;
 import com.zuowei.utils.bridge.params.SharePreferenceParam;
 import com.zuowei.utils.common.TagUtil;
 
@@ -46,18 +45,8 @@ public class SharePreferenceHandler extends AbstractHandler<SharePreferenceParam
     }
 
     @Override
-    public boolean isParamAvailable(LightParam param) {
-        if (param != null && EaterAction.ACTION_DO_WITH_PREFERENCE.equals(param.getAction())){
-            if (param instanceof SharePreferenceParam){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void doJobWithParam(SharePreferenceParam param) {
-        SharePreferenceParam temp = param;
+    public void doJobWithParam(ParamWrap<SharePreferenceParam> paramWrap) {
+        SharePreferenceParam temp = paramWrap.getParam();
         Bundle data = temp.getData();
         if (data != null){
             final String name = data.getString("name");

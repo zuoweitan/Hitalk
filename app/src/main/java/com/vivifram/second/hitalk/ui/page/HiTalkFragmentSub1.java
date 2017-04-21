@@ -32,6 +32,7 @@ import com.vivifram.second.hitalk.ui.page.layout.HitalkFragmentSub1Layout;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
+import com.zuowei.utils.bridge.params.ParamWrap;
 import com.zuowei.utils.bridge.params.chat.ClientOpenParam;
 import com.zuowei.utils.bridge.params.chat.ConversationParam;
 import com.zuowei.utils.bridge.params.chat.MessageParam;
@@ -115,13 +116,10 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
 
     private void listenToConversation() {
         mConversationHandler = new AbstractHandler<ConversationParam>() {
-            @Override
-            public boolean isParamAvailable(LightParam param) {
-                return param != null && param instanceof ConversationParam;
-            }
 
             @Override
-            public void doJobWithParam(ConversationParam param) {
+            public void doJobWithParam(ParamWrap<ConversationParam> paramWrap) {
+                ConversationParam param = paramWrap.getParam();
                 switch (param.getActionType()){
                     case ConversationParam.ACTION_MEMBER_JOIN:
                     case ConversationParam.ACTION_MEMBER_LEFT:
@@ -145,7 +143,8 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
     private void listenToClient() {
         mClientOpenListener = new ClientOpenHandler() {
             @Override
-            public void doJobWithParam(ClientOpenParam param) {
+            public void doJobWithParam(ParamWrap<ClientOpenParam> paramWrap) {
+                ClientOpenParam param = paramWrap.getParam();
                 NLog.i(TagUtil.makeTag(getClass()),"mClientOpenListener callback and param.mOpened = "+param.mOpened);
                 if (param.mOpened){
                     initSquareConversation();
@@ -398,12 +397,8 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
     class MessageReceiver extends AbstractHandler<MessageParam> {
 
         @Override
-        public boolean isParamAvailable(LightParam param) {
-            return param != null && param instanceof MessageParam;
-        }
-
-        @Override
-        public void doJobWithParam(MessageParam param) {
+        public void doJobWithParam(ParamWrap<MessageParam> paramWrap) {
+            MessageParam param = paramWrap.getParam();
             switch (param.mMessageAction){
                 case MessageParam.MESSAGE_ACTION_RECEIVED:
                     onMessageReceived(param.conversation,param.message);

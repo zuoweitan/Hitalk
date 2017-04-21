@@ -15,6 +15,7 @@ import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
+import com.zuowei.utils.bridge.params.ParamWrap;
 import com.zuowei.utils.bridge.params.address.AddressActionParam;
 import com.zuowei.utils.bridge.params.address.SchoolMateStateParam;
 import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
@@ -121,12 +122,8 @@ public class AddressFragmentSub2 extends LazyFragment<AddressFragmentSub2Layout>
     public class NewFriendAddedListener extends AbstractHandler<AddressActionParam>{
 
         @Override
-        public boolean isParamAvailable(LightParam param) {
-            return param != null && param instanceof AddressActionParam;
-        }
-
-        @Override
-        public void doJobWithParam(AddressActionParam param) {
+        public void doJobWithParam(ParamWrap<AddressActionParam> paramWrap) {
+            AddressActionParam param = paramWrap.getParam();
             if (param.getActionType() == AddressActionParam.ACTION_NEW_FRIEND_ADDED){
                 fetchFriends(true, (list, e) -> {
                     if (list != null) {
@@ -144,12 +141,8 @@ public class AddressFragmentSub2 extends LazyFragment<AddressFragmentSub2Layout>
     public class InvitateListener extends AbstractHandler<InvitationParam> {
 
         @Override
-        public boolean isParamAvailable(LightParam param) {
-            return param != null && param instanceof InvitationParam;
-        }
-
-        @Override
-        public void doJobWithParam(InvitationParam param) {
+        public void doJobWithParam(ParamWrap<InvitationParam> paramWrap) {
+            InvitationParam param = paramWrap.getParam();
             if (param.justRefresh) {
                 refresh();
             } else {
@@ -172,12 +165,7 @@ public class AddressFragmentSub2 extends LazyFragment<AddressFragmentSub2Layout>
     public class RequestCountUpdate extends AbstractHandler<UnReadRequestCountParam>{
 
         @Override
-        public boolean isParamAvailable(LightParam param) {
-            return param != null && param instanceof UnReadRequestCountParam;
-        }
-
-        @Override
-        public void doJobWithParam(UnReadRequestCountParam param) {
+        public void doJobWithParam(ParamWrap<UnReadRequestCountParam> paramWrap) {
             updateNewRequestBadge();
         }
     }

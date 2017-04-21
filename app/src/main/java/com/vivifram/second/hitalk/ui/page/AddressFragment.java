@@ -10,7 +10,7 @@ import com.vivifram.second.hitalk.base.LayoutInject;
 import com.vivifram.second.hitalk.manager.chat.FriendsManager;
 import com.vivifram.second.hitalk.ui.page.layout.AddressFragmentLayout;
 import com.zuowei.utils.bridge.constant.EaterAction;
-import com.zuowei.utils.bridge.params.LightParam;
+import com.zuowei.utils.bridge.params.ParamWrap;
 import com.zuowei.utils.bridge.params.address.UnReadRequestCountParam;
 import com.zuowei.utils.bridge.params.push.InvitationParam;
 import com.zuowei.utils.handlers.AbstractHandler;
@@ -93,12 +93,8 @@ public class AddressFragment extends LazyFragment<AddressFragmentLayout> {
     public class InvitateListener extends AbstractHandler<InvitationParam> {
 
         @Override
-        public boolean isParamAvailable(LightParam param) {
-            return param != null && param instanceof InvitationParam;
-        }
-
-        @Override
-        public void doJobWithParam(InvitationParam param) {
+        public void doJobWithParam(ParamWrap<InvitationParam> paramWrap) {
+            InvitationParam param = paramWrap.getParam();
             if (param.justRefresh){
                 FriendsManager.getInstance().countUnreadRequests(null);
             } else {
@@ -111,13 +107,9 @@ public class AddressFragment extends LazyFragment<AddressFragmentLayout> {
     @EatMark(action = EaterAction.ACTION_ON_ADDRESS)
     public class RequestCountUpdate extends AbstractHandler<UnReadRequestCountParam>{
 
-        @Override
-        public boolean isParamAvailable(LightParam param) {
-            return param != null && param instanceof UnReadRequestCountParam;
-        }
 
         @Override
-        public void doJobWithParam(UnReadRequestCountParam param) {
+        public void doJobWithParam(ParamWrap<UnReadRequestCountParam> paramWrap) {
             updateNewRequestBadge();
         }
     }

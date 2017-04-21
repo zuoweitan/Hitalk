@@ -18,6 +18,7 @@ import com.vivifram.second.hitalk.ui.page.layout.BaseFragmentLayout;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.IEater;
 import com.zuowei.utils.bridge.constant.EaterAction;
+import com.zuowei.utils.bridge.params.ParamWrap;
 import com.zuowei.utils.bridge.params.chat.ClientOpenParam;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
@@ -240,8 +241,8 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
 
     private ClientOpenHandler clientOpenHandler = new ClientOpenHandler() {
         @Override
-        public void doJobWithParam(ClientOpenParam param) {
-            if (param.mOpened){
+        public void doJobWithParam(ParamWrap<ClientOpenParam> paramWrap) {
+            if (paramWrap.getParam().mOpened){
                 onClientOpen();
             }
         }

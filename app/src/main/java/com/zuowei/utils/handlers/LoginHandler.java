@@ -4,6 +4,7 @@ import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.handler.ToolKit;
 import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.LoginParam;
+import com.zuowei.utils.bridge.params.ParamWrap;
 import com.zuowei.utils.helper.HiTalkHelper;
 import com.zuowei.utils.helper.LoginHelper;
 
@@ -61,16 +62,12 @@ public class LoginHandler extends AbstractHandler<LoginParam>{
 
     @Override
     public boolean isParamAvailable(LightParam param) {
-        if (param != null && EaterAction.ACTION_DO_LOGIN.equals(param.getAction())){
-            if (param instanceof LightParam){
-                return true;
-            }
-        }
-        return false;
+        return param != null && EaterAction.ACTION_DO_LOGIN.equals(param.getAction());
     }
 
     @Override
-    public void doJobWithParam(LoginParam param) {
+    public void doJobWithParam(ParamWrap<LoginParam> paramWrap) {
+        LightParam param = paramWrap.getParam();
         int type = param.getData().getInt("type");
         String userName = param.getData().getString("userName");
         String password = param.getData().getString("password");
@@ -78,19 +75,19 @@ public class LoginHandler extends AbstractHandler<LoginParam>{
         String code = param.getData().getString("code");
         switch (type){
             case LoginParam.TYPE_LOGIN:
-                    doLogin(userName,password);
+                doLogin(userName,password);
                 break;
             case LoginParam.TYPE_REGISTER:
-                    doRegister(userName,password,phoneNumber);
+                doRegister(userName,password,phoneNumber);
                 break;
             case LoginParam.TYPE_REQUEST_VERIFY:
-                    doRequestVerify(phoneNumber);
+                doRequestVerify(phoneNumber);
                 break;
             case LoginParam.TYPE_VERIFY:
-                    doVerify(code,phoneNumber);
+                doVerify(code,phoneNumber);
                 break;
             case LoginParam.TYPE_LOGOUT:
-                    doLogout();
+                doLogout();
                 break;
         }
     }

@@ -33,6 +33,7 @@ import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.constant.EaterAction;
 import com.zuowei.utils.bridge.params.LightParam;
+import com.zuowei.utils.bridge.params.ParamWrap;
 import com.zuowei.utils.bridge.params.address.SchoolMateStateParam;
 import com.zuowei.utils.bridge.params.chat.MessageParam;
 import com.zuowei.utils.chat.ConversationUtils;
@@ -374,12 +375,8 @@ import bolts.Task;
     class MessageReceiver extends AbstractHandler<MessageParam> {
 
         @Override
-        public boolean isParamAvailable(LightParam param) {
-            return param != null && param instanceof MessageParam;
-        }
-
-        @Override
-        public void doJobWithParam(MessageParam param) {
+        public void doJobWithParam(ParamWrap<MessageParam> paramWrap) {
+            MessageParam param = paramWrap.getParam();
             switch (param.mMessageAction){
                 case MessageParam.MESSAGE_ACTION_RECEIVED:
                     onMessageReceived(param.conversation, param.message);
