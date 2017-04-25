@@ -34,10 +34,7 @@ public abstract class ViewClickHelper implements View.OnClickListener {
         Context appContext = HiTalkApplication.$();
         if (!checkNetwork || (appContext != null && ConnectivityNotifier.isConnected(appContext))){
             long currentTime = Calendar.getInstance().getTimeInMillis();
-            if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {
-                lastClickTime = currentTime;
-                onRealClick(v);
-            } else if (currentTime <= lastClickTime){
+            if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME || currentTime <= lastClickTime) {
                 lastClickTime = currentTime;
                 onRealClick(v);
             }

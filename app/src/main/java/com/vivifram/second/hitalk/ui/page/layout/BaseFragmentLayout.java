@@ -15,7 +15,7 @@ import com.zuowei.utils.handlers.ClientOpenHandler;
 /**
  * Created by zuowei on 16-8-1.
  */
-public class BaseFragmentLayout {
+public class BaseFragmentLayout implements View.OnClickListener{
 
     protected View mRootView;
     protected Context mCtx;
@@ -69,4 +69,9 @@ public class BaseFragmentLayout {
             }
         }
     };
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

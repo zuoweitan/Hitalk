@@ -35,6 +35,13 @@ public enum LayoutIdBinder {
                     try {
                         bindField.setAccessible(true);
                         bindField.set(t,t.findViewById(id));
+
+                        if (annotation.boundClick()) {
+                            Object bindObj = bindField.get(t);
+                            Method setOnClickListener = View.class.getDeclaredMethod("setOnClickListener", View.OnClickListener.class);
+                            setOnClickListener.setAccessible(true);
+                            setOnClickListener.invoke(bindObj, t);
+                        }
                     } catch (Exception e) {
                         NLog.i(TAG,"bindField failed : ",e);
                     }
@@ -57,6 +64,14 @@ public enum LayoutIdBinder {
                     try {
                         bindField.setAccessible(true);
                         bindField.set(t,t.findViewById(id));
+
+                        if (annotation.boundClick()) {
+                            Object bindObj = bindField.get(t);
+                            Method setOnClickListener = View.class.getDeclaredMethod("setOnClickListener", View.OnClickListener.class);
+                            setOnClickListener.setAccessible(true);
+                            setOnClickListener.invoke(bindObj, t);
+                        }
+
                     } catch (Exception e) {
                         NLog.i(TAG,"bindField failed : ",e);
                     }

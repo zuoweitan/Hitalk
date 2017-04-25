@@ -15,13 +15,19 @@ import com.zuowei.utils.handlers.ClientOpenHandler;
 /**
  * Created by zuowei on 16-7-18.
  */
-public class BaseLayout {
+public class BaseLayout implements View.OnClickListener{
     protected View mRootView;
     protected Context mCtx;
     protected Context mAppCtx;
     protected Resources mRes;
     protected LayoutInflater mLayoutInflater;
     protected OnLayoutEventListener mOnLayoutEventListener;
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
     public interface OnLayoutEventListener <T extends BaseLayout>{
         void onContentConfirmed(T t);
     }
