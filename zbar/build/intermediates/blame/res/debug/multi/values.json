@@ -6,5 +6,9 @@
     {
         "outputFile": "/home/zuowei/workspace/hitalk_lean/zbar/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
         "map": []
+    },
+    {
+        "outputFile": "/home/zuowei/github/Hitalk/zbar/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+        "map": []
     }
 ]

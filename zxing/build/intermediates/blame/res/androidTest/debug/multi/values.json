@@ -6,5 +6,9 @@
     {
         "outputFile": "/home/zuowei/sundires/Hitalk/zxing/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml",
         "map": []
+    },
+    {
+        "outputFile": "/home/zuowei/github/Hitalk/zxing/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml",
+        "map": []
     }
 ]
