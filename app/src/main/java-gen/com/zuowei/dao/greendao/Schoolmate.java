@@ -7,6 +7,8 @@ package com.zuowei.dao.greendao;
 public class Schoolmate {
 
     private String userId;
+    /** Not-null value. */
+    private String releatedId;
     private Integer friendState;
     private java.util.Date createAt;
 
@@ -17,8 +19,9 @@ public class Schoolmate {
         this.userId = userId;
     }
 
-    public Schoolmate(String userId, Integer friendState, java.util.Date createAt) {
+    public Schoolmate(String userId, String releatedId, Integer friendState, java.util.Date createAt) {
         this.userId = userId;
+        this.releatedId = releatedId;
         this.friendState = friendState;
         this.createAt = createAt;
     }
@@ -29,6 +32,16 @@ public class Schoolmate {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    /** Not-null value. */
+    public String getReleatedId() {
+        return releatedId;
+    }
+
+    /** Not-null value; ensure this value is available before it is saved to the database. */
+    public void setReleatedId(String releatedId) {
+        this.releatedId = releatedId;
     }
 
     public Integer getFriendState() {

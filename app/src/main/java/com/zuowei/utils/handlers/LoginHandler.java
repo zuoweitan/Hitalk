@@ -146,89 +146,65 @@ public class LoginHandler extends AbstractHandler<LoginParam>{
     }
 
     public void loginSuccess(){
-        ToolKit.runOnMainThreadAsync(new Runnable() {
-            @Override
-            public void run() {
-                for (OnLoginListener loginListener : mOnLoginListeners){
-                    loginListener.onSuccess();
-                }
+        ToolKit.runOnMainThreadAsync(() -> {
+            for (OnLoginListener loginListener : mOnLoginListeners){
+                loginListener.onSuccess();
             }
         });
     }
 
     public void loginError(final int code, final String message){
-        ToolKit.runOnMainThreadAsync(new Runnable() {
-            @Override
-            public void run() {
-                for (OnLoginListener loginListener : mOnLoginListeners){
-                    loginListener.onError(code,message);
-                }
+        ToolKit.runOnMainThreadAsync(() -> {
+            for (OnLoginListener loginListener : mOnLoginListeners){
+                loginListener.onError(code,message);
             }
         });
     }
 
     public void registerSuccess(){
-        ToolKit.runOnMainThreadAsync(new Runnable() {
-            @Override
-            public void run() {
-                for (OnRegisterListener registerListener : mOnRegisterListeners){
-                    registerListener.onRegisterSuccess();
-                }
+        ToolKit.runOnMainThreadAsync(() -> {
+            for (OnRegisterListener registerListener : mOnRegisterListeners){
+                registerListener.onRegisterSuccess();
             }
         });
     }
 
     public void registerError(final int code, final String message){
-        ToolKit.runOnMainThreadAsync(new Runnable() {
-            @Override
-            public void run() {
-                for (OnRegisterListener registerListener : mOnRegisterListeners){
-                    registerListener.onRegisterError(code,message);
-                }
+        ToolKit.runOnMainThreadAsync(() -> {
+            for (OnRegisterListener registerListener : mOnRegisterListeners){
+                registerListener.onRegisterError(code,message);
             }
         });
     }
 
     public void requestSuccess(){
-        ToolKit.runOnMainThreadAsync(new Runnable() {
-            @Override
-            public void run() {
-                for (OnRequestVerifyListener onRequestVerifyListener : onRequestVerifyListeners_){
-                    onRequestVerifyListener.onRequestVerifySuccess();
-                }
+        ToolKit.runOnMainThreadAsync(() -> {
+            for (OnRequestVerifyListener onRequestVerifyListener : onRequestVerifyListeners_){
+                onRequestVerifyListener.onRequestVerifySuccess();
             }
         });
     }
 
     public void requestError(final int code, final String message){
-        ToolKit.runOnMainThreadAsync(new Runnable() {
-            @Override
-            public void run() {
-                for (OnRequestVerifyListener onRequestVerifyListener : onRequestVerifyListeners_){
-                    onRequestVerifyListener.onRequestVerifyError(code,message);
-                }
+        ToolKit.runOnMainThreadAsync(() -> {
+            for (OnRequestVerifyListener onRequestVerifyListener : onRequestVerifyListeners_){
+                onRequestVerifyListener.onRequestVerifyError(code,message);
             }
         });
     }
 
     public void verifySuccess(){
-        ToolKit.runOnMainThreadAsync(new Runnable() {
-            @Override
-            public void run() {
-                for (OnVerifyListener onVerifyListener : onVerifyListeners_){
-                    onVerifyListener.onVerifySuccess();
-                }
+        ToolKit.runOnMainThreadAsync(() -> {
+            for (OnVerifyListener onVerifyListener : onVerifyListeners_){
+                onVerifyListener.onVerifySuccess();
             }
         });
     }
 
     public void verifyError(final int code, final String message){
-        ToolKit.runOnMainThreadAsync(new Runnable() {
-            @Override
-            public void run() {
-                for (OnVerifyListener onVerifyListener : onVerifyListeners_){
-                    onVerifyListener.onVerifyError(code,message);
-                }
+        ToolKit.runOnMainThreadAsync(() -> {
+            for (OnVerifyListener onVerifyListener : onVerifyListeners_){
+                onVerifyListener.onVerifyError(code,message);
             }
         });
     }

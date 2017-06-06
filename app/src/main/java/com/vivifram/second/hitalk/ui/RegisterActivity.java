@@ -62,12 +62,9 @@ public class RegisterActivity extends BaseActivity<RegisterLayout> implements Vi
 
     @Override
     public void onRegisterError(int code, final String message) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                NToast.shortToast(RegisterActivity.this,getString(R.string.registerFailed) + message);
-                mLayout.resetRegisterButton();
-            }
+        runOnUiThread(() -> {
+            NToast.shortToast(RegisterActivity.this,getString(R.string.registerFailed) + message);
+            mLayout.resetRegisterButton();
         });
     }
 

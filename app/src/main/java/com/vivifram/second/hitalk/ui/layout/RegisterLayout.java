@@ -13,8 +13,6 @@ import android.widget.TextView;
 import com.vivifram.second.hitalk.R;
 import com.vivifram.second.hitalk.ui.view.FlashBorderView;
 import com.vivifram.second.hitalk.ui.view.ShrinkButton;
-import com.zuowei.utils.bridge.EaterManager;
-import com.zuowei.utils.bridge.params.LoginParam;
 import com.zuowei.utils.common.DisplayUtil;
 import com.zuowei.utils.common.NToast;
 import com.zuowei.utils.common.TagUtil;
@@ -129,29 +127,28 @@ public class RegisterLayout extends BaseLayout implements DownTimerListener,View
     }
 
     private void initListeners() {
-        mSendCodeListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (checkPhoneAndPassword()) {
-                    mValueAnimator.start();
-                    if (mDownTimer != null) {
-                        mDownTimer.stopDown();
-                    }
-                    mDownTimer = new DownTimer();
-                    mDownTimer.setListener(RegisterLayout.this);
-                    mDownTimer.startDown(60 * 1000, 1000);
-                    mSendCodeBtn.setOnClickListener(null);
-                    sendCode();
+        mSendCodeListener = v -> {
+            if (checkPhoneAndPassword()) {
+                mValueAnimator.start();
+                if (mDownTimer != null) {
+                    mDownTimer.stopDown();
                 }
+                mDownTimer = new DownTimer();
+                mDownTimer.setListener(RegisterLayout.this);
+                mDownTimer.startDown(60 * 1000, 1000);
+                mSendCodeBtn.setOnClickListener(null);
+                sendCode();
             }
         };
     }
 
     private void sendCode() {
-        EaterManager.getInstance().broadcast(
+        //you can uncomment this to use the function
+        /*EaterManager.getInstance().broadcast(
                 new LoginParam.Builder(LoginParam.TYPE_REQUEST_VERIFY)
                         .setPhoneNumber(getPhoneNumber())
-                        .create());
+                        .create());*/
+        NToast.shortToast(mAppCtx, mRes.getString(R.string.comment_function));
     }
 
     private void initAnimators() {
@@ -159,12 +156,9 @@ public class RegisterLayout extends BaseLayout implements DownTimerListener,View
         mValueAnimator.setDuration(700);
         mValueAnimator.setRepeatMode(ValueAnimator.RESTART);
         mValueAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mSendCodeBtn.setmFraction(animation.getAnimatedFraction());
-                mSendCodeBtn.postInvalidate();
-            }
+        mValueAnimator.addUpdateListener(animation -> {
+            mSendCodeBtn.setmFraction(animation.getAnimatedFraction());
+            mSendCodeBtn.postInvalidate();
         });
     }
 
@@ -268,7 +262,7 @@ public class RegisterLayout extends BaseLayout implements DownTimerListener,View
 
     @Override
     public void onRequestVerifyError(int code, String message) {
-        NToast.longToast(mAppCtx,mRes.getString(R.string.send_code_failed)+":"+message);
+        NToast.longToast(mAppCtx,mRes.getString(R.string.send_code_failed) + ":" + message);
         mRegisterBtn.setEnabled(false);
     }
 }

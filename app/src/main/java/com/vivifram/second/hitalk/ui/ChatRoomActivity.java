@@ -32,7 +32,6 @@ import com.vivifram.second.hitalk.ui.page.layout.ChatMessageListLayout;
 import com.zuowei.dao.greendao.User;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.constant.EaterAction;
-import com.zuowei.utils.bridge.params.LightParam;
 import com.zuowei.utils.bridge.params.ParamWrap;
 import com.zuowei.utils.bridge.params.address.SchoolMateStateParam;
 import com.zuowei.utils.bridge.params.chat.MessageParam;

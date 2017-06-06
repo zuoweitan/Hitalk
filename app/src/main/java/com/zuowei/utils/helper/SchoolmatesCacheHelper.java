@@ -12,6 +12,7 @@ import java.util.HashMap;
 import bolts.Task;
 import de.greenrobot.dao.async.AsyncSession;
 import de.greenrobot.dao.query.Query;
+import de.greenrobot.dao.query.QueryBuilder;
 
 /**
  * Created by zuowei on 16-11-6.
@@ -40,9 +41,10 @@ public class SchoolmatesCacheHelper {
     public Task<Integer> getSchoolmateFriendState(String uid){
         if (caches.get(uid) == null){
             return Task.callInBackground(() -> {
-                Query<Schoolmate> build = DaoHelper.getInstance().getSchoolmateDao().queryBuilder()
-                        .where(SchoolmateDao.Properties.UserId.eq(uid))
-                        .build();
+                QueryBuilder<Schoolmate> schoolmateQueryBuilder = DaoHelper.getInstance().getSchoolmateDao().queryBuilder();
+                schoolmateQueryBuilder.where(schoolmateQueryBuilder.and(SchoolmateDao.Properties.UserId.eq(uid),
+                        SchoolmateDao.Properties.ReleatedId.eq(HiTalkHelper.getInstance().getCurrentUserId())));
+                Query<Schoolmate> build = schoolmateQueryBuilder.build();
                 int friendState = REQUEST_STATE_FAILED;
                 try{
                     friendState = build.unique().getFriendState();
@@ -61,7 +63,8 @@ public class SchoolmatesCacheHelper {
         if (!caches.containsKey(uid)) {
             caches.put(uid, friendState);
             AsyncSession asyncSession = DaoHelper.getInstance().wrapDao(DaoHelper.getInstance().getSchoolmateDao());
-            asyncSession.insertOrReplaceInTx(Schoolmate.class, new Schoolmate(uid, friendState, new Date()));
+            asyncSession.insertOrReplaceInTx(Schoolmate.class, new Schoolmate(uid,
+                    HiTalkHelper.getInstance().getCurrentUserId(), friendState, new Date()));
         }
     }
 
