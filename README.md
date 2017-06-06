@@ -17,11 +17,11 @@ The project architecture is [MAL](http://www.jianshu.com/p/ae831e01dc54)
 
 # Notes for Creating an account
 1. choose a string of numbers like phone number [sample：13166227158]
-2. choose a school you belong [sample : 重庆邮电大学]
+2. choose a school you belong [sample : 重庆邮电大学 ***** 暂时只有重庆邮电大学有用户]
 3. choose your Hobbies
 
 
-# screencap
+# Screencap
 ![](screencap/1.png)
 ![](screencap/2.png)
 ![](screencap/3.png)
