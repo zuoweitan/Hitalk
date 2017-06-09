@@ -6,7 +6,9 @@ import com.vivifram.second.hitalk.cache.ConversationParse;
 import com.vivifram.second.hitalk.state.ActionCallback;
 import com.zuowei.dao.greendao.Conversation;
 import com.zuowei.dao.greendao.ConversationDao;
+import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.RxjavaUtils;
+import com.zuowei.utils.common.TagUtil;
 import com.zuowei.utils.handlers.LogoutHandler;
 
 import java.util.ArrayList;
@@ -40,7 +42,7 @@ public class ConversationCacheHelper implements LogoutHandler.OnLogoutListener{
 
     private ConversationCacheHelper(){
         mCache = new HashMap();
-
+        LogoutHandler.getInstance().addListener(this);
     }
 
     public void init(final ActionCallback callback){
