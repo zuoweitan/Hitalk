@@ -1,7 +1,6 @@
 package com.vivifram.second.hitalk.base;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -51,7 +50,7 @@ public abstract class BaseFragment<T extends BaseFragmentLayout> extends Fragmen
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EaterManager.getInstance().registerEater(EaterAction.ACTION_DO_CHECK_CLIENT, clientOpenHandler);
-        ConnectivityNotifier.getNotifier(mAppCtx).addListener(this::onInternetConnected);
+        ConnectivityNotifier.getNotifier(mAppCtx).addAndRequestOneShot(mAppCtx, this::onInternetConnected);
         workHandler = new WorkHandler();
     }
 
