@@ -89,7 +89,7 @@ public class AddressFragmentSub1 extends LazyFragment<AddressFragmentSub1Layout>
         mLayout.setOnSchoolMatesActionListener(new SchoolMatesAdapter.OnSchoolMatesActionListener() {
             @Override
             public void onAddFriendRequest(String userId, Continuation<Boolean, Void> callback) {
-                FriendsManager.FriendsManagerUIHelper.requestFriend(userId, callback);
+                FriendsManager.FriendsManagerUIHelper.requestFriend(getActivity(), userId, callback);
             }
 
             @Override

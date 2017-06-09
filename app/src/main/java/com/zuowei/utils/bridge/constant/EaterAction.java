@@ -7,6 +7,7 @@ public final class EaterAction {
     //write or read data from sharepreference
     public static final String ACTION_DO_WITH_PREFERENCE = "action_do_with_preference";
     public static final String ACTION_DO_LOGIN = "action_do_login";
+    public static final String ACTION_DO_LOGOUT = "action_do_logout";
     public static final String ACTION_DO_CHECK_MESSAGE = "action_do_check_message";
     public static final String ACTION_DO_CHECK_CONVERSATION = "action_do_check_conversation";
     public static final String ACTION_DO_CHECK_CLIENT = "action_do_check_client";

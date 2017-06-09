@@ -55,7 +55,7 @@ public class AddressFragmentSub2 extends LazyFragment<AddressFragmentSub2Layout>
         mLayout.setOnFreshListener(new SpringView.OnFreshListener() {
             @Override
             public void onRefresh() {
-                fetchFriends(false,((list, e) -> {
+                fetchFriends(true,((list, e) -> {
                     mLayout.notifyFreshDone();
                 }));
             }

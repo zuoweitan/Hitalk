@@ -123,7 +123,7 @@ public class FriendInfoActivity extends BaseActivity<FriendInfoLayout>{
     }
 
     private void doAddFriend() {
-        FriendsManager.FriendsManagerUIHelper.requestFriend(schoolMate.getUserId(), task -> {
+        FriendsManager.FriendsManagerUIHelper.requestFriend(this, schoolMate.getUserId(), task -> {
             Boolean result = task.getResult();
             if (result) {
                 SchoolmatesCacheHelper.getInstance().cache(schoolMate.getUserId(), SchoolmatesCacheHelper.REQUEST_STATE_WATING);

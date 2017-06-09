@@ -1,7 +1,6 @@
 package com.vivifram.second.hitalk.ui;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.avos.avoscloud.im.v2.AVIMClient;
@@ -16,6 +15,7 @@ import com.vivifram.second.hitalk.ui.layout.SettingLayout;
 import com.vivifram.second.hitalk.ui.view.BGATitlebar;
 import com.zuowei.utils.bridge.EaterManager;
 import com.zuowei.utils.bridge.params.LoginParam;
+import com.zuowei.utils.bridge.params.LogoutParam;
 import com.zuowei.utils.common.UIUtils;
 
 /**
@@ -55,11 +55,15 @@ public class SettingActivity extends BaseActivity<SettingLayout> {
             EaterManager.getInstance().
                     broadcast(new LoginParam.Builder(LoginParam.TYPE_LOGOUT).create());
 
+            clearLoginData();
             finish();
             notifyAllActivityDestroy();
             UIUtils.startActivitySafety(mAppCtx,LoginActivity.class);
-
         });
+    }
+
+    private void clearLoginData() {
+        EaterManager.getInstance().broadcast(new LogoutParam());
     }
 
     @Override

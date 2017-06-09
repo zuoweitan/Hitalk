@@ -286,11 +286,12 @@ import bolts.Task;
             mLayout.flowBar().setOnFlowBarActionListener(new ChatRoomLayout.FlowBar.OnFlowBarActionListener() {
                 @Override
                 public void onAddFriend() {
-                    FriendsManager.FriendsManagerUIHelper.requestFriend(user.getObjectId(), task -> {
+                    FriendsManager.FriendsManagerUIHelper.requestFriend(ChatRoomActivity.this, user.getObjectId(), task -> {
                         if (task.getResult()) {
                             SchoolmatesCacheHelper.getInstance().cache(user.getObjectId(), SchoolmatesCacheHelper.REQUEST_STATE_WATING);
                         }
                         EaterManager.getInstance().broadcast(new SchoolMateStateParam());
+                        mLayout.flowBar().show(false);
                         return null;
                     });
                 }

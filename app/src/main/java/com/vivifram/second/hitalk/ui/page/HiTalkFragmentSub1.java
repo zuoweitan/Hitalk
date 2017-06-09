@@ -163,7 +163,6 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
                         .equals(currentSquareConversationName)){
             mAvimConversation = ClientManager.getInstance().getClient().getConversation(
                     HiTalkHelper.getInstance().getModel().getSquareConversationId());
-
             updateConversation(mAvimConversation);
             queryInSquare();
         }else {
@@ -171,16 +170,18 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
                     ConversationClient.getCollegeSquareConversationName(HiTalkHelper.getInstance().getCurrentUserCollege()), new AVIMConversationQueryCallback() {
                         @Override
                         public void done(List<AVIMConversation> list, AVIMException e) {
-                            if (e == null && list.size() > 0){
-                                final AVIMConversation avimConversation = list.get(0);
-                                ConversationCacheHelper.getInstance().insertConversation(avimConversation.getConversationId());
-                                HiTalkHelper.getInstance().getModel().setSquareConversationId(avimConversation.getConversationId());
-                                HiTalkHelper.getInstance().getModel().setSquareConversationName(avimConversation.getName());
-                                mAvimConversation = avimConversation;
-                                updateConversation(mAvimConversation);
-                                queryInSquare();
-                            }else {
-                               NToast.shortToast(mAppCtx,getString(R.string.square_not_create));
+                            if (isAdded() && !isDetached()) {
+                                if (e == null && list.size() > 0) {
+                                    final AVIMConversation avimConversation = list.get(0);
+                                    ConversationCacheHelper.getInstance().insertConversation(avimConversation.getConversationId());
+                                    HiTalkHelper.getInstance().getModel().setSquareConversationId(avimConversation.getConversationId());
+                                    HiTalkHelper.getInstance().getModel().setSquareConversationName(avimConversation.getName());
+                                    mAvimConversation = avimConversation;
+                                    updateConversation(mAvimConversation);
+                                    queryInSquare();
+                                } else {
+                                    NToast.shortToast(mAppCtx, getString(R.string.square_not_create));
+                                }
                             }
                         }
                     });
@@ -204,6 +205,7 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
                                 mAvimConversation.getMemberCount(new AVIMConversationMemberCountCallback() {
                                     @Override
                                     public void done(Integer integer, AVIMException e) {
+                                        NLog.i(TagUtil.makeTag(HiTalkFragmentSub1.class), "getMemberCount = " + integer);
                                         if (e == null && integer != null){
                                            EaterManager.getInstance().broadCastSticky(
                                                    new LightParam.Builder("square_count").setArg1(integer).create());
@@ -239,7 +241,6 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
         mLayout.setMessageListFreshListener(new ChatMessageListLayout.IMessageListFreshListener() {
             @Override
             public void onRefresh() {
-                NLog.i(TagUtil.makeTag(getClass()),"mAvimConversation = "+mAvimConversation);
                 if (mAvimConversation == null || !isInternetConnected){
                     if (!isInternetConnected){
                         NToast.shortToast(mAppCtx, R.string.internet_not_connect_warn);
@@ -323,10 +324,10 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
     }
 
     public void updateConversation(AVIMConversation conversation){
-        NLog.i(TagUtil.makeTag(HiTalkFragmentSub1.class),"conversation = "+conversation);
         mAvimConversation = conversation;
         if (mAvimConversation != null) {
             NotificationUtils.addTag(mAvimConversation.getConversationId());
+            ConversationCacheHelper.getInstance().insertConversation(mAvimConversation.getConversationId());
         }
         if (mLayout != null) {
             fetchMessages();
@@ -352,7 +353,6 @@ public class HiTalkFragmentSub1 extends LazyFragment<HitalkFragmentSub1Layout> {
                         }
                     });
                     SyncUtils.wait(syncLatch);
-                    NLog.i(TagUtil.makeTag(getClass()),"fetchMessages queryResult = "+queryResult);
                     return queryResult;
                 }
             }).continueWith(task -> {

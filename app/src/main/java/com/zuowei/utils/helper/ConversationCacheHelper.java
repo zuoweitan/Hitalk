@@ -7,6 +7,7 @@ import com.vivifram.second.hitalk.state.ActionCallback;
 import com.zuowei.dao.greendao.Conversation;
 import com.zuowei.dao.greendao.ConversationDao;
 import com.zuowei.utils.common.RxjavaUtils;
+import com.zuowei.utils.handlers.LogoutHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ import rx.functions.Func1;
 /**
  * Created by zuowei on 16-8-4.
  */
-public class ConversationCacheHelper {
+public class ConversationCacheHelper implements LogoutHandler.OnLogoutListener{
     private static ConversationCacheHelper sInstance;
     private Map<String, ConversationParse.Wrap> mCache;
     public static ConversationCacheHelper getInstance(){
@@ -39,6 +40,7 @@ public class ConversationCacheHelper {
 
     private ConversationCacheHelper(){
         mCache = new HashMap();
+
     }
 
     public void init(final ActionCallback callback){
@@ -111,6 +113,11 @@ public class ConversationCacheHelper {
 
     }
 
+    public synchronized void deleteConversation() {
+        AsyncSession asyncSession = getAsyncSession();
+        asyncSession.deleteAll(Conversation.class);
+    }
+
 
     public synchronized void insertConversation(String convid) {
         if(!TextUtils.isEmpty(convid)) {
@@ -171,5 +178,11 @@ public class ConversationCacheHelper {
     private AsyncSession getAsyncSession() {
         ConversationDao conversationDao = DaoHelper.getInstance().getConversationDao();
         return DaoHelper.getInstance().wrapDao(conversationDao);
+    }
+
+    @Override
+    public void logout() {
+        mCache.clear();
+        deleteConversation();
     }
 }

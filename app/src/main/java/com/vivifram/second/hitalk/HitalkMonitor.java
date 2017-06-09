@@ -12,6 +12,8 @@ public class HitalkMonitor extends HandlerThread{
 
     public static final int LOOP_TIME = 5000;
     public static final int LOOP_IMMEDIATE = 500;
+    public static final int LOOP_INCREAMENT = 2000;
+    public static int IMMEDIATE_TIMES = 0;
 
     public static final int BASE_MSG_TYPE = 0x00;
     public static final int CHECK_HITALK_CONVERSATION = BASE_MSG_TYPE + 1;
@@ -49,10 +51,12 @@ public class HitalkMonitor extends HandlerThread{
                             Message newMsg = new Message();
                             newMsg.copyFrom(msg);
                             if (!monitorEvent.check()) {
+                                IMMEDIATE_TIMES ++;
                                 monitorEvent.run();
                                 handler.sendMessageDelayed(newMsg,
-                                        LOOP_IMMEDIATE);
+                                        LOOP_IMMEDIATE + (IMMEDIATE_TIMES / 3) * LOOP_INCREAMENT);
                             } else {
+                                IMMEDIATE_TIMES = 0;
                                 handler.sendMessageDelayed(newMsg,
                                         LOOP_TIME);
                             }

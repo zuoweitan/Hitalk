@@ -5,6 +5,7 @@ import com.zuowei.dao.greendao.Schoolmate;
 import com.zuowei.dao.greendao.SchoolmateDao;
 import com.zuowei.utils.common.NLog;
 import com.zuowei.utils.common.TagUtil;
+import com.zuowei.utils.handlers.LogoutHandler;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import de.greenrobot.dao.query.QueryBuilder;
  * Created by zuowei on 16-11-6.
  */
 
-public class SchoolmatesCacheHelper {
+public class SchoolmatesCacheHelper implements LogoutHandler.OnLogoutListener{
 
     public static final int REQUEST_STATE_SUCCESS = Constants.SchoolMateState.REQUEST_STATE_SUCCESS;
     public static final int REQUEST_STATE_WATING = Constants.SchoolMateState.REQUEST_STATE_WATING;
@@ -32,6 +33,7 @@ public class SchoolmatesCacheHelper {
     }
 
     private SchoolmatesCacheHelper(){
+        LogoutHandler.getInstance().addListener(this);
         caches = new HashMap<>();
     }
 
@@ -86,5 +88,10 @@ public class SchoolmatesCacheHelper {
         return "SchoolmatesCacheHelper{" +
                 "caches=" + caches +
                 '}';
+    }
+
+    @Override
+    public void logout() {
+        caches.clear();
     }
 }

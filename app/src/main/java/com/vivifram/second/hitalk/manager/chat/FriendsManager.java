@@ -1,5 +1,7 @@
 package com.vivifram.second.hitalk.manager.chat;
 
+import android.app.Activity;
+
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.avos.avoscloud.AVCallback;
 import com.avos.avoscloud.AVException;
@@ -282,16 +284,16 @@ public class FriendsManager {
 
     public static class FriendsManagerUIHelper {
 
-        public static void requestFriend(String userId, Continuation<Boolean, Void> continueTask) {
+        public static void requestFriend(Activity atc, String userId, Continuation<Boolean, Void> continueTask) {
 
             if (continueTask == null) {
                 continueTask = task -> null;
             }
-            final MaterialDialog dialog = new MaterialDialog.Builder(HiTalkApplication.$())
+            final MaterialDialog dialog = new MaterialDialog.Builder(atc)
                     .content(R.string.request_sending)
                     .progress(true, 0)
                     .progressIndeterminateStyle(false)
-                    .widgetColor(HiTalkApplication.$().getResources().getColor(R.color.hitalk_deep_yellow))
+                    .widgetColor(atc.getResources().getColor(R.color.hitalk_deep_yellow))
                     .build();
             AVUser avUser = UserCacheHelper.getInstance().getCachedAVUser(userId);
             if (avUser != null) {
