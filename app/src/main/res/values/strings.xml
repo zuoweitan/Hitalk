@@ -144,4 +144,5 @@
     <string name="friends_fetch_error">好友列表获取失败</string>
     <string name="select_student_warn">请至少选择一位朋友</string>
     <string name="comment_function">该功能已经被注释,可以直接跳过</string>
+    <string name="CQYD_university">重庆邮电大学</string>
 </resources>
